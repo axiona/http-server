@@ -1,0 +1,4 @@
+compiler-cache
+
+# ignore the .ts files
+*.js.map

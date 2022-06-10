@@ -1,0 +1,20 @@
+{
+  "name": "@alirya/class",
+  "version": "0.3.2",
+  "description": "Typescript class",
+  "dependencies": {
+    "@alirya/function": "^0.16.0",
+    "@alirya/message": "^0.12.1",
+    "@alirya/object": "^0.37.3",
+    "@alirya/string": "^0.16.4",
+    "@alirya/validatable": "^0.20.1",
+    "@alirya/validator": "^0.19.3",
+    "@alirya/value": "^0.15.1",
+    "ts-toolbelt": "^9.6.0"
+  },
+  "homepage": "https://github.com/alirya/class",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alirya/class"
+  }
+}

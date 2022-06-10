@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "removeComments" : false,
+    "moduleResolution": "node",
+    "module": "es2015",
+    "declaration": true,
+    "target": "es2015",
+    "sourceMap": true,
+    "declarationMap": true,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration" : true,
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "incremental": true,
+    "strictPropertyInitialization": true,
+    "emitDecoratorMetadata": true,
+    "rootDir": "./spec",
+    "outDir": "./dist-spec",
+    "importHelpers": true,
+    "tsBuildInfoFile": "./dist-spec/compiler-cache.json",
+    "lib": [
+      "es2016",
+      "es2015",
+      "es5",
+      "es6"
+    ]
+  },
+  "include":  [
+    "spec/**/*"
+
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.d.ts",
+    "dist/**/*.d.ts",
+    "**/dist/**/*.d.ts",
+    "dist-spec",
+    "**/*.d.ts",
+    "dist-spec/**/*.d.ts",
+    "**/dist-spec/**/*.d.ts"
+  ]
+
+}

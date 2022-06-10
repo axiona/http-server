@@ -1,0 +1,10 @@
+{
+  "spec_dir": "dist-spec",
+  "spec_files": [
+    "**/*.spec.debug.js",
+    "!**/entity"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": false,
+  "verboseDeprecations" : true
+}
