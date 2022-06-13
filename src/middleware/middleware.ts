@@ -1,6 +1,6 @@
 import Context from '../context/context';
 import Router from '../router/router';
-import BaseReturn from './return/return';
+
 
 export default interface Middleware<
     Argument extends Context = Context,
@@ -8,5 +8,10 @@ export default interface Middleware<
 > {
 
     register?:(context: Router) => void;
-    /*<Arg extends Argument>*/(context: Argument) : BaseReturn<Return>;
+    /*<Arg extends Argument>*/(context: Argument) : MiddlewareReturn<Return>;
 }
+
+
+export type MiddlewareInferNext<Type> = Type  extends Middleware<any, infer Argument> ? Argument : never;
+export type MiddlewareInferCurrent<Type> = Type  extends Middleware<infer Return, any> ? Return : never;
+export type MiddlewareReturn<Type> = Type|Promise<Type|void>|void;

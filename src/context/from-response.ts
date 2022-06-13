@@ -7,9 +7,7 @@ import {O} from 'ts-toolbelt';
 export type FromResponseReturn<
     Body extends unknown,
     ContextType extends Context
-> = O.P.Omit<ContextType, ['response', 'body']> & {
-    response: BodyType<Body>
-};
+> = O.P.Update<ContextType, ['response', 'body'], Body>;
 
 export function FromResponseParameters<Body extends unknown, ContextType extends Context>(
     context : ContextType,

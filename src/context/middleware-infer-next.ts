@@ -1,5 +1,3 @@
-import Middleware from '../middleware/middleware';
-
-type MiddlewareInferNext<Type> = Type  extends Middleware<any, infer Current> ? Current : never;
+import {MiddlewareInferNext} from '../middleware/middleware';
 
 export default MiddlewareInferNext;

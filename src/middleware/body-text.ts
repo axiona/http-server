@@ -9,7 +9,7 @@ import {Required} from 'utility-types';
 
 type BodyTextReturn<Argument extends Context> = Middleware<
     Argument,
-    O.P.Omit<Argument, ['request', 'body']> & {request: { body : Record<PropertyKey, any> }}
+    O.P.Omit<Argument, ['request', 'body']> & {request: { body : string }}
 >;
 
 /**

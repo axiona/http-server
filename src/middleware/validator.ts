@@ -37,7 +37,7 @@ export type ValidatorReturnContext<
 export interface ValidatorArgumentProperties<
     Properties extends PropertyKey[],
     ContextType extends ValidatorTypeContext<Properties>,
-    ValidatorType extends Validator<O.Path<ContextType, Properties>>,
+    ValidatorType extends Validator<O.P.Pick<ContextType, Properties>>,
     ValidatableKey extends PropertyKey[]
 > {
     validator : ValidatorType;
@@ -94,7 +94,7 @@ export function ValidatorParameter<
 export function ValidatorParameter<
     Properties extends PropertyKey[],
     ContextType extends ValidatorTypeContext<Properties> = ValidatorTypeContext<Properties>,
-    ValidatorType extends Validator<O.Path<ContextType, Properties>> = Validator<O.Path<ContextType, Properties>>,
+    ValidatorType extends Validator<O.P.Pick<ContextType, Properties>> = Validator<O.P.Pick<ContextType, Properties>>,
     ValidatableKey extends PropertyKey[] = ['validatable']
 >(  {
         validator,
@@ -117,7 +117,7 @@ export function ValidatorParameter<
 export function ValidatorParameter<
     Properties extends PropertyKey[],
     ContextType extends ValidatorTypeContext<Properties> = ValidatorTypeContext<Properties>,
-    ValidatorType extends Validator<O.Path<ContextType, Properties>> = Validator<O.Path<ContextType, Properties>>,
+    ValidatorType extends Validator<O.P.Pick<ContextType, Properties>> = Validator<O.P.Pick<ContextType, Properties>>,
     ValidatableKey extends PropertyKey[] = ['validatable']
 >(  {
         validator,
@@ -140,7 +140,7 @@ export function ValidatorParameter<
 export function ValidatorParameter<
     Properties extends PropertyKey[],
     ContextType extends ValidatorTypeContext<Properties>,
-    ValidatorType extends Validator<O.Path<ContextType, Properties>>|Validator<ContextType>,
+    ValidatorType extends Validator<O.P.Pick<ContextType, Properties>>|Validator<ContextType>,
     ValidatableKey extends PropertyKey[]
 >(  {
         validator,
@@ -221,7 +221,7 @@ export function ValidatorParameters<
 export function ValidatorParameters<
     Properties extends PropertyKey[],
     ContextType extends ValidatorTypeContext<Properties> = ValidatorTypeContext<Properties>,
-    ValidatorType extends Validator<O.Path<ContextType, Properties>> = Validator<O.Path<ContextType, Properties>>,
+    ValidatorType extends Validator<O.P.Pick<ContextType, Properties>> = Validator<O.P.Pick<ContextType, Properties>>,
     ValidatableKey extends PropertyKey[] = ['validatable']
 >(
     validator : ValidatorType,
@@ -244,7 +244,7 @@ export function ValidatorParameters<
 export function ValidatorParameters<
     Properties extends PropertyKey[],
     ContextType extends ValidatorTypeContext<Properties>|Context,
-    ValidatorType extends Validator<O.Path<ContextType, Properties>>|Validator<ContextType>,
+    ValidatorType extends Validator<O.P.Pick<ContextType, Properties>>|Validator<ContextType>,
     ValidatableKey extends PropertyKey[]
 >(
     validator : ValidatorType,
@@ -288,7 +288,7 @@ namespace Validator {
     export type ArgumentProperties<
         Properties extends PropertyKey[],
         ContextType extends ValidatorTypeContext<Properties>,
-        ValidatorType extends Validator<O.Path<ContextType, Properties>>,
+        ValidatorType extends Validator<O.P.Pick<ContextType, Properties>>,
         ValidatableKey extends PropertyKey[]
     > = ValidatorArgumentProperties<Properties, ContextType, ValidatorType, ValidatableKey>;
 

@@ -49,7 +49,7 @@ export default function AutoOptions<
 
 }
 
-export function AutoOptionsDefault(context : Context) {
+export function AutoOptionsDefault<ContextType extends Context>(context : ContextType) {
 
     return FromResponse.Parameters(context, MethodNotAllowedParameters());
 }
