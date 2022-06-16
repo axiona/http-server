@@ -3,11 +3,10 @@ import MapAllParameters from '../../../../object/dist/validator/map-all-paramete
 import StringParameters from '../../../../string/dist/validator/string-parameters';
 import And from '../../../../object/dist/validatable/and';
 import Map from '../../../../object/dist/message/message/record/map';
-import Context from '../../../dist/context/context';
 
 
-export default function ContextValidatable(value : Context & {data?:unknown}) : value is Context & {data:string} {
+export default function UnknownOneGuard(value : number) : value is 1 {
 
-    return typeof value.data === 'string';
+    return value === 1;
 }
 
