@@ -27,11 +27,11 @@ export type ValidatorReturnProperties<
 
 export type ValidatorReturnContext<
     Argument extends Context,
-    ValidatorType extends Validator<Argument>,
+    ValidatorType extends Validator<Argument, Context>,
     ValidatableKey extends PropertyKey[]
 > = Middleware<
     Argument,
-    InferMatch<ValidatorType> & O.P.Record<ValidatableKey, InferValidatable<ValidatorType>>
+    Argument & InferMatch<ValidatorType> & O.P.Record<ValidatableKey, InferValidatable<ValidatorType>>
 >;
 
 export interface ValidatorArgumentProperties<
@@ -51,11 +51,12 @@ export interface ValidatorArgumentProperties<
 export interface ValidatorArgumentContext<
     ContextType extends Context,
     ValidatorType extends Validator<ContextType>,
-    ValidatableKey extends PropertyKey[]
+    ValidatableKey extends PropertyKey[],
+    Invalid extends ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey>
 > {
     validator : ValidatorType;
     // valid ?: Middleware<ContextType>,
-    invalid ?: Middleware<ContextType, InferMatch<ValidatorType>>;
+    invalid ?: Invalid;
     replace ?: boolean;
     properties ?: [];
     validatable ?: [...ValidatableKey];
@@ -72,14 +73,15 @@ export interface ValidatorArgumentContext<
  */
 export function ValidatorParameter<
     ContextType extends Context = Context,
-    ValidatorType extends Validator<ContextType> = Validator<ContextType>,
-    ValidatableKey extends PropertyKey[] = ['validatable']
+    ValidatorType extends Validator<ContextType, Context> = Validator<ContextType, Context>,
+    ValidatableKey extends PropertyKey[] = ['validatable'],
+    Invalid extends ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey> = ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey>
 >(  {
         validator,
         invalid,
         replace,
         validatable,
-    } : ValidatorArgumentContext<ContextType, ValidatorType, ValidatableKey>,
+    } : ValidatorArgumentContext<ContextType, ValidatorType, ValidatableKey, Invalid>,
 ) : ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey>;
 
 /**
@@ -141,7 +143,8 @@ export function ValidatorParameter<
     Properties extends PropertyKey[],
     ContextType extends ValidatorTypeContext<Properties>,
     ValidatorType extends Validator<O.P.Pick<ContextType, Properties>>|Validator<ContextType>,
-    ValidatableKey extends PropertyKey[]
+    ValidatableKey extends PropertyKey[],
+    Invalid extends ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey>
 >(  {
         validator,
         invalid = Stop,
@@ -149,7 +152,7 @@ export function ValidatorParameter<
         properties = [],
         validatable = ['validatable'],
     } : ValidatorArgumentProperties<Properties, ContextType, ValidatorType, ValidatableKey|['validatable']> |
-        ValidatorArgumentContext<ContextType, ValidatorType, ValidatableKey|['validatable']>
+        ValidatorArgumentContext<ContextType, ValidatorType, ValidatableKey|['validatable'], any>
 ) : ValidatorReturnProperties<ContextType, Properties, ValidatorType, ValidatableKey> | ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey> {
 
     return ValidatorParameters(validator, properties as [], invalid as Middleware, replace, validatable as ValidatableKey|['validatable']) as
@@ -176,12 +179,13 @@ export function ValidatorParameter<
 export function ValidatorParameters<
     ContextType extends Context = Context,
     ValidatorType extends Validator<ContextType> = Validator<ContextType>,
-    ValidatableKey extends PropertyKey[] = ['validatable']
+    ValidatableKey extends PropertyKey[] = ['validatable'],
+    Invalid extends ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey> = ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey>
 >(
     validator : ValidatorType,
     properties ?: [],
     // valid ?: Middleware<ContextType>,
-    invalid ?: Middleware<ContextType>,
+    invalid ?: Invalid,
     replace ?: boolean,
     validatable ?: [...ValidatableKey],
 ) : ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey>;
@@ -295,8 +299,9 @@ namespace Validator {
     export type ArgumentContext<
         ContextType extends Context,
         ValidatorType extends Validator<ContextType>,
-        ValidatableKey extends PropertyKey[]
-    > = ValidatorArgumentContext<ContextType, ValidatorType, ValidatableKey>;
+        ValidatableKey extends PropertyKey[],
+        Invalid extends ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey>
+    > = ValidatorArgumentContext<ContextType, ValidatorType, ValidatableKey, Invalid>;
 
     export type ReturnProperties<
         Argument extends Context,
