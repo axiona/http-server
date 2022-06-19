@@ -89,7 +89,9 @@ describe('invalid', () => {
 
     it('add request', ()=>{
 
-        router.add(Validator.Parameters(ContextValidator)).add(function (ctx) {
+        router
+            .add(Validator.Parameters(ContextValidator))
+            .add(function (ctx) {
 
             // @ts-expect-error
             const boolean : boolean = ctx.data;

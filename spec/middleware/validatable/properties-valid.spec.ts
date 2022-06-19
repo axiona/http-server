@@ -39,7 +39,7 @@ describe('valid', () => {
             .add(ValidationParameters(OneGuard, ['data']))
             .add(function (ctx) {
                 const data : 1 = ctx.data;
-                ctx.response.body = data;
+                ctx.response.body = (data + data).toString();
                 called = true;
                 return ctx;
             });
@@ -49,7 +49,7 @@ describe('valid', () => {
 
     it('send request', function (done) {
 
-        Axios.post(`http://localhost:${server.config.port}`, data, {headers:{'content-type':'text/plain'}}).then((res)=>{
+        Axios.post(`http://localhost:${server.config.port}`, data.toString(), {headers:{'content-type':'text/plain'}}).then((res)=>{
 
             response = res;
 
@@ -57,8 +57,7 @@ describe('valid', () => {
     });
 
     it('assert value', function () {
-
-        expect(response.data).toEqual(data.toString());
+        expect(response.data.toString()).toEqual((data + data).toString());
         expect(called).toBe(true);
         expect(response.status).toEqual(200);
         expect(response.statusText).toEqual('OK');

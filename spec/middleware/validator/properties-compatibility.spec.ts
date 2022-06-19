@@ -8,22 +8,21 @@ import String from '../../../../string/dist/boolean/string';
 import OneGuard from './one-validator';
 import {O} from 'ts-toolbelt';
 import Context from '../../../dist/context/context';
+import RecordValidator, {ValidatorType} from './record-validator';
+import Validatable from '../../../../validator/dist/validatable/validatable';
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
 
 const server = Server();
 
-beforeAll(()=>server.open());
-afterAll(()=>server.close());
-
 let router =  BindToServer(server, new Router());
 
 describe('guard', () => {
 
-    it('no context', ()=>{
+    describe('no context', ()=>{
 
-        it('parameters', ()=>{
+        describe('parameters', ()=>{
 
             router
                 .add(ValidatorParameters(OneGuard(), ['response', 'status'], undefined))
@@ -52,9 +51,27 @@ describe('guard', () => {
 
                     return ctx;
                 });
+
+            router.add(Validator.Parameters(RecordValidator(), ['request', 'body'])).add(function (ctx) {
+
+                // @ts-expect-error
+                const boolean : boolean = ctx.request.body;
+                // @ts-expect-error
+                const string : string = ctx.request.body;
+                // @ts-expect-error
+                const number : number = ctx.request.body;
+
+                const validatable : Validatable = ctx.validatable;
+
+                const object : object = ctx.request.body;
+                const type : ValidatorType = ctx.request.body;
+                const record : Record<PropertyKey, any> = ctx.request.body;
+                ctx.response.body = record;
+                return ctx;
+            });
         });
 
-        it('parameter', ()=>{
+        describe('parameter', ()=>{
 
             router
                 .add(ValidatorParameter({
@@ -73,6 +90,29 @@ describe('guard', () => {
 
                     return ctx;
                 });
+
+            router.add(ValidatorParameter({
+                validator: RecordValidator(),
+                invalid: Stop,
+                replace: true,
+                properties: ['request', 'body']
+            })).add(function (ctx) {
+
+                // @ts-expect-error
+                const boolean : boolean = ctx.request.body;
+                // @ts-expect-error
+                const string : string = ctx.request.body;
+                // @ts-expect-error
+                const number : number = ctx.request.body;
+
+                const validatable : Validatable = ctx.validatable;
+
+                const object : object = ctx.request.body;
+                const type : ValidatorType = ctx.request.body;
+                const record : Record<PropertyKey, any> = ctx.request.body;
+                ctx.response.body = record;
+                return ctx;
+            });
 
             router
                 .add(Validator.Parameter({
@@ -94,8 +134,8 @@ describe('guard', () => {
         });
     });
 
-    it('with context', ()=>{
-        it('parameters', ()=>{
+    describe('with context', ()=>{
+        describe('parameters', ()=>{
 
             router
                 .add(ValidatorParameters(OneGuard(), ['response', 'status'], undefined))
@@ -126,7 +166,7 @@ describe('guard', () => {
                 });
 
         });
-        it('parameter', ()=>{
+        describe('parameter', ()=>{
 
             router
                 .add(ValidatorParameter({

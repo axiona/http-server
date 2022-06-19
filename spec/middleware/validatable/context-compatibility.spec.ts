@@ -10,12 +10,9 @@ import ContextDataGuard from './context-data-guard';
 import {O} from 'ts-toolbelt';
 import Context from '../../../dist/context/context';
 
-describe("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
-
-beforeAll(()=>server.open());
-afterAll(()=>server.close());
 
 let router =  BindToServer(server, new Router());
 

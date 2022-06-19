@@ -12,17 +12,13 @@ import Context from '../../../dist/context/context';
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-
 const server = Server();
-
-beforeAll(()=>server.open());
-afterAll(()=>server.close());
 
 let router =  BindToServer(server, new Router());
 
 describe('validation', () => {
 
-    it('no context', ()=>{
+    describe('no context', ()=>{
         it('parameters', ()=>{
 
             router
@@ -102,7 +98,7 @@ describe('validation', () => {
             });
         });
     });
-    it('with context', ()=>{
+    describe('with context', ()=>{
         it('parameters', ()=>{
             router
                 .add(function (context) {
@@ -193,7 +189,7 @@ describe('validation', () => {
 
 describe('guard', () => {
 
-    it('no context', ()=>{
+    describe('no context', ()=>{
         it('parameters', ()=>{
 
             router
@@ -265,7 +261,7 @@ describe('guard', () => {
         });
     });
 
-    it('with context', ()=>{
+    describe('with context', ()=>{
         it('parameters', ()=>{
 
             router

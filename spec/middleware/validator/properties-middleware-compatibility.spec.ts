@@ -11,19 +11,15 @@ import Context from '../../../dist/context/context';
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
-
 const server = Server();
-
-beforeAll(()=>server.open());
-afterAll(()=>server.close());
 
 let router =  BindToServer(server, new Router());
 
 describe('guard', () => {
 
-    it('no context', ()=>{
+    describe('no context', ()=>{
 
-        it('parameters', ()=>{
+        describe('parameters', ()=>{
 
             router
                 .add(ValidatorParameters(OneGuard(), ['response', 'status'], Stop))
@@ -68,7 +64,7 @@ describe('guard', () => {
                 });
         });
 
-        it('parameter', ()=>{
+        describe('parameter', ()=>{
 
             router
                 .add(ValidatorParameter({
@@ -107,8 +103,8 @@ describe('guard', () => {
                 });
         });
     });
-    it('with context', ()=>{
-        it('parameters', ()=>{
+    describe('with context', ()=>{
+        describe('parameters', ()=>{
             router
                 .add(ValidatorParameters(OneGuard(), ['response', 'status'], Stop))
                 .add(function (ctx) {
@@ -138,7 +134,7 @@ describe('guard', () => {
                 });
 
         });
-        it('parameter', ()=>{
+        describe('parameter', ()=>{
             router
                 .add(ValidatorParameter({
                     validator: OneGuard(),

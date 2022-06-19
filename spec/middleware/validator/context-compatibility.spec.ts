@@ -9,17 +9,15 @@ import {O} from 'ts-toolbelt';
 import Context from '../../../dist/context/context';
 import RecordValidator from './record-validator';
 import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator';
+import Validatable from '../../../../validator/dist/validatable/validatable';
 
-describe("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
 
-beforeAll(()=>server.open());
-afterAll(()=>server.close());
-
 let router =  BindToServer(server, new Router());
 
-describe('guard', ()=>{
+describe('context compatibility', ()=>{
 
     describe('no context', ()=>{
 
@@ -37,6 +35,26 @@ describe('guard', ()=>{
                     // @ts-expect-error
                     let object : object = ctx.data;
 
+                    return ctx;
+                });
+
+
+            router.add(ValidatorParameters(ContextValidator))
+                .add(function (ctx) {
+
+                    // @ts-expect-error
+                    const boolean : boolean = ctx.data;
+                    // @ts-expect-error
+                    const object : object = ctx.data;
+                    // @ts-expect-error
+                    const number : number = ctx.data;
+                    // @ts-expect-error
+                    const record : Record<PropertyKey, any> = ctx.request.body;
+
+                    const validatable : Validatable = ctx.validatable;
+
+                    const string : string = ctx.data;
+                    ctx.response.body = record;
                     return ctx;
                 });
 
@@ -159,6 +177,26 @@ describe('guard', ()=>{
 
                     return ctx;
                 });
+
+            router.add(ValidatorParameter({
+                validator: ContextValidator
+            })).add(function (ctx) {
+
+                // @ts-expect-error
+                const boolean : boolean = ctx.data;
+                // @ts-expect-error
+                const object : object = ctx.data;
+                // @ts-expect-error
+                const number : number = ctx.data;
+                // @ts-expect-error
+                const record : Record<PropertyKey, any> = ctx.request.body;
+
+                const validatable : Validatable = ctx.validatable;
+
+                const string : string = ctx.data;
+                ctx.response.body = record;
+                return ctx;
+            });
 
             router
                 .add(function (context) {
