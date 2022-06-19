@@ -1,13 +1,7 @@
 import Router from '../../../dist/router/standard';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
-import Stop from '../../../dist/middleware/stop';
-import Number from '@alirya/number/boolean/number';
-import String from '../../../../string/dist/boolean/string';
 import ContextValidator from './context-validator';
-import {O} from 'ts-toolbelt';
-import Context from '../../../dist/context/context';
-import RecordValidator from './record-validator';
 import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator';
 import Validatable from '../../../../validator/dist/validatable/validatable';
 

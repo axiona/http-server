@@ -1,6 +1,5 @@
 import Response from '@alirya/http/response/response';
 import Context from '../context/context';
-import Next from './next';
 import {O} from 'ts-toolbelt';
 import Middleware from "./middleware";
 import IsFunction from "@alirya/function/boolean/function";

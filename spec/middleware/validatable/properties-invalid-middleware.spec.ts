@@ -2,12 +2,9 @@ import Axios, {AxiosResponse} from 'axios';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Router from '../../../dist/router/standard';
-import BodyText from '../../../dist/middleware/body-text';
-import Validation from '../../../dist/middleware/validation';
 import ContextDataGuard from './context-data-guard';
 import {ResponseParameters} from '../../../dist/middleware/response';
 import PaymentRequiredParameters from '../../../../http/dist/response/payment-required-parameters';
-import OneGuard from './one-guard';
 import {ValidationParameters} from '../../../dist/middleware/validation';
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});

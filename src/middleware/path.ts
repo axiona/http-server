@@ -1,10 +1,7 @@
 import Context from '../context/context';
 import Middleware from './middleware';
 import List, {ListParameterType} from '@alirya/uri/path/list-parameter';
-import EqualParameters from '@alirya/array/boolean/equal-parameters';
-import Callable from '../../../function/dist/callable';
-import { pathToRegexp, match as Matcher, Match, parse, compile, MatchFunction, ParseOptions, TokensToRegexpOptions, RegexpToFunctionOptions, MatchResult } from 'path-to-regexp';
-import ExistsParameters from '../../../object/dist/property/boolean/exists-parameters';
+import { match as Matcher, Match, MatchFunction, ParseOptions, TokensToRegexpOptions, RegexpToFunctionOptions} from 'path-to-regexp';
 import Parents from '../router/array/parents';
 import Router from '../router/router';
 import IsPath from './boolean/path';

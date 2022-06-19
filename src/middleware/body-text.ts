@@ -1,6 +1,4 @@
-import buddy, {text, Options} from 'co-body';
-import forms from 'formidable';
-import * as qs from 'qs';
+import {text, Options} from 'co-body';
 import Context from '../context/context';
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';

@@ -3,12 +3,8 @@ import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
 import BodyText from '../../../dist/middleware/body-text';
-import String from '../../../../string/dist/boolean/string';
 import Validation from '../../../dist/middleware/validation';
-import {FromResponseParameters} from '../../../dist/context/from-response';
-import PaymentRequiredParameters from '../../../../http/dist/response/payment-required-parameters';
 import ContextDataGuard from './context-data-guard';
-import {ResponseParameters} from '../../../dist/middleware/response';
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});
 

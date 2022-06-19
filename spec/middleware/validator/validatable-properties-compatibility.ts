@@ -1,7 +1,7 @@
 import Router from '../../../dist/router/standard';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
-import Validator, {ValidatorParameter} from '../../../dist/middleware/validator';
+import {ValidatorParameter} from '../../../dist/middleware/validator';
 import Stop from '../../../dist/middleware/stop';
 import RecordValidator, {ValidatorType} from './record-validator';
 import ContextValidator from './context-validator';

@@ -1,10 +1,7 @@
 import forms, {Options, File, defaultOptions} from 'formidable';
-import * as qs from 'qs';
 import Context from '../context/context';
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
-import SetPathParameters from '../../../object/dist/set-path-parameters';
-import {json} from 'co-body';
 import Callable from '../../../function/dist/callable';
 import AffixParsers from '../object/affix-parsers';
 

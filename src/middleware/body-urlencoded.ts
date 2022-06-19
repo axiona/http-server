@@ -1,5 +1,4 @@
-import buddy, {Options, form} from 'co-body';
-import forms from 'formidable';
+import {Options, form} from 'co-body';
 import * as qs from 'qs';
 import Context from '../context/context';
 import Middleware from './middleware';

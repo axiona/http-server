@@ -2,12 +2,7 @@ import Router from '../../../dist/router/standard';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Validation, {ValidationParameter, ValidationParameters} from '../../../dist/middleware/validation';
-import Stop from '../../../dist/middleware/stop';
-import Number from '@alirya/number/boolean/number';
-import String from '../../../../string/dist/boolean/string';
-import OneGuard from './one-guard';
 import ContextDataGuard from './context-data-guard';
-import {O} from 'ts-toolbelt';
 import Context from '../../../dist/context/context';
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});

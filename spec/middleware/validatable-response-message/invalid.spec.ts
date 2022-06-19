@@ -1,12 +1,7 @@
 import Router from '../../../dist/router/standard';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
-import Validator, {ValidatorParameter} from '../../../dist/middleware/validator';
-import Stop from '../../../dist/middleware/stop';
-import Validatable from '../../../../validator/dist/validatable/validatable';
-import {ValidatorParameters} from '../../../dist/middleware/validator';
-import {ValidatableResponseMessageParameters, ValidatableResponseMessageParameter} from '../../../dist/middleware/validatable-response-message';
-import Context from '../../../dist/context/context';
+import {ValidatableResponseMessageParameters} from '../../../dist/middleware/validatable-response-message';
 import Axios, {AxiosResponse} from 'axios';
 
 it("force console log", () => { spyOn(console, 'log').and.callThrough();});

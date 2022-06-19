@@ -5,7 +5,6 @@ import Router from './router';
 import ErrorHandler from '../error-handler/error-handler';
 import Callable from '../../../function/dist/callable';
 import Middleware from '../middleware/middleware';
-import MiddlewareInferCurrent from '../context/middleware-infer-current';
 import MiddlewareInferNext from '../context/middleware-infer-next';
 
 export default class Standard<

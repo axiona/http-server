@@ -1,5 +1,4 @@
 import Response from '@alirya/http/response/response';
-import BodyType from '@alirya/http/body/body';
 import Context from './context';
 import {O} from 'ts-toolbelt';
 

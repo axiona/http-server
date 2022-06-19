@@ -1,4 +1,4 @@
-import {DefaultContext, DefaultState, ExtendableContext, ParameterizedContext} from 'koa';
+import {DefaultContext, DefaultState, ExtendableContext} from 'koa';
 import RouterType from '../router/router';
 
 /**

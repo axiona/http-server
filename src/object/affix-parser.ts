@@ -1,5 +1,4 @@
 import Escape from '../../../string/dist/pattern/escape';
-import IsObject from '../../../object/dist/boolean/object';
 import Digit from '../../../string/dist/boolean/digit';
 import String from '../../../string/dist/boolean/string';
 import SafeCast from '../../../string/dist/safe-cast';
