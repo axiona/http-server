@@ -1,0 +1,51 @@
+import ApplicationContext from '../context/context';
+import Middleware from './middleware';
+import {O} from 'ts-toolbelt';
+import SetPathParameters from "@alirya/object/set-path-parameters";
+import PickPathParameters from "@alirya/object/value/value/select-path-parameters";
+import ReplacePath from "@alirya/object/replace-path";
+
+export function ReplaceParameters<
+    Properties extends ReadonlyArray<PropertyKey>,
+    BodyTo extends unknown = unknown,
+    ContextType extends ApplicationContext & O.P.Record<Properties, unknown> = ApplicationContext & O.P.Record<Properties, unknown>,
+>(
+    filter : (data : O.Path<ContextType, Properties>, context: ContextType) => BodyTo,
+    properties : [...Properties]
+) : Middleware<ContextType, ReplacePath<ContextType, BodyTo, Properties>> {
+
+    return function (context) {
+
+        const value = PickPathParameters<Properties>(context as any, ...properties);
+
+        const filtered = filter(value as any, context);
+
+        SetPathParameters(context as any, filtered, ...properties);
+
+        return context;
+
+    } as Middleware<ContextType, ReplacePath<ContextType, BodyTo, Properties>>;
+}
+
+export function ReplaceParameter<
+    Properties extends ReadonlyArray<PropertyKey>,
+    BodyTo extends unknown = unknown,
+    ContextType extends ApplicationContext & O.P.Record<Properties, unknown> = ApplicationContext & O.P.Record<Properties, unknown>,
+    >( {
+           filter,
+           properties
+       } : {
+           filter : (data : O.Path<ContextType, Properties>, context: ContextType) => BodyTo,
+           properties : [...Properties],
+       }
+) : Middleware<ContextType, ReplacePath<ContextType, BodyTo, Properties>> {
+
+    return ReplaceParameters<Properties, BodyTo, ContextType>(filter, properties);
+}
+
+namespace Replace {
+    export const Parameters = ReplaceParameters;
+    export const Parameter = ReplaceParameter;
+}
+
+export default Replace;
