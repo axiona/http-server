@@ -16,6 +16,7 @@
     "@alirya/validatable": "^0.20.1",
     "@alirya/http": "^0.18.3",
     "@alirya/validator": "^0.19.3",
+    "@alirya/syslog": "^0.3.2",
     "@alirya/value": "^0.15.1",
     "@alirya/uri": "^0.7.4",
     "@koa/router": "^10.1.1",
