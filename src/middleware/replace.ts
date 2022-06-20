@@ -6,9 +6,10 @@ import PickPathParameters from "@alirya/object/value/value/select-path-parameter
 import ReplacePath from "@alirya/object/replace-path";
 
 export function ReplaceParameters<
-    Properties extends ReadonlyArray<PropertyKey>,
-    BodyTo extends unknown = unknown,
-    ContextType extends ApplicationContext & O.P.Record<Properties, unknown> = ApplicationContext & O.P.Record<Properties, unknown>,
+    Properties extends PropertyKey[],
+    BodyTo extends unknown,
+    ContextType extends ApplicationContext & O.P.Record<Properties, unknown>
+        = ApplicationContext & O.P.Record<Properties, unknown> ,
 >(
     filter : (data : O.Path<ContextType, Properties>, context: ContextType) => BodyTo,
     properties : [...Properties]
@@ -28,19 +29,19 @@ export function ReplaceParameters<
 }
 
 export function ReplaceParameter<
-    Properties extends ReadonlyArray<PropertyKey>,
-    BodyTo extends unknown = unknown,
+    Properties extends PropertyKey[],
+    BodyTo extends unknown,
     ContextType extends ApplicationContext & O.P.Record<Properties, unknown> = ApplicationContext & O.P.Record<Properties, unknown>,
-    >( {
-           filter,
-           properties
-       } : {
-           filter : (data : O.Path<ContextType, Properties>, context: ContextType) => BodyTo,
-           properties : [...Properties],
-       }
+>( {
+       filter,
+       properties
+   } : {
+       filter : (data : O.Path<ContextType, Properties>, context: ContextType) => BodyTo,
+       properties : [...Properties],
+   }
 ) : Middleware<ContextType, ReplacePath<ContextType, BodyTo, Properties>> {
 
-    return ReplaceParameters<Properties, BodyTo, ContextType>(filter, properties);
+    return ReplaceParameters<Properties, BodyTo, ContextType>(filter as (data : O.Path<ContextType, Properties>, context: ContextType) => BodyTo, properties);
 }
 
 namespace Replace {
