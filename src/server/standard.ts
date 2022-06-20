@@ -2,10 +2,6 @@ import Koa, {DefaultContext, DefaultState, Middleware} from 'koa';
 import {Server as HttpServer} from 'http';
 import Server from './server';
 import {ListenOptions} from 'net';
-// import Router from "@koa/router";
-// import ApplicationContext from "../context/context";
-// import State from "../context/state/infer";
-
 
 export default class Standard<
     StateT = DefaultState,
@@ -14,7 +10,6 @@ export default class Standard<
 
     readonly koa : Koa<StateT, CustomT> = new Koa<StateT, CustomT>();
     #server : HttpServer|undefined;
-    // private router : Router = new Router();
 
     constructor(
         readonly config : ListenOptions = {},
@@ -22,15 +17,7 @@ export default class Standard<
     ) {
 
         this.middlewares.forEach(this.koa.use);
-
-        // this.koa.use(this.router.routes());
-        // this.koa.use(this.router.allowedMethods());
     }
-
-    // route() : Router<State<ApplicationContext<{}, {}, {}, DefaultContext>>, ApplicationContext<{}, {}, {}, DefaultContext>> {
-    //
-    //     return this.router as Router<State<ApplicationContext<{}, {}, {}, DefaultContext>>, ApplicationContext<{}, {}, {}, DefaultContext>>;
-    // }
 
     get server() : HttpServer|undefined {
 

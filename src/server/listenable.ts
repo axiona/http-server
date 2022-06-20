@@ -1,9 +1,6 @@
 import Koa, {DefaultContext, DefaultState} from 'koa';
 import Server from './server';
 import {Server as HttpServer} from 'http';
-// import State from "../context/state/infer";
-// import ApplicationContext from "../context/context";
-// import Router from "@koa/router";
 import {ListenOptions} from "net";
 
 export default class Listenable<StateT = DefaultState, CustomT = DefaultContext> implements Server<StateT, CustomT> {
@@ -23,11 +20,6 @@ export default class Listenable<StateT = DefaultState, CustomT = DefaultContext>
 
         return this.#server.config;
     }
-
-    // route() : Router<State<ApplicationContext<{}, {}, {}, DefaultContext>>, ApplicationContext<{}, {}, {}, DefaultContext>> {
-    //
-    //     return this.#server.route();
-    // }
 
 
     get koa () : Koa<StateT, CustomT> {
