@@ -5,9 +5,9 @@ import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/
 import Stop from '../../../dist/middleware/stop';
 import OneGuard from './one-validator';
 import RecordValidator, {ValidatorType} from './record-validator';
-import Validatable from '../../../../validator/dist/validatable/validatable';
+import Validatable from '@alirya/validator/validatable/validatable';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 
 const server = Server();

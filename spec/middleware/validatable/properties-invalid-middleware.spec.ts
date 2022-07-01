@@ -4,10 +4,10 @@ import BindToServer from '../../../dist/router/append-server';
 import Router from '../../../dist/router/standard';
 import ContextDataGuard from './context-data-guard';
 import {ResponseParameters} from '../../../dist/middleware/response';
-import PaymentRequiredParameters from '../../../../http/dist/response/payment-required-parameters';
+import {PaymentRequiredParameters} from '@alirya/http/response/payment-required';
 import {ValidationParameters} from '../../../dist/middleware/validation';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('invalid middleware', () => {
 

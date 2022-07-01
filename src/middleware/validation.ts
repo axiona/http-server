@@ -1,10 +1,10 @@
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
-import PickDeepParameters from "@alirya/object/value/value/select-path-parameters";
+import {SelectPathParameters} from '@alirya/object/value/value/select-path';
 import Context from '../context/context';
 import Stop from './stop';
-import ValidationInterface from '../../../boolean/dist/function/validation';
-import Guard, {GuardInferExpect} from '../../../boolean/dist/function/guard';
+import ValidationInterface from '@alirya/boolean/function/validation';
+import Guard, {GuardInferExpect} from '@alirya/boolean/function/guard';
 
 
 export type ValidationTypeContext<ContextType extends Context, Properties extends PropertyKey[], Value extends unknown>
@@ -128,7 +128,7 @@ export function ValidationParameters<
 
     return function (context: ContextType & O.P.Record<Properties|[], unknown>) {
 
-        const value = assignment ? PickDeepParameters(context, ...properties) : context;
+        const value = assignment ? SelectPathParameters(context, ...properties) : context;
 
         const result = validation(value as O.P.Pick<ContextType, Properties>);
 

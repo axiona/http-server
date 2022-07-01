@@ -1,8 +1,8 @@
 import Context from '../context/context';
 import Middleware from './middleware';
-import List, {ListParameterType} from '@alirya/uri/path/list-parameter';
+import {ListType, ListParameter} from '@alirya/uri/path/list';
 import { match as Matcher, Match, MatchFunction, ParseOptions, TokensToRegexpOptions, RegexpToFunctionOptions} from 'path-to-regexp';
-import ExistsParameters from '../../../object/dist/property/boolean/exists-parameters';
+import {ExistsParameters} from '@alirya/object/property/boolean/exists';
 import Parents from '../router/array/parents';
 import Router from '../router/router';
 import {Required} from 'utility-types';
@@ -16,7 +16,7 @@ export type PathReturn<
     ContextType,
     ContextType & {
         request : {
-            [Key in Storage] : ListParameterType
+            [Key in Storage] : ListType
         } & {
             [Key in Argument] : Record<string, string>
         }
@@ -115,7 +115,7 @@ export function PathMatches<Argument extends string, Storage extends string>(
 
     const cached : Map<string, Match|false> = context.request[PathMatched];
 
-    let paths : ListParameterType = ContextPathSegments(context).request[PathSegmentsKey];
+    let paths : ListType = ContextPathSegments(context).request[PathSegmentsKey];
     let path = paths.toString();
 
     if(cached.has(match.path)) {
@@ -133,9 +133,9 @@ export function PathMatches<Argument extends string, Storage extends string>(
 }
 
 
-export function PathGenerateList(paths : string[]|string) : ListParameterType {
+export function PathGenerateList(paths : string[]|string) : ListType {
 
-    return List({
+    return ListParameter({
         segments : paths,
         empty : false,
         separators : '/\\',
@@ -173,7 +173,7 @@ export type PathMatchers = {
 
 export interface PathContainerType<Argument extends string, Storage extends string> {
 
-    paths : ListParameterType;
+    paths : ListType;
     matchers : Map<Router, PathMatchers>;
     path : string;
     option : PathOption<Argument, Storage>;
@@ -185,7 +185,7 @@ export class PathContainer<
     Storage extends string,
 > implements PathContainerType<Argument, Storage> {
 
-    paths : ListParameterType;
+    paths : ListType;
     path : string;
     matchers : Map<Router, PathMatchers> = new Map();
 

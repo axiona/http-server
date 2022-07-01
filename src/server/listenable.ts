@@ -1,7 +1,7 @@
 import Koa, {DefaultContext, DefaultState} from 'koa';
 import Server from './server';
 import {Server as HttpServer} from 'http';
-import {ListenOptions} from "net";
+import {ListenOptions} from 'net';
 
 export default class Listenable<StateT = DefaultState, CustomT = DefaultContext> implements Server<StateT, CustomT> {
 

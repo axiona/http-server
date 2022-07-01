@@ -5,7 +5,7 @@ import Axios, {AxiosResponse} from 'axios';
 import Validation from '../../../dist/middleware/validation';
 import ContextDataGuard from './context-data-guard';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 
 describe('invalid', () => {

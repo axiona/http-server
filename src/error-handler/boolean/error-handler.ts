@@ -1,6 +1,6 @@
 import ErrorHandlerType from '../error-handler';
 import Function from '@alirya/function/boolean/function';
-import ExistsParameters from '@alirya/object/property/boolean/exists-parameters';
+import {ExistsParameters} from '@alirya/object/property/boolean/exists';
 
 
 export default function ErrorHandler<Type extends object>(type: Type) : type is Type & ErrorHandlerType {

@@ -5,7 +5,7 @@ import Axios, {AxiosResponse} from 'axios';
 import FromRecord from '../../../../uri/dist/query/from-record';
 import BodyForm from '../../../dist/middleware/body-urlencoded';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 

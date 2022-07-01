@@ -3,9 +3,9 @@ import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import ContextValidator from './context-validator';
 import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator';
-import Validatable from '../../../../validator/dist/validatable/validatable';
+import Validatable from '@alirya/validator/validatable/validatable';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
 

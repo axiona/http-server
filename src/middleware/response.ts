@@ -1,10 +1,10 @@
 import Response from '@alirya/http/response/response';
 import Context from '../context/context';
 import {O} from 'ts-toolbelt';
-import Middleware from "./middleware";
-import IsFunction from "@alirya/function/boolean/function";
+import Middleware from './middleware';
+import IsFunction from '@alirya/function/boolean/function';
 import FromResponse, {FromResponseReturn} from '../context/from-response';
-import Callable from '../../../function/dist/callable';
+import Callable from '@alirya/function/callable';
 /**
  * use {@param response} value or return for response data
  *

@@ -3,11 +3,11 @@ import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
 import Validation from '../../../dist/middleware/validation';
-import PaymentRequiredParameters from '../../../../http/dist/response/payment-required-parameters';
+import {PaymentRequiredParameters} from '@alirya/http/response/payment-required';
 import ContextDataGuard from './context-data-guard';
 import {ResponseParameters} from '../../../dist/middleware/response';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 
 describe('invalid middleware', () => {

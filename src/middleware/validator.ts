@@ -3,8 +3,8 @@ import InferValidatable from '@alirya/validator/validatable/infer-static';
 import InferMatch from '@alirya/validator/validatable/match/infer';
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
-import PickDeepParameters from "@alirya/object/value/value/select-path-parameters";
-import SetPathParameters from "@alirya/object/set-path-parameters";
+import {SelectPathParameters} from '@alirya/object/value/value/select-path';
+import SetPathParameters from '@alirya/object/set-path-parameters';
 import Context from '../context/context';
 import Stop from './stop';
 
@@ -41,7 +41,6 @@ export interface ValidatorArgumentProperties<
     ValidatableKey extends PropertyKey[]
 > {
     validator : ValidatorType;
-    // valid ?: Middleware<ContextType>,
     invalid ?: Middleware<ContextType, ValidatorTypeReturnContext<ContextType, Properties, ValidatorType>>;
     replace ?: boolean;
     properties : [...Properties];
@@ -55,7 +54,6 @@ export interface ValidatorArgumentContext<
     Invalid extends ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey>
 > {
     validator : ValidatorType;
-    // valid ?: Middleware<ContextType>,
     invalid ?: Invalid;
     replace ?: boolean;
     properties ?: [];
@@ -184,29 +182,10 @@ export function ValidatorParameters<
 >(
     validator : ValidatorType,
     properties ?: [],
-    // valid ?: Middleware<ContextType>,
     invalid ?: Invalid,
     replace ?: boolean,
     validatable ?: [...ValidatableKey],
 ) : ValidatorReturnContext<ContextType, ValidatorType, ValidatableKey>;
-// /**
-//  * Same as no properties
-//  *
-//  * @param validator
-//  * @param invalid
-//  * @param replace
-//  * @param properties
-//  */
-// export function ValidatorParameters<
-//     ContextType extends Context = Context,
-//     ValidatorType extends Validator<ContextType> = Validator<ContextType>,
-// >(
-//     validator : ValidatorType,
-//     // valid ?: Middleware<ContextType>,
-//     invalid ?: Middleware<ContextType>,
-//     replace ?: boolean,
-//     properties ?: []
-// ) : Middleware<ContextType, ContextType & ValidatableContainer<InferValidatable<ValidatorType>>>;
 
 /**
  * Validate value from {@see Context} according to {@param properties} path key
@@ -230,7 +209,6 @@ export function ValidatorParameters<
 >(
     validator : ValidatorType,
     properties ?: [...Properties],
-    // valid ?: Middleware<ContextType>,
     invalid ?: Middleware<ContextType>,
     replace ?: boolean,
     validatable ?: [...ValidatableKey],
@@ -253,7 +231,6 @@ export function ValidatorParameters<
 >(
     validator : ValidatorType,
     properties : Properties|[] = [],
-    // valid : Middleware<ContextType> = Next,
     invalid : Middleware<ContextType> = Stop,
     replace : boolean = true,
     validatable : ValidatableKey|['validatable'] = ['validatable'],
@@ -263,7 +240,7 @@ export function ValidatorParameters<
 
     return function (context: ValidatorTypeContext<Properties|[]>) {
 
-        const value = assignment ? PickDeepParameters(context, ...properties) : context;
+        const value = assignment ? SelectPathParameters(context, ...properties) : context;
 
         const result = (validator as Validator)(value);
 

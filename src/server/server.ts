@@ -1,6 +1,6 @@
 import Koa, {DefaultContext, DefaultState} from 'koa';
 import {Server as HttpServer} from 'http';
-import {ListenOptions} from "net";
+import {ListenOptions} from 'net';
 
 export default interface Server<StateT = DefaultState, CustomT = DefaultContext> {
 

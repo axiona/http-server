@@ -1,6 +1,6 @@
 import Context from '../context/context';
 import Middleware from './middleware';
-import List, {ListParameterType} from '@alirya/uri/path/list-parameter';
+import {ListParameter, ListType} from '@alirya/uri/path/list';
 import { match as Matcher, Match, MatchFunction, ParseOptions, TokensToRegexpOptions, RegexpToFunctionOptions} from 'path-to-regexp';
 import Parents from '../router/array/parents';
 import Router from '../router/router';
@@ -16,7 +16,7 @@ export type PathReturn<
     ContextType,
     ContextType & {
         request : {
-            [Key in Storage] : ListParameterType
+            [Key in Storage] : ListType
         } & {
             [Key in Argument] : Record<string, string>
         }
@@ -39,7 +39,7 @@ export const PathOptionDefault : PathOption<'pathParameter', 'paths'> = Object.f
 
 export interface PathContainerType<Argument extends string, Storage extends string> {
 
-    paths : ListParameterType;
+    paths : ListType;
     matchers : Map<Router, PathMatchers>;
     path : string;
     option : PathOption<Argument, Storage>;
@@ -134,7 +134,7 @@ export function PathMatches<Argument extends string, Storage extends string>(
 
     const cached : Map<string, Match|false> = context.request[PathMatched];
 
-    let paths : ListParameterType = ContextPathSegments(context).request[PathSegmentsKey];
+    let paths : ListType = ContextPathSegments(context).request[PathSegmentsKey];
     let path = paths.toString();
 
     if(cached.has(match.path)) {
@@ -152,9 +152,9 @@ export function PathMatches<Argument extends string, Storage extends string>(
 }
 
 
-export function PathGenerateList(paths : string[]|string) : ListParameterType {
+export function PathGenerateList(paths : string[]|string) : ListType {
 
-    return List({
+    return ListParameter({
         segments : paths,
         empty : false,
         separators : '/\\',
@@ -196,7 +196,7 @@ export function PathRegister<
     Argument extends string,
     Storage extends string
 >(
-    paths : ListParameterType,
+    paths : ListType,
     container: Map<Router, PathMatchers>,
     option : PathOption<Argument, Storage>,
     router : Router

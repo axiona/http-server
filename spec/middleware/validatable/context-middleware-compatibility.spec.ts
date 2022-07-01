@@ -6,7 +6,7 @@ import Stop from '../../../dist/middleware/stop';
 import ContextDataGuard from './context-data-guard';
 import Context from '../../../dist/context/context';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 
 const server = Server();
@@ -246,7 +246,7 @@ describe('guard', () => {
                     // @ts-expect-error
                     let string : Context<{ data :string }> = ctx;
 
-                    return ctx;;
+                    return ctx;
                 });
 
             router

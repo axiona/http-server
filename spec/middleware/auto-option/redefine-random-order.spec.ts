@@ -7,7 +7,7 @@ import PathPattern from '../../../dist/middleware/path';
 import AutoOptions from '../../../dist/middleware/auto-options';
 import RandomBoolean from '@alirya/boolean/random';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('random order, redefine', () => {
 

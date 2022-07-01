@@ -6,7 +6,7 @@ import Stop from '../../../dist/middleware/stop';
 import Context from '../../../dist/context/context';
 import ContextValidator from './context-validator';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
 

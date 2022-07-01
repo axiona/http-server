@@ -2,7 +2,7 @@ import forms, {Options, File, defaultOptions} from 'formidable';
 import Context from '../context/context';
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
-import Callable from '../../../function/dist/callable';
+import Callable from '@alirya/function/callable';
 import AffixParsers from '../object/affix-parsers';
 
 export type BodyMultipartReturnRecursive<Type> = {

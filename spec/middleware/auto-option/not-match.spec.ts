@@ -6,7 +6,7 @@ import Axios, {AxiosResponse} from 'axios';
 import PathPattern from '../../../dist/middleware/path';
 import AutoOptions from '../../../dist/middleware/auto-options';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 

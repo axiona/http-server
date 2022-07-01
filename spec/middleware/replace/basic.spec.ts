@@ -6,7 +6,7 @@ import BodyJson from '../../../dist/middleware/body-json';
 import ReplaceToNumber, {ReplaceToNumberArgument, ReplaceToNumberReturn} from './replace-to-number';
 import {ReplaceParameters} from '../../../dist/middleware/replace';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 

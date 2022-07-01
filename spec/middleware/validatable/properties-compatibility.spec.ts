@@ -4,7 +4,7 @@ import BindToServer from '../../../dist/router/append-server';
 import Validation, {ValidationParameter, ValidationParameters} from '../../../dist/middleware/validation';
 import OneGuard from './one-guard';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
 

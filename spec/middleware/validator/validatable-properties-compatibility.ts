@@ -5,10 +5,10 @@ import {ValidatorParameter} from '../../../dist/middleware/validator';
 import Stop from '../../../dist/middleware/stop';
 import RecordValidator, {ValidatorType} from './record-validator';
 import ContextValidator from './context-validator';
-import Validatable from '../../../../validator/dist/validatable/validatable';
+import Validatable from '@alirya/validator/validatable/validatable';
 import {ValidatorParameters} from '../../../dist/middleware/validator';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 let called : boolean = false;
 

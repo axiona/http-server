@@ -3,7 +3,7 @@ import ErrorHandlerType from '../error-handler/error-handler';
 import Context from '../context/context';
 import Router from './router';
 import ErrorHandler from '../error-handler/error-handler';
-import Callable from '../../../function/dist/callable';
+import Callable from '@alirya/function/callable';
 import Middleware from '../middleware/middleware';
 import MiddlewareInferNext from '../context/middleware-infer-next';
 
@@ -32,11 +32,6 @@ export default class Standard<
 
     add<Next extends Context>(middleware : Middleware<MiddlewareInferNext<Type>, Next>) : Router<Middleware<Next>> {
 
-        // if(middleware.register) {
-        //
-        //     middleware.register(this);
-        // }
-
         const router =  new Standard(middleware, undefined, this, {});
 
         this.children.push(router);
@@ -45,11 +40,6 @@ export default class Standard<
     }
 
     catch(errorHandler : ErrorHandlerType) {
-
-        // if(errorHandler.register) {
-        //
-        //     errorHandler.register(this);
-        // }
 
         const router =  new Standard(undefined, errorHandler, this, {});
 

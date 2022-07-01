@@ -1,8 +1,8 @@
 import Function from '@alirya/function/boolean/function';
-import ExistsParameters from '@alirya/object/property/boolean/exists-parameters';
+import {ExistsParameters} from '@alirya/object/property/boolean/exists';
 import Middleware from '../middleware';
 import {PathReturn} from '../path';
-import String from '../../../../string/dist/boolean/string';
+import String from '@alirya/string/boolean/string';
 
 
 export default function Path<Type extends Middleware>(type: Type) : type is Type & PathReturn {

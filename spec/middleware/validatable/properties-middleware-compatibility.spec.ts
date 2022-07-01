@@ -5,7 +5,7 @@ import Validation, {ValidationParameter, ValidationParameters} from '../../../di
 import Stop from '../../../dist/middleware/stop';
 import OneGuard from './one-guard';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 
 const server = Server();

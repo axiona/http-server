@@ -1,8 +1,7 @@
-import PickParameters from '@alirya/object/pick-parameters';
+import {PickParameters} from '@alirya/object/pick';
 import Context from '../context/context';
 import Syslog from '@alirya/syslog/syslog';
 import Middleware from './middleware';
-import {PrintResponseParameters} from './print-response';
 
 export function PrintTransactionParameters<ContextType extends Context<Partial<{ body: any }>>, Log extends Syslog<[string, any, any]>>(
     syslog: Log,

@@ -1,4 +1,4 @@
-import Callable from '../../../function/dist/callable';
+import Callable from '@alirya/function/callable';
 import AffixParser from './affix-parser';
 import Deepmerge from 'deepmerge';
 

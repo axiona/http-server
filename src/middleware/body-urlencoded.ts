@@ -3,7 +3,7 @@ import * as qs from 'qs';
 import Context from '../context/context';
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
-import Omit from '../../../object/dist/omit';
+import Omit from '@alirya/object/omit';
 
 
 type BodyUrlencodedReturn<Argument extends Context> = Middleware<

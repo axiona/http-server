@@ -1,5 +1,5 @@
 import Function from '@alirya/function/boolean/function';
-import ExistsParameters from '@alirya/object/property/boolean/exists-parameters';
+import {ExistsParameters} from '@alirya/object/property/boolean/exists';
 import Middleware from '../middleware';
 import {MethodType} from '../method';
 

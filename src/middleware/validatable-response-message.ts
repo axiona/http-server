@@ -1,21 +1,11 @@
-import {O} from "ts-toolbelt";
-import Middleware from "./middleware";
-import Validatable from "@alirya/validator/validatable/validatable";
-import Response from "@alirya/http/response/response";
-import UnprocessableEntityParameter from "@alirya/http/response/unprocessable-entity-parameter";
+import {O} from 'ts-toolbelt';
+import Middleware from './middleware';
+import Validatable from '@alirya/validator/validatable/validatable';
+import Response from '@alirya/http/response/response';
+import {UnprocessableEntityParameter} from '@alirya/http/response/unprocessable-entity';
 import Context from '../context/context';
-import PickDeepParameters from '../../../object/dist/value/value/select-path-parameters';
+import {SelectPathParameters} from '@alirya/object/value/value/select-path';
 import FromResponse from '../context/from-response';
-
-//
-// export interface ValidatableResponseMessageReturn<
-//     Property extends PropertyKey[],
-//     ValidatorType extends Validatable,
-//     Argument extends Context ,
-// > extends Middleware<
-//     Argument & O.P.Record<Property, ValidatorType>,
-//     O.P.Record<Property, ValidatorType> & O.P.Update<Argument, ['response', 'body'], ValidatorType['message']>
-// > {}
 
 export type ValidatableResponseMessageReturn<
     Property extends PropertyKey[],
@@ -26,44 +16,6 @@ export type ValidatableResponseMessageReturn<
     O.P.Record<Property, ValidatorType> & O.P.Update<Argument, ['response', 'body'], ValidatorType['message']>
 > ;
 
-// export interface ValidatableResponseMessageReturn<
-//     Property extends PropertyKey[],
-//     ValidatorTypez extends Validatable,
-//     Argument extends Context,
-//     // Message = unknown
-// > /*extends Middleware<
-//     Argument & O.P.Record<Property, ValidatorType>,
-//     O.P.Record<Property, ValidatorType> & O.P.Update<Argument, ['response', 'body'], ValidatorType['message']>
-// >*/ {
-//     <A extends Argument & O.P.Record<Property, ValidatorTypez>>(
-//         context: A
-//     ) : /*Return<O.P.Record<Property, ValidatorType> &*/ O.P.Update<A, ['response', 'body'], ValidatorTypez['message']>;
-// }
-
-//
-// export function ValidatableResponseMessageParameters<
-//     ValidatorType extends Validatable,
-//     Argument extends Context = Context,
-// >() : ValidatableResponseMessageReturn<['validatable'], ValidatorType, Argument>;
-
-
-// export function ValidatableResponseMessageParameters<
-//     ValidatorType extends Validatable,
-//     Argument extends Context,
-// >(
-//     response : (response :  Partial<Response<number, string, {}, ValidatorType['message']>>) => Response<number, string, Record<string, string>, any>,
-// ) : ValidatableResponseMessageReturn<['validatable'], ValidatorType, Argument>;
-//
-
-// export function ValidatableResponseMessageParameters<
-//     ValidatorType extends Validatable,
-//     Property extends PropertyKey[] = ['validatable'],
-//     Argument extends Context = Context,
-// >(
-//     response ?: ((response :  Partial<Response<number, string, {}, ValidatorType['message']>>) => Response<number, string, Record<string, string>, any>),
-//     properties ?: [...Property],
-// ) : ValidatableResponseMessageReturn<Property, ValidatorType, Argument>;
-
 export function ValidatableResponseMessageParameters<
     ValidatorType extends Validatable,
     Property extends PropertyKey[],
@@ -73,18 +25,6 @@ export function ValidatableResponseMessageParameters<
     properties ?: [...Property],
     next ?: boolean
 ) : ValidatableResponseMessageReturn<Property, ValidatorType, Argument> ;
-
-// export function ValidatableResponseMessageParameters<
-//     Property extends PropertyKey[] = ['validatable'],
-//     ValidatorType extends Validatable = Validatable,
-//     Argument extends Context = Context,
-// >(
-//     response ?: (response :  Partial<Response<number, string, {}, ValidatorType['message']>>) => Response<number, string, Record<string, string>, any>,
-//     properties ?: [...Property],
-//     next ?: boolean
-// ) : ValidatableResponseMessageReturn<[...Property], ValidatorType, Argument> ;
-
-
 
 export function ValidatableResponseMessageParameters<
     ValidatorType extends Validatable,
@@ -99,7 +39,7 @@ export function ValidatableResponseMessageParameters<
 
     return function (context) {
 
-        const value = PickDeepParameters(context, ...properties) as ValidatorType;
+        const value = SelectPathParameters(context, ...properties) as ValidatorType;
 
         if(value.valid) {
 

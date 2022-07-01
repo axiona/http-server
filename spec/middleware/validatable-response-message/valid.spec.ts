@@ -4,7 +4,7 @@ import BindToServer from '../../../dist/router/append-server';
 import {ValidatableResponseMessageParameters} from '../../../dist/middleware/validatable-response-message';
 import Axios, {AxiosResponse} from 'axios';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('parameters', () => {
 

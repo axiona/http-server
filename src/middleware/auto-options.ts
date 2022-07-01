@@ -7,7 +7,7 @@ import {PathMatchers, PathMatches} from './path';
 import Root from '../router/root';
 import Method from '../boolean/method';
 import FromResponse from '../context/from-response';
-import MethodNotAllowedParameters from '../../../http/dist/response/method-not-allowed-parameters';
+import {MethodNotAllowedParameters} from '@alirya/http/response/method-not-allowed';
 
 export default function AutoOptions<
     ContextType extends Context = Context

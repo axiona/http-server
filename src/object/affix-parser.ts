@@ -1,10 +1,10 @@
-import Escape from '../../../string/dist/pattern/escape';
-import Digit from '../../../string/dist/boolean/digit';
-import String from '../../../string/dist/boolean/string';
-import SafeCast from '../../../string/dist/safe-cast';
-import Callable from '../../../function/dist/callable';
-import RemoveSuffixParameters from '../../../string/dist/remove-suffix-parameters';
-import RemovePrefixParameters from '../../../string/dist/remove-prefix-parameters';
+import Escape from '@alirya/string/pattern/escape';
+import Digit from '@alirya/string/boolean/digit';
+import String from '@alirya/string/boolean/string';
+import SafeCast from '@alirya/string/safe-cast';
+import Callable from '@alirya/function/callable';
+import {RemoveSuffixParameters} from '@alirya/string/remove-suffix';
+import {RemovePrefixParameters} from '@alirya/string/remove-prefix';
 
 
 export default function AffixParser(
@@ -32,7 +32,7 @@ export default function AffixParser(
 
 
 
-export function BracesParserSet(/*container : Record<PropertyKey, any>,*/ keys : ReadonlyArray<string>, value : any/*, pattern : RegExp*/) : Record<PropertyKey, any> {
+export function BracesParserSet(keys : ReadonlyArray<string>, value : any/*, pattern : RegExp*/) : Record<PropertyKey, any> {
 
     let clone = keys.slice(0);
     const key = clone.shift();
@@ -67,77 +67,5 @@ export function BracesParserSet(/*container : Record<PropertyKey, any>,*/ keys :
         const type = SafeCast(key);
         throw new Error(`unable to determine key container : "${type}"`);
     }
-
-    //
-    // if(key === undefined) {
-    //
-    //     return value;
-    //
-    // } else if(key === '' || Digit(key)) {
-    //
-    //
-    // }
-    //
-    //
-    // for (const [index, key] of keys.entries()) {
-    //
-    //     let next = keys[index + 1];
-    //
-    //     // initialize
-    //     if(container[key] === undefined) {
-    //
-    //         if(next === '') {
-    //
-    //             container[key] = [];
-    //
-    //         } else if(next) {
-    //
-    //             container[key] = {};
-    //
-    //         } else { // next is undefined
-    //
-    //             // if(Array.isArray(container[key])) {
-    //             //
-    //             //     container[key].push(value);
-    //             //
-    //             // } else {
-    //             //
-    //             //     container[key] = value;
-    //             // }
-    //         }
-    //
-    //         // container = container[key];
-    //     }
-    //
-    //
-    //     if(next === '') {
-    //
-    //         if(Array.isArray(container[key])) {
-    //
-    //             container[key].push(value);
-    //
-    //         } else {
-    //
-    //             container[key] = [value];
-    //         }
-    //
-    //     } else if(next) {
-    //
-    //         if(Array.isArray(container[key])) {
-    //
-    //             container[key] = {};
-    //
-    //         } else if (!IsObject(container[key])) {
-    //
-    //             container[key] = {};
-    //         }
-    //
-    //     } else {
-    //
-    //     }
-    //
-    // }
-
-
 
 }

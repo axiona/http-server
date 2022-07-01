@@ -6,7 +6,7 @@ import BodyText from '../../../dist/middleware/body-text';
 import OneGuard from './one-guard';
 import {ValidationParameters} from '../../../dist/middleware/validation';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('valid', () => {
 

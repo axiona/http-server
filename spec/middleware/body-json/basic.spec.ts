@@ -4,7 +4,7 @@ import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
 import BodyJson from '../../../dist/middleware/body-json';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 

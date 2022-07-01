@@ -4,7 +4,7 @@ import BindToServer from '../../../dist/router/append-server';
 import {ValidatableResponseMessageParameters, ValidatableResponseMessageParameter} from '../../../dist/middleware/validatable-response-message';
 import Context from '../../../dist/context/context';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('parameters', () => {
 

@@ -1,6 +1,6 @@
 import BracesParsers from '../../../dist/object/affix-parsers';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 
 describe('single', function () {

@@ -3,7 +3,7 @@ import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import BodyMultipart from '../../../dist/middleware/body-multipart';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 

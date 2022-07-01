@@ -6,7 +6,7 @@ import Validator from '../../../dist/middleware/validator';
 import ContextValidator from './context-validator';
 import BodyText from '../../../dist/middleware/body-text';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('valid', () => {
 

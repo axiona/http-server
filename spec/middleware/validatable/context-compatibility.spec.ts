@@ -5,7 +5,7 @@ import Validation, {ValidationParameter, ValidationParameters} from '../../../di
 import ContextDataGuard from './context-data-guard';
 import Context from '../../../dist/context/context';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
 

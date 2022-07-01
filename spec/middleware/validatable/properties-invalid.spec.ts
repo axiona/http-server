@@ -5,7 +5,7 @@ import Router from '../../../dist/router/standard';
 import OneGuard from './one-guard';
 import {ValidationParameters} from '../../../dist/middleware/validation';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 
 

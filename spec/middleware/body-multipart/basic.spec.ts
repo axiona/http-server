@@ -5,7 +5,7 @@ import Axios, {AxiosResponse} from 'axios';
 import BodyMultipart from '../../../dist/middleware/body-multipart';
 import FormData from 'form-data';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 

@@ -1,13 +1,13 @@
 import Context from './context';
-import List, {ListParameterType} from '@alirya/uri/path/list-parameter';
-import ExistsParameters from '@alirya/object/property/boolean/exists-parameters';
+import {ListParameter, ListType} from '@alirya/uri/path/list';
+import {ExistsParameters} from '@alirya/object/property/boolean/exists';
 
 export const PathSegmentsKey = Symbol('PathSegmentsKey');
 
 export type PathPathSegmentsReturn<
     ContextType extends Context,
     StorageKey extends PropertyKey> = ContextType & {
-    request : { [Key in StorageKey]:ListParameterType }
+    request : { [Key in StorageKey]:ListType }
 };
 
 /**
@@ -45,7 +45,7 @@ export default function PathSegments<
 
     if(!ExistsParameters(request, PathSegmentsKey)) {
 
-        request[PathSegmentsKey] = List({
+        request[PathSegmentsKey] = ListParameter({
             segments : request.url,
             empty : false,
             prefix: true
@@ -57,7 +57,7 @@ export default function PathSegments<
     return context as PathPathSegmentsReturn<ContextType, StorageKey|string>;
 }
 
-export function PathSegmentsGet(context: Context) : ListParameterType|undefined {
+export function PathSegmentsGet(context: Context) : ListType|undefined {
 
     return context.request[PathSegmentsKey];
 }

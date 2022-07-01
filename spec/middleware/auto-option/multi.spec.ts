@@ -5,9 +5,9 @@ import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
 import PathPattern from '../../../dist/middleware/path';
 import AutoOptions from '../../../dist/middleware/auto-options';
-import ShuffleParameters from '../../../../array/dist/shuffle-parameters';
+import {ShuffleParameters} from '@alirya/array/shuffle';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('ordered', () => {
 

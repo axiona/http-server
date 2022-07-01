@@ -1,11 +1,10 @@
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Router from '../../../dist/router/standard';
-import Validation, {ValidationParameters} from '../../../dist/middleware/validation';
 import Context from '../../../dist/context/context';
 import Replace, {ReplaceParameters} from '../../../dist/middleware/replace';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
 

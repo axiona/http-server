@@ -6,7 +6,7 @@ import BodyJson from '../../../dist/middleware/body-json';
 import RecordValidator from './record-validator';
 import Validator from '../../../dist/middleware/validator';
 
-it("force console log", () => { spyOn(console, 'log').and.callThrough();});
+it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('valid', () => {
 
