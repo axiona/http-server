@@ -1,24 +1,36 @@
 {
   "name": "@alirya/http-server",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Typescript Http Server",
+  "publishConfig": {
+    "directory": "dist"
+  },
+  "author": {
+    "name": "Andika Candra"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/alirya/http-server",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alirya/http-server"
+  },
   "dependencies": {
     "tslib": "^2.3.1",
-    "@alirya/function": "^0.16.0",
-    "@alirya/boolean": "^0.11.2",
-    "@alirya/message": "^0.12.1",
-    "@alirya/map": "^0.12.1",
-    "@alirya/iterable": "^0.5.3",
-    "@alirya/set": "^0.8.1",
-    "@alirya/array": "^0.26.3",
-    "@alirya/object": "^0.37.3",
-    "@alirya/string": "^0.16.4",
-    "@alirya/validatable": "^0.20.1",
-    "@alirya/http": "^0.18.3",
-    "@alirya/validator": "^0.19.3",
-    "@alirya/syslog": "^0.3.2",
-    "@alirya/value": "^0.15.1",
-    "@alirya/uri": "^0.7.4",
+    "@alirya/function": "^0.17.0",
+    "@alirya/boolean": "^0.12.0",
+    "@alirya/message": "^0.13.0",
+    "@alirya/map": "^0.13.0",
+    "@alirya/iterable": "^0.6.0",
+    "@alirya/set": "^0.9.0",
+    "@alirya/array": "^0.27.0",
+    "@alirya/object": "^0.38.0",
+    "@alirya/string": "^0.17.0",
+    "@alirya/validatable": "^0.21.0",
+    "@alirya/http": "^0.19.0",
+    "@alirya/validator": "^0.20.0",
+    "@alirya/syslog": "^0.4.0",
+    "@alirya/value": "^0.16.0",
+    "@alirya/uri": "^0.8.0",
     "@koa/router": "^10.1.1",
     "@types/koa": "^2.13.4",
     "@types/koa__router": "^8.0.11",
@@ -52,8 +64,10 @@
     "tsc-fancy": "^1.1.2",
     "ts-toolbelt": "^9.6.0",
     "utility-types": "^3.10.0",
-    "package-version-git-tag": "^3.0.0"
+    "package-version-git-tag": "^3.0.0",
+    "cpx2": "^4.2.0"
   },
+  "private": true,
   "scripts": {
     "spec-run-js": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json",
     "spec-run": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json --reporter=jasmine-ts-console-reporter",
@@ -61,15 +75,15 @@
     "spec": "npm-run-all spec-compile spec-run",
     "spec-compile": "npm-run-all _spec-compile-script spec-cleanup",
     "spec-compile-watch": "npm-run-all --sequential _spec-ensure-directory --parallel _spec-compile-watch-script spec-cleanup-watch",
-    "compile": "npm-run-all _compile-script cleanup",
+    "compile": "npm-run-all _compile-script cleanup _compile-asset",
     "cleanup": "ts-cleaner --verbose --dist=dist --src=src",
     "cleanup-watch": "ts-cleaner --verbose --dist=dist --src=src --watch",
     "spec-cleanup": "ts-cleaner --verbose --dist=dist-spec --src=spec",
     "spec-cleanup-watch": "ts-cleaner --verbose --dist=dist-spec --src=spec --watch",
-    "compile-watch": "npm-run-all --sequential _compile-ensure-directory --parallel _compile-script-watch cleanup-watch",
-    "release": "remove-json-properties ./dist/package.json private",
+    "compile-watch": "npm-run-all --sequential _compile-ensure-directory --parallel _compile-script-watch cleanup-watch _compile-asset-watch",
+    "release": "npm publish ./dist",
     "postrelease": "npm publish --access=public ./dist",
-    "prerelease": "npm-run-all _release-remove-compile-cache compile _release_copy-meta-files",
+    "prerelease": "npm-run-all _release-remove-compile-cache compile",
     "postpublish": "rimraf package.json package-lock.json LICENSE Readme.md .npmignore",
     "lint": "tslint --project ./tslint.json",
     "lint-fix": "tslint --project ./tslint.json --fix",
@@ -85,19 +99,9 @@
     "_release_copy-meta-files": "cpy package.json package-lock.json LICENSE Readme.md .npmignore dist",
     "_release-remove-compile-cache": "rimraf ./dist/compiler-cache.json",
     "_doc-generate": "typedoc --entryPointStrategy expand ./src --out docs",
-    "_doc-clean": "rimraf docs"
-  },
-  "publishConfig": {
-    "directory": "dist"
-  },
-  "author": {
-    "name": "Andika Candra"
-  },
-  "private": true,
-  "license": "Apache-2.0",
-  "homepage": "https://github.com/alirya/http-server",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/alirya/http-server"
+    "_doc-clean": "rimraf docs",
+    "prepublishOnly": "cd ../dist",
+    "_compile-asset": "cpx \"./{package.json,package-lock.json,LICENSE,Readme.md,.npmignore}\" ./dist/ --verbose",
+    "_compile-asset-watch": "cpx \"./{package.json,package-lock.json,LICENSE,README.md,.npmignore}\" ./dist/ --verbose --watch"
   }
 }
