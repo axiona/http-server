@@ -1,4 +1,4 @@
-import {MiddlewareInferCurrent} from '../middleware/middleware';
+import {MiddlewareInferCurrent} from '../middleware/middleware.js';
 
 
 

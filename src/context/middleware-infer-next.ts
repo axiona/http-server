@@ -1,3 +1,3 @@
-import {MiddlewareInferNext} from '../middleware/middleware';
+import {MiddlewareInferNext} from '../middleware/middleware.js';
 
 export default MiddlewareInferNext;

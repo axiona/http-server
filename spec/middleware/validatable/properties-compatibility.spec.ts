@@ -1,8 +1,8 @@
-import Router from '../../../dist/router/standard';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import Validation, {ValidationParameter, ValidationParameters} from '../../../dist/middleware/validation';
-import OneGuard from './one-guard';
+import Router from '../../../dist/router/standard.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Validation, {ValidationParameter, ValidationParameters} from '../../../dist/middleware/validation.js';
+import OneGuard from './one-guard.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

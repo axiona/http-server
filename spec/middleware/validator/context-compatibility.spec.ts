@@ -1,9 +1,9 @@
-import Router from '../../../dist/router/standard';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import ContextValidator from './context-validator';
-import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator';
-import Validatable from '@alirya/validator/validatable/validatable';
+import Router from '../../../dist/router/standard.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import ContextValidator from './context-validator.js';
+import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator.js';
+import Validatable from '@alirya/validator/validatable/validatable.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

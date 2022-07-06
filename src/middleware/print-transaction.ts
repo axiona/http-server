@@ -1,7 +1,7 @@
-import {PickParameters} from '@alirya/object/pick';
-import Context from '../context/context';
-import Syslog from '@alirya/syslog/syslog';
-import Middleware from './middleware';
+import {PickParameters} from '@alirya/object/pick.js';
+import Context from '../context/context.js';
+import Syslog from '@alirya/syslog/syslog.js';
+import Middleware from './middleware.js';
 
 export function PrintTransactionParameters<ContextType extends Context<Partial<{ body: any }>>, Log extends Syslog<[string, any, any]>>(
     syslog: Log,

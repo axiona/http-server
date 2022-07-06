@@ -1,12 +1,12 @@
-import Validator from '@alirya/validator/simple';
-import InferValidatable from '@alirya/validator/validatable/infer-static';
-import InferMatch from '@alirya/validator/validatable/match/infer';
-import Middleware from './middleware';
+import Validator from '@alirya/validator/simple.js';
+import InferValidatable from '@alirya/validator/validatable/infer-static.js';
+import InferMatch from '@alirya/validator/validatable/match/infer.js';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import {SelectPathParameters} from '@alirya/object/value/value/select-path';
-import SetPathParameters from '@alirya/object/set-path-parameters';
-import Context from '../context/context';
-import Stop from './stop';
+import {SelectPathParameters} from '@alirya/object/value/value/select-path.js';
+import SetPathParameters from '@alirya/object/set-path-parameters.js';
+import Context from '../context/context.js';
+import Stop from './stop.js';
 
 export type ValidatorTypeContext<Properties extends PropertyKey[]> = Context & O.P.Record<Properties, unknown>;
 export type ValidatorTypeReturnContext<

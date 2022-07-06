@@ -1,9 +1,9 @@
 import forms, {Options, File, defaultOptions} from 'formidable';
-import Context from '../context/context';
-import Middleware from './middleware';
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import Callable from '@alirya/function/callable';
-import AffixParsers from '../object/affix-parsers';
+import Callable from '@alirya/function/callable.js';
+import AffixParsers from '../object/affix-parsers.js';
 
 export type BodyMultipartReturnRecursive<Type> = {
     [Key in string]: Type|Record<PropertyKey, BodyMultipartReturnRecursive<Type>>|BodyMultipartReturnRecursive<Type>[]

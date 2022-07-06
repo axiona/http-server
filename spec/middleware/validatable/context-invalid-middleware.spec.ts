@@ -1,11 +1,11 @@
-import Router from '../../../dist/router/standard';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/standard.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import Validation from '../../../dist/middleware/validation';
-import {PaymentRequiredParameters} from '@alirya/http/response/payment-required';
-import ContextDataGuard from './context-data-guard';
-import {ResponseParameters} from '../../../dist/middleware/response';
+import Validation from '../../../dist/middleware/validation.js';
+import {PaymentRequiredParameters} from '@alirya/http/response/payment-required.js';
+import ContextDataGuard from './context-data-guard.js';
+import {ResponseParameters} from '../../../dist/middleware/response.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

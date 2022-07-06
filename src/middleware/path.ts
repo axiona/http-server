@@ -1,12 +1,12 @@
-import Context from '../context/context';
-import Middleware from './middleware';
-import {ListParameter, ListType} from '@alirya/uri/path/list';
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
+import {ListParameter, ListType} from '@alirya/uri/path/list.js';
 import { match as Matcher, Match, MatchFunction, ParseOptions, TokensToRegexpOptions, RegexpToFunctionOptions} from 'path-to-regexp';
-import Parents from '../router/array/parents';
-import Router from '../router/router';
-import IsPath from './boolean/path';
+import Parents from '../router/array/parents.js';
+import Router from '../router/router.js';
+import IsPath from './boolean/path.js';
 import {Required} from 'utility-types';
-import ContextPathSegments, {PathSegmentsKey} from '../context/path-segments';
+import ContextPathSegments, {PathSegmentsKey} from '../context/path-segments.js';
 
 export type PathReturn<
     ContextType extends Context = Context,

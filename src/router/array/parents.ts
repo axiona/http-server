@@ -1,4 +1,4 @@
-import Router from '../router';
+import Router from '../router.js';
 
 export default function Parents(router : Router) : Router[] {
 

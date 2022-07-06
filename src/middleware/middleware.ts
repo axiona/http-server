@@ -1,5 +1,5 @@
-import Context from '../context/context';
-import Router from '../router/router';
+import Context from '../context/context.js';
+import Router from '../router/router.js';
 
 
 export default interface Middleware<

@@ -1,8 +1,8 @@
-import Router from '../../../dist/router/standard';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import {ValidatableResponseMessageParameters, ValidatableResponseMessageParameter} from '../../../dist/middleware/validatable-response-message';
-import Context from '../../../dist/context/context';
+import Router from '../../../dist/router/standard.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import {ValidatableResponseMessageParameters, ValidatableResponseMessageParameter} from '../../../dist/middleware/validatable-response-message.js';
+import Context from '../../../dist/context/context.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

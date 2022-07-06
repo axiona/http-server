@@ -1,5 +1,5 @@
-import Callable from '@alirya/function/callable';
-import AffixParser from './affix-parser';
+import Callable from '@alirya/function/callable.js';
+import AffixParser from './affix-parser.js';
 import Deepmerge from 'deepmerge';
 
 export default function AffixParsers(

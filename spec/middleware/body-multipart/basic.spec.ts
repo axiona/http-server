@@ -1,9 +1,9 @@
-import Router from '../../../dist/router/standard';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/standard.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import BodyMultipart from '../../../dist/middleware/body-multipart';
-import FormData from 'form-data';
+import BodyMultipart from '../../../dist/middleware/body-multipart.js';
+import FormData from 'form-data.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

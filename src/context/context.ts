@@ -1,5 +1,5 @@
 import {DefaultContext, DefaultState, ExtendableContext} from 'koa';
-import RouterType from '../router/router';
+import RouterType from '../router/router.js';
 
 /**
  * context of parameter middleware

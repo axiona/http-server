@@ -1,9 +1,9 @@
-import Router from '../../../dist/router/standard';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/standard.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import FromRecord from '../../../../uri/dist/query/from-record';
-import BodyForm from '../../../dist/middleware/body-urlencoded';
+import FromRecord from '../../../../uri/dist/query/from-record.js';
+import BodyForm from '../../../dist/middleware/body-urlencoded.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

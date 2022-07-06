@@ -1,7 +1,7 @@
-import Function from '@alirya/function/boolean/function';
-import {ExistsParameters} from '@alirya/object/property/boolean/exists';
-import Middleware from '../middleware';
-import {MethodType} from '../method';
+import Function from '@alirya/function/boolean/function.js';
+import {ExistsParameters} from '@alirya/object/property/boolean/exists.js';
+import Middleware from '../middleware.js';
+import {MethodType} from '../method.js';
 
 
 export default function Method<Type extends Middleware>(type: Type) : type is Type & MethodType {

@@ -1,7 +1,7 @@
-import Router from '../../../dist/router/standard';
-import Method from '../../../dist/middleware/method';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/standard.js';
+import Method from '../../../dist/middleware/method.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});

@@ -1,6 +1,6 @@
-import Context from './context';
-import {ListParameter, ListType} from '@alirya/uri/path/list';
-import {ExistsParameters} from '@alirya/object/property/boolean/exists';
+import Context from './context.js';
+import {ListParameter, ListType} from '@alirya/uri/path/list.js';
+import {ExistsParameters} from '@alirya/object/property/boolean/exists.js';
 
 export const PathSegmentsKey = Symbol('PathSegmentsKey');
 

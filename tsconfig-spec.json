@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "removeComments" : false,
+    "removeComments": false,
     "moduleResolution": "node",
     "module": "es2015",
     "declaration": true,
@@ -9,7 +9,7 @@
     "sourceMap": true,
     "declarationMap": true,
     "allowSyntheticDefaultImports": true,
-    "downlevelIteration" : true,
+    "downlevelIteration": true,
     "strictNullChecks": true,
     "experimentalDecorators": true,
     "incremental": true,
@@ -26,10 +26,6 @@
       "es6"
     ]
   },
-  "include":  [
-    "spec/**/*"
-
-  ],
   "exclude": [
     "node_modules",
     "dist",
@@ -37,9 +33,10 @@
     "dist/**/*.d.ts",
     "**/dist/**/*.d.ts",
     "dist-spec",
-    "**/*.d.ts",
     "dist-spec/**/*.d.ts",
     "**/dist-spec/**/*.d.ts"
+  ],
+  "include": [
+    "spec/**/*"
   ]
-
 }

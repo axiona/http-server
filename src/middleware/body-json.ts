@@ -1,10 +1,10 @@
 import {Options, json} from 'co-body';
-import Context from '../context/context';
-import Middleware from './middleware';
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import JsonMimeTypes from '../array/json-mime-types';
+import JsonMimeTypes from '../array/json-mime-types.js';
 import {Required} from 'utility-types';
-import {BodyTextArgument, BodyTextArgumentDefault} from './body-text';
+import {BodyTextArgument, BodyTextArgumentDefault} from './body-text.js';
 
 
 

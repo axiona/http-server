@@ -1,8 +1,8 @@
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import Router from '../../../dist/router/standard';
-import Context from '../../../dist/context/context';
-import Replace, {ReplaceParameters} from '../../../dist/middleware/replace';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Router from '../../../dist/router/standard.js';
+import Context from '../../../dist/context/context.js';
+import Replace, {ReplaceParameters} from '../../../dist/middleware/replace.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

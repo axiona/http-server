@@ -1,10 +1,10 @@
-import Router from '../../../dist/router/standard';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/standard.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import BodyJson from '../../../dist/middleware/body-json';
-import RecordValidator from './record-validator';
-import Validator from '../../../dist/middleware/validator';
+import BodyJson from '../../../dist/middleware/body-json.js';
+import RecordValidator from './record-validator.js';
+import Validator from '../../../dist/middleware/validator.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

@@ -1,5 +1,5 @@
-import Middleware from './middleware';
-import Context from '../context/context';
+import Middleware from './middleware.js';
+import Context from '../context/context.js';
 
 
 export type MethodType<ContextType extends Context = Context> = Middleware<ContextType, ContextType> & {

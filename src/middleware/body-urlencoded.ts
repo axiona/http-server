@@ -1,9 +1,9 @@
 import {Options, form} from 'co-body';
 import * as qs from 'qs';
-import Context from '../context/context';
-import Middleware from './middleware';
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import Omit from '@alirya/object/omit';
+import Omit from '@alirya/object/omit.js';
 
 
 type BodyUrlencodedReturn<Argument extends Context> = Middleware<

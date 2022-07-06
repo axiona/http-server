@@ -1,9 +1,9 @@
-import ApplicationContext from '../context/context';
-import Middleware from './middleware';
+import ApplicationContext from '../context/context.js';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import SetPathParameters from '@alirya/object/set-path-parameters';
-import {SelectPathParameters} from '@alirya/object/value/value/select-path';
-import ReplacePath from '@alirya/object/replace-path';
+import SetPathParameters from '@alirya/object/set-path-parameters.js';
+import {SelectPathParameters} from '@alirya/object/value/value/select-path.js';
+import ReplacePath from '@alirya/object/replace-path.js';
 
 export function ReplaceParameters<
     Properties extends PropertyKey[],

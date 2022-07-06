@@ -1,9 +1,9 @@
 import Axios, {AxiosResponse} from 'axios';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import Router from '../../../dist/router/standard';
-import OneGuard from './one-guard';
-import {ValidationParameters} from '../../../dist/middleware/validation';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Router from '../../../dist/router/standard.js';
+import OneGuard from './one-guard.js';
+import {ValidationParameters} from '../../../dist/middleware/validation.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

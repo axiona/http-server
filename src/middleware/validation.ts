@@ -1,10 +1,10 @@
-import Middleware from './middleware';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import {SelectPathParameters} from '@alirya/object/value/value/select-path';
-import Context from '../context/context';
-import Stop from './stop';
-import ValidationInterface from '@alirya/boolean/function/validation';
-import Guard, {GuardInferExpect} from '@alirya/boolean/function/guard';
+import {SelectPathParameters} from '@alirya/object/value/value/select-path.js';
+import Context from '../context/context.js';
+import Stop from './stop.js';
+import ValidationInterface from '@alirya/boolean/function/validation.js';
+import Guard, {GuardInferExpect} from '@alirya/boolean/function/guard.js';
 
 
 export type ValidationTypeContext<ContextType extends Context, Properties extends PropertyKey[], Value extends unknown>

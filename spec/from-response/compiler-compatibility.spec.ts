@@ -1,5 +1,5 @@
-import Context from '../../dist/context/context';
-import FromResponse from '../../dist/context/from-response';
+import Context from '../../dist/context/context.js';
+import FromResponse from '../../dist/context/from-response.js';
 
 
 describe('empty', () => {

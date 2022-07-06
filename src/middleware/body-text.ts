@@ -1,6 +1,6 @@
 import {text, Options} from 'co-body';
-import Context from '../context/context';
-import Middleware from './middleware';
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
 import {Required} from 'utility-types';
 

@@ -1,5 +1,5 @@
-import Router from './router';
-import Server from '../server/server';
+import Router from './router.js';
+import Server from '../server/server.js';
 
 export default function BindAfter<Type extends Router>(server : Server, router: Type) : Type {
 

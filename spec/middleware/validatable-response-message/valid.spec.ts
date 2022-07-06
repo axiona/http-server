@@ -1,7 +1,7 @@
-import Router from '../../../dist/router/standard';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import {ValidatableResponseMessageParameters} from '../../../dist/middleware/validatable-response-message';
+import Router from '../../../dist/router/standard.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import {ValidatableResponseMessageParameters} from '../../../dist/middleware/validatable-response-message.js';
 import Axios, {AxiosResponse} from 'axios';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});

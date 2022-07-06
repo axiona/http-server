@@ -1,6 +1,6 @@
-import Context from '../context/context';
-import Syslog from '@alirya/syslog/syslog';
-import Middleware from './middleware';
+import Context from '../context/context.js';
+import Syslog from '@alirya/syslog/syslog.js';
+import Middleware from './middleware.js';
 
 export function PrintResponseParameters<ContextType extends Context, Log extends Syslog<[string, any, any]>>(
     syslog: Log,

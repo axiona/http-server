@@ -1,7 +1,7 @@
-import Router from '../../../dist/router/standard';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import BodyMultipart from '../../../dist/middleware/body-multipart';
+import Router from '../../../dist/router/standard.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import BodyMultipart from '../../../dist/middleware/body-multipart.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

@@ -1,6 +1,6 @@
-import Middleware from './middleware';
-import Context from '../context/context';
-import Syslog from '@alirya/syslog/syslog';
+import Middleware from './middleware.js';
+import Context from '../context/context.js';
+import Syslog from '@alirya/syslog/syslog.js';
 
 export function PrintRequestParameters<ContextType extends Context, Log extends Syslog<[string, any, any]>>(
     syslog: Log,

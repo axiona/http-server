@@ -1,11 +1,11 @@
-import Router from '../../../dist/router/standard';
-import Method from '../../../dist/middleware/method';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/standard.js';
+import Method from '../../../dist/middleware/method.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import PathPattern from '../../../dist/middleware/path';
-import AutoOptions from '../../../dist/middleware/auto-options';
-import {ShuffleParameters} from '@alirya/array/shuffle';
+import PathPattern from '../../../dist/middleware/path.js';
+import AutoOptions from '../../../dist/middleware/auto-options.js';
+import {ShuffleParameters} from '@alirya/array/shuffle.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

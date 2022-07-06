@@ -1,10 +1,10 @@
-import Escape from '@alirya/string/pattern/escape';
-import Digit from '@alirya/string/boolean/digit';
-import String from '@alirya/string/boolean/string';
-import SafeCast from '@alirya/string/safe-cast';
-import Callable from '@alirya/function/callable';
-import {RemoveSuffixParameters} from '@alirya/string/remove-suffix';
-import {RemovePrefixParameters} from '@alirya/string/remove-prefix';
+import Escape from '@alirya/string/pattern/escape.js';
+import Digit from '@alirya/string/boolean/digit.js';
+import String from '@alirya/string/boolean/string.js';
+import SafeCast from '@alirya/string/safe-cast.js';
+import Callable from '@alirya/function/callable.js';
+import {RemoveSuffixParameters} from '@alirya/string/remove-suffix.js';
+import {RemovePrefixParameters} from '@alirya/string/remove-prefix.js';
 
 
 export default function AffixParser(

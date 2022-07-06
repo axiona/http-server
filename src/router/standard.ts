@@ -1,11 +1,11 @@
-import MiddlewareType from '../middleware/middleware';
-import ErrorHandlerType from '../error-handler/error-handler';
-import Context from '../context/context';
-import Router from './router';
-import ErrorHandler from '../error-handler/error-handler';
-import Callable from '@alirya/function/callable';
-import Middleware from '../middleware/middleware';
-import MiddlewareInferNext from '../context/middleware-infer-next';
+import MiddlewareType from '../middleware/middleware.js';
+import ErrorHandlerType from '../error-handler/error-handler.js';
+import Context from '../context/context.js';
+import Router from './router.js';
+import ErrorHandler from '../error-handler/error-handler.js';
+import Callable from '@alirya/function/callable.js';
+import Middleware from '../middleware/middleware.js';
+import MiddlewareInferNext from '../context/middleware-infer-next.js';
 
 export default class Standard<
     Type extends MiddlewareType  = MiddlewareType,

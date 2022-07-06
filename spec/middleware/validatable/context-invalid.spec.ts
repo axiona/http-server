@@ -1,9 +1,9 @@
-import Router from '../../../dist/router/standard';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/standard.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import Validation from '../../../dist/middleware/validation';
-import ContextDataGuard from './context-data-guard';
+import Validation from '../../../dist/middleware/validation.js';
+import ContextDataGuard from './context-data-guard.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

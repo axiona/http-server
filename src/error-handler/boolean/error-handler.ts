@@ -1,6 +1,6 @@
-import ErrorHandlerType from '../error-handler';
-import Function from '@alirya/function/boolean/function';
-import {ExistsParameters} from '@alirya/object/property/boolean/exists';
+import ErrorHandlerType from '../error-handler.js';
+import Function from '@alirya/function/boolean/function.js';
+import {ExistsParameters} from '@alirya/object/property/boolean/exists.js';
 
 
 export default function ErrorHandler<Type extends object>(type: Type) : type is Type & ErrorHandlerType {

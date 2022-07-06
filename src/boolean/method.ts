@@ -1,4 +1,4 @@
-import Context from '../context/context';
+import Context from '../context/context.js';
 
 export default function Method(context : Context, methods : string[]) : boolean {
 

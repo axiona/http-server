@@ -1,12 +1,12 @@
-import Router from '../../../dist/router/standard';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import {ValidatorParameter} from '../../../dist/middleware/validator';
-import Stop from '../../../dist/middleware/stop';
-import RecordValidator, {ValidatorType} from './record-validator';
-import ContextValidator from './context-validator';
-import Validatable from '@alirya/validator/validatable/validatable';
-import {ValidatorParameters} from '../../../dist/middleware/validator';
+import Router from '../../../dist/router/standard.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import {ValidatorParameter} from '../../../dist/middleware/validator.js';
+import Stop from '../../../dist/middleware/stop.js';
+import RecordValidator, {ValidatorType} from './record-validator.js';
+import ContextValidator from './context-validator.js';
+import Validatable from '@alirya/validator/validatable/validatable.js';
+import {ValidatorParameters} from '../../../dist/middleware/validator.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

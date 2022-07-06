@@ -1,7 +1,7 @@
-import Middleware from '../middleware/middleware';
-import ErrorHandler from '../error-handler/error-handler';
-import Context from '../context/context';
-import MiddlewareInferNext from '../context/middleware-infer-next';
+import Middleware from '../middleware/middleware.js';
+import ErrorHandler from '../error-handler/error-handler.js';
+import Context from '../context/context.js';
+import MiddlewareInferNext from '../context/middleware-infer-next.js';
 
 export default interface Router<
     Type extends Middleware  = Middleware,

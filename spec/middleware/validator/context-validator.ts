@@ -1,7 +1,7 @@
-import String from '@alirya/string/boolean/string';
-import Validator from '@alirya/validator/simple';
-import Validatable from '@alirya/validator/validatable/simple';
-import Context from '../../../dist/context/context';
+import String from '@alirya/string/boolean/string.js';
+import Validator from '@alirya/validator/simple.js';
+import Validatable from '@alirya/validator/validatable/simple.js';
+import Context from '../../../dist/context/context.js';
 
 
 export default <Validator<Context & {data ?: string}, Context & {data : string}>> function ContextValidator<

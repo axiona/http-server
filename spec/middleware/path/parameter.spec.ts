@@ -1,7 +1,7 @@
-import Router from '../../../dist/router/standard';
-import PathPattern from '../../../dist/middleware/path';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/standard.js';
+import PathPattern from '../../../dist/middleware/path.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
 
 

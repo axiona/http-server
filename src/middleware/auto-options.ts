@@ -1,13 +1,13 @@
-import Middleware from './middleware';
-import Context from '../context/context';
-import Router from '../router/router';
-import Path from './boolean/path';
-import IsMethod from './boolean/method';
-import {PathMatchers, PathMatches} from './path';
-import Root from '../router/root';
-import Method from '../boolean/method';
-import FromResponse from '../context/from-response';
-import {MethodNotAllowedParameters} from '@alirya/http/response/method-not-allowed';
+import Middleware from './middleware.js';
+import Context from '../context/context.js';
+import Router from '../router/router.js';
+import Path from './boolean/path.js';
+import IsMethod from './boolean/method.js';
+import {PathMatchers, PathMatches} from './path.js';
+import Root from '../router/root.js';
+import Method from '../boolean/method.js';
+import FromResponse from '../context/from-response.js';
+import {MethodNotAllowedParameters} from '@alirya/http/response/method-not-allowed.js';
 
 export default function AutoOptions<
     ContextType extends Context = Context
