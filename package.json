@@ -102,6 +102,7 @@
     "_doc-clean": "rimraf docs",
     "prepublishOnly": "cd ../dist",
     "_compile-asset": "cpx \"./{package.json,package-lock.json,LICENSE,Readme.md,.npmignore}\" ./dist/ --verbose",
-    "_compile-asset-watch": "cpx \"./{package.json,package-lock.json,LICENSE,README.md,.npmignore}\" ./dist/ --verbose --watch"
+    "_compile-asset-watch": "cpx \"./{package.json,package-lock.json,LICENSE,README.md,.npmignore}\" ./dist/ --verbose --watch",
+    "installs": "npm i"
   }
 }
