@@ -1,9 +1,9 @@
 {
+  "random": false,
   "spec_dir": "dist-spec",
   "spec_files": [
     "**/*.spec.js"
   ],
   "stopSpecOnExpectationFailure": false,
-  "random": false,
-  "verboseDeprecations" : true
+  "verboseDeprecations": true
 }
