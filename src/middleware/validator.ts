@@ -4,7 +4,7 @@ import InferMatch from '@alirya/validator/validatable/match/infer';
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
 import {SelectPathParameters} from '@alirya/object/value/value/select-path';
-import SetPathParameters from '@alirya/object/set-path-parameters';
+import { SetPathParameters } from '@alirya/object/set-path';
 import Context from '../context/context';
 import Stop from './stop';
 

@@ -1,7 +1,7 @@
 import ApplicationContext from '../context/context';
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
-import SetPathParameters from '@alirya/object/set-path-parameters';
+import { SetPathParameters } from '@alirya/object/set-path';
 import {SelectPathParameters} from '@alirya/object/value/value/select-path';
 import ReplacePath from '@alirya/object/replace-path';
 
