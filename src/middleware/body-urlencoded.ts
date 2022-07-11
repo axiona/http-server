@@ -28,7 +28,7 @@ export default function BodyUrlencoded<Argument extends Context>(
     const option : Options = Object.assign({}, BodyUrlencodedArgumentDefault, {
         limit: argument.limit,
         encoding:argument.charset,
-        queryString:Omit(argument, 'limit')
+        queryString:Omit.Parameters(argument, 'limit')
     });
 
   return function (context) {
