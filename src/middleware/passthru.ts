@@ -1,6 +1,11 @@
 import Context from '../context/context';
+import {Middleware} from "koa";
+import Callable from "@alirya/function/callable";
 
-export default function Passthru<Argument extends Context = Context>(context: Argument) : Argument|Promise<Argument|void>|void {
+export default function Passthru<Argument extends Context = Context>(callback: Callable<[Argument]>) : Middleware<Argument, Argument> {
 
-    return  context;
+    return function (context) {
+        callback(context);
+        return  context;
+    };
 }
