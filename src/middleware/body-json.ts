@@ -5,6 +5,7 @@ import {O} from 'ts-toolbelt';
 import JsonMimeTypes from '../array/json-mime-types';
 import {Required} from 'utility-types';
 import {BodyTextArgument, BodyTextArgumentDefault} from './body-text';
+import OmitUndefined from "@alirya/object/omit-undefined";
 
 
 
@@ -22,35 +23,44 @@ type BodyJsonReturn<Argument extends Context> = Middleware<
  * @see BodyJsonArgument.encoding
  * Sets encoding for incoming form fields
  */
-export type BodyJsonArgument = Partial<Pick<Options, 'encoding'|'limit'>>;
+export type BodyJsonArgument<Argument extends Context> = Partial<Pick<Options, 'encoding'|'limit'>> & {
+    invalid ?: BodyJsonReturn<Argument>
+};
 
 /**
  * @see BodyTextArgumentDefault
  */
-export const BodyJsonArgumentDefault : Required<BodyTextArgument, 'limit'|'encoding'> = BodyTextArgumentDefault;
+export const BodyJsonArgumentDefault : Required<BodyTextArgument<Context>, 'limit'|'encoding'> = BodyTextArgumentDefault;
 
 /**
  * @param argument
  * @default {@see BodyJsonArgumentDefault}
  */
 export function BodyJsonParameter<Argument extends Context>(
-    argument : BodyJsonArgument = {}
+    argument : BodyJsonArgument<Argument> = {}
 ) : BodyJsonReturn<Argument> {
-    argument = Object.assign({}, BodyTextArgumentDefault, argument);
-  return function (context) {
 
-    if (context.request.is(JsonMimeTypes as string[])) {
+    argument = Object.assign({}, BodyTextArgumentDefault, OmitUndefined(argument)) as BodyJsonArgument<Argument>;
 
-      return  json(context, argument).then(body=>{
+    return function (context) {
 
-        Object.assign(context.request, {body});
+        if (context.request.is(JsonMimeTypes as string[])) {
 
-        return context;
+            return  json(context, argument).then(body=>{
 
-      });
-    }
+                Object.assign(context.request, {body});
 
-  } as BodyJsonReturn<Argument>;
+                return context;
+
+            });
+        }
+
+        if(argument.invalid) {
+
+            return argument.invalid(context);
+        }
+
+    } as BodyJsonReturn<Argument>;
 }
 
 
@@ -62,14 +72,16 @@ export function BodyJsonParameter<Argument extends Context>(
  * @default {@see BodyJsonArgumentDefault.limit}
  *
  * @param encoding
+ * @param invalid
  * @default {@see BodyJsonArgumentDefault.encoding}
  */
 export function BodyJsonParameters<Argument extends Context>(
     limit : string|number = BodyJsonArgumentDefault.limit,
     encoding : string = BodyJsonArgumentDefault.encoding,
+    invalid ?: BodyJsonReturn<Argument>
 ) : BodyJsonReturn<Argument> {
 
-    return BodyJsonParameter({limit, encoding});
+    return BodyJsonParameter({invalid, limit, encoding});
 }
 
 
@@ -77,7 +89,7 @@ namespace BodyJson {
 
     export type Return<Argument extends Context> = BodyJsonReturn<Argument>;
     export const Parameters = BodyJsonParameters;
-    export type Argument = BodyJsonArgument;
+    export type Argument<Argument extends Context> = BodyJsonArgument<Argument>;
     export const Parameter = BodyJsonParameter;
 }
 
