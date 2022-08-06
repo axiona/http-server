@@ -1,12 +1,12 @@
 import Middleware from '../middleware/middleware';
-import ErrorHandler from '../error-handler/error-handler';
+import Catch from '../catch/catch';
 import Context from '../context/context';
 import MiddlewareInferNext from '../context/middleware-infer-next';
 
 export default interface Router<
     Type extends Middleware  = Middleware,
-    Error extends ErrorHandler  = ErrorHandler,
-> {
+    Error extends Catch  = Catch,
+> /*extends MiddlewareType<MiddlewareInferCurrent<Type>, MiddlewareInferNext<Type>>*/ {
     children : Router[];
     middleware : Type|undefined;
     error : Error|undefined;

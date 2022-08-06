@@ -1,15 +1,15 @@
 import MiddlewareType from '../middleware/middleware';
-import ErrorHandlerType from '../error-handler/error-handler';
+import ErrorHandlerType from '../catch/catch';
 import Context from '../context/context';
 import Router from './router';
-import ErrorHandler from '../error-handler/error-handler';
+import Catch from '../catch/catch';
 import Callable from '@alirya/function/callable';
 import Middleware from '../middleware/middleware';
 import MiddlewareInferNext from '../context/middleware-infer-next';
 
 export default class Standard<
     Type extends MiddlewareType  = MiddlewareType,
-    Error extends ErrorHandler  = ErrorHandler,
+    Error extends Catch  = Catch,
 > implements Router<Type, Error> {
 
     children : Router[] = [];
@@ -58,10 +58,10 @@ export default class Standard<
 
             if(this.error) {
 
-                await this.error(error, context);
+                error = await this.error(error, context);
+            }
 
-            } else {
-
+            if(error) {
                 throw error;
             }
         }
