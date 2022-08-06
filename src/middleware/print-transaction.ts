@@ -3,7 +3,7 @@ import Context from '../context/context';
 import Syslog from '@alirya/syslog/syslog';
 import Middleware from './middleware';
 
-export function PrintTransactionParameters<ContextType extends Context<Partial<{ body: any }>>, Log extends Syslog<[string, any, any]>>(
+export function PrintTransactionParameters<ContextType extends Context<Partial<{ body: any }>>, Log extends Syslog<[string, any, any, any]>>(
     syslog: Log,
     severity : keyof Syslog = 'debug',
 ) : Middleware<ContextType> {
@@ -11,8 +11,9 @@ export function PrintTransactionParameters<ContextType extends Context<Partial<{
     return function (context) {
 
         syslog[severity](
-          `${context.request.method} ${context.request.path} -> ${context.response.status} ${context.response.message}`,
+          `${context.request.method} ${context.request.path}`,
           PickParameters(context.request, 'headers', 'body'),
+          `${context.response.status} ${context.response.message}`,
           PickParameters(context.response, 'headers', 'body'),
         );
     };

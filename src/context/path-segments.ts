@@ -14,7 +14,6 @@ export type PathPathSegmentsReturn<
  * split request path into segments
  *
  *
- *
  * @param context
  * @param storage
  * @constructor

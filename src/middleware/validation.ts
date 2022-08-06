@@ -5,6 +5,8 @@ import Context from '../context/context';
 import Stop from './stop';
 import ValidationInterface from '@alirya/boolean/function/validation';
 import Guard, {GuardInferExpect} from '@alirya/boolean/function/guard';
+import Next from "./next";
+import {ConditionalCallParameters} from "@alirya/function/conditional-call";
 
 
 export type ValidationTypeContext<ContextType extends Context, Properties extends PropertyKey[], Value extends unknown>
@@ -42,22 +44,26 @@ export type ValidationReturnContextGuard<
 export function ValidationParameters<
     ContextType extends Context,
     ValidationType extends Guard<ContextType, Context> = Guard<ContextType, Context>,
-    Invalid extends ValidationReturnContextGuard<ContextType, ValidationType> = ValidationReturnContextGuard<ContextType, ValidationType>
+    Invalid extends ValidationReturnContextGuard<ContextType, ValidationType> = ValidationReturnContextGuard<ContextType, ValidationType>,
+    Valid extends ValidationReturnContextGuard<ContextType, ValidationType> = ValidationReturnContextGuard<ContextType, ValidationType>,
 >(
     validation : ValidationType,
     properties ?: [],
     invalid ?: Invalid,
+    valid ?: Valid,
 ) : ValidationReturnContextGuard<ContextType, ValidationType>;
 
 export function ValidationParameters<
     Properties extends PropertyKey[],
     ValidationType extends Guard,
     ContextType extends Context = Context,
-    Invalid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType> = ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>
+    Invalid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType> = ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>,
+    Valid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType> = ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>
 >(
     validation : ValidationType,
     properties ?: [...Properties],
     invalid ?: Invalid,
+    valid ?: Valid,
 ) : ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>;
 
 /**
@@ -80,6 +86,7 @@ export function ValidationParameters<
     validation : ValidationType,
     properties ?: [],
     invalid ?: Middleware<ContextType>,
+    valid ?: Middleware<ContextType>,
 ) : ValidationReturnContextValidatable<ContextType>;
 
 
@@ -99,11 +106,13 @@ export function ValidationParameters<
     Properties extends PropertyKey[],
     Value extends unknown,
     ContextType extends Context = Context,
-    Invalid extends ValidationTypeMiddleware<ContextType, Properties, Value> = ValidationTypeMiddleware<ContextType, Properties, Value>
+    Invalid extends ValidationTypeMiddleware<ContextType, Properties, Value> = ValidationTypeMiddleware<ContextType, Properties, Value>,
+    Valid extends ValidationTypeMiddleware<ContextType, Properties, Value> = ValidationTypeMiddleware<ContextType, Properties, Value>
 >(
-    validation : ValidationInterface<[O.P.Pick<ContextType, Properties>]>,
+    validation : ValidationInterface<[O.Path<ContextType, Properties>]>,
     properties ?: [...Properties],
     invalid ?: Invalid,
+    valid ?: Valid,
 ) : ValidationReturnPropertiesValidatable<Properties, Value, ContextType>;
 
 /**
@@ -112,16 +121,17 @@ export function ValidationParameters<
  * @param validation
  * @param invalid
  * @param properties
- * @param validatable
+ * @param valid
  */
 export function ValidationParameters<
     Properties extends PropertyKey[],
     Value extends unknown,
     ContextType extends Context = Context,
 >(
-    validation : ValidationInterface<[O.P.Pick<ContextType, Properties>]>|ValidationInterface<[ContextType]>,
+    validation : ValidationInterface<[O.Path<ContextType, Properties>]>|ValidationInterface<[ContextType]>,
     properties : Properties|[] = [],
     invalid : Middleware<ContextType> = Stop,
+    valid : Middleware<ContextType> = Next,
 ) : ValidationReturnPropertiesValidatable<Properties, Value, ContextType> | ValidationReturnContextValidatable<ContextType> {
 
     const assignment : boolean = !!properties.length;
@@ -130,14 +140,9 @@ export function ValidationParameters<
 
         const value = assignment ? SelectPathParameters(context, ...properties) : context;
 
-        const result = validation(value as O.P.Pick<ContextType, Properties>);
+        const result = (validation as ValidationInterface<[O.Path<ContextType, Properties>]>)(value as O.Path<ContextType, Properties>);
 
-        if(result) {
-
-            return context;
-        }
-
-        return invalid(context as ContextType);
+        return ConditionalCallParameters(result, valid, invalid, context as ContextType);
 
     } as ValidationReturnPropertiesValidatable<Properties, Value, ContextType>;
 }
@@ -149,38 +154,45 @@ export interface ValidationArgumentContextGuard<
     validation : ValidationType;
     properties ?: [];
     invalid ?: ValidationReturnContextGuard<ContextType, ValidationType>;
+    valid ?: ValidationReturnContextGuard<ContextType, ValidationType>;
 }
 
 export interface ValidationArgumentPropertiesGuard<
     Properties extends PropertyKey[],
     ContextType extends Context,
     ValidationType extends Guard,
-    Invalid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>
+    Invalid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>,
+    Valid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>,
 > {
     validation : ValidationType;
     properties : [...Properties];
+    valid ?: Valid;
     invalid ?: Invalid;
 }
 
 export interface ValidationArgumentContextValidatable<
     ContextType extends Context,
     ValidationType extends ValidationInterface<[ContextType]>,
-    Invalid extends Middleware<ContextType>
+    Invalid extends Middleware<ContextType>,
+    Valid extends Middleware<ContextType>,
 > {
     validation : ValidationType;
     properties ?: [];
     invalid ?: Invalid;
+    valid ?: Valid;
 }
 
 export interface ValidationArgumentPropertiesValidatable<
     Properties extends PropertyKey[],
     Value extends unknown,
     ContextType extends Context,
-    Invalid extends ValidationTypeMiddleware<ContextType, Properties, Value>
+    Invalid extends ValidationTypeMiddleware<ContextType, Properties, Value>,
+    Valid extends ValidationTypeMiddleware<ContextType, Properties, Value>,
 > {
     validation : ValidationInterface<[O.P.Pick<ContextType, Properties>]>;
     properties : [...Properties];
     invalid ?: Invalid;
+    valid ?: Valid;
 }
 
 
@@ -197,6 +209,7 @@ export function ValidationParameter<
 >(  {
         validation,
         invalid,
+        valid,
     } : ValidationArgumentContextGuard<ContextType, ValidationType>,
 ) : ValidationReturnContextGuard<ContextType, ValidationType>;
 
@@ -204,12 +217,14 @@ export function ValidationParameter<
     Properties extends PropertyKey[],
     ContextType extends Context,
     ValidationType extends Guard,
-    Invalid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType> = ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>
+    Invalid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType> = ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>,
+    Valid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType> = ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>,
 >(  {
         validation,
         invalid,
+        valid,
         properties,
-    } : ValidationArgumentPropertiesGuard<Properties, ContextType, ValidationType, Invalid>,
+    } : ValidationArgumentPropertiesGuard<Properties, ContextType, ValidationType, Invalid, Valid>,
 ) : ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>;
 
 /**
@@ -222,12 +237,14 @@ export function ValidationParameter<
 export function ValidationParameter<
     ContextType extends Context,
     ValidationType extends ValidationInterface<[ContextType]> = ValidationInterface<[ContextType]>,
-    M extends Middleware<ContextType> = Middleware<ContextType>
+    Invalid extends Middleware<ContextType> = Middleware<ContextType>,
+    Valid extends Middleware<ContextType> = Middleware<ContextType>,
 >(  {
         validation,
         invalid,
+        valid,
         properties,
-    } : ValidationArgumentContextValidatable<ContextType, ValidationType, M>,
+    } : ValidationArgumentContextValidatable<ContextType, ValidationType, Invalid, Valid>,
 ) : Middleware<ContextType>;
 
 /**
@@ -241,12 +258,13 @@ export function ValidationParameter<
     Properties extends PropertyKey[],
     Value extends unknown,
     ContextType extends Context = Context,
-    Invalid extends ValidationTypeMiddleware<ContextType, Properties, Value> = ValidationTypeMiddleware<ContextType, Properties, Value>
+    Invalid extends ValidationTypeMiddleware<ContextType, Properties, Value> = ValidationTypeMiddleware<ContextType, Properties, Value>,
+    Valid extends ValidationTypeMiddleware<ContextType, Properties, Value> = ValidationTypeMiddleware<ContextType, Properties, Value>,
 >(  {
         validation,
         invalid,
         properties,
-    } : ValidationArgumentPropertiesValidatable<Properties, Value, ContextType, Invalid>,
+    } : ValidationArgumentPropertiesValidatable<Properties, Value, ContextType, Invalid, Valid>,
 ) : ValidationReturnPropertiesValidatable<Properties, Value, ContextType>;
 
 /**
@@ -262,13 +280,13 @@ export function ValidationParameter<
     Value extends unknown,
     ContextType extends Context,
     Invalid extends ValidationTypeMiddleware<ContextType, Properties, Value> = ValidationTypeMiddleware<ContextType, Properties, Value>,
+    Valid extends ValidationTypeMiddleware<ContextType, Properties, Value> = ValidationTypeMiddleware<ContextType, Properties, Value>,
 >(  {
         validation,
         invalid = Stop,
         properties = [],
-    } : ValidationArgumentPropertiesValidatable<Properties, Value, ContextType, Invalid> |
-        ValidationArgumentContextValidatable<ContextType,  ValidationInterface<[ContextType]>,
-Middleware<ContextType>>
+    } : ValidationArgumentPropertiesValidatable<Properties, Value, ContextType, Invalid, Valid> |
+        ValidationArgumentContextValidatable<ContextType,  ValidationInterface<[ContextType]>, Middleware<ContextType>, Middleware<ContextType>>
 ) : ValidationReturnPropertiesValidatable<Properties, Value, ContextType> | ValidationReturnContextValidatable<ContextType> {
 
     return ValidationParameters(validation as ValidationInterface<[ContextType]>, properties as [], invalid) as
@@ -304,8 +322,9 @@ namespace Validation {
         ContextType extends Context,
         Properties extends PropertyKey[],
         ValidationType extends Guard,
-        Invalid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>
-    > = ValidationArgumentPropertiesGuard<Properties, ContextType, ValidationType, Invalid>;
+        Invalid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>,
+        Valid extends ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>,
+    > = ValidationArgumentPropertiesGuard<Properties, ContextType, ValidationType, Invalid, Valid>;
 
     export type ContextTypeContextGuard<
         ContextType extends Context,
@@ -316,14 +335,16 @@ namespace Validation {
         Properties extends PropertyKey[],
         Value extends unknown,
         ContextType extends Context,
-        Invalid extends ValidationTypeMiddleware<ContextType, Properties, Value>
-    > = ValidationArgumentPropertiesValidatable<Properties, Value, ContextType, Invalid>;
+        Invalid extends ValidationTypeMiddleware<ContextType, Properties, Value>,
+        Valid extends ValidationTypeMiddleware<ContextType, Properties, Value>,
+    > = ValidationArgumentPropertiesValidatable<Properties, Value, ContextType, Invalid, Valid>;
 
     export type ContextTypeContextValidatable<
         ContextType extends Context,
         ValidationType extends ValidationInterface<[ContextType]>,
-        Invalid extends Middleware<ContextType>
-    > = ValidationArgumentContextValidatable<ContextType, ValidationType, Invalid>;
+        Invalid extends Middleware<ContextType>,
+        Valid extends Middleware<ContextType>,
+    > = ValidationArgumentContextValidatable<ContextType, ValidationType, Invalid, Valid>;
 
     export type ReturnProperties<
         Properties extends PropertyKey[],

@@ -14,12 +14,10 @@ export default function Method<ContextType extends Context>(
 
     const callable = function (context) {
 
-
         if(methods.includes(context.request.method) || methods.includes(context.request.method.toUpperCase())) {
 
             return context;
         }
-
     };
 
     return Object.assign(callable, {methods});

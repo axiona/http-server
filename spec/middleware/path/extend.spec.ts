@@ -1,5 +1,5 @@
 import Router from '../../../dist/router/standard';
-import PathPattern from '../../../dist/middleware/path';
+import {PathParameters} from '../../../dist/middleware/path';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
@@ -33,7 +33,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(PathPattern('/path', {end:false})).add(function (ctx) {
+        router.add(PathParameters('/path', {end:false})).add(function (ctx) {
 
             ctx.response.body = {
                 parent : true,
@@ -42,7 +42,7 @@ describe('single', () => {
             called1 = true;
             return ctx;
 
-        }).add(PathPattern('child')).add(function (ctx) {
+        }).add(PathParameters('child')).add(function (ctx) {
 
             ctx.response.body = Object.assign({ child : true }, ctx.response.body);
 
@@ -142,7 +142,7 @@ describe('multi', () => {
 
     it('add first request', ()=>{
 
-        router.add(PathPattern('/parent1', {end:false})).add(function (ctx) {
+        router.add(PathParameters('/parent1', {end:false})).add(function (ctx) {
 
             ctx.response.body = {
                 parent : 1,
@@ -152,7 +152,7 @@ describe('multi', () => {
             called.parent1 = true;
             return ctx;
 
-        }).add(PathPattern('child1')).add(function (ctx) {
+        }).add(PathParameters('child1')).add(function (ctx) {
 
             ctx.response.body = Object.assign({
                 child : 1
@@ -168,7 +168,7 @@ describe('multi', () => {
 
     it('add second request', ()=>{
 
-        router.add(PathPattern('/parent2', {end:false})).add(function (ctx) {
+        router.add(PathParameters('/parent2', {end:false})).add(function (ctx) {
 
             ctx.response.body = {
                 parent : 2,
@@ -178,7 +178,7 @@ describe('multi', () => {
             called.parent2 = true;
             return ctx;
 
-        }).add(PathPattern('child2')).add(function (ctx) {
+        }).add(PathParameters('child2')).add(function (ctx) {
 
             ctx.response.body = Object.assign({
                 child : 2

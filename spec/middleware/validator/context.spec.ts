@@ -126,10 +126,10 @@ describe('invalid', () => {
 
     it('assert value', function () {
 
-        expect<string>(response.data).toEqual('Not Found');
+        expect<string>(response.data).toEqual('invalid');
         expect(called).toBe(false);
-        expect(response.status).toEqual(404);
-        expect(response.statusText).toEqual('Not Found');
+        expect(response.status).toEqual(422);
+        expect(response.statusText).toEqual('Unprocessable Entity');
     });
 
 });

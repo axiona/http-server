@@ -1,5 +1,5 @@
 import Router from '../../../dist/router/standard';
-import PathPattern from '../../../dist/middleware/path';
+import {PathParameters} from '../../../dist/middleware/path';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
@@ -29,7 +29,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(PathPattern('/:foo/:bar')).add(function (ctx) {
+        router.add(PathParameters('/:foo/:bar')).add(function (ctx) {
             ctx.response.body = data;
             pathParameter = ctx.request.pathParameter;
             called = true;
@@ -96,7 +96,7 @@ describe('multi', () => {
 
     it('add first request', ()=>{
 
-        router.add(PathPattern('/path1/:child1')).add(function (ctx) {
+        router.add(PathParameters('/path1/:child1')).add(function (ctx) {
             ctx.response.body = data1;
             pathParameter1 = ctx.request.pathParameter;
             called1 = true;
@@ -107,7 +107,7 @@ describe('multi', () => {
 
     it('add second request', ()=>{
 
-        router.add(PathPattern('/path2/:child2')).add(function (ctx) {
+        router.add(PathParameters('/path2/:child2')).add(function (ctx) {
             ctx.response.body = data2;
             pathParameter2 = ctx.request.pathParameter;
             called2 = true;

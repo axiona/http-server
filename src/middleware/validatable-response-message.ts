@@ -21,7 +21,7 @@ export function ValidatableResponseMessageParameters<
     Property extends PropertyKey[],
     Argument extends Context,
 >(
-    response ?: (response :  Partial<Response<number, string, {}, ValidatorType['message']>>) => Response<number, string, Record<string, string>, any>,
+    response ?: (response :  Partial<Response<ValidatorType['message']>>) => Response<any>,
     properties ?: [...Property],
     next ?: boolean
 ) : ValidatableResponseMessageReturn<Property, ValidatorType, Argument> ;
@@ -31,7 +31,7 @@ export function ValidatableResponseMessageParameters<
     Property extends PropertyKey[],
     Argument extends Context,
 >(
-    response : (response :  Partial<Response<number, string, {}, ValidatorType['message']>>) => Response<number, string, Record<string, string>, any>
+    response : (response :  Partial<Response<ValidatorType['message']>>) => Response<any>
         = UnprocessableEntityParameter,
     properties : Property = ['validatable'] as Property,
     next : boolean = false
@@ -62,7 +62,7 @@ export interface ValidatableResponseMessageArgument<
     ValidatorType extends Validatable,
     Argument extends Context
 > {
-    response ?: (response :  Partial<Response<number, string, {}, ValidatorType['message']>>) => Response<number, string, Record<string, string>, any>;
+    response ?: (response :  Partial<Response<ValidatorType['message']>>) => Response<any>;
     properties ?: [...Property];
     next ?: boolean;
 }
