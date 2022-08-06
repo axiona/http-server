@@ -2,7 +2,7 @@ import Validatable from '@alirya/validatable/validatable';
 import Value from '@alirya/value/value';
 import ReadonlyList from "../../../../../array/dist/array/readonly";
 
-export function InParameters(
+export function MimeTypesParameters(
     value : string,
     valid : boolean,
     arrays : ReadonlyArray<string>,
@@ -19,14 +19,14 @@ export type ArrayArgument =
     Value<string> &
     Readonly<ReadonlyList<string>>;
 
-export function InParameter({valid, value, array} : ArrayArgument) : string {
+export function MimeTypesParameter({valid, value, array} : ArrayArgument) : string {
 
-    return InParameters(value, valid, array);
+    return MimeTypesParameters(value, valid, array);
 }
 
 namespace Array {
-    export const Parameters = InParameters;
+    export const Parameters = MimeTypesParameters;
     export type Argument = ArrayArgument;
-    export const Parameter = InParameter;
+    export const Parameter = MimeTypesParameter;
 }
 export default Array;

@@ -3,7 +3,7 @@ import Value from '@alirya/value/value';
 import Inclusive from "../../../../../number/dist/inclusive/inclusive";
 import Minimum from "../../../../../number/dist/minimum/minimum";
 
-export function InParameters(
+export function MinimumSizeParameters(
     value : number,
     valid : boolean,
     minimum : number,
@@ -19,14 +19,14 @@ export function InParameters(
 export type ArrayArgument =
     Value<number> & Validatable & Minimum & Inclusive & {subject ?: string};
 
-export function InParameter({
+export function MinimumSizeParameter({
     valid,
     value,
     minimum,
     inclusive,
 } : ArrayArgument) : string {
 
-    return InParameters(
+    return MinimumSizeParameters(
         value,
         valid,
         minimum,
@@ -35,8 +35,8 @@ export function InParameter({
 }
 
 namespace Array {
-    export const Parameters = InParameters;
+    export const Parameters = MinimumSizeParameters;
     export type Argument = ArrayArgument;
-    export const Parameter = InParameter;
+    export const Parameter = MinimumSizeParameter;
 }
 export default Array;

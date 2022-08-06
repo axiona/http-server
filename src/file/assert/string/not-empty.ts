@@ -1,7 +1,7 @@
 import Validatable from '@alirya/validatable/validatable';
 import Value from '@alirya/value/value';
 
-export function InParameters(
+export function NotEmptyParameters(
     value : number,
     valid : boolean
 ) : string {
@@ -14,20 +14,20 @@ export function InParameters(
 
 export type ArrayArgument = Value<number> & Validatable;
 
-export function InParameter({
+export function NotEmptyParameter({
     valid,
     value
 } : ArrayArgument) : string {
 
-    return InParameters(
+    return NotEmptyParameters(
         value,
         valid
         );
 }
 
 namespace Array {
-    export const Parameters = InParameters;
+    export const Parameters = NotEmptyParameters;
     export type Argument = ArrayArgument;
-    export const Parameter = InParameter;
+    export const Parameter = NotEmptyParameter;
 }
 export default Array;
