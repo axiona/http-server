@@ -6,7 +6,7 @@ import Validatable from '@alirya/validator/validatable/validatable';
 import MimeTypeMessage from "../assert/string/mime-types";
 import InvalidFirstValidLast from "@alirya/array/message/message/list/invalid-first-valid-last";
 import File from "../file";
-import {InParameters, InParametersArgumentsMessage, InParameterArgument} from "@alirya/array/validator/in";
+import {InParameters, InArgumentsMessage, InArgument} from "@alirya/array/validator/in";
 import {MapAllParameters} from '@alirya/object/validator/map-all';
 import AndRecord from '@alirya/object/validatable/and';
 import InvalidMessageRecord from '@alirya/object/message/message/record/invalid';
@@ -17,12 +17,12 @@ export function MimeTypesParameters(mimes: ReadonlyArray<string>) : Validator<Fi
 
 export function MimeTypesParameters<Message>(
     mimes: ReadonlyArray<string>,
-    message : InParametersArgumentsMessage<string, Message>
+    message : InArgumentsMessage<string, Message>
 ) : Validator<object, File, Readonly<Validatable<object, Message>>>;
 
 export function MimeTypesParameters<Message>(
     mimes: ReadonlyArray<string>,
-    message : InParametersArgumentsMessage<string, Message|string> = MimeTypeMessage.Parameters
+    message : InArgumentsMessage<string, Message|string> = MimeTypeMessage.Parameters
 ) : Validator<object, File, Readonly<Validatable<null, Message|string>>> {
 
     mimes = mimes.map(mime=>mime.toLowerCase());
@@ -45,7 +45,7 @@ export function MimeTypesParameters<Message>(
 export function MimeTypesParameter(
     {
         array
-    } : InParameterArgument<string, string>
+    } : InArgument<string, string>
 ) : Validator<object, File, Readonly<Validatable<object, string>>>;
 
 export function MimeTypesParameter<Message>(
@@ -54,14 +54,14 @@ export function MimeTypesParameter<Message>(
     {
         array,
         message
-    } : InParameterArgument<string, Message>
+    } : InArgument<string, Message>
 ) : Validator<object, File, Readonly<Validatable<object, Message>>>;
 
 export function MimeTypesParameter<Message>(
     {
         array,
         message  = MimeTypeMessage.Parameter
-    } : InParameterArgument<string, Message|string>
+    } : InArgument<string, Message|string>
 ) : Validator<object, File, Readonly<Validatable<null, Message|string>>> {
 
     return MimeTypesParameters(array, (value, valid, array)=>message({array, value, valid}));
