@@ -39,8 +39,8 @@ export function NotEmptyParameter<Message>(
 }
 
 
-namespace FormidableFile {
+namespace NotEmpty {
     export const Parameters = NotEmptyParameters;
     export const Parameter = NotEmptyParameter;
 }
-export default FormidableFile;
+export default NotEmpty;

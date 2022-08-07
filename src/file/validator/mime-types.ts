@@ -68,8 +68,8 @@ export function MimeTypesParameter<Message>(
 }
 
 
-namespace FormidableFile {
+namespace MimeTypes {
     export const Parameters = MimeTypesParameters;
     export const Parameter = MimeTypesParameter;
 }
-export default FormidableFile;
+export default MimeTypes;

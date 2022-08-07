@@ -12,12 +12,12 @@ export function NotEmptyParameters(
 }
 
 
-export type ArrayArgument = Value<number> & Validatable;
+export type NotEmptyArgument = Value<number> & Validatable;
 
 export function NotEmptyParameter({
     valid,
     value
-} : ArrayArgument) : string {
+} : NotEmptyArgument) : string {
 
     return NotEmptyParameters(
         value,
@@ -25,9 +25,9 @@ export function NotEmptyParameter({
         );
 }
 
-namespace Array {
+namespace NotEmpty {
     export const Parameters = NotEmptyParameters;
-    export type Argument = ArrayArgument;
+    export type Argument = NotEmptyArgument;
     export const Parameter = NotEmptyParameter;
 }
-export default Array;
+export default NotEmpty;

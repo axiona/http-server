@@ -14,19 +14,19 @@ export function MimeTypesParameters(
 }
 
 
-export type ArrayArgument =
+export type MimeTypes =
     Validatable &
     Value<string> &
     Readonly<ReadonlyList<string>>;
 
-export function MimeTypesParameter({valid, value, array} : ArrayArgument) : string {
+export function MimeTypesParameter({valid, value, array} : MimeTypes) : string {
 
     return MimeTypesParameters(value, valid, array);
 }
 
-namespace Array {
+namespace MimeTypes {
     export const Parameters = MimeTypesParameters;
-    export type Argument = ArrayArgument;
+    export type Argument = MimeTypes;
     export const Parameter = MimeTypesParameter;
 }
-export default Array;
+export default MimeTypes;

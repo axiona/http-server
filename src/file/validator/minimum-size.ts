@@ -67,8 +67,8 @@ export function MinimumSizeParameter<Message>(
 }
 
 
-namespace FormidableFile {
+namespace MinimumSize {
     export const Parameters = MinimumSizeParameters;
     export const Parameter = MinimumSizeParameter;
 }
-export default FormidableFile;
+export default MinimumSize;

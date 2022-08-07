@@ -49,9 +49,9 @@ export function FileParameter(
 
 
 
-namespace FormidableFile {
+namespace File {
     export const Parameters = FileParameters;
     export const Parameter = FileParameter;
     export type Argument = FileArgument;
 }
-export default FormidableFile;
+export default File;

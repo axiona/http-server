@@ -16,7 +16,7 @@ export function MinimumSizeParameters(
 }
 
 
-export type ArrayArgument =
+export type MinimumSizeArgument =
     Value<number> & Validatable & Minimum & Inclusive & {subject ?: string};
 
 export function MinimumSizeParameter({
@@ -24,7 +24,7 @@ export function MinimumSizeParameter({
     value,
     minimum,
     inclusive,
-} : ArrayArgument) : string {
+} : MinimumSizeArgument) : string {
 
     return MinimumSizeParameters(
         value,
@@ -34,9 +34,9 @@ export function MinimumSizeParameter({
         );
 }
 
-namespace Array {
+namespace MinimumSize {
     export const Parameters = MinimumSizeParameters;
-    export type Argument = ArrayArgument;
+    export type Argument = MinimumSizeArgument;
     export const Parameter = MinimumSizeParameter;
 }
-export default Array;
+export default MinimumSize;
