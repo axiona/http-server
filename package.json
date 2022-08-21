@@ -15,7 +15,7 @@
     "url": "https://github.com/alirya/http-server"
   },
   "dependencies": {
-    "tslib": "^2.4.0",
+    "tslib": "^2.3.1",
     "@alirya/function": "^0.17.1",
     "@alirya/boolean": "^0.12.1",
     "@alirya/message": "^0.13.1",
@@ -83,8 +83,8 @@
     "spec-run": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json --reporter=jasmine-ts-console-reporter",
     "spec-run-debug": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine-debug.json --reporter=jasmine-ts-console-reporter",
     "spec": "npm-run-all spec-compile spec-run",
-    "spec-compile": "npm-run-all _spec-ensure-directory _spec-compile-script spec-cleanup _spec-asset",
-    "spec-compile-watch": "npm-run-all --sequential _spec-ensure-directory --parallel _spec-compile-watch-script spec-cleanup-watch _spec-asset-watch",
+    "spec-compile": "npm-run-all _spec-compile-script spec-cleanup",
+    "spec-compile-watch": "npm-run-all --sequential _spec-ensure-directory --parallel _spec-compile-watch-script spec-cleanup-watch",
     "compile": "npm-run-all _compile-script cleanup _compile-asset",
     "cleanup": "ts-cleaner --verbose --dist=dist --src=src",
     "cleanup-watch": "ts-cleaner --verbose --dist=dist --src=src --watch",
