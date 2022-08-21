@@ -142,9 +142,9 @@ export function AutoOptionGenerateMiddleware(
     if(IsMethod(middleware)) {
 
         middleware.methods.forEach(v=>option.methods.add(v));
+    }
 
-
-    } else if(Path(middleware)) {
+    if(Path(middleware)) {
 
         option.matcher = middleware.matchers.get(router);
 

@@ -1,7 +1,7 @@
 import Validatable from '@alirya/validatable/validatable';
 import Value from '@alirya/value/value';
-import Inclusive from "../../../../../number/dist/inclusive/inclusive";
-import Minimum from "../../../../../number/dist/minimum/minimum";
+import Inclusive from '@alirya/number/inclusive/inclusive';
+import Minimum from '@alirya/number/minimum/minimum';
 
 export function MinimumSizeParameters(
     value : number,

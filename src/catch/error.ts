@@ -1,4 +1,4 @@
-import Callable from "../../../function/dist/callable";
+import Callable from '@alirya/function/callable';
 import Middleware from "../middleware/middleware";
 import Context from "../context/context";
 import Catch from "./catch";

@@ -46,7 +46,7 @@ describe('single', () => {
 
     it('send request', function (done) {
 
-        const path = __dirname + '/file/jpg.jpg';
+        const path = __dirname + '/../../file-source/jpg.jpg';
 
         const form = new FormData();
         form.append('image', createReadStream(path));

@@ -6,7 +6,7 @@
 // import Callable from '@alirya/function/callable';
 // import Middleware from '../middleware/middleware';
 // import MiddlewareInferNext from '../context/middleware-infer-next';
-// import Merge from "../../../iterable/dist/merge";
+// import Merge from '@alirya/iterable/merge';
 //
 //
 // export function Create<

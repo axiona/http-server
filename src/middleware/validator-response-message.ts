@@ -7,8 +7,8 @@
 // import { SetPathParameters } from '@alirya/object/set-path';
 // import Context from '../context/context';
 // import Stop from './stop';
-// import Response from "../../../http/dist/response/response";
-// import {UnprocessableEntityParameter} from "../../../http/dist/response/unprocessable-entity";
+// import Response from '@alirya/http/response/response';
+// import {UnprocessableEntityParameter} from '@alirya/http/response/unprocessable-entity';
 // import InferStatic from "@alirya/validator/validatable/infer-static";
 //
 // export type ValidatorTypeContext<Properties extends PropertyKey[]> = Context & O.P.Record<Properties, unknown>;

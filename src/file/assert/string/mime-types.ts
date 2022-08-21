@@ -1,6 +1,6 @@
 import Validatable from '@alirya/validatable/validatable';
 import Value from '@alirya/value/value';
-import ReadonlyList from "../../../../../array/dist/array/readonly";
+import ReadonlyList from '@alirya/array/array/readonly';
 
 export function MimeTypesParameters(
     value : string,

@@ -21,64 +21,66 @@ export type BodyMultipartReturnCombine<Argument extends Context> = Middleware<
     Argument,
     O.P.Omit<Argument, ['request', 'body']> & {
         request: {
-            body : BodyMultipartReturnRecursive<string|number|boolean|File>
+            body : BodyMultipartReturnRecursive<string|number|boolean|File>,
+            files : BodyMultipartReturnRecursive<File>,
         }
     }
 >;
-export type BodyMultipartReturnSeparate<Argument extends Context> = Middleware<
-    Argument,
-    O.P.Omit<Argument, ['request', 'body']> & {
-        request: {
-            body : {
-                files : BodyMultipartReturnRecursive<File>,
-                fields : BodyMultipartReturnRecursive<string|number|boolean>
-            }
-        }
-    }
->;
+// export type BodyMultipartReturnSeparate<Argument extends Context> = Middleware<
+//     Argument,
+//     O.P.Omit<Argument, ['request', 'body']> & {
+//         request: {
+//             body : {
+//                 files : BodyMultipartReturnRecursive<File>,
+//                 fields : BodyMultipartReturnRecursive<string|number|boolean>
+//             }
+//         }
+//     }
+// >;
 
 
 
 export interface BodyMultipartArgumentCombine<Argument extends Context> extends Options {
     mapper : Callable<[ReadonlyArray<[string, any]>]>;
-    parser : Callable<[string, any]>;
-    separate : false;
+    parser : Callable<[string, any], any>;
+    // separate : false;
     invalid ?: BodyMultipartReturnCombine<Argument>;
 }
 
-export interface BodyMultipartArgumentSeparate<Argument extends Context> extends Options {
-    mapper : Callable<[ReadonlyArray<[string, any]>]>;
-    parser : Callable<[string, any]>;
-    separate : true;
-    invalid ?: BodyMultipartReturnSeparate<Argument>;
-}
+// export interface BodyMultipartArgumentSeparate<Argument extends Context> extends Options {
+//     mapper : Callable<[ReadonlyArray<[string, any]>]>;
+//     parser : Callable<[string, any]>;
+//     separate : true;
+//     invalid ?: BodyMultipartReturnSeparate<Argument>;
+// }
 
 export const BodyMultipartArgumentDefault : BodyMultipartArgumentCombine<Context> = Object.freeze(Object.assign({
     mapper : AffixParsers(),
-    separate : false,
+    parser : (key, value)=>value,
+    // separate : false,
     invalid : ResponseParameters(UnsupportedMediaTypeParameters(), false) as BodyMultipartReturnCombine<Context>
-}, defaultOptions as any as BodyMultipartArgumentCombine<Context>));
+}, defaultOptions as any as Options));
 
 
-export default function BodyMultipart<Argument extends Context>(
-    argument : Omit<Partial<BodyMultipartArgumentCombine<Argument>>, 'separate'>
-) : BodyMultipartReturnSeparate<Argument>;
+// export default function BodyMultipart<Argument extends Context>(
+//     argument : Omit<Partial<BodyMultipartArgumentCombine<Argument>>, 'separate'>
+// ) : BodyMultipartReturnSeparate<Argument>;
 
 export default function BodyMultipart<Argument extends Context>(
     argument ?: Partial<BodyMultipartArgumentCombine<Argument>>
 ) : BodyMultipartReturnCombine<Argument>;
 
-export default function BodyMultipart<Argument extends Context>(
-    argument ?: Partial<BodyMultipartArgumentSeparate<Argument>>
-) : BodyMultipartReturnSeparate<Argument>;
+// export default function BodyMultipart<Argument extends Context>(
+//     argument ?: Partial<BodyMultipartArgumentSeparate<Argument>>
+// ) : BodyMultipartReturnSeparate<Argument>;
 
 export default function BodyMultipart<Argument extends Context>(
-    argument : (Partial<BodyMultipartArgumentCombine<Argument>>|Partial<BodyMultipartArgumentSeparate<Argument>>) = {}
-) : BodyMultipartReturnCombine<Argument>|BodyMultipartReturnSeparate<Argument> {
+    argument : (Partial<BodyMultipartArgumentCombine<Argument>>/*|Partial<BodyMultipartArgumentSeparate<Argument>>*/) = {}
+) : BodyMultipartReturnCombine<Argument>/*|BodyMultipartReturnSeparate<Argument>*/ {
 
     const required = Object.assign({}, BodyMultipartArgumentDefault, OmitUndefined(argument));
-
-    const parser : Callable<[string, any]> = argument.parser ? argument.parser : (key, value)=>value;
+;
+    const parser : Callable<[string, any], any> = required.parser;
 
     const invalid = required.invalid ? required.invalid : Stop;
 
@@ -101,18 +103,24 @@ export default function BodyMultipart<Argument extends Context>(
 
                 await Promise.all(promises);
 
-                if(required.separate) {
+                //
+                // if(required.separate) {
+                //
+                //     context.request['body'] =
+                //         {
+                //             files : required.mapper(files),
+                //             fields : required.mapper(fields),
+                //         };
+                //
+                // } else {
+                //
+                //     context.request['body'] = required.mapper([...fields, ...files]);
+                // }
 
-                    context.request['body'] =
-                        {
-                            files : required.mapper(files),
-                            fields : required.mapper(fields),
-                        };
-
-                } else {
-
-                    context.request['body'] = required.mapper([...fields, ...files]);
-                }
+                Object.assign(context.request, {
+                    body: required.mapper([...fields, ...files]),
+                    files: required.mapper(files),
+                });
 
                 resolve(context);
 

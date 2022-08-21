@@ -1,6 +1,6 @@
 import {InternalServerErrorParameter} from '@alirya/http/response/internal-server-error';
 import Name from '@alirya/object/string/name';
-import ContentTypeTextUtf8 from "../../../http/dist/headers/header/content-type-text-utf8";
+import ContentTypeTextUtf8 from '@alirya/http/headers/header/content-type-text-utf8';
 import {FromResponseParameters} from "../context/from-response";
 import Context from "../context/context";
 

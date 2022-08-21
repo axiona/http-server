@@ -10,7 +10,7 @@ import {MapAllParameters} from '@alirya/object/validator/map-all';
 import AndRecord from '@alirya/object/validatable/and';
 import MapMessage from '@alirya/object/message/message/record/map';
 import ValidatorInterface from "@alirya/validator/simple";
-import {GreaterParameters, GreaterArgumentsMessage, GreaterArgument} from "../../../../number/dist/validator/greater";
+import {GreaterParameters, GreaterArgumentsMessage, GreaterArgument} from '@alirya/number/validator/greater';
 
 export function MinimumSizeParameters() : Validator<File, File, Readonly<Validatable<object, string>>>;
 export function MinimumSizeParameters(minimum: number) : Validator<File, File, Readonly<Validatable<object, string>>>;

@@ -1,7 +1,7 @@
 import {errors} from "formidable";
-import {ExistsParameters} from "../../../../object/dist/property/boolean/exists";
-import String from "../../../../string/dist/boolean/string";
-import Number from "../../../../number/dist/boolean/number";
+import {ExistsParameters} from '@alirya/object/property/boolean/exists';
+import String from '@alirya/string/boolean/string';
+import Number from '@alirya/number/boolean/number';
 
 // fix incorrect @types
 export type FormidableErrorType = Omit<InstanceType<typeof errors.FormidableError>, 'internalCode'> & {
