@@ -7,7 +7,7 @@ import MimeError from "../throwable/mime-error";
 import String from '@alirya/string/boolean/string';
 import { Readable } from 'stream';
 import FromReadable from "../context/from-readable";
-import Union from "../../../promise/dist/union";
+import Union from '@alirya/promise/union';
 
 export type FileStreamResponseCallbackType = string|{
     path: string,

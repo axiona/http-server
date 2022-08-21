@@ -8,7 +8,7 @@ import String from '@alirya/string/boolean/string';
 import {OpenMode} from "fs";
 import {Abortable} from "events";
 import FromBuffer from "../context/from-buffer";
-import Union from "../../../promise/dist/union";
+import Union from '@alirya/promise/union';
 
 
 export type FileBufferResponseCallbackTypeOptions = {

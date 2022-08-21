@@ -2,7 +2,7 @@ import Context from "../context/context";
 import Callable from '@alirya/function/callable';
 import Middleware from "./middleware";
 import FromBuffer from "../context/from-buffer";
-import Union from "../../../promise/dist/union";
+import Union from '@alirya/promise/union';
 
 
 export type BufferResponseCallbackType = Buffer|{
