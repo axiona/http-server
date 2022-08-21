@@ -1,10 +1,9 @@
 import Route from '@alirya/http/route/route';
 import {PathOptionDefault, PathParameters} from "./path";
-import {MethodPathArgumentsOption, MethodPathReturn} from "./method-path";
+import {MethodPathArgumentsOption} from "./method-path";
 import Middleware from "./middleware";
 import Method, {MethodType} from "./method";
 import Context from "../context/context";
-import {BodyJsonArgument, BodyJsonParameter, BodyJsonParameters} from "./body-json";
 
 
 export function RouteOptionsParameters<

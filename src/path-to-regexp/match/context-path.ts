@@ -21,18 +21,6 @@ export default function ContextPath<Argument extends string, Storage extends str
 
     const cached = GetOrSet(context.request as {}, PathMatchesKeyCache, () =>new Map<string, Match|false>());
 
-
-    // if(!context.request[PathMatched]) {
-    //
-    //     context.request[PathMatched] = new Map<string, Match|false>();
-    // }
-
-    // const cached : Map<string, Match|false> = context.request[PathMatched];
-
-    // let paths : ListType = ContextPathSegments(context).request[PathSegmentsKey];
-    //
-    // let path = paths.toString();
-
     if(cached.has(match.path)) {
 
         return cached.get(match.path) as Match;

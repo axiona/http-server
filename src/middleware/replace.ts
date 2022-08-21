@@ -4,9 +4,6 @@ import {O} from 'ts-toolbelt';
 import { SetPathParameters } from '@alirya/object/set-path';
 import {SelectPathParameters} from '@alirya/object/value/value/select-path';
 import Union from "@alirya/promise/union";
-//import ReplacePath from '@alirya/object/replace-path';
-
-//type ReplacePath<Target extends object, Replace extends any, Properties extends ReadonlyArray<PropertyKey>> = O.P.Omit<Target, Properties> & O.P.Record<Properties, Replace>;
 
 export type ReplaceReturn<
     Properties extends PropertyKey[],

@@ -49,8 +49,6 @@ export function MimeTypesParameter(
 ) : Validator<object, File, Readonly<Validatable<object, string>>>;
 
 export function MimeTypesParameter<Message>(
-    //mimes: string[],
-    //message : StaticParameter<object, File, true, false, Message>,
     {
         array,
         message

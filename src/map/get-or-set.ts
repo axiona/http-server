@@ -2,7 +2,6 @@
 export default function GetOrSet<
     MapType extends Map<unknown, unknown>,
     Key extends PropertyKey,
-    //Container extends Partial<Record<Key, MapType>> = Partial<Record<Key, MapType>>
     Container extends Partial<Record<Key, MapType>> = Partial<Record<Key, MapType>>
 >(
     container : Container,

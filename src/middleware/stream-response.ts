@@ -1,14 +1,8 @@
 import Context from "../context/context";
 import Callable from '@alirya/function/callable';
 import Middleware from "./middleware";
-import {promises, createReadStream, PathLike, ReadStream} from "fs";
-import {charsets, extension, lookup, contentType} from 'mime-types';
-import Extension, {ExtensionParameters} from "@alirya/uri/path/file/string/extension";
-import {fromBuffer, fromStream} from "file-type";
-import MimeError from "../throwable/mime-error";
-import ContentType from '@alirya/http/headers/header/content-type';
 import Union from '@alirya/promise/union';
-import { Writable, Readable, PassThrough } from 'stream';
+import { Readable } from 'stream';
 import FromReadable from "../context/from-readable";
 
 export type StreamResponseCallbackType = Readable|{

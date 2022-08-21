@@ -246,7 +246,6 @@ export function ValidatorParameters<
 >(
     validator : ValidatorType,
     properties : Properties|[] = [],
-    // invalid : Middleware<ContextType> = Stop,
     invalid : Callable<[InferStatic<ValidatorType>, ContextType], Middleware<ContextType>> = (validatable) => (context) => {
         FromResponseParameters(context, UnprocessableEntityParameter({body:validatable.message}));
     },
@@ -276,8 +275,6 @@ export function ValidatorParameters<
         }
 
         return ConditionalCallParameters(result.valid, valid, invalid, result as InferStatic<ValidatorType>, context as ContextType)(context as ContextType);
-
-        // return invalid(context as ContextType);
 
     } as ValidatorReturnProperties<ContextType, Properties, ValidatorType, ValidatableKey>;
 }

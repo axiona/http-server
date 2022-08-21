@@ -121,44 +121,6 @@ export function PathParameters<
     }) as PathReturn<ArgumentType, Argument|string, Storage|string, ContextType>;
 }
 
-// export const PathMatched = Symbol('PathMatch');
-//
-// /**
-//  *
-//  *
-//  * @param match
-//  * @param context
-//  */
-// export function PathMatches<Argument extends string, Storage extends string>(
-//     match : PathMatchers,
-//     context : Context
-// ) : Match|false  {
-//
-//     if(!context.request[PathMatched]) {
-//
-//         context.request[PathMatched] = new Map<string, Match|false>();
-//     }
-//
-//     const cached : Map<string, Match|false> = context.request[PathMatched];
-//
-//     let paths : ListType = ContextPathSegments(context).request[PathSegmentsKey];
-//     let path = paths.toString();
-//
-//     if(cached.has(match.path)) {
-//
-//         return cached.get(match.path) as Match;
-//
-//     } else {
-//
-//         const result = match.callback(path);
-//
-//         cached.set(match.path, result);
-//
-//         return result;
-//     }
-// }
-
-
 export function PathGenerateList(paths : string[]|string) : ListType {
 
     return ListParameter({
@@ -247,7 +209,6 @@ export function PathMatch<
         throw new Error('Matcher on current route is not exists');
     }
 
-    //const result = PathMatches(match, context);
     const result = ContextPath(match, context);
 
     if(result) {
@@ -275,20 +236,11 @@ export type PathArgument<
     path : string[]|string
 };
 
-
-// export function PathParameter<
-//     ContextType extends Context,
-//     Argument extends string,
-//     >(
-//     paths : string[]|string,
-// ) : PathArgument<ContextType, Argument, 'paths'>;
-
 export function PathParameter<
     ArgumentType extends Record<string, string>,
     Argument extends string,
     ContextType extends Context,
 >(
-    // paths : string[]|string,
     argument : Omit<PathArgument<ArgumentType, Argument, 'paths'>, 'storage'>,
 ) : PathReturn<ArgumentType, Argument, 'paths', ContextType>;
 
@@ -298,7 +250,6 @@ export function PathParameter<
     Storage extends string,
     ContextType extends Context,
 >(
-    // paths : string[]|string,
     argument : Omit<PathArgument<ArgumentType, 'pathParameter', 'paths'>, 'storage'|'argument'>,
 ) : PathReturn<ArgumentType, 'pathParameter', 'paths', ContextType>;
 
@@ -308,7 +259,6 @@ export function PathParameter<
     Storage extends string,
     ContextType extends Context,
 >(
-    // paths : string[]|string,
     argument : PathArgument<ArgumentType, Argument, Storage>,
 ) : PathReturn<ArgumentType, Argument, Storage, ContextType>;
 

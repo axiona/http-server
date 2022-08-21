@@ -1,10 +1,6 @@
 import Context from "../context/context";
 import Callable from '@alirya/function/callable';
 import Middleware from "./middleware";
-import {fromBuffer, fromStream} from "file-type";
-import MimeError from "../throwable/mime-error";
-import ContentType from '@alirya/http/headers/header/content-type';
-import String from '@alirya/string/boolean/string';
 import FromBuffer from "../context/from-buffer";
 import Union from "../../../promise/dist/union";
 

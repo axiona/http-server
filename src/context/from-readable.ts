@@ -1,5 +1,5 @@
 import Context from "./context";
-import {fromBuffer, fromStream} from "file-type";
+import {fromStream} from "file-type";
 import MimeError from "../throwable/mime-error";
 import ContentType from '@alirya/http/headers/header/content-type';
 import {Readable, PassThrough} from "stream";

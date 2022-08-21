@@ -111,19 +111,12 @@ export type MethodPathArgument<
     method : string,
 };
 
-// export function PathParameter<
-//     ContextType extends Context,
-//     Argument extends string,
-//     >(
-//     paths : string[]|string,
-// ) : PathArgument<ContextType, Argument, 'paths'>;
 
 export function MethodPathParameter<
     ArgumentType extends Record<string, string>,
     Argument extends string = 'pathParameter',
     ContextType extends Context = Context,
     >(
-    // paths : string[]|string,
     argument : Omit<MethodPathArgument<ArgumentType, Argument, 'paths'>, 'storage'>,
 ) : PathReturn<ArgumentType, Argument, 'paths', ContextType>;
 
@@ -131,7 +124,6 @@ export function MethodPathParameter<
     ArgumentType extends Record<string, string>,
     ContextType extends Context = Context,
     >(
-    // paths : string[]|string,
     argument : Omit<MethodPathArgument<ArgumentType, 'pathParameter', 'paths'>, 'storage'|'argument'>,
 ) : PathReturn<ArgumentType, 'pathParameter', 'paths', ContextType>;
 
@@ -141,7 +133,6 @@ export function MethodPathParameter<
     Storage extends string = 'paths',
     ContextType extends Context = Context,
     >(
-    // paths : string[]|string,
     argument : MethodPathArgument<ArgumentType, Argument, Storage>,
 ) : PathReturn<ArgumentType, Argument, Storage, ContextType>;
 

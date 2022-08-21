@@ -1,16 +1,12 @@
 import Context from "../context/context";
 import Callable from '@alirya/function/callable';
 import Middleware from "./middleware";
-import {promises, createReadStream, PathLike} from "fs";
-import {charsets, extension, lookup, contentType} from 'mime-types';
-import Extension, {ExtensionParameters} from "@alirya/uri/path/file/string/extension";
-import {fromBuffer, fromStream} from "file-type";
+import {promises} from "fs";
+import {lookup} from 'mime-types';
 import MimeError from "../throwable/mime-error";
-import ContentType from '@alirya/http/headers/header/content-type';
 import String from '@alirya/string/boolean/string';
 import {OpenMode} from "fs";
 import {Abortable} from "events";
-import BufferResponse from "./buffer-response";
 import FromBuffer from "../context/from-buffer";
 import Union from "../../../promise/dist/union";
 
@@ -53,26 +49,6 @@ export default function FileBufferResponse<
             throw error;
 
         }
-
-        //BufferResponse()
-
-        // if(!mime) {
-        //
-        //     const result = await fromBuffer(buffer);
-        //
-        //     if(result && result.mime) {
-        //
-        //         mime = result.mime;
-        //     }
-        // }
-        //
-        // if(!mime) {
-        //
-        //     throw new MimeError(`Cannot detect mime from ${path}`);
-        // }
-        //
-        // context.response.set(ContentType(mime));
-        // context.body = buffer;
     };
 
 }
