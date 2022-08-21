@@ -11,6 +11,7 @@ import String from '@alirya/string/boolean/string';
 import { Writable, Readable } from 'stream';
 import FromBuffer from "../context/from-buffer";
 import FromReadable from "../context/from-readable";
+import Union from "../../../promise/dist/union";
 
 export type FileStreamResponseCallbackType = string|{
     path: string,
@@ -20,12 +21,12 @@ export type FileStreamResponseCallbackType = string|{
 export default function FileStreamResponseResponse<
     Ctx extends Context
 >(
-    option: Callable<[Ctx], FileStreamResponseCallbackType>
+    option: Callable<[Ctx], Union<FileStreamResponseCallbackType>>
 ) : Middleware<Ctx, Ctx & {response:{body:Readable}}> {
 
     return async function (context) {
 
-        const {options, path} = FileStreamResponseFixArgument(option(context));
+        const {options, path} = FileStreamResponseFixArgument(await option(context));
 
         const stream = createReadStream(path, options);
 

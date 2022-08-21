@@ -7,7 +7,7 @@ import Extension, {ExtensionParameters} from "@alirya/uri/path/file/string/exten
 import {fromBuffer, fromStream} from "file-type";
 import MimeError from "../throwable/mime-error";
 import ContentType from '@alirya/http/headers/header/content-type';
-import String from '@alirya/string/boolean/string';
+import Union from '@alirya/promise/union';
 import { Writable, Readable, PassThrough } from 'stream';
 import FromReadable from "../context/from-readable";
 
@@ -19,32 +19,14 @@ export type StreamResponseCallbackType = Readable|{
 export default function StreamResponse<
     Ctx extends Context
 >(
-    option: Callable<[Ctx], StreamResponseCallbackType>
+    option: Callable<[Ctx], Union<StreamResponseCallbackType>>
 ) : Middleware<Ctx, Ctx & {response:{body:Readable}}> {
 
     return async function (context) {
 
-        let {readable, mime} = StreamResponseUnpackArgument(option(context));
+        let {readable, mime} = StreamResponseUnpackArgument(await option(context));
 
         return FromReadable(context, readable, mime);
-
-        // if(!mime) {
-        //
-        //     const result = await fromStream(readable);
-        //
-        //     if(result && result.mime) {
-        //
-        //         mime = result.mime;
-        //     }
-        // }
-        //
-        // if(!mime) {
-        //
-        //     throw new MimeError(`Cannot detect mime from stream`);
-        // }
-        //
-        // context.response.set(ContentType(mime));
-        // context.body = readable;
     };
 
 }

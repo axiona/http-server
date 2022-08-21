@@ -12,6 +12,7 @@ import {OpenMode} from "fs";
 import {Abortable} from "events";
 import BufferResponse from "./buffer-response";
 import FromBuffer from "../context/from-buffer";
+import Union from "../../../promise/dist/union";
 
 
 export type FileBufferResponseCallbackTypeOptions = {
@@ -27,12 +28,12 @@ export type FileBufferResponseCallbackType = string|{
 export default function FileBufferResponse<
     Ctx extends Context
 >(
-    option: Callable<[Ctx], FileBufferResponseCallbackType>
+    option: Callable<[Ctx], Union<FileBufferResponseCallbackType>>
 ) : Middleware<Ctx, Ctx & {response:{body:Buffer}}> {
 
     return async function (context) {
 
-        const {options, path} = FileBufferResponseFixArgument(option(context));
+        const {options, path} = FileBufferResponseFixArgument(await option(context));
 
         const buffer = await promises.readFile(path, options);
 
