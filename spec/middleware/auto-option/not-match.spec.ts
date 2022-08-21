@@ -3,7 +3,7 @@ import Method from '../../../dist/middleware/method';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
-import PathPattern from '../../../dist/middleware/path';
+import {PathParameters} from '../../../dist/middleware/path';
 import AutoOptions from '../../../dist/middleware/auto-options';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
@@ -25,7 +25,7 @@ describe('single', () => {
     it('add request', ()=>{
 
         router.add(AutoOptions());
-        const path = router.add(PathPattern('/path/child'));
+        const path = router.add(PathParameters('/path/child'));
 
         for (const method of methods) {
 

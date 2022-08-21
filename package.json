@@ -1,6 +1,6 @@
 {
   "name": "@alirya/http-server",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Typescript Http Server",
   "publishConfig": {
     "directory": "dist"
@@ -15,11 +15,14 @@
     "url": "https://github.com/alirya/http-server"
   },
   "dependencies": {
-    "tslib": "^2.3.1",
+    "tslib": "^2.4.0",
     "@alirya/function": "^0.17.1",
     "@alirya/boolean": "^0.12.1",
     "@alirya/message": "^0.13.1",
+    "@alirya/number": "^0.18.2",
+    "@alirya/null": "^0.7.1",
     "@alirya/map": "^0.13.1",
+    "@alirya/class": "^0.4.1",
     "@alirya/iterable": "^0.6.1",
     "@alirya/set": "^0.9.1",
     "@alirya/array": "^0.27.1",
@@ -27,10 +30,11 @@
     "@alirya/string": "^0.17.1",
     "@alirya/validatable": "^0.21.1",
     "@alirya/http": "^0.19.1",
+    "@alirya/promise": "^0.1.1",
     "@alirya/validator": "^0.20.1",
     "@alirya/syslog": "^0.4.1",
     "@alirya/value": "^0.16.1",
-    "@alirya/uri": "^0.8.1",
+    "@alirya/uri": "^0.8.2",
     "@koa/router": "^10.1.1",
     "@types/koa": "^2.13.4",
     "@types/koa__router": "^8.0.11",
@@ -39,9 +43,12 @@
     "@koa/cors": "^3.1.0",
     "axios": "=0.19.0",
     "ts-toolbelt": "^9.6.0",
-    "@types/formidable": "^2.0.5",
     "co-body": "^6.1.0",
     "@types/co-body": "^6.1.0",
+    "@types/mime-types": "^2.1.1",
+    "mime-types": "^2.1.35",
+    "file-type": "^16.5.4",
+    "@types/formidable": "^2.0.5",
     "formidable": "^2.0.1"
   },
   "devDependencies": {
@@ -67,14 +74,17 @@
     "package-version-git-tag": "^3.0.0",
     "cpx2": "^4.2.0"
   },
+  "esm": {
+    "cache": false
+  },
   "private": true,
   "scripts": {
     "spec-run-js": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json",
     "spec-run": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json --reporter=jasmine-ts-console-reporter",
     "spec-run-debug": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine-debug.json --reporter=jasmine-ts-console-reporter",
     "spec": "npm-run-all spec-compile spec-run",
-    "spec-compile": "npm-run-all _spec-compile-script spec-cleanup",
-    "spec-compile-watch": "npm-run-all --sequential _spec-ensure-directory --parallel _spec-compile-watch-script spec-cleanup-watch",
+    "spec-compile": "npm-run-all _spec-ensure-directory _spec-compile-script spec-cleanup _spec-asset",
+    "spec-compile-watch": "npm-run-all --sequential _spec-ensure-directory --parallel _spec-compile-watch-script spec-cleanup-watch _spec-asset-watch",
     "compile": "npm-run-all _compile-script cleanup _compile-asset",
     "cleanup": "ts-cleaner --verbose --dist=dist --src=src",
     "cleanup-watch": "ts-cleaner --verbose --dist=dist --src=src --watch",
@@ -103,6 +113,8 @@
     "prepublishOnly": "cd ../dist",
     "_compile-asset": "cpx \"./{package.json,package-lock.json,LICENSE,Readme.md,.npmignore}\" ./dist/ --verbose",
     "_compile-asset-watch": "cpx \"./{package.json,package-lock.json,LICENSE,README.md,.npmignore}\" ./dist/ --verbose --watch",
+    "_spec-asset-watch": "cpx \"spec/**/*.{jpg,json}\" dist-spec/ --watch --verbose",
+    "_spec-asset": "cpx \"spec/**/*.{jpg,json}\" dist-spec/ --verbose",
     "installs": "npm i"
   }
 }

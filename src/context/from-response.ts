@@ -10,7 +10,7 @@ export type FromResponseReturn<
 
 export function FromResponseParameters<Body extends unknown, ContextType extends Context>(
     context : ContextType,
-    response : Response<number, string, Record<string, string>, Body>,
+    response : Response<Body>,
 ) : FromResponseReturn<Body, ContextType> {
 
     context.response.set(response.headers);

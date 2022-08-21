@@ -91,10 +91,10 @@ describe('valid', () => {
 
         it('assert value', function () {
 
-            expect<any>(response.data).toEqual('Not Found');
+            expect<any>(response.data).toEqual({ name: 'type must string, actual undefined.', address: 'type must string, actual undefined.' });
             expect(called).toBe(false);
-            expect(response.status).toEqual(404);
-            expect(response.statusText).toEqual('Not Found');
+            expect(response.status).toEqual(422);
+            expect(response.statusText).toEqual('Unprocessable Entity');
         });
     });
 

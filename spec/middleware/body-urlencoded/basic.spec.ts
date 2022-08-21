@@ -2,7 +2,7 @@ import Router from '../../../dist/router/standard';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
-import FromRecord from '../../../../uri/dist/query/from-record';
+import FromRecord from '@alirya/uri/query/from-record';
 import BodyForm from '../../../dist/middleware/body-urlencoded';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});

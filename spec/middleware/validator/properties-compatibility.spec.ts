@@ -89,7 +89,7 @@ describe('guard', () => {
 
             router.add(ValidatorParameter({
                 validator: RecordValidator(),
-                invalid: Stop,
+                invalid: () => Stop,
                 replace: true,
                 properties: ['request', 'body']
             })).add(function (ctx) {

@@ -2,7 +2,8 @@
   "random": false,
   "spec_dir": "dist-spec",
   "spec_files": [
-    "**/*.spec.js"
+    "**/*.spec.js",
+    "**/*.spec.debug.js"
   ],
   "stopSpecOnExpectationFailure": false,
   "verboseDeprecations": true

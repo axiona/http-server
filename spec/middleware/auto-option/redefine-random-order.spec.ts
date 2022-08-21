@@ -3,7 +3,7 @@ import Method from '../../../dist/middleware/method';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
-import PathPattern from '../../../dist/middleware/path';
+import {PathParameters} from '../../../dist/middleware/path';
 import AutoOptions from '../../../dist/middleware/auto-options';
 import RandomBoolean from '@alirya/boolean/random';
 
@@ -29,11 +29,11 @@ describe('random order, redefine', () => {
 
             if(RandomBoolean()) {
 
-                router.add(Method(method)).add(PathPattern('/path/child')).add(ctx=>ctx);
+                router.add(Method(method)).add(PathParameters('/path/child')).add(ctx=>ctx);
 
             } else {
 
-                router.add(PathPattern('/path/child')).add(Method(method)).add(ctx=>ctx);
+                router.add(PathParameters('/path/child')).add(Method(method)).add(ctx=>ctx);
             }
         }
     });

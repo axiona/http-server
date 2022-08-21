@@ -19,7 +19,7 @@ describe('guard', () => {
         describe('parameters', ()=>{
 
             router
-                .add(ValidatorParameters(ContextValidator, undefined, Stop))
+                .add(ValidatorParameters(ContextValidator, undefined, () => Stop))
                 .add(function (ctx) {
 
                     let data : Context = ctx;
@@ -34,7 +34,7 @@ describe('guard', () => {
                 });
 
             router
-                .add(Validator.Parameters(ContextValidator, undefined, Stop))
+                .add(Validator.Parameters(ContextValidator, undefined, () => Stop))
                 .add(function (ctx) {
 
                     let data : Context = ctx;
@@ -56,7 +56,7 @@ describe('guard', () => {
             router
                 .add(ValidatorParameter({
                     validator: ContextValidator,
-                    invalid : Stop
+                    invalid : () => Stop
                 }))
                 .add(function (ctx) {
 
@@ -74,7 +74,7 @@ describe('guard', () => {
             router
                 .add(Validator.Parameter({
                     validator: ContextValidator,
-                    invalid : Stop
+                    invalid : () => Stop
                 }))
                 .add(function (ctx) {
 
@@ -101,7 +101,7 @@ describe('guard', () => {
                     return Object.assign(context, {request: {body : 'a' as string|number|boolean}});
 
                 })
-                .add(ValidatorParameters(ContextValidator, undefined, Stop))
+                .add(ValidatorParameters(ContextValidator, undefined, () => Stop))
                 .add(function (ctx) {
 
                     let data : string|number|boolean = ctx.request.body;
@@ -121,7 +121,7 @@ describe('guard', () => {
                     return Object.assign(context, {request: {body : 'a' as string|number|boolean}});
 
                 })
-                .add(Validator.Parameters(ContextValidator, undefined, Stop))
+                .add(Validator.Parameters(ContextValidator, undefined, () => Stop))
                 .add(function (ctx) {
 
                     let data : string|number|boolean = ctx.request.body;
@@ -145,7 +145,7 @@ describe('guard', () => {
                 })
                 .add(ValidatorParameter({
                     validator: ContextValidator,
-                    invalid : Stop
+                    invalid : () => Stop
                 }))
                 .add(function (ctx) {
 
@@ -168,7 +168,7 @@ describe('guard', () => {
                 })
                 .add(Validator.Parameter({
                     validator: ContextValidator,
-                    invalid : Stop
+                    invalid : () => Stop
                 }))
                 .add(function (ctx) {
 

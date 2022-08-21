@@ -23,7 +23,6 @@ describe('caught', function () {
         ctx.status = 204;
 
         called.push('1');
-        return ctx;
 
     }).add(function (ctx) {
 

@@ -3,11 +3,12 @@ import Context from '../context/context';
 import Router from '../router/router';
 import Path from './boolean/path';
 import IsMethod from './boolean/method';
-import {PathMatchers, PathMatches} from './path';
+import {PathMatchers} from './path';
 import Root from '../router/root';
 import Method from '../boolean/method';
 import FromResponse from '../context/from-response';
 import {MethodNotAllowedParameters} from '@alirya/http/response/method-not-allowed';
+import ContextPath from "../path-to-regexp/match/context-path";
 
 export default function AutoOptions<
     ContextType extends Context = Context
@@ -19,7 +20,7 @@ export default function AutoOptions<
 
         for (const [path, value] of AutoOptionRoot(context.router)) {
 
-            const result = PathMatches({path, callback : value.matcher.callback}, context);
+            const result = ContextPath({path, callback : value.matcher.callback}, context);
 
             if(result) {
 
@@ -141,9 +142,9 @@ export function AutoOptionGenerateMiddleware(
     if(IsMethod(middleware)) {
 
         middleware.methods.forEach(v=>option.methods.add(v));
+    }
 
-
-    } else if(Path(middleware)) {
+    if(Path(middleware)) {
 
         option.matcher = middleware.matchers.get(router);
 

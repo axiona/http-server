@@ -7,8 +7,10 @@ type BodyJsonReturn<Argument extends Context, Body extends unknown> = Middleware
     O.P.Omit<Argument, ['request', 'body']> & { request: { body : Body } }
 >;
 
+
+
 export function Body<Argument extends Context, Body extends unknown>(
-    ...middlewares : BodyJsonReturn<Argument, Body>[]
+    middlewares : [...BodyJsonReturn<Argument, Body>[]]
 ) : BodyJsonReturn<Argument, Body> {
 
     return function (context) {

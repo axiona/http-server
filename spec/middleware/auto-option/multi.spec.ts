@@ -3,7 +3,7 @@ import Method from '../../../dist/middleware/method';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
-import PathPattern from '../../../dist/middleware/path';
+import {PathParameters} from '../../../dist/middleware/path';
 import AutoOptions from '../../../dist/middleware/auto-options';
 import {ShuffleParameters} from '@alirya/array/shuffle';
 
@@ -46,7 +46,7 @@ describe('ordered', () => {
 
         for (const {path, method} of list) {
 
-            router.add(Method(method)).add(PathPattern(path)).add(ctx=>ctx);
+            router.add(Method(method)).add(PathParameters(path)).add(ctx=>ctx);
         }
 
     });

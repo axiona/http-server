@@ -19,7 +19,6 @@ describe('basic', function () {
     router.catch(function (error, ctx) {
 
         called.push('1');
-        return ctx;
 
     }).add(function (ctx) {
 
