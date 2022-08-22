@@ -2,6 +2,9 @@ import Context from './context';
 import {ListParameter, ListType} from '@alirya/uri/path/list';
 import {ExistsParameters} from '@alirya/object/property/boolean/exists';
 
+
+
+
 export const PathSegmentsKey = Symbol('PathSegmentsKey');
 
 export type PathPathSegmentsReturn<
@@ -56,8 +59,13 @@ export default function PathSegments<
     return context as PathPathSegmentsReturn<ContextType, StorageKey|string>;
 }
 
-export function PathSegmentsGet(context: Context) : ListType|undefined {
+export function PathSegmentsGet(context: Context) : ListType {
 
-    return context.request[PathSegmentsKey];
+    if(context.request[PathSegmentsKey]) {
+
+        return context.request[PathSegmentsKey];
+    }
+
+    return PathSegmentsGet(PathSegments(context));
 }
 

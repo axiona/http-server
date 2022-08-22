@@ -1,9 +1,9 @@
 import Context from "../../context/context";
 import {ListType} from "@alirya/uri/path/list";
 import ContextPathSegments, {PathSegmentsGet} from "../../context/path-segments";
-import {PathMatchers} from "../../middleware/path";
 import { Match} from 'path-to-regexp';
 import GetOrSet from "../../map/get-or-set";
+import Matcher from "../matcher";
 
 export const PathMatchesKeyCache = Symbol('PathMatch');
 /**
@@ -14,7 +14,7 @@ export const PathMatchesKeyCache = Symbol('PathMatch');
  * @param factory
  */
 export default function ContextPath<Argument extends string, Storage extends string>(
-    match : PathMatchers,
+    match : Matcher,
     context : Context,
     factory : (context: Context) => ListType = (ctx) => PathSegmentsGet(ContextPathSegments(ctx)) as ListType
 ) : Match|false  {
@@ -29,7 +29,7 @@ export default function ContextPath<Argument extends string, Storage extends str
 
         const path = factory(context).toString();
 
-        const result = match.callback(path);
+        const result = match(path);
 
         cached.set(match.path, result);
 

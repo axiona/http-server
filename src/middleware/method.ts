@@ -1,14 +1,10 @@
 import Middleware from './middleware';
 import Context from '../context/context';
-
-
-export type MethodType<ContextType extends Context = Context> = Middleware<ContextType, ContextType> & {
-    methods : string[]
-};
+import Router from "../router/router";
 
 export default function Method<ContextType extends Context>(
     ...methods : string[]
-) : MethodType<ContextType> {
+) : Middleware<ContextType, ContextType> {
 
     methods = methods.map(method=>method.toUpperCase());
 
@@ -20,6 +16,11 @@ export default function Method<ContextType extends Context>(
         }
     };
 
-    return Object.assign(callable, {methods});
+    const register = function (router : Router)  {
+
+        router.metadata.method.push(...methods);
+    };
+
+    return Object.assign(callable, {register});
 
 }

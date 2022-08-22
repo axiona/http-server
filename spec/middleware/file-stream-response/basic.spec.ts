@@ -2,8 +2,6 @@ import Router from '../../../dist/router/standard';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
-import BodyMultipart from '../../../dist/middleware/body-multipart';
-import FormData from 'form-data';
 import {MethodPathParameter} from "../../../dist/middleware/method-path";
 import FileBuffer from "../../../dist/middleware/file-stream-response";
 import * as Fs from "fs";

@@ -1,4 +1,3 @@
-
 import KoaCors, {Options} from "@koa/cors";
 import Context from "../context/context";
 import Middleware from "./middleware";

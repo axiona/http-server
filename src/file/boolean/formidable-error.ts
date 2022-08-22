@@ -20,7 +20,6 @@ export default function FormidableError(error: object) : error is FormidableErro
         return false;
     }
 
-
     // number
     for(const key of ['code', 'httpCode']) {
 

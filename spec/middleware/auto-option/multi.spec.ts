@@ -15,11 +15,11 @@ describe('ordered', () => {
 
     let mapped : Map<string, string[]> = new Map<string, string[]>();
     mapped.set('/path1/child1', ['POST', 'GET', 'PATCH', 'DELETE', 'PUT']);
-    mapped.set('/path2/child2', ['GET', 'PATCH', 'DELETE', 'PUT']);
-    mapped.set('/path3/child3', ['PATCH', 'DELETE', 'PUT']);
-    mapped.set('/path4/child4', ['DELETE', 'PUT']);
-    mapped.set('/path5/child5', ['PUT']);
-    mapped.set('/path6/child6', ['CUSTOM']);
+    // mapped.set('/path2/child2', ['GET', 'PATCH', 'DELETE', 'PUT']);
+    // mapped.set('/path3/child3', ['PATCH', 'DELETE', 'PUT']);
+    // mapped.set('/path4/child4', ['DELETE', 'PUT']);
+    // mapped.set('/path5/child5', ['PUT']);
+    // mapped.set('/path6/child6', ['CUSTOM']);
 
     const server = Server();
 

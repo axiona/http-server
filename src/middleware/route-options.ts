@@ -2,7 +2,7 @@ import Route from '@alirya/http/route/route';
 import {PathOptionDefault, PathParameters} from "./path";
 import {MethodPathArgumentsOption} from "./method-path";
 import Middleware from "./middleware";
-import Method, {MethodType} from "./method";
+import Method from "./method";
 import Context from "../context/context";
 
 
@@ -11,7 +11,7 @@ export function RouteOptionsParameters<
 >(
     routes : Route[],
     option : Partial<Omit<MethodPathArgumentsOption<Record<string, string>, string, string>,  'storage'|'argument'>> = PathOptionDefault,
-) : MethodType<ContextType> {
+) : Middleware<ContextType, ContextType> {
 
     const middlewareMethod = Method('OPTIONS');
     const middlewarePaths : [Middleware, Route][] = [];
@@ -60,7 +60,7 @@ export function RouteOptionsParameters<
         }
     };
 
-    return Object.assign(middleware, middlewareMethod, {register}) as MethodType<ContextType>;
+    return Object.assign(middleware, middlewareMethod, {register}) as Middleware<ContextType, ContextType>;
 
 }
 
@@ -73,7 +73,7 @@ export function RouteOptionsParameter<
         routes : Route[],
         option : Partial<Omit<MethodPathArgumentsOption<Record<string, string>, string, string>,  'storage'|'argument'>>,
     }
-) : MethodType<ContextType> {
+) : Middleware<ContextType, ContextType> {
 
     return RouteOptionsParameters(routes, option);
 }

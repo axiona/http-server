@@ -1,9 +1,7 @@
 import Router from '../../../dist/router/standard';
-import Method from '../../../dist/middleware/method';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
-import {PathParameters} from '../../../dist/middleware/path';
 import AutoOptions from '../../../dist/middleware/auto-options';
 import {MethodPathParameter} from "../../../dist/middleware/method-path";
 

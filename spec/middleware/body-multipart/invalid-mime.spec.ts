@@ -6,7 +6,6 @@ import BodyMultipart from '../../../dist/middleware/body-multipart';
 import FormData from 'form-data';
 import {createReadStream} from "fs";
 import FormidableFileBoolean from "../../../dist/file/boolean/file";
-import FormidableFile from "../../../dist/file/validator/file";
 import MimeType from "../../../dist/file/validator/mime-types";
 import Validatable from "@alirya/validator/validatable/validatable";
 import File from "../../../dist/file/file";

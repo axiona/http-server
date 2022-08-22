@@ -12,8 +12,8 @@ export default interface Middleware<
      * called on registered to router
      * @param context
      */
-    register?:(context: Router) => void;
-    /*<Arg extends Argument>*/(context: Argument) : MiddlewareReturn<Return>;
+    register?:(router: Router) => void;
+    (context: Argument) : MiddlewareReturn<Return>;
 }
 
 

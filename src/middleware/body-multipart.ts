@@ -45,8 +45,8 @@ export default function BodyMultipart<Argument extends Context>(
 
 
 export default function BodyMultipart<Argument extends Context>(
-    argument : (Partial<BodyMultipartArgumentCombine<Argument>>/*|Partial<BodyMultipartArgumentSeparate<Argument>>*/) = {}
-) : BodyMultipartReturnCombine<Argument>/*|BodyMultipartReturnSeparate<Argument>*/ {
+    argument : (Partial<BodyMultipartArgumentCombine<Argument>>) = {}
+) : BodyMultipartReturnCombine<Argument> {
 
     const required = Object.assign({}, BodyMultipartArgumentDefault, OmitUndefined(argument));
 

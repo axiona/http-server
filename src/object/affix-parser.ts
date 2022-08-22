@@ -32,7 +32,7 @@ export default function AffixParser(
 
 
 
-export function BracesParserSet(keys : ReadonlyArray<string>, value : any/*, pattern : RegExp*/) : Record<PropertyKey, any> {
+export function BracesParserSet(keys : ReadonlyArray<string>, value : any) : Record<PropertyKey, any> {
 
     let clone = keys.slice(0);
     const key = clone.shift();
@@ -42,7 +42,7 @@ export function BracesParserSet(keys : ReadonlyArray<string>, value : any/*, pat
     if(clone.length) {
 
 
-        value = BracesParserSet(clone, value/*, pattern*/);
+        value = BracesParserSet(clone, value);
     }
 
     if(key === undefined) {

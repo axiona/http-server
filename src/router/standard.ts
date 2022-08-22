@@ -6,6 +6,9 @@ import Catch from '../catch/catch';
 import Callable from '@alirya/function/callable';
 import Middleware from '../middleware/middleware';
 import MiddlewareInferNext from '../context/middleware-infer-next';
+import Metadata from "./metadata/metadata";
+import Null from "./metadata/null";
+import Clone from "./metadata/clone";
 
 export default class Standard<
     Type extends MiddlewareType  = MiddlewareType,
@@ -18,7 +21,7 @@ export default class Standard<
         public middleware : Type|undefined = undefined,
         public error : Error|undefined = undefined,
         public parent : Router|undefined = undefined,
-        public metadata : Record<PropertyKey, any> = {},
+        public metadata : Metadata = Null(),
     ) {
 
         for(const handler of [middleware, error]) {
@@ -32,7 +35,7 @@ export default class Standard<
 
     add<Next extends Context>(middleware : Middleware<MiddlewareInferNext<Type>, Next>) : Router<Middleware<Next>> {
 
-        const router =  new Standard(middleware, undefined, this, {});
+        const router =  new Standard(middleware, undefined, this, Clone(this.metadata));
 
         this.children.push(router);
 
@@ -41,7 +44,7 @@ export default class Standard<
 
     catch(errorHandler : ErrorHandlerType) {
 
-        const router =  new Standard(undefined, errorHandler, this, {});
+        const router =  new Standard(undefined, errorHandler, this, Clone(this.metadata));
 
         this.children.push(router);
 

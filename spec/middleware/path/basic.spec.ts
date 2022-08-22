@@ -34,13 +34,6 @@ describe('single', () => {
             return ctx;
         });
 
-
-        // // add to trigger cache
-        // router.add(PathPattern('/path/child', {end:false})).add(ctx=> {
-        //     console.log('xxxxxxxxx');
-        //     return ctx;
-        // });
-
     });
 
     it('send request', function (done) {
