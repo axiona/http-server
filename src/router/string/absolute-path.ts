@@ -1,10 +1,7 @@
 import Router from "../router";
 import Parents from "../array/parents";
-import {PathReturn} from "../../middleware/path";
 import {ListType} from "@alirya/uri/path/list";
 import {Required} from "utility-types";
-import Middleware from "../../middleware/middleware";
-import IsPath from "../../middleware/boolean/path";
 import List from "../../path/list/list";
 import Last from '@alirya/array/value/value/last';
 

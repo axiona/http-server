@@ -1,5 +1,4 @@
 import Router from './router';
-import Server from '../server/server';
 import Standard from "./standard";
 import Koa from "koa";
 

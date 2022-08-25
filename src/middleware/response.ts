@@ -64,7 +64,6 @@ export function ResponseParameters<
     Subject extends Response,
 >(
     response : Subject|ResponseArgumentsPromise<ContextType, Subject>|ResponseArgumentsCallback<ContextType, Subject>,
-    // next : boolean = false
 ) : ResponseReturn<ContextType, Subject> {
 
     if(IsFunction(response)) {

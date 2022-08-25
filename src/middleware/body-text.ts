@@ -3,12 +3,7 @@ import Context from '../context/context';
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
 import {Required} from 'utility-types';
-import {ResponseParameters} from "./response";
-import {UnsupportedMediaTypeParameters} from "@alirya/http/response/unsupported-media-type";
 import OmitUndefined from "@alirya/object/omit-undefined";
-import HttpError from "../../../http/dist/throwable/http-error";
-import {BadRequestParameters} from "../../../http/dist/response/bad-request";
-import ParseError from "../throwable/parse-error";
 
 
 type BodyTextReturn<Argument extends Context> = Middleware<
@@ -25,9 +20,7 @@ type BodyTextReturn<Argument extends Context> = Middleware<
  * @see BodyTextArgument.encoding
  * Sets encoding for incoming form fields
  */
-export type BodyTextArgument<Argument extends Context> = Partial<Pick<Options, 'encoding'|'limit'>> & {
-    // invalid ?: BodyTextReturn<Argument>
-};
+export type BodyTextArgument<Argument extends Context> = Partial<Pick<Options, 'encoding'|'limit'>>;
 
 /**
  * {@see BodyTextArgumentDefault.limit} '1mb'
@@ -36,7 +29,6 @@ export type BodyTextArgument<Argument extends Context> = Partial<Pick<Options, '
 export const BodyTextArgumentDefault : Required<BodyTextArgument<Context>, 'limit'|'encoding'> = Object.freeze({
     limit : '1mb',
     encoding : 'utf-8',
-    // invalid : ResponseParameters(UnsupportedMediaTypeParameters(), false) as BodyTextReturn<Context>
 });
 
 /**
@@ -59,19 +51,10 @@ export function BodyTextParameter<Argument extends Context>(
 
                 return context;
 
-            })/*.catch(error=>{
-
-                throw ParseError(error);
-
-            })*/;
+            });
         }
 
         return context;
-
-        // if(argument.invalid) {
-        //
-        //     return argument.invalid(context);
-        // }
 
     } as BodyTextReturn<Argument>;
 }

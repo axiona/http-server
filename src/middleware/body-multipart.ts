@@ -4,16 +4,10 @@ import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
 import Callable from '@alirya/function/callable';
 import AffixParsers from '../object/affix-parsers';
-import {ResponseParameters} from "./response";
-import {UnsupportedMediaTypeParameters} from "@alirya/http/response/unsupported-media-type";
 import OmitUndefined from "@alirya/object/omit-undefined";
-import Stop from "./stop";
 import {fromFile} from 'file-type';
 import {extension} from 'mime-types';
 import File from "../file/file";
-import HttpError from "../../../http/dist/throwable/http-error";
-import {BadRequestParameters} from "../../../http/dist/response/bad-request";
-import ParseError from "../throwable/parse-error";
 
 export type BodyMultipartReturnRecursive<Type> = {
     [Key in string]: Type|Record<PropertyKey, BodyMultipartReturnRecursive<Type>>|BodyMultipartReturnRecursive<Type>[]
@@ -33,14 +27,11 @@ export type BodyMultipartReturnCombine<Argument extends Context> = Middleware<
 export interface BodyMultipartArgumentCombine<Argument extends Context> extends Options {
     mapper : Callable<[ReadonlyArray<[string, any]>]>;
     parser : Callable<[string, any], any>;
-    // invalid ?: BodyMultipartReturnCombine<Argument>;
 }
-// export const BodyMultipartIsParsed = Symbol('BodyMultipartIsParsed');
 
 export const BodyMultipartArgumentDefault : BodyMultipartArgumentCombine<Context> = Object.freeze(Object.assign({
     mapper : AffixParsers(),
     parser : (key, value)=>value,
-    // invalid : ResponseParameters(UnsupportedMediaTypeParameters(), false) as BodyMultipartReturnCombine<Context>
 }, defaultOptions as any as Options));
 
 export default function BodyMultipart<Argument extends Context>(
@@ -56,14 +47,11 @@ export default function BodyMultipart<Argument extends Context>(
 
     const parser : Callable<[string, any], any> = required.parser;
 
-    // const invalid = required.invalid ? required.invalid : Stop;
-
     return function (context) {
 
         if (!context.request.is('multipart')) {
 
             return context;
-            // return invalid(context);
         }
 
         return new Promise<Context>(function (resolve, reject) {

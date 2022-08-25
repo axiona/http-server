@@ -3,7 +3,6 @@ import Callable from '@alirya/function/callable';
 import Middleware from "./middleware";
 import {promises} from "fs";
 import {lookup} from 'mime-types';
-import MimeError from "../throwable/mime-error";
 import String from '@alirya/string/boolean/string';
 import {OpenMode} from "fs";
 import {Abortable} from "events";

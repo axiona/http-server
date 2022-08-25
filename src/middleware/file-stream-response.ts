@@ -3,7 +3,6 @@ import Callable from '@alirya/function/callable';
 import Middleware from "./middleware";
 import {createReadStream} from "fs";
 import {lookup} from 'mime-types';
-import MimeError from "../throwable/mime-error";
 import String from '@alirya/string/boolean/string';
 import { Readable } from 'stream';
 import FromReadable from "../context/from-readable";
