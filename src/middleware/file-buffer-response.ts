@@ -9,6 +9,7 @@ import {OpenMode} from "fs";
 import {Abortable} from "events";
 import FromBuffer from "../context/from-buffer";
 import Union from '@alirya/promise/union';
+import HttpError from "http-errors";
 
 
 export type FileBufferResponseCallbackTypeOptions = {
@@ -41,9 +42,9 @@ export default function FileBufferResponse<
 
         } catch (error) {
 
-            if(error instanceof MimeError) {
+            if(HttpError.isHttpError(error) && error.statusCode === 415) {
 
-                throw new MimeError(`Cannot detect mime from ${path}`);
+                throw new HttpError.UnsupportedMediaType(`Cannot detect mime from ${path}`);
             }
 
             throw error;

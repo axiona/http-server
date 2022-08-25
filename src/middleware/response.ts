@@ -64,7 +64,7 @@ export function ResponseParameters<
     Subject extends Response,
 >(
     response : Subject|ResponseArgumentsPromise<ContextType, Subject>|ResponseArgumentsCallback<ContextType, Subject>,
-    next : boolean = false
+    // next : boolean = false
 ) : ResponseReturn<ContextType, Subject> {
 
     if(IsFunction(response)) {
@@ -75,7 +75,7 @@ export function ResponseParameters<
 
                 context = FromResponse.Parameters(context, subject) as ContextType;
 
-                return (next ? context : undefined) as FromResponseReturn<Subject['body'], ContextType>;
+                return context as FromResponseReturn<Subject['body'], ContextType>;
 
             });
         };
@@ -86,7 +86,7 @@ export function ResponseParameters<
 
             context = FromResponse.Parameters(context, response) as ContextType;
 
-            return (next ? context : undefined) as O.P.Update<ContextType, ['response', 'body'], Subject['body']>;
+            return context as O.P.Update<ContextType, ['response', 'body'], Subject['body']>;
         };
     }
 

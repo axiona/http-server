@@ -6,6 +6,13 @@ import JsonMimeTypes from '../array/json-mime-types';
 import {Required} from 'utility-types';
 import {BodyTextArgument, BodyTextArgumentDefault} from './body-text';
 import OmitUndefined from "@alirya/object/omit-undefined";
+import {ResponseParameters} from "./response";
+import BadRequest, {BadRequestParameters} from "../../../http/dist/response/bad-request";
+import HttpError from "http-errors";
+import Omit from "../../../object/dist/omit";
+import Pick, {PickParameters} from "../../../object/dist/pick";
+import ParseError from "../throwable/parse-error";
+// import HttpError from "../../../http/dist/throwable/http-error";
 
 
 
@@ -23,14 +30,19 @@ type BodyJsonReturn<Argument extends Context> = Middleware<
  * @see BodyJsonArgument.encoding
  * Sets encoding for incoming form fields
  */
-export type BodyJsonArgument<Argument extends Context> = Partial<Pick<Options, 'encoding'|'limit'>> & {
+export type BodyJsonArgument<Argument extends Context> = Partial<Pick<Options, 'encoding'|'limit'>>/* & {
     invalid ?: BodyJsonReturn<Argument>
-};
+    error ?: (error) => BodyJsonReturn<Argument>
+}*/;
 
 /**
  * @see BodyTextArgumentDefault
  */
-export const BodyJsonArgumentDefault : Required<BodyTextArgument<Context>, 'limit'|'encoding'> = BodyTextArgumentDefault;
+export const BodyJsonArgumentDefault : Required<BodyTextArgument<Context>, 'limit'|'encoding'> = Object.freeze(Object.assign({
+   // error: ResponseParameters(BadRequestParameters())
+}, BodyTextArgumentDefault));
+
+// export const BodyJsonIsParsed = Symbol('BodyJsonIsParsed');
 
 /**
  * @param argument
@@ -44,21 +56,31 @@ export function BodyJsonParameter<Argument extends Context>(
 
     return function (context) {
 
+        // if(context[BodyJsonIsParsed]) {
+        //
+        //     return context;
+        // }
+
         if (context.request.is(JsonMimeTypes as string[])) {
 
-            return  json(context, argument).then(body=>{
+            return json(context, argument).then(body=>{
 
                 Object.assign(context.request, {body});
-
+                // context[BodyJsonIsParsed] = true;
                 return context;
 
-            });
+            })/*.catch(error=>{
+
+                throw ParseError(error);
+            })*/;
         }
 
-        if(argument.invalid) {
+        return context;
 
-            return argument.invalid(context);
-        }
+        // if(argument.invalid) {
+        //
+        //     return argument.invalid(context);
+        // }
 
     } as BodyJsonReturn<Argument>;
 }
@@ -73,15 +95,17 @@ export function BodyJsonParameter<Argument extends Context>(
  *
  * @param encoding
  * @param invalid
+ * @param error
  * @default {@see BodyJsonArgumentDefault.encoding}
  */
 export function BodyJsonParameters<Argument extends Context>(
     limit : string|number = BodyJsonArgumentDefault.limit,
     encoding : string = BodyJsonArgumentDefault.encoding,
-    invalid ?: BodyJsonReturn<Argument>
+    // invalid ?: BodyJsonReturn<Argument>,
+    // error ?: BodyJsonReturn<Argument>
 ) : BodyJsonReturn<Argument> {
 
-    return BodyJsonParameter({invalid, limit, encoding});
+    return BodyJsonParameter({/*invalid,*/ limit, encoding});
 }
 
 

@@ -8,6 +8,7 @@ import String from '@alirya/string/boolean/string';
 import { Readable } from 'stream';
 import FromReadable from "../context/from-readable";
 import Union from '@alirya/promise/union';
+import HttpError from "http-errors";
 
 export type FileStreamResponseCallbackType = string|{
     path: string,
@@ -34,14 +35,13 @@ export default function FileStreamResponseResponse<
 
         } catch (error) {
 
-            if(error instanceof MimeError) {
+            if(HttpError.isHttpError(error) && error.statusCode === 415) {
 
-                throw new MimeError(`Cannot detect mime from ${path}`);
+                throw new HttpError.UnsupportedMediaType(`Cannot detect mime from ${path}`);
             }
 
             throw error;
         }
-
     };
 
 }

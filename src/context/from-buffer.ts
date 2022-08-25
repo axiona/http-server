@@ -2,6 +2,7 @@ import Context from "./context";
 import {fromBuffer} from "file-type";
 import MimeError from "../throwable/mime-error";
 import ContentType from '@alirya/http/headers/header/content-type';
+import HttpError from "http-errors";
 
 
 export default async function FromBuffer<Ctx extends Context>(
@@ -22,7 +23,7 @@ export default async function FromBuffer<Ctx extends Context>(
 
     if(!mime) {
 
-        throw new MimeError(`Cannot detect mime from BufferResponse`);
+        throw new HttpError.UnsupportedMediaType(`Cannot detect mime from BufferResponse`);
     }
 
     context.response.set(ContentType(mime));

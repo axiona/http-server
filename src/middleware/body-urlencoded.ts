@@ -14,20 +14,20 @@ type BodyUrlencodedReturn<Argument extends Context> = Middleware<
     O.P.Omit<Argument, ['request', 'body']> & {request: { body : Record<PropertyKey, any> }}
     >;
 
-export interface BodyUrlencodedArgument<Argument extends Context> extends qs.IParseOptions {
+export interface BodyUrlencodedArgument/*<Argument extends Context>*/ extends qs.IParseOptions {
     limit : string|number;
-    invalid ?: BodyMultipartReturnCombine<Argument>;
+    // invalid ?: BodyMultipartReturnCombine<Argument>;
 }
 
-export const BodyUrlencodedArgumentDefault : BodyUrlencodedArgument<Context> = Object.freeze({
+export const BodyUrlencodedArgumentDefault : BodyUrlencodedArgument/*<Context>*/ = Object.freeze({
     limit : '1mb',
     charset : 'utf-8',
-    invalid : ResponseParameters(UnsupportedMediaTypeParameters(), false) as BodyMultipartReturnCombine<Context>
+    // invalid : ResponseParameters(UnsupportedMediaTypeParameters(), false) as BodyMultipartReturnCombine<Context>
 });
 
 
 export default function BodyUrlencoded<Argument extends Context>(
-    argument : Partial<BodyUrlencodedArgument<Argument>> = {}
+    argument : Partial<BodyUrlencodedArgument/*<Argument>*/> = {}
 ) : BodyUrlencodedReturn<Argument> {
 
     const option : Options = Object.assign({}, BodyUrlencodedArgumentDefault, {
@@ -36,7 +36,7 @@ export default function BodyUrlencoded<Argument extends Context>(
         queryString: Omit.Parameters(argument, 'limit')
     });
 
-    const invalid = argument.invalid ? argument.invalid : BodyUrlencodedArgumentDefault.invalid;
+    // const invalid = argument.invalid ? argument.invalid : BodyUrlencodedArgumentDefault.invalid;
 
     return function (context) {
 
@@ -51,10 +51,12 @@ export default function BodyUrlencoded<Argument extends Context>(
             });
         }
 
-        if(invalid) {
+        return context;
 
-            return invalid(context);
-        }
+        // if(invalid) {
+        //
+        //     return invalid(context);
+        // }
 
     } as BodyUrlencodedReturn<Argument>;
 }
