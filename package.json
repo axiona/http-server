@@ -43,7 +43,7 @@
     "deep-object-diff": "^1.1.7",
     "@types/koa__cors": "^3.3.0",
     "@koa/cors": "^3.1.0",
-    "axios": "=0.19.0",
+    "axios": "^0.21.1",
     "ts-toolbelt": "^9.6.0",
     "co-body": "^6.1.0",
     "@types/co-body": "^6.1.0",
@@ -51,7 +51,8 @@
     "mime-types": "^2.1.35",
     "file-type": "^16.5.4",
     "@types/formidable": "^2.0.5",
-    "formidable": "^2.0.1"
+    "formidable": "^2.0.1",
+    "@types/http-errors": "^1.8.2"
   },
   "devDependencies": {
     "form-data": "^3.0.1",
