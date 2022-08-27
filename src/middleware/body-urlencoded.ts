@@ -41,6 +41,10 @@ export default function BodyUrlencoded<Argument extends Context>(
 
                 return context;
 
+            }).catch(error => {
+
+                Object.assign(error, {router:context.router});
+                throw error;
             });
         }
 

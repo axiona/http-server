@@ -23,7 +23,7 @@ describe('parameters', () => {
         it('validatable', ()=>{
 
             router
-                .add(ValidatorParameters(RecordValidator(), ['request', 'body'], undefined, undefined, undefined, ['bodyValid']))
+                .add(ValidatorParameters(RecordValidator(), ['request', 'body'], undefined, /*undefined, */undefined, ['bodyValid']))
                 .add(function (ctx) {
 
                 // @ts-expect-error
@@ -55,7 +55,7 @@ describe('parameters', () => {
 
         it('validatable', ()=>{
 
-            router.add(ValidatorParameters(ContextValidator, undefined, undefined, undefined, undefined, ['bodyValid']))
+            router.add(ValidatorParameters(ContextValidator, undefined, /*undefined, */undefined, undefined, ['bodyValid']))
                 .add(function (ctx) {
 
                     // @ts-expect-error
@@ -91,7 +91,7 @@ describe('parameter', () => {
 
             router.add(ValidatorParameter({
                 validator: RecordValidator(),
-                invalid: () => Stop,
+                invalid: Stop(),
                 replace: true,
                 properties: ['request', 'body'],
                 validatable : ['bodyValid']

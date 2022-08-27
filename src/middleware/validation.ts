@@ -5,8 +5,8 @@ import Context from '../context/context';
 import Stop from './stop';
 import ValidationInterface from '@alirya/boolean/function/validation';
 import Guard, {GuardInferExpect} from '@alirya/boolean/function/guard';
-import Next from "./next";
-import {ConditionalCallParameters} from "@alirya/function/conditional-call";
+// import Next from "./next";
+// import {ConditionalCallParameters} from "@alirya/function/conditional-call";
 
 
 export type ValidationTypeContext<ContextType extends Context, Properties extends PropertyKey[], Value extends unknown>
@@ -130,8 +130,8 @@ export function ValidationParameters<
 >(
     validation : ValidationInterface<[O.Path<ContextType, Properties>]>|ValidationInterface<[ContextType]>,
     properties : Properties|[] = [],
-    invalid : Middleware<ContextType> = Stop,
-    valid : Middleware<ContextType> = Next,
+    invalid : Middleware<ContextType> = Stop(),
+    // valid : Middleware<ContextType> = Next(),
 ) : ValidationReturnPropertiesValidatable<Properties, Value, ContextType> | ValidationReturnContextValidatable<ContextType> {
 
     const assignment : boolean = !!properties.length;
@@ -142,7 +142,14 @@ export function ValidationParameters<
 
         const result = (validation as ValidationInterface<[O.Path<ContextType, Properties>]>)(value as O.Path<ContextType, Properties>);
 
-        return ConditionalCallParameters(result, valid, invalid, context as ContextType);
+        if(!result) {
+
+            return invalid(context);
+        }
+
+        return context;
+
+        // return ConditionalCallParameters(result, valid, invalid, context as ContextType);
 
     } as ValidationReturnPropertiesValidatable<Properties, Value, ContextType>;
 }
@@ -283,7 +290,7 @@ export function ValidationParameter<
     Valid extends ValidationTypeMiddleware<ContextType, Properties, Value> = ValidationTypeMiddleware<ContextType, Properties, Value>,
 >(  {
         validation,
-        invalid = Stop,
+        invalid = Stop(),
         properties = [],
     } : ValidationArgumentPropertiesValidatable<Properties, Value, ContextType, Invalid, Valid> |
         ValidationArgumentContextValidatable<ContextType,  ValidationInterface<[ContextType]>, Middleware<ContextType>, Middleware<ContextType>>

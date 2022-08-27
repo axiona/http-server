@@ -8,6 +8,7 @@ import Matcher from "../matcher/matcher";
 import AbsolutePath from "../router/string/absolute-path";
 import FromRouter from "../matcher/from-router";
 import List from "../path/list/list";
+import Standard from "../router/standard";
 
 export type PathReturn<
     ArgumentType extends Record<string, string> = Record<string, string>,
@@ -112,11 +113,16 @@ export class PathClass<
         this.relatives = List(paths);
     }
 
-    register (router : Router) {
+    private createMatcher(router : Router) : Matcher {
 
         const absoluteString = AbsolutePath(router, this.relatives);
 
-        const matcher = FromRouter(router, absoluteString, this.option);
+        return  FromRouter(router, absoluteString, this.option);
+    }
+
+    register (router : Router) {
+
+        const matcher = this.createMatcher(router);
 
         this.matchers.set(router, matcher);
 
@@ -125,11 +131,20 @@ export class PathClass<
 
     callback (context : Context) : Context|undefined {
 
-        const match = this.matchers.get(context.router);
+        let match: Matcher;
 
-        if(!match) {
+        if(context.router) {
 
-            throw new Error('Matcher on current route is not exists');
+            match = this.matchers.get(context.router) as Matcher;
+
+            if(!match) {
+
+                throw new Error('Matcher on current route is not exists');
+            }
+
+        } else {
+
+            match = this.createMatcher(new Standard());
         }
 
         const result = ContextPath(match, context);

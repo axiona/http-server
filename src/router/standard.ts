@@ -65,44 +65,113 @@ export default class Standard<
             }
 
             if(error) {
+
                 throw error;
             }
         }
     }
 
+    //
+    // async call(context: Context) : Promise<Context|void> {
+    //
+    //     context.router = this;
+    //
+    //     if(this.middleware) {
+    //
+    //         context = await this.tryExecute(()=> {
+    //
+    //             context.router = this;
+    //
+    //             return (this.middleware as Middleware)(context);
+    //
+    //         }, context) as Context;
+    //     }
+    //
+    //
+    //     if(context) {
+    //
+    //         for (const children of this.children) {
+    //
+    //             await this.tryExecute(()=> {
+    //
+    //                 context.router = this;
+    //
+    //                 return  children.call(context);
+    //
+    //             }, context) as Context;
+    //         }
+    //
+    //         return context as Context;
+    //
+    //     }
+    //
+    //     return context;
+    // }
 
     async call(context: Context) : Promise<Context|void> {
 
-        context.router = this;
+        // context.router = this;
 
-        context = await this.tryExecute(()=> {
+        if(this.middleware) {
 
-            if(this.middleware) {
-
+            try {
                 context.router = this;
 
-                return this.middleware(context);
+                context = await (this.middleware as Middleware)(context) as Context;
+                // return await callable();
+
+            } catch (error) {
+
+                if(this.error) {
+
+                    error = await this.error(error, context);
+                }
+
+                if(error) {
+
+                    throw error;
+                }
             }
 
-            return context as Context;
+            // context = await this.tryExecute(()=> {
 
-        }, context) as Context;
+            // }, context) as Context;
+        }
 
 
         if(context) {
 
             for (const children of this.children) {
 
-                await this.tryExecute(()=> {
+                try {
 
                     context.router = this;
 
-                    return  children.call(context);
+                    await children.call(context);
 
-                }, context) as Context;
+                } catch (error) {
+
+                    if(this.error) {
+
+                        error = await this.error(error, context);
+                    }
+
+                    if(error) {
+
+                        throw error;
+                    }
+                }
+
+                // await this.tryExecute(()=> {
+
+                    // context.router = this;
+                    //
+                    // return  children.call(context);
+
+                // }, context) as Context;
             }
 
-            return context as Context;
+            // return context as Context;
 
         }
 

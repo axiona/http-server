@@ -50,6 +50,10 @@ export function BodyJsonParameter<Argument extends Context>(
                 Object.assign(context.request, {body});
                 return context;
 
+            }).catch(error => {
+
+                Object.assign(error, {router:context.router});
+                throw error;
             });
         }
 

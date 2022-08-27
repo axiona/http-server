@@ -51,6 +51,10 @@ export function BodyTextParameter<Argument extends Context>(
 
                 return context;
 
+            }).catch(error => {
+
+                Object.assign(error, {router:context.router});
+                throw error;
             });
         }
 

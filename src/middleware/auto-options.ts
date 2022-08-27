@@ -9,12 +9,13 @@ import FromRouter from "../router/metadata/array/from-router";
 import Stop from "./stop";
 import {PathSegmentsGet} from "../context/path-segments";
 import {UniqueParameters} from '@alirya/array/unique';
+import Standard from "../router/standard";
 
 export default function AutoOptions<
     ContextType extends Context = Context
 >(
     invalid : Middleware<ContextType, ContextType> = AutoOptionsDefault as Middleware<ContextType, ContextType>,
-    valid : Middleware<ContextType, ContextType> = Stop as Middleware<ContextType, ContextType>,
+    valid : Middleware<ContextType, ContextType> = Stop(),
 ) : Middleware<ContextType, ContextType> {
 
     let caches : Map<string, string[]> = new Map<string, string[]>();
@@ -63,7 +64,7 @@ export function AutoOptionsDefault<ContextType extends Context>(context : Contex
 
 export function AutoOptionGenerateMethods(context : Context) : string[] {
 
-    const methods = FromRouter(Root(context.router))
+    const methods = FromRouter(Root(context.router || new Standard()))
         .filter(metadata=>ContextPath(metadata.path, context))
         .flatMap(metadata=>metadata.method)
         .map(method=>method.toUpperCase());

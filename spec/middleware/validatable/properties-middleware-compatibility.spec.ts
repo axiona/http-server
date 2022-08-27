@@ -19,7 +19,7 @@ describe('validation', () => {
         it('parameters', ()=>{
 
             router
-                .add(ValidationParameters(() => true, ['request', 'body'], Stop))
+                .add(ValidationParameters(() => true, ['request', 'body'], Stop()))
                 .add(function (ctx) {
 
                     let unknown : unknown = ctx.request.body;
@@ -36,7 +36,7 @@ describe('validation', () => {
                 });
 
             router
-                .add(Validation.Parameters(() => true, ['request', 'body'], Stop))
+                .add(Validation.Parameters(() => true, ['request', 'body'], Stop()))
                 .add(function (ctx) {
 
                     let unknown : unknown = ctx.request.body;
@@ -59,7 +59,7 @@ describe('validation', () => {
                 .add(ValidationParameter({
                     validation: () => true,
                     properties : ['request', 'body'],
-                    invalid : Stop
+                    invalid : Stop()
                 }))
                 .add(function (ctx) {
 
@@ -80,7 +80,7 @@ describe('validation', () => {
                 .add(Validation.Parameter({
                     validation: () => true,
                     properties : ['request', 'body'],
-                    invalid : Stop
+                    invalid : Stop()
                 }))
                 .add(function (ctx) {
 
@@ -108,7 +108,7 @@ describe('validation', () => {
                     return Object.assign(context, {request: {body : 'a' as string|number|boolean}});
 
                 })
-                .add(ValidationParameters(() => true, ['request', 'body'], Stop))
+                .add(ValidationParameters(() => true, ['request', 'body'], Stop()))
                 .add(function (ctx) {
 
                     let data : string|number|boolean = ctx.request.body;
@@ -128,7 +128,7 @@ describe('validation', () => {
                     return Object.assign(context, {request: {body : 'a' as string|number|boolean}});
 
                 })
-                .add(Validation.Parameters(() => true, ['request', 'body'], Stop))
+                .add(Validation.Parameters(() => true, ['request', 'body'], Stop()))
                 .add(function (ctx) {
 
                     let data : string|number|boolean = ctx.request.body;
@@ -154,7 +154,7 @@ describe('validation', () => {
                 .add(ValidationParameter({
                     validation: () => true,
                     properties : ['request', 'body'],
-                    invalid : Stop
+                    invalid : Stop()
                 }))
                 .add(function (ctx) {
 
@@ -178,7 +178,7 @@ describe('validation', () => {
                 .add(Validation.Parameter({
                     validation: () => true,
                     properties : ['request', 'body'],
-                    invalid : Stop
+                    invalid : Stop()
                 }))
                 .add(function (ctx) {
 
@@ -206,7 +206,7 @@ describe('guard', () => {
         it('parameters', ()=>{
 
             router
-                .add(ValidationParameters(OneGuard, ['response', 'status'], Stop))
+                .add(ValidationParameters(OneGuard, ['response', 'status'], Stop()))
                 .add(function (ctx) {
 
                     let number : number = ctx.response.status;
@@ -220,7 +220,7 @@ describe('guard', () => {
                 });
 
             router
-                .add(ValidationParameters(OneGuard, ['a', 'b'], Stop))
+                .add(ValidationParameters(OneGuard, ['a', 'b'], Stop()))
                 .add(function (ctx) {
 
                     let number : number = ctx.a.b;
@@ -234,7 +234,7 @@ describe('guard', () => {
                 });
 
             router
-                .add(Validation.Parameters(OneGuard, ['a', 'b'], Stop))
+                .add(Validation.Parameters(OneGuard, ['a', 'b'], Stop()))
                 .add(function (ctx) {
 
                     let number : number = ctx.a.b;
@@ -254,7 +254,7 @@ describe('guard', () => {
                 .add(ValidationParameter({
                     validation: OneGuard,
                     properties: ['a', 'b'],
-                    invalid : Stop
+                    invalid : Stop()
                 }))
                 .add(function (ctx) {
 
@@ -272,7 +272,7 @@ describe('guard', () => {
                 .add(Validation.Parameter({
                     validation: OneGuard,
                     properties: ['response', 'body'],
-                    invalid : Stop
+                    invalid : Stop()
                 }))
                 .add(function (ctx) {
 
@@ -290,7 +290,7 @@ describe('guard', () => {
     describe('with context', ()=>{
         it('parameters', ()=>{
             router
-                .add(ValidationParameters(OneGuard, ['response', 'status'], Stop))
+                .add(ValidationParameters(OneGuard, ['response', 'status'], Stop()))
                 .add(function (ctx) {
 
                     let number : number = ctx.response.status;
@@ -304,7 +304,7 @@ describe('guard', () => {
                 });
 
             router
-                .add(Validation.Parameters(OneGuard, ['response', 'status'], Stop))
+                .add(Validation.Parameters(OneGuard, ['response', 'status'], Stop()))
                 .add(function (ctx) {
 
                     let number : number = ctx.response.status;
@@ -323,7 +323,7 @@ describe('guard', () => {
                 .add(ValidationParameter({
                     validation: OneGuard,
                     properties: ['response', 'status'],
-                    invalid : Stop
+                    invalid : Stop()
                 }))
                 .add(function (ctx) {
 
@@ -341,7 +341,7 @@ describe('guard', () => {
                 .add(Validation.Parameter({
                     validation: OneGuard,
                     properties: ['response', 'status'],
-                    invalid : Stop
+                    invalid : Stop()
                 }))
                 .add(function (ctx) {
 

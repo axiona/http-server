@@ -6,6 +6,7 @@ import Validation from '../../../dist/middleware/validation';
 import {PaymentRequiredParameters} from '@alirya/http/response/payment-required';
 import ContextDataGuard from './context-data-guard';
 import {ResponseParameters} from '../../../dist/middleware/response';
+import Stop from "../../../dist/middleware/stop";
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -28,7 +29,7 @@ describe('invalid middleware', () => {
     it('add request', ()=>{
 
         router
-            .add(Validation.Parameters(ContextDataGuard, undefined, ResponseParameters(PaymentRequiredParameters())))
+            .add(Validation.Parameters(ContextDataGuard, undefined, Stop(ResponseParameters(PaymentRequiredParameters()))))
             .add(function (ctx : any) {
 
             const string : string = ctx.data;

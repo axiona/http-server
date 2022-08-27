@@ -75,7 +75,7 @@ export default function BodyMultipart<Argument extends Context>(
 
             }).on('error', function (error) {
 
-                return reject(error);
+                return reject(Object.assign(error, {router:context.router}));
 
             }).on('field', function (field, value) {
 

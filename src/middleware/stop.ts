@@ -1,5 +1,22 @@
 import Context from '../context/context';
+import Middleware from "./middleware";
+import Callable from "../../../function/dist/callable";
 
-export default function Stop<ContextType extends Context>(context : ContextType) : void {
+export default function Stop<ContextType extends Context>() : Callable<[ContextType], void>;
+export default function Stop<ContextType extends Context, CtxtNext extends Context>(context : Middleware<ContextType, CtxtNext>) : Middleware<ContextType, CtxtNext>;
+export default function Stop<ContextType extends Context>(m ?: Middleware) : Callable<[ContextType], void> {
 
+    if(m) {
+
+        return function (context) {
+            m(context);
+        };
+    } else {
+
+        return function (context) {};
+    }
 }
+
+// export default function Stop<ContextType extends Context>(context : Context) : void {
+//
+// }
