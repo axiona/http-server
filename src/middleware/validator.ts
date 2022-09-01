@@ -11,6 +11,7 @@ import InferStatic from "@alirya/validator/validatable/infer-static";
 import {ConditionalCallParameters} from "@alirya/function/conditional-call";
 import {FromResponseParameters} from "../context/from-response";
 import {UnprocessableEntityParameter} from "@alirya/http/response/unprocessable-entity";
+import {BadRequestParameters} from "../../../http/dist/response/bad-request";
 
 export type ValidatorPreviousContext<Properties extends PropertyKey[]> = Context & O.P.Record<Properties, unknown>;
 export type ValidatorTypePropertiesNext<
@@ -244,7 +245,7 @@ export function ValidatorParameters<
     validator : ValidatorType,
     properties : Properties|[] = [],
     invalid : Callable<[ContextType, InferStatic<ValidatorType>], MiddlewareReturn<ContextType>> = (context, validatable) => {
-        FromResponseParameters(context, UnprocessableEntityParameter({body:validatable.message}));
+        FromResponseParameters(context, BadRequestParameters(validatable.message));
     },
     replace : boolean = true,
     validatable : ValidatableKey|['validatable'] = ['validatable'],

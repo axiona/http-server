@@ -5,7 +5,7 @@ import Axios, {AxiosResponse} from 'axios';
 import BodyMultipart from '../../../dist/middleware/body-multipart';
 import FormData from 'form-data';
 import {createReadStream} from "fs";
-import MaxSizeExceeded from "../../../dist/file/error-handler/max-size-exceeded";
+import MaxSizeExceeded from "../../../dist/file/catch/max-size-exceeded";
 
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});

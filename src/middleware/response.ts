@@ -11,9 +11,6 @@ import Callable from '@alirya/function/callable';
  * @param response
  * Value or Value from callback to be applied to response
  *
- * @param middleware
- * @default {@see Next}
- * to be executed after
  */
 
 export type ResponseArgumentsPromise<
@@ -34,7 +31,6 @@ export function ResponseParameters<
     Subject extends Response,
 >(
     response : ResponseArgumentsPromise<ContextType, Subject>,
-    next ?: boolean
 ) : ResponseReturn<ContextType, Subject>;
 
 /**
@@ -45,7 +41,6 @@ export function ResponseParameters<
     Subject extends Response,
 >(
     response : ResponseArgumentsCallback<ContextType, Subject>,
-    next ?: boolean
 ) : ResponseReturn<ContextType, Subject>;
 
 /**
@@ -56,7 +51,6 @@ export function ResponseParameters<
     Subject extends Response,
     >(
     response : Subject,
-    next ?: boolean
 ) : ResponseReturn<ContextType, Subject>;
 
 export function ResponseParameters<
@@ -97,7 +91,6 @@ export type ResponseArgumentPromise<
     Subject extends Response,
 > = {
     response: ResponseArgumentsPromise<ContextType, Subject>,
-    next?: boolean,
 };
 
 export type ResponseArgumentCallback<
@@ -105,7 +98,6 @@ export type ResponseArgumentCallback<
     Subject extends Response,
 > = {
     response: ResponseArgumentsCallback<ContextType, Subject>,
-    next?: boolean,
 };
 
 export type ResponseArgumentResponse<
@@ -113,7 +105,6 @@ export type ResponseArgumentResponse<
     Subject extends Response,
 > = {
     response: Subject,
-    next?: boolean,
 };
 
 
@@ -129,7 +120,6 @@ export function ResponseParameter<
     Subject extends Response,
 >(  {
         response,
-        next
     } : ResponseArgumentResponse<ContextType, Subject>
 ) : ResponseReturn<ContextType, Subject>;
 
@@ -141,7 +131,6 @@ export function ResponseParameter<
     Subject extends Response,
 >(  {
         response,
-        next,
     } : ResponseArgumentPromise<ContextType, Subject>
 ) : ResponseReturn<ContextType, Subject>;
 
@@ -153,7 +142,6 @@ export function ResponseParameter<
     Subject extends Response,
 >(  {
         response,
-        next
     } : ResponseArgumentCallback<ContextType, Subject>
 ) : ResponseReturn<ContextType, Subject>;
 
@@ -162,11 +150,10 @@ export function ResponseParameter<
     Subject extends Response,
 >(  {
         response,
-        next = false,
     } : ResponseArgumentResponse<ContextType, Subject>| ResponseArgumentPromise<ContextType, Subject>| ResponseArgumentCallback<ContextType, Subject>
 ) : ResponseReturn<ContextType, Subject> {
 
-    return ResponseParameters(response as Subject, next);
+    return ResponseParameters(response as Subject);
 }
 
 
