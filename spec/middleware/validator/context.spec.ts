@@ -128,8 +128,8 @@ describe('invalid', () => {
 
         expect<string>(response.data).toEqual('invalid');
         expect(called).toBe(false);
-        expect(response.status).toEqual(422);
-        expect(response.statusText).toEqual('Unprocessable Entity');
+        expect(response.status).toEqual(400);
+        expect(response.statusText).toEqual('Bad Request');
     });
 
 });

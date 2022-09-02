@@ -93,8 +93,8 @@ describe('valid', () => {
 
             expect<any>(response.data).toEqual({ name: 'type must string, actual undefined.', address: 'type must string, actual undefined.' });
             expect(called).toBe(false);
-            expect(response.status).toEqual(422);
-            expect(response.statusText).toEqual('Unprocessable Entity');
+            expect(response.status).toEqual(400);
+            expect(response.statusText).toEqual('Bad Request');
         });
     });
 
