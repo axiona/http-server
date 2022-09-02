@@ -1,4 +1,3 @@
-import MiddlewareType from '../middleware/middleware';
 import ErrorHandlerType from '../catch/catch';
 import Context from '../context/context';
 import Router from './router';
@@ -11,7 +10,7 @@ import Null from "./metadata/null";
 import Clone from "./metadata/clone";
 
 export default class Standard<
-    Type extends MiddlewareType  = MiddlewareType,
+    Type extends Middleware  = Middleware,
     Error extends Catch  = Catch,
 > implements Router<Type, Error> {
 
@@ -31,6 +30,16 @@ export default class Standard<
                 handler.register(this);
             }
         }
+    }
+
+    extends<
+        ENext extends Context,
+        NextError extends Catch  = Catch,
+    >(
+        router: Callable<[this], Router<Middleware<ENext>, NextError>>
+    ) : Router<Middleware<ENext>, NextError> {
+
+        return router(this);
     }
 
     add<Next extends Context>(middleware : Middleware<MiddlewareInferNext<Type>, Next>) : Router<Middleware<Next>> {

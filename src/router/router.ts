@@ -3,6 +3,7 @@ import Catch from '../catch/catch';
 import Context from '../context/context';
 import MiddlewareInferNext from '../context/middleware-infer-next';
 import Metadata from "./metadata/metadata";
+import Callable from "../../../function/dist/callable";
 
 export default interface Router<
     Type extends Middleware  = Middleware,
@@ -17,6 +18,12 @@ export default interface Router<
     add<Next extends Context>(middleware : Middleware<MiddlewareInferNext<Type>, Next>) : Router<Middleware<Next>>;
     catch(errorHandler : Error) : Router<Type, Error>;
     call(context: Context) : Promise<Context|void>;
+    extends<
+        ENext extends Context,
+        NextError extends Catch  = Catch,
+    >(
+        router: Callable<[this], Router<Middleware<ENext>, NextError>>
+    ) : Router<Middleware<ENext>, NextError>;
 
 }
 
