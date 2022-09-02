@@ -19,7 +19,8 @@ export type BodyMultipartReturnCombine<Argument extends Context> = Middleware<
     O.P.Omit<Argument, ['request', 'body']> & {
         request: {
             body : BodyMultipartReturnRecursive<string|number|boolean|File>,
-            files : BodyMultipartReturnRecursive<File>,
+            fields : ReadonlyArray<[string, string|number|boolean]>,
+            files : ReadonlyArray<[string, File]>,
         }
     }
 >;
@@ -66,10 +67,10 @@ export default function BodyMultipart<Argument extends Context>(
 
                 await Promise.all(promises);
 
-                Object.assign(context.request, {
-                    body: required.mapper([...fields, ...files]),
-                    files: required.mapper(files),
-                });
+                const values : ReadonlyArray<[string, any]> = [...fields, ...files];
+                const body = required.mapper(values);
+
+                Object.assign(context.request, {body, fields, files});
 
                 resolve(context);
 
