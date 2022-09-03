@@ -3,8 +3,14 @@ import {ExistsParameters} from "@alirya/object/property/boolean/exists";
 import String from "@alirya/string/boolean/string";
 import Nullable from "@alirya/null/boolean/nullable";
 import FileType from "../file";
+import Object_ from "../../../../object/dist/boolean/object";
 
 export default function File(value: object) : value is FileType {
+
+    if(!Object_(value)) {
+
+        return false;
+    }
 
      if(!ExistsParameters(value, 'size') || !Number(value.size)) {
 

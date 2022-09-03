@@ -1,13 +1,14 @@
-import {Options, defaultOptions, IncomingForm} from 'formidable';
+import {Options, defaultOptions, IncomingForm, File as FormidableFile} from 'formidable';
 import Context from '../context/context';
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
 import Callable from '@alirya/function/callable';
-import AffixParsers from '../object/affix-parsers';
+import {AffixParsersParameters} from '../object/affix-parsers';
 import OmitUndefined from "@alirya/object/omit-undefined";
 import {fromFile} from 'file-type';
 import {extension} from 'mime-types';
 import File from "../file/file";
+import FromFormidable from "../file/from-formidable";
 
 export type BodyMultipartReturnRecursive<Type> = {
     [Key in string]: Type|Record<PropertyKey, BodyMultipartReturnRecursive<Type>>|BodyMultipartReturnRecursive<Type>[]
@@ -27,11 +28,11 @@ export type BodyMultipartReturnCombine<Argument extends Context> = Middleware<
 
 export interface BodyMultipartArgumentCombine<Argument extends Context> extends Options {
     mapper : Callable<[ReadonlyArray<[string, any]>]>;
-    parser : Callable<[string, any], any>;
+    parser : Callable<[string, string|number|boolean|File], any>;
 }
 
 export const BodyMultipartArgumentDefault : BodyMultipartArgumentCombine<Context> = Object.freeze(Object.assign({
-    mapper : AffixParsers(),
+    mapper : AffixParsersParameters(),
     parser : (key, value)=>value,
 }, defaultOptions as any as Options));
 
@@ -57,17 +58,22 @@ export default function BodyMultipart<Argument extends Context>(
 
         return new Promise<Context>(function (resolve, reject) {
 
-            const promises : Promise<any>[] = [];
-            const fields : [string, any][] = [];
-            const files : [string, any][] = [];
+            const fieldsRaw : [string, string|number|boolean][] = [];
+            const filesRaw : [string, FormidableFile][] = [];
 
             const form = new IncomingForm(required);
 
             form.on('end', async function () {
 
-                await Promise.all(promises);
+                const promisesFiles = filesRaw
+                    .map(async ([name, file])=>[name, await FromFormidable(file)] as [string, File]);
+                let filesEnsured = await Promise.all(promisesFiles);
 
-                const values : ReadonlyArray<[string, any]> = [...fields, ...files];
+                // parse
+                let files  = filesEnsured.map(([field, file])        =>[field, parser(field, file)] as [string, File]);
+                let fields =    fieldsRaw.map(([field, value]) =>[field, parser(field, value)] as [string, string|number|boolean]);
+
+                const values : ReadonlyArray<[string, string|number|boolean|File]> = [...fields, ...files];
                 const body = required.mapper(values);
 
                 Object.assign(context.request, {body, fields, files});
@@ -80,21 +86,13 @@ export default function BodyMultipart<Argument extends Context>(
 
             }).on('field', function (field, value) {
 
-                fields.push([field, parser(field, value)]);
+                fieldsRaw.push([field, value]);
 
             }).on('file', function (field, file) {
 
-                const fileExtension = Object.assign(file, {extension:null});
-
-                const promise = EnsureType(fileExtension)
-                    .then(
-                        result => files.push([field, parser(field, result)])
-                    );
-
-                promises.push(promise);
+                filesRaw.push([field, file]);
 
             });
-
 
             form.parse(context.req);
         });
@@ -102,30 +100,3 @@ export default function BodyMultipart<Argument extends Context>(
     } as BodyMultipartReturnCombine<Argument>;
 }
 
-async function EnsureType(file: File) : Promise<File> {
-
-    if(!file.mimetype) {
-
-        const result = await fromFile(file.filepath);
-
-        if(result) {
-
-            Object.assign(file, {
-                extension: result.ext,
-                mimetype: result.mime,
-            });
-        }
-    }
-
-    if(file.mimetype && !file.extension) {
-
-        let ext = extension(file.mimetype);
-
-        if(ext) {
-
-            file.extension = ext;
-        }
-    }
-
-    return file;
-}

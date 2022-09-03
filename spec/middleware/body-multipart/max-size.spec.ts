@@ -21,7 +21,6 @@ describe('single', () => {
 
     let router =  BindToServer(server, new Router());
 
-
     it('add request', ()=>{
 
         router.catch(MaxSizeExceeded(function (ctx) {
@@ -39,25 +38,26 @@ describe('single', () => {
 
     });
 
-    it('send request', function (done) {
+    it('send request', function () {
 
         const path = __dirname + '/../../file-source/jpg.jpg';
 
         const form = new FormData();
         form.append('image', createReadStream(path));
-        Axios.request( {
+        return Axios.request( {
             method: 'post',
             url:`http://localhost:${server.config.port}`,
             data: form,
             headers: {
                 'Content-Type' : 'multipart/form-data',
                 ...form.getHeaders()
-            }
+            },
+            timeout: 3000
         }).then((res)=>{
 
             response = res;
 
-        }).catch(fail).finally(done);
+        }).catch(fail);
     });
 
     it('assert value', function () {

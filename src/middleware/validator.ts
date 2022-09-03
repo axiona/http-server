@@ -8,9 +8,7 @@ import { SetPathParameters } from '@alirya/object/set-path';
 import Context from '../context/context';
 import Callable from "@alirya/function/callable";
 import InferStatic from "@alirya/validator/validatable/infer-static";
-import {ConditionalCallParameters} from "@alirya/function/conditional-call";
 import {FromResponseParameters} from "../context/from-response";
-import {UnprocessableEntityParameter} from "@alirya/http/response/unprocessable-entity";
 import {BadRequestParameters} from "../../../http/dist/response/bad-request";
 
 export type ValidatorPreviousContext<Properties extends PropertyKey[]> = Context & O.P.Record<Properties, unknown>;
