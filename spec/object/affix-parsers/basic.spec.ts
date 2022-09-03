@@ -7,7 +7,7 @@ describe('single', function () {
 
     it('single', function () {
 
-        const result = BracesParsers()([
+        const result = BracesParsers.Parameters()([
             ['root1', 'data 1'],
             ['root2', 'data 2'],
         ]);
@@ -24,7 +24,7 @@ describe('multi', function () {
 
     it('object', function () {
 
-        const result = BracesParsers()([
+        const result = BracesParsers.Parameters()([
             ['root[parent][child1]', 'data 1'],
             ['root[parent][child2]', 'data 2'],
         ]);
@@ -44,7 +44,7 @@ describe('multi', function () {
 
     it('object with array', function () {
 
-        const result = BracesParsers()([
+        const result = BracesParsers.Parameters()([
             ['root[parent][child][]', 'data 1'],
             ['root[parent][child][]', 'data 2'],
         ]);
@@ -66,7 +66,7 @@ describe('multi', function () {
 
     it('object with array in middle', function () {
 
-        const result = BracesParsers()([
+        const result = BracesParsers.Parameters()([
             ['root[parent][][child]', 'data 1'],
             ['root[parent][][child]', 'data 2'],
         ]);
@@ -91,7 +91,7 @@ describe('invalid', function () {
 
     it('invalid 1', function () {
 
-        const result = BracesParsers()([['root[par[ent][child]', 'data']]);
+        const result = BracesParsers.Parameters()([['root[par[ent][child]', 'data']]);
 
         expect(result).toEqual(
             {
@@ -108,7 +108,7 @@ describe('invalid', function () {
 
     it('invalid 2', function () {
 
-        const result = BracesParsers()([['root[parent][chi]ld]', 'data']]);
+        const result = BracesParsers.Parameters()([['root[parent][chi]ld]', 'data']]);
 
         expect(result).toEqual(
             {

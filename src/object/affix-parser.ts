@@ -5,9 +5,11 @@ import SafeCast from '@alirya/string/safe-cast';
 import Callable from '@alirya/function/callable';
 import {RemoveSuffixParameters} from '@alirya/string/remove-suffix';
 import {RemovePrefixParameters} from '@alirya/string/remove-prefix';
+import Prefix from "../../../string/dist/prefix/prefix";
+import Suffix from "../../../string/dist/suffix/suffix";
 
 
-export default function AffixParser(
+export function AffixParserParameters(
  prefix : string = '[',
  suffix : string = ']',
 ) : Callable<[string, any], Record<string, any>> {
@@ -26,13 +28,24 @@ export default function AffixParser(
             .map(path=>RemovePrefixParameters(path, '['))
             .map(path=>RemoveSuffixParameters(path, ']'));
 
-        return BracesParserSet(paths ?? [], value);
+        return AffixParserParameterBracesSet(paths ?? [], value);
     };
 }
 
+export type AffixParserArgument = Partial<Prefix & Suffix>;
+
+export function AffixParserParameter(
+    {
+        prefix,
+        suffix,
+    } : AffixParserArgument
+) : Callable<[string, any], Record<string, any>> {
+
+    return AffixParserParameters(prefix, suffix);
+}
 
 
-export function BracesParserSet(keys : ReadonlyArray<string>, value : any) : Record<PropertyKey, any> {
+export function AffixParserParameterBracesSet(keys : ReadonlyArray<string>, value : any) : Record<PropertyKey, any> {
 
     let clone = keys.slice(0);
     const key = clone.shift();
@@ -42,7 +55,7 @@ export function BracesParserSet(keys : ReadonlyArray<string>, value : any) : Rec
     if(clone.length) {
 
 
-        value = BracesParserSet(clone, value);
+        value = AffixParserParameterBracesSet(clone, value);
     }
 
     if(key === undefined) {
@@ -69,3 +82,13 @@ export function BracesParserSet(keys : ReadonlyArray<string>, value : any) : Rec
     }
 
 }
+
+
+namespace AffixParser {
+
+    export const Parameters = AffixParserParameters;
+    export type Argument = AffixParserArgument;
+    export const Parameter = AffixParserParameter;
+}
+
+export default AffixParser;
