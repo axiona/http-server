@@ -1,5 +1,4 @@
 import {Middleware as KoaMiddleware} from "koa";
-import Middleware from "../../middleware/middleware";
 import Catch from "../../catch/catch";
 
 export default function Prepend<

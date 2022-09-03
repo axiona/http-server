@@ -1,6 +1,3 @@
-import error from "../../catch/error";
-
-
 export type EconnresetType = Error & {
     code : 'ECONNRESET'
 };
