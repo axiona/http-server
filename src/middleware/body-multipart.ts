@@ -15,37 +15,40 @@ export type BodyMultipartReturnRecursive<Type> = {
 };
 
 
-
-
-export type BodyMultipartReturnCombine<Argument extends Context> = Middleware<
-    Argument,
-    O.P.Omit<Argument, ['request', 'body']> & {
-        request: {
-            body : BodyMultipartReturnRecursive<string|number|boolean|File>,
-            fields : ReadonlyArray<[string, string|number|boolean]>,
-            files : ReadonlyArray<[string, File]>,
-        }
+export type BodyMultipartTypeContext<
+    Argument extends Context,
+    Body extends BodyMultipartReturnRecursive<string|number|boolean|File> = BodyMultipartReturnRecursive<string|number|boolean|File>,
+    > = O.P.Omit<Argument, ['request', 'body']> & {
+    request: {
+        body : Body,
+        fields : ReadonlyArray<[string, string|number|boolean]>,
+        files : ReadonlyArray<[string, File]>,
     }
->;
+};
 
-export interface BodyMultipartArgumentCombine<Argument extends Context> extends Options {
+export type BodyMultipartType<
+    Argument extends Context,
+    Body extends BodyMultipartReturnRecursive<string|number|boolean|File> = BodyMultipartReturnRecursive<string|number|boolean|File>,
+> = Middleware<Argument, BodyMultipartTypeContext<Argument, Body>>;
+
+export interface BodyMultipartArgument<Argument extends Context> extends Options {
     mapper : Callable<[ReadonlyArray<[string, any]>]>;
     parser : Callable<[string, string|number|boolean|File], any>;
 }
 
-export const BodyMultipartArgumentDefault : BodyMultipartArgumentCombine<Context> = Object.freeze(Object.assign({
+export const BodyMultipartArgumentDefault : BodyMultipartArgument<Context> = Object.freeze(Object.assign({
     mapper : AffixParsersParameters(),
     parser : (key, value)=>value,
 }, defaultOptions as any as Options));
 
 export default function BodyMultipart<Argument extends Context>(
-    argument ?: Partial<BodyMultipartArgumentCombine<Argument>>
-) : BodyMultipartReturnCombine<Argument>;
+    argument ?: Partial<BodyMultipartArgument<Argument>>
+) : BodyMultipartType<Argument>;
 
 
 export default function BodyMultipart<Argument extends Context>(
-    argument : (Partial<BodyMultipartArgumentCombine<Argument>>) = {}
-) : BodyMultipartReturnCombine<Argument> {
+    argument : (Partial<BodyMultipartArgument<Argument>>) = {}
+) : BodyMultipartType<Argument> {
 
     const required = Object.assign({}, BodyMultipartArgumentDefault, OmitUndefined(argument));
 
@@ -76,7 +79,7 @@ export default function BodyMultipart<Argument extends Context>(
             return context;
         });
 
-    } as BodyMultipartReturnCombine<Argument>;
+    } as BodyMultipartType<Argument, BodyMultipartReturnRecursive<string|number|boolean|File>>;
 }
 
 export type BodyMultipartParseType = {
@@ -86,7 +89,7 @@ export type BodyMultipartParseType = {
 
 export function BodyMultipartParse<Argument extends Context>(
     context : Context,
-    argument : BodyMultipartArgumentCombine<Argument>
+    argument : BodyMultipartArgument<Argument>
 ) : Promise<BodyMultipartParseType> {
 
     return new Promise<BodyMultipartParseType>(function (resolve, reject) {

@@ -10,14 +10,15 @@ import Null from "./metadata/null";
 import Clone from "./metadata/clone";
 
 export default class Standard<
-    Type extends Middleware  = Middleware,
+    ContextType extends Context  = Context,
+    // Type extends Middleware  = Middleware,
     Error extends Catch  = Catch,
-> implements Router<Type, Error> {
+> implements Router<ContextType, Error> {
 
     children : Router[] = [];
 
     constructor(
-        public middleware : Type|undefined = undefined,
+        public middleware : Middleware<Context, ContextType>|undefined = undefined,
         public error : Error|undefined = undefined,
         public parent : Router|undefined = undefined,
         public metadata : Metadata = Null(),
@@ -36,19 +37,19 @@ export default class Standard<
         ENext extends Context,
         NextError extends Catch  = Catch,
     >(
-        router: Callable<[this], Router<Middleware<ENext>, NextError>>
-    ) : Router<Middleware<ENext>, NextError> {
+        router: Callable<[this], Router<ENext, NextError>>
+    ) : Router<ENext, NextError> {
 
         return router(this);
     }
 
-    add<Next extends Context>(middleware : Middleware<MiddlewareInferNext<Type>, Next>) : Router<Middleware<Next>> {
+    add<Next extends Context>(middleware : Middleware<ContextType, Next>) : Router<Next> {
 
         const router =  new Standard(middleware, undefined, this, Clone(this.metadata));
 
         this.children.push(router);
 
-        return router as Router<Middleware<Next>> ;
+        return router as Router<Next> ;
     }
 
     catch(errorHandler : ErrorHandlerType) {

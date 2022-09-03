@@ -6,24 +6,25 @@ import Metadata from "./metadata/metadata";
 import Callable from "../../../function/dist/callable";
 
 export default interface Router<
-    Type extends Middleware  = Middleware,
+    ContextType extends Context  = Context,
+    // Type extends Middleware  = Middleware,
     Error extends Catch  = Catch,
 >  {
     children : Router[];
-    middleware : Type|undefined;
+    middleware : Middleware<Context, ContextType>|undefined;
     error : Error|undefined;
     parent : Router|undefined;
     metadata : Metadata;
 
-    add<Next extends Context>(middleware : Middleware<MiddlewareInferNext<Type>, Next>) : Router<Middleware<Next>>;
-    catch(errorHandler : Error) : Router<Type, Error>;
+    add<Next extends Context>(middleware : Middleware<ContextType, Next>) : Router<Next>;
+    catch(errorHandler : Error) : Router<ContextType, Error>;
     call(context: Context) : Promise<Context|void>;
     extends<
         ENext extends Context,
         NextError extends Catch  = Catch,
     >(
-        router: Callable<[this], Router<Middleware<ENext>, NextError>>
-    ) : Router<Middleware<ENext>, NextError>;
+        router: Callable<[this], Router<ENext, NextError>>
+    ) : Router<ENext, NextError>;
 
 }
 
