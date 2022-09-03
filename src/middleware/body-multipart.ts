@@ -15,6 +15,8 @@ export type BodyMultipartReturnRecursive<Type> = {
 };
 
 
+
+
 export type BodyMultipartReturnCombine<Argument extends Context> = Middleware<
     Argument,
     O.P.Omit<Argument, ['request', 'body']> & {
@@ -56,47 +58,62 @@ export default function BodyMultipart<Argument extends Context>(
             return context;
         }
 
-        return new Promise<Context>(function (resolve, reject) {
+        return BodyMultipartParse(context, required).then(async ({files, fields})=>{
 
-            const fieldsRaw : [string, string|number|boolean][] = [];
-            const filesRaw : [string, FormidableFile][] = [];
+            files = await Promise.all(
+                files.map(async ([name, file])=>[name, await FromFormidable(file)])
+            );
 
-            const form = new IncomingForm(required);
+            files  = files.map(([field, file])=>[field, parser(field, file)]);
 
-            form.on('end', async function () {
+            fields = fields.map(([field, value]) =>[field, parser(field, value)] as [string, string|number|boolean]);
 
-                const promisesFiles = filesRaw
-                    .map(async ([name, file])=>[name, await FromFormidable(file)] as [string, File]);
-                let filesEnsured = await Promise.all(promisesFiles);
+            const values : ReadonlyArray<[string, string|number|boolean|File]> = [...fields, ...files as [string, File][]];
+            const body = required.mapper(values);
 
-                // parse
-                let files  = filesEnsured.map(([field, file])        =>[field, parser(field, file)] as [string, File]);
-                let fields =    fieldsRaw.map(([field, value]) =>[field, parser(field, value)] as [string, string|number|boolean]);
+            Object.assign(context.request, {body, fields, files});
 
-                const values : ReadonlyArray<[string, string|number|boolean|File]> = [...fields, ...files];
-                const body = required.mapper(values);
-
-                Object.assign(context.request, {body, fields, files});
-
-                resolve(context);
-
-            }).on('error', function (error) {
-
-                return reject(Object.assign(error, {router:context.router}));
-
-            }).on('field', function (field, value) {
-
-                fieldsRaw.push([field, value]);
-
-            }).on('file', function (field, file) {
-
-                filesRaw.push([field, file]);
-
-            });
-
-            form.parse(context.req);
+            return context;
         });
 
     } as BodyMultipartReturnCombine<Argument>;
 }
 
+export type BodyMultipartParseType = {
+    fields : ReadonlyArray<[string, string|number|boolean]>,
+    files : ReadonlyArray<[string, FormidableFile]>,
+};
+
+export function BodyMultipartParse<Argument extends Context>(
+    context : Context,
+    argument : BodyMultipartArgumentCombine<Argument>
+) : Promise<BodyMultipartParseType> {
+
+    return new Promise<BodyMultipartParseType>(function (resolve, reject) {
+
+        const fields : [string, string|number|boolean][] = [];
+        const files : [string, FormidableFile][] = [];
+
+        const form = new IncomingForm(argument);
+
+        form.on('end', async function () {
+
+            resolve({fields, files});
+
+        }).on('error', function (error) {
+
+            return reject(Object.assign(error, {router:context.router}));
+
+        }).on('field', function (field, value) {
+
+            fields.push([field, value]);
+
+        }).on('file', function (field, file) {
+
+            files.push([field, file]);
+
+        });
+
+        form.parse(context.req);
+    });
+}

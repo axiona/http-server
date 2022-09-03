@@ -15,8 +15,7 @@ describe('single', () => {
 
     const server = Server();
 
-    beforeAll(()=>server.open());
-    afterAll(()=>server.close());
+    it('open', ()=>server.open());
 
 
     let router =  BindToServer(server, new Router());
@@ -52,9 +51,11 @@ describe('single', () => {
 
     it('assert value', function () {
 
-        expect(response.headers.allow).toEqual(undefined);
+        expect<string|undefined>(response.headers.allow as string|undefined).toEqual(undefined);
         expect(response.status).toEqual(405);
         expect(response.statusText).toEqual('Method Not Allowed');
     });
+
+    it('close', ()=>server.close());
 
 });

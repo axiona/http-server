@@ -6,6 +6,7 @@ import BodyMultipart from '../../../dist/middleware/body-multipart';
 import FormData from 'form-data';
 import {createReadStream} from "fs";
 import MaxSizeExceeded from "../../../dist/file/catch/max-size-exceeded";
+import Timeout from "../../../../promise/dist/timeout";
 
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
@@ -16,12 +17,12 @@ describe('single', () => {
     let nextCalled : boolean = false;
     const server = Server();
 
-    beforeAll(()=>server.open());
-    afterAll(()=>server.close());
+    it('open', ()=>server.open().then(() => Timeout(0.5)));
 
-    let router =  BindToServer(server, new Router());
 
     it('add request', ()=>{
+
+        let router =  BindToServer(server, new Router());
 
         router.catch(MaxSizeExceeded(function (ctx) {
 
@@ -38,12 +39,14 @@ describe('single', () => {
 
     });
 
-    it('send request', function () {
+    it('send request', async function () {
 
         const path = __dirname + '/../../file-source/jpg.jpg';
+        const image = createReadStream(path);
+        await Timeout(0.5);
 
         const form = new FormData();
-        form.append('image', createReadStream(path));
+        form.append('image', image);
         return Axios.request( {
             method: 'post',
             url:`http://localhost:${server.config.port}`,
@@ -69,4 +72,5 @@ describe('single', () => {
         expect(response.data).toEqual({data:'exception called'});
     });
 
+    it('close', ()=>Timeout(0.5).then(()=>server.close()));
 });

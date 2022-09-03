@@ -3,11 +3,9 @@ import Standard from '../dist/server/standard';
 
 process.setMaxListeners(99);
 
-export default function Server () {
+export default function Server (config : typeof Config = Config) {
 
-    const server = new Standard({
-        port : Config.port
-    });
+    const server = new Standard(config);
 
     function disconnect() {
 
