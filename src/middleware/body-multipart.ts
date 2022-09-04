@@ -5,8 +5,6 @@ import {O} from 'ts-toolbelt';
 import Callable from '@alirya/function/callable';
 import {AffixParsersParameters} from '../object/affix-parsers';
 import OmitUndefined from "@alirya/object/omit-undefined";
-import {fromFile} from 'file-type';
-import {extension} from 'mime-types';
 import File from "../file/file";
 import FromFormidable from "../file/from-formidable";
 

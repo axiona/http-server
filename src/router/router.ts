@@ -1,7 +1,6 @@
 import Middleware from '../middleware/middleware';
 import Catch from '../catch/catch';
 import Context from '../context/context';
-import MiddlewareInferNext from '../context/middleware-infer-next';
 import Metadata from "./metadata/metadata";
 import Callable from "../../../function/dist/callable";
 

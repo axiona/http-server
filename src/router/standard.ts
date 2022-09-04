@@ -4,7 +4,6 @@ import Router from './router';
 import Catch from '../catch/catch';
 import Callable from '@alirya/function/callable';
 import Middleware from '../middleware/middleware';
-import MiddlewareInferNext from '../context/middleware-infer-next';
 import Metadata from "./metadata/metadata";
 import Null from "./metadata/null";
 import Clone from "./metadata/clone";

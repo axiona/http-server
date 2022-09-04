@@ -1,11 +1,7 @@
-import Koa, {DefaultContext, DefaultState, Middleware} from 'koa';
+import Koa, {DefaultContext, DefaultState} from 'koa';
 import {Server as HttpServer} from 'http';
 import Server, {ServerKoaOption} from './server';
 import {ListenOptions} from 'net';
-import PrependKoa from "../router/prepend-koa";
-import Catch from "../catch/catch";
-import Router from "@koa/router";
-import AppendKoa from "../router/append-koa";
 
 export default class Standard<
     StateT = DefaultState,
