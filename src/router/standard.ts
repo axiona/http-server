@@ -45,7 +45,7 @@ export default class Standard<
 
     add<Next extends Context>(middleware : Middleware<ContextType, Next>) : Router<Next> {
 
-        const router =  new Standard(middleware, undefined, this, Clone(this.metadata));
+        const router = new Standard(middleware, undefined, this, Clone(this.metadata));
 
         this.children.push(router);
 

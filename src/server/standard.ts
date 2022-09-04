@@ -1,22 +1,26 @@
 import Koa, {DefaultContext, DefaultState, Middleware} from 'koa';
 import {Server as HttpServer} from 'http';
-import Server from './server';
+import Server, {ServerKoaOption} from './server';
 import {ListenOptions} from 'net';
+import PrependKoa from "../router/prepend-koa";
+import Catch from "../catch/catch";
+import Router from "@koa/router";
+import AppendKoa from "../router/append-koa";
 
 export default class Standard<
     StateT = DefaultState,
     CustomT = DefaultContext
     > implements Server <StateT, CustomT> {
 
-    readonly koa : Koa<StateT, CustomT> = new Koa<StateT, CustomT>();
+    readonly koa : Koa<StateT, CustomT>;
     #server : HttpServer|undefined;
 
     constructor(
         readonly config : ListenOptions = {},
-        private middlewares : Middleware[] = [],
+        koa : ServerKoaOption = {},
     ) {
 
-        this.middlewares.forEach(this.koa.use);
+        this.koa = new Koa<StateT, CustomT>(koa);
     }
 
     get server() : HttpServer|undefined {
@@ -26,7 +30,7 @@ export default class Standard<
 
     open () : Promise<HttpServer> {
 
-        if(!this.#server) {
+        if(!this.#server || !this.#server.listening) {
 
             return new Promise<void>((resolve, reject) => {
 
@@ -42,26 +46,30 @@ export default class Standard<
 
         return new Promise<void>((resolve, reject) => {
 
-            if(this.#server) {
-
-                this.#server.close((error)=>{
-
-                    if(error) {
-
-                        reject(error);
-
-                    } else {
-
-                        this.#server = undefined;
-                        resolve();
-                    }
-
-                });
-
-            } else {
+            if(!this.#server) {
 
                 resolve();
+                return;
             }
+
+            if(this.#server.listening) {
+
+                resolve();
+                return;
+            }
+
+            this.#server.close((error)=>{
+
+                if(error) {
+
+                    reject(error);
+
+                } else {
+
+                    this.#server = undefined;
+                    resolve();
+                }
+            });
         });
     }
 }
