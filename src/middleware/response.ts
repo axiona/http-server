@@ -3,7 +3,7 @@ import Context from '../context/context';
 import {O} from 'ts-toolbelt';
 import Middleware from './middleware';
 import IsFunction from '@alirya/function/boolean/function';
-import FromResponse, {FromResponseReturn} from '../context/from-response';
+import FromResponse, {SetResponseReturn} from '../context/set-response';
 import Callable from '@alirya/function/callable';
 /**
  * use {@param response} value or return for response data
@@ -68,7 +68,7 @@ export function ResponseParameters<
 
                 context = FromResponse.Parameters(context, subject) as ContextType;
 
-                return context as FromResponseReturn<Subject['body'], ContextType>;
+                return context as SetResponseReturn<Subject['body'], ContextType>;
 
             });
         };

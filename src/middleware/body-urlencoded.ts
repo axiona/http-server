@@ -4,6 +4,7 @@ import Context from '../context/context';
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
 import Omit from '@alirya/object/omit';
+import AddAcceptHeaders from "../router/void/add-accept-headers";
 
 
 type BodyUrlencodedReturn<Argument extends Context> = Middleware<
@@ -31,7 +32,9 @@ export default function BodyUrlencoded<Argument extends Context>(
         queryString: Omit.Parameters(argument, 'limit')
     });
 
-    return function (context) {
+    const register : Middleware['register'] = (router) =>AddAcceptHeaders(router, 'application/x-www-form-urlencoded');
+
+    return Object.assign(function (context) {
 
         if (context.request.is('urlencoded')) {
 
@@ -50,5 +53,5 @@ export default function BodyUrlencoded<Argument extends Context>(
 
         return context;
 
-    } as BodyUrlencodedReturn<Argument>;
+    }, register) as BodyUrlencodedReturn<Argument>;
 }

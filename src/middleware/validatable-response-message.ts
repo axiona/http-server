@@ -5,7 +5,7 @@ import Response from '@alirya/http/response/response';
 import {UnprocessableEntityParameter} from '@alirya/http/response/unprocessable-entity';
 import Context from '../context/context';
 import {SelectPathParameters} from '@alirya/object/value/value/select-path';
-import FromResponse from '../context/from-response';
+import FromResponse from '../context/set-response';
 
 export type ValidatableResponseMessageReturn<
     Property extends PropertyKey[],

@@ -7,6 +7,10 @@ import {Required} from 'utility-types';
 import {BodyTextArgument, BodyTextArgumentDefault} from './body-text';
 import OmitUndefined from "@alirya/object/omit-undefined";
 import Pick from "../../../object/dist/pick";
+import Router from "../router/router";
+import {Headers} from "headers-polyfill";
+import {CurryParameters} from "../../../function/dist/curry";
+import AddAcceptHeaders from "../router/void/add-accept-headers";
 
 
 
@@ -41,7 +45,9 @@ export function BodyJsonParameter<Argument extends Context>(
 
     argument = Object.assign({}, BodyTextArgumentDefault, OmitUndefined(argument)) as BodyJsonArgument<Argument>;
 
-    return function (context) {
+    const register : Middleware['register'] = (router) =>AddAcceptHeaders(router, 'application/json');
+
+    const middleware = function (context) {
 
         if (context.request.is(JsonMimeTypes as string[])) {
 
@@ -60,6 +66,8 @@ export function BodyJsonParameter<Argument extends Context>(
         return context;
 
     } as BodyJsonReturn<Argument>;
+
+    return Object.assign(middleware, {register});
 }
 
 

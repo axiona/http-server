@@ -4,6 +4,7 @@ import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
 import {Required} from 'utility-types';
 import OmitUndefined from "@alirya/object/omit-undefined";
+import AddAcceptHeaders from "../router/void/add-accept-headers";
 
 
 type BodyTextReturn<Argument extends Context> = Middleware<
@@ -31,6 +32,8 @@ export const BodyTextArgumentDefault : Required<BodyTextArgument<Context>, 'limi
     encoding : 'utf-8',
 });
 
+export const BodyTextParameterMimetype = 'text/*';
+
 /**
  * @param argument
  * @default {@see BodyTextArgumentDefault}
@@ -41,9 +44,11 @@ export function BodyTextParameter<Argument extends Context>(
 
     argument = Object.assign({}, BodyTextArgumentDefault, OmitUndefined(argument)) as BodyTextArgument<Argument>;
 
-    return function (context) {
+    const register : Middleware['register'] = (router) =>AddAcceptHeaders(router, BodyTextParameterMimetype);
 
-        if (context.request.is('text/*')) {
+    return Object.assign(function (context) {
+
+        if (context.request.is(BodyTextParameterMimetype)) {
 
             return  text(context, argument).then(body=>{
 
@@ -60,7 +65,7 @@ export function BodyTextParameter<Argument extends Context>(
 
         return context;
 
-    } as BodyTextReturn<Argument>;
+    }, register) as BodyTextReturn<Argument>;
 }
 
 

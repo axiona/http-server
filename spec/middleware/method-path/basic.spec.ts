@@ -4,7 +4,7 @@ import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
 import {MethodPathParameter} from "../../../dist/middleware/method-path";
 import FromRouter from "../../../dist/router/metadata/array/from-router";
-import Passthru from "../../../dist/middleware/passthru";
+import Passthru from "../../../dist/middleware/passthrough";
 import NoOp from '@alirya/function/no-op';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});

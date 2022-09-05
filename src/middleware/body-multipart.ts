@@ -7,6 +7,7 @@ import {AffixParsersParameters} from '../object/affix-parsers';
 import OmitUndefined from "@alirya/object/omit-undefined";
 import File from "../file/file";
 import FromFormidable from "../file/from-formidable";
+import AddAcceptHeaders from "../router/void/add-accept-headers";
 
 export type BodyMultipartReturnRecursive<Type> = {
     [Key in string]: Type|Record<PropertyKey, BodyMultipartReturnRecursive<Type>>|BodyMultipartReturnRecursive<Type>[]
@@ -52,7 +53,9 @@ export default function BodyMultipart<Argument extends Context>(
 
     const parser : Callable<[string, any], any> = required.parser;
 
-    return function (context) {
+    const register : Middleware['register'] = (router) =>AddAcceptHeaders(router, 'multipart/form-data');
+
+    return Object.assign(function (context) {
 
         if (!context.request.is('multipart')) {
 
@@ -77,7 +80,7 @@ export default function BodyMultipart<Argument extends Context>(
             return context;
         });
 
-    } as BodyMultipartType<Argument, BodyMultipartReturnRecursive<string|number|boolean|File>>;
+    }, register) as BodyMultipartType<Argument, BodyMultipartReturnRecursive<string|number|boolean|File>>;
 }
 
 export type BodyMultipartParseType = {

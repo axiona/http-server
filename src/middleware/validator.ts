@@ -8,7 +8,7 @@ import { SetPathParameters } from '@alirya/object/set-path';
 import Context from '../context/context';
 import Callable from "@alirya/function/callable";
 import InferStatic from "@alirya/validator/validatable/infer-static";
-import {FromResponseParameters} from "../context/from-response";
+import {SetResponseParameters} from "../context/set-response";
 import {BadRequestParameters} from "../../../http/dist/response/bad-request";
 
 export type ValidatorPreviousContext<Properties extends PropertyKey[]> = Context & O.P.Record<Properties, unknown>;
@@ -243,7 +243,7 @@ export function ValidatorParameters<
     validator : ValidatorType,
     properties : Properties|[] = [],
     invalid : Callable<[ContextType, InferStatic<ValidatorType>], MiddlewareReturn<ContextType>> = (context, validatable) => {
-        FromResponseParameters(context, BadRequestParameters(validatable.message));
+        SetResponseParameters(context, BadRequestParameters(validatable.message));
     },
     replace : boolean = true,
     validatable : ValidatableKey|['validatable'] = ['validatable'],

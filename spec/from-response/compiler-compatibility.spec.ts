@@ -1,5 +1,5 @@
 import Context from '../../dist/context/context';
-import FromResponse from '../../dist/context/from-response';
+import FromResponse from '../../dist/context/set-response';
 
 
 describe('empty', () => {

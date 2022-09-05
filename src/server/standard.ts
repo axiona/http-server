@@ -48,9 +48,10 @@ export default class Standard<
                 return;
             }
 
-            if(this.#server.listening) {
+            if(!this.#server.listening) {
 
                 resolve();
+                this.#server = undefined;
                 return;
             }
 
