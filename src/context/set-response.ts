@@ -25,7 +25,7 @@ export function SetResponseParameters<Body extends unknown, ContextType extends 
     }
 
     context.response.body = response.body;
-    context.response.status = response.code;
+    context.response.status = response.status;
     context.response.message = response.message;
 
     return context as SetResponseReturn<Body, ContextType>;

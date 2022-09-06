@@ -13,7 +13,7 @@ describe('empty', () => {
             message : '',
         }
 
-    } as Context, {headers:{}, message:'', code:200, body: 1});
+    } as Context, {headers:{}, message:'', status:200, body: 1});
 
     let number : number = cts.response.body;
     // @ts-expect-error

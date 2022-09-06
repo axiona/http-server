@@ -17,7 +17,7 @@ export function MergeResponseParameters<Body extends unknown, ContextType extend
         context.response.append(name, value);
     }
     context.response.body = response.body;
-    context.response.status = response.code;
+    context.response.status = response.status;
     context.response.message = response.message;
 
     return context as MergeResponseReturn<Body, ContextType>;

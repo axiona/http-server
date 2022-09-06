@@ -2,20 +2,29 @@ import {PickParameters} from '@alirya/object/pick';
 import Context from '../context/context';
 import Syslog from '@alirya/syslog/syslog';
 import Middleware from './middleware';
+import Callable from "../../../function/dist/callable";
+import {Request, Response} from "koa";
+import TransactionMessages from "../array/transaction-messages";
+import RequestMessages from "../array/request-messages";
+import ResponseMessages from "../array/response-messages";
 
-export function PrintTransactionParameters<ContextType extends Context<Partial<{ body: any }>>, Log extends Syslog<[string, any, any, any]>>(
+export function PrintTransactionParameters<ContextType extends Context<Partial<{ body: any }>>, Log extends Syslog<any[]>>(
     syslog: Log,
     severity : keyof Syslog = 'debug',
+    transaction : Callable<[Request, Response], any[]> = TransactionMessages,
+    request : Callable<[Request], any[]> = RequestMessages,
+    response : Callable<[Response], any[]> = ResponseMessages,
 ) : Middleware<ContextType> {
 
     return function (context) {
 
         syslog[severity](
-          `${context.request.method} ${context.request.path}`,
-          PickParameters(context.request, 'headers', 'body'),
-          `${context.response.status} ${context.response.message}`,
-          PickParameters(context.response, 'headers', 'body'),
+            ...transaction(context.request, context.response),
+            ...request(context.request),
+            ...response(context.response),
         );
+
+        return context;
     };
 }
 

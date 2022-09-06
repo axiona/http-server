@@ -60,25 +60,25 @@ export default class Standard<
         return router;
     }
 
-    protected async tryExecute<Return>(callable : Callable<[], Return>, context: Context) : Promise<Return|undefined> {
-
-        try {
-
-            return await callable();
-
-        } catch (error) {
-
-            if(this.error) {
-
-                error = await this.error(error, context);
-            }
-
-            if(error) {
-
-                throw error;
-            }
-        }
-    }
+    // protected async tryExecute<Return>(callable : Callable<[], Return>, context: Context) : Promise<Return|undefined> {
+    //
+    //     try {
+    //
+    //         return await callable();
+    //
+    //     } catch (error) {
+    //
+    //         if(this.error) {
+    //
+    //             error = await this.error(error, context);
+    //         }
+    //
+    //         if(error) {
+    //
+    //             throw error;
+    //         }
+    //     }
+    // }
 
     //
     // async call(context: Context) : Promise<Context|void> {
@@ -124,6 +124,7 @@ export default class Standard<
         if(this.middleware) {
 
             try {
+
                 context.router = this;
 
                 context = await (this.middleware as Middleware)(context) as Context;
@@ -133,10 +134,9 @@ export default class Standard<
 
                 if(this.error) {
 
-                    error = await this.error(error, context);
-                }
+                    await this.error(error, context);
 
-                if(error) {
+                } else {
 
                     throw error;
                 }
@@ -162,10 +162,9 @@ export default class Standard<
 
                     if(this.error) {
 
-                        error = await this.error(error, context);
-                    }
+                        await this.error(error, context);
 
-                    if(error) {
+                    } else  {
 
                         throw error;
                     }

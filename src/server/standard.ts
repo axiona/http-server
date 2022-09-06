@@ -38,35 +38,34 @@ export default class Standard<
         return Promise.resolve(this.#server);
     }
 
-    close() : Promise<void> {
+    close() : Promise<this> {
 
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<this>((resolve, reject) => {
 
             if(!this.#server) {
 
-                resolve();
-                return;
-            }
+                resolve(this);
 
-            if(!this.#server.listening) {
+            } else if(!this.#server.listening) {
 
-                resolve();
+                resolve(this);
                 this.#server = undefined;
-                return;
+
+            } else {
+
+                this.#server.close((error)=>{
+
+                    if(error) {
+
+                        reject(error);
+
+                    } else {
+
+                        this.#server = undefined;
+                        resolve(this);
+                    }
+                });
             }
-
-            this.#server.close((error)=>{
-
-                if(error) {
-
-                    reject(error);
-
-                } else {
-
-                    this.#server = undefined;
-                    resolve();
-                }
-            });
         });
     }
 }

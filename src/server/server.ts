@@ -16,6 +16,6 @@ export default interface Server<StateT = DefaultState, CustomT = DefaultContext>
     readonly koa  : Koa<StateT, CustomT>;
     readonly server : HttpServer|undefined;
     readonly config : ListenOptions;
-    open ():void;
-    close():void;
+    open ():Promise<HttpServer>;
+    close():Promise<this>;
 }

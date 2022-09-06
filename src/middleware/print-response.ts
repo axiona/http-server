@@ -1,19 +1,19 @@
 import Context from '../context/context';
 import Syslog from '@alirya/syslog/syslog';
 import Middleware from './middleware';
+import Callable from "../../../function/dist/callable";
+import {Response} from "koa";
+import ResponseMessages from "../array/response-messages";
 
-export function PrintResponseParameters<ContextType extends Context, Log extends Syslog<[string, any, any]>>(
+export function PrintResponseParameters<ContextType extends Context, Log extends Syslog<any[]>>(
     syslog: Log,
     severity : keyof Syslog = 'debug',
+    response : Callable<[Response], any[]> = (response) => ResponseMessages(response, null, true),
 ) : Middleware<ContextType> {
 
     return function (context) {
 
-        syslog[severity](
-            `${context.response.status} ${context.response.message}`,
-            context.response.headers,
-            context.response.body
-        );
+        syslog[severity](...response(context.response));
     };
 }
 

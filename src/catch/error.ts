@@ -16,7 +16,7 @@ export function ErrorParameters<ContextType extends Context = Context>(
 
         } else {
 
-            return error;
+            throw error;
         }
     };
 }
