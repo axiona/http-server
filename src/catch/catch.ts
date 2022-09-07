@@ -5,5 +5,5 @@ import Union from '@alirya/promise/union';
 export default interface Catch<Argument extends Context = Context> {
 
     register ?: (context: Router) => void;
-    (error: Error, context: Argument) : Union<Error|void>;
+    (context: Argument, error: Error) : Union<void>;
 }

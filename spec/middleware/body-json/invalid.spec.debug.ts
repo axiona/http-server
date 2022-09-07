@@ -27,7 +27,7 @@ describe('multi parse', () => {
     it('add request', ()=>{
 
         router
-            .catch((error : HttpError, context)=>{
+            .catch((context, error : HttpError)=>{
                 FromError(context, error);
             })
             .add(BodyJson.Parameter())

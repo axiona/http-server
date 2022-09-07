@@ -15,7 +15,7 @@ export default function Prepend<
 
         } catch (error) {
 
-            catches(error, context);
+            catches(context, error);
         }
 
     };

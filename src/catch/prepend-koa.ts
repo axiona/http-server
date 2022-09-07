@@ -5,7 +5,7 @@ export default function PrependKoa<Type extends Catch>(server : Koa, handler: Ty
 
     server.use((context, next) => {
 
-        return next().catch(error => handler(error, context));
+        return next().catch(error => handler(context, error));
 
     });
 

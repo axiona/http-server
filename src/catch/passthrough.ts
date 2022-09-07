@@ -8,7 +8,7 @@ export default function Passthrough<
     middleware: Middleware<ContextType>
 ) : Catch<ContextType> {
 
-    return async function (error: Error, context: ContextType) {
+    return async function (context: ContextType, error: Error) {
 
         await middleware(context);
 

@@ -18,7 +18,7 @@ describe('caught', function () {
 
     let called : string[] = [];
 
-    router.catch(function (error, ctx) {
+    router.catch(function (ctx, error) {
 
         ctx.status = 204;
 

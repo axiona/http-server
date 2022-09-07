@@ -8,7 +8,7 @@ export function ErrorParameters<ContextType extends Context = Context>(
     middleware: Middleware<ContextType>
 ) : Catch<ContextType> {
 
-    return async function (error, context) {
+    return async function (context, error) {
 
         if(validation(error)) {
 

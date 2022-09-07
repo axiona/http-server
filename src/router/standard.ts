@@ -134,7 +134,7 @@ export default class Standard<
 
                 if(this.error) {
 
-                    await this.error(error, context);
+                    await this.error(context, error);
 
                 } else {
 
@@ -162,7 +162,7 @@ export default class Standard<
 
                     if(this.error) {
 
-                        await this.error(error, context);
+                        await this.error(context, error);
 
                     } else  {
 
