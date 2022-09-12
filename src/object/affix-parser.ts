@@ -5,8 +5,8 @@ import SafeCast from '@alirya/string/safe-cast';
 import Callable from '@alirya/function/callable';
 import {RemoveSuffixParameters} from '@alirya/string/remove-suffix';
 import {RemovePrefixParameters} from '@alirya/string/remove-prefix';
-import Prefix from "../../../string/dist/prefix/prefix";
-import Suffix from "../../../string/dist/suffix/suffix";
+import Prefix from '@alirya/string/prefix/prefix';
+import Suffix from '@alirya/string/suffix/suffix';
 
 
 export function AffixParserParameters(

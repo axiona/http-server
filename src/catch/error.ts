@@ -2,17 +2,28 @@ import Callable from '@alirya/function/callable';
 import Middleware from "../middleware/middleware";
 import Context from "../context/context";
 import Catch from "./catch";
+import Guard from "@alirya/boolean/function/guard";
 
-export function ErrorParameters<ContextType extends Context = Context>(
+export function ErrorParameters<ContextType extends Context, ErrorType extends Error = Error>(
+    validation : Guard<Error, ErrorType>,
+    middleware: Middleware<ContextType>|Catch<ContextType, ErrorType>
+) : Catch<ContextType, ErrorType>;
+
+export function ErrorParameters<ContextType extends Context>(
     validation : Callable<[Error], boolean>,
-    middleware: Middleware<ContextType>
-) : Catch<ContextType> {
+    middleware: Middleware<ContextType>|Catch<ContextType>
+) : Catch<ContextType, Error>;
+
+export function ErrorParameters<ContextType extends Context, ErrorType extends Error>(
+    validation : Callable<[Error], boolean>|Guard<Error, ErrorType>,
+    middleware: Middleware<ContextType>|Catch<ContextType, ErrorType>
+) : Catch<ContextType, ErrorType> {
 
     return async function (context, error) {
 
         if(validation(error)) {
 
-            await middleware(context);
+            await middleware(context, error);
 
         } else {
 
@@ -21,13 +32,13 @@ export function ErrorParameters<ContextType extends Context = Context>(
     };
 }
 
-export function ErrorParameter<ContextType extends Context = Context>(
+export function ErrorParameter<ContextType extends Context, ErrorType extends Error = Error>(
     {
         validation,
         middleware
     } : {
-        validation : Callable<[Error], boolean>,
-        middleware: Middleware<ContextType>
+        validation : Callable<[ErrorType], boolean>,
+        middleware: Middleware<ContextType>|Catch<ContextType, ErrorType>
     }
 
 ) {

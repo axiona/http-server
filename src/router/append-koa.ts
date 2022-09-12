@@ -6,9 +6,10 @@ export default function AppendKoa(server : Koa) : Router;
 export default function AppendKoa<Type extends Router>(server : Koa, router: Type) : Type;
 export default function AppendKoa<Type extends Router>(server : Koa, router: Type|Router = new Standard()) : Type|Router {
 
-    server.use((context, next) => {
+    server.use(async (context, next) => {
 
-        return router.call(context as any).then(next);
+        return next().then(()=>router.call(context as any));
+
     });
 
     return router;

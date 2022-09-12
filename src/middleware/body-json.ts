@@ -6,10 +6,10 @@ import JsonMimeTypes from '../array/json-mime-types';
 import {Required} from 'utility-types';
 import {BodyTextArgument, BodyTextArgumentDefault} from './body-text';
 import OmitUndefined from "@alirya/object/omit-undefined";
-import Pick from "../../../object/dist/pick";
+import Pick from '@alirya/object/pick';
 import Router from "../router/router";
 import {Headers} from "headers-polyfill";
-import {CurryParameters} from "../../../function/dist/curry";
+import {CurryParameters} from '@alirya/function/curry';
 import AddAcceptHeaders from "../router/void/add-accept-headers";
 
 

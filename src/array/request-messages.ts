@@ -1,5 +1,5 @@
 import {Request, Response} from "koa";
-import {PickParameters} from "../../../object/dist/pick";
+import {PickParameters} from '@alirya/object/pick';
 import Body from "@alirya/http/body/body";
 
 

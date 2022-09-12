@@ -1,7 +1,7 @@
 import Middleware from './middleware';
 import Context from '../context/context';
 import Syslog from '@alirya/syslog/syslog';
-import Callable from "../../../function/dist/callable";
+import Callable from '@alirya/function/callable';
 import {Request} from "koa";
 import RequestMessages from "../array/request-messages";
 

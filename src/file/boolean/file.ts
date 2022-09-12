@@ -3,7 +3,7 @@ import {ExistsParameters} from "@alirya/object/property/boolean/exists";
 import String from "@alirya/string/boolean/string";
 import Nullable from "@alirya/null/boolean/nullable";
 import FileType from "../file";
-import Object_ from "../../../../object/dist/boolean/object";
+import Object_ from '@alirya/object/boolean/object';
 
 export default function File(value: object) : value is FileType {
 

@@ -65,7 +65,7 @@ export function BodyTextParameter<Argument extends Context>(
 
         return context;
 
-    }, register) as BodyTextReturn<Argument>;
+    }, {register}) as BodyTextReturn<Argument>;
 }
 
 

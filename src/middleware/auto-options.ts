@@ -62,10 +62,10 @@ export default function AutoOptions<
 
 }
 
-export function AutoOptionsDefault<ContextType extends Context>(context : ContextType) {
-
-    return FromResponse.Parameters(context, MethodNotAllowedParameters());
-}
+// export function AutoOptionsDefault<ContextType extends Context>(context : ContextType) {
+//
+//     return FromResponse.Parameters(context, MethodNotAllowedParameters());
+// }
 
 // export function AutoOptionGenerateMethods(context : Context) : Pick<Metadata, 'headers'|'method'> {
 //

@@ -6,10 +6,9 @@ export default function PrependKoa(server : Koa) : Router;
 export default function PrependKoa<Type extends Router>(server : Koa, router: Type) : Type;
 export default function PrependKoa<Type extends Router>(server : Koa, router: Type|Router = new Standard()) : Type|Router {
 
-    server.use(async (context, next) => {
+    server.use((context, next) => {
 
-        return next().then(()=>router.call(context as any));
-
+        return router.call(context as any).then(next);
     });
 
     return router;

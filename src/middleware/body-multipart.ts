@@ -80,7 +80,7 @@ export default function BodyMultipart<Argument extends Context>(
             return context;
         });
 
-    }, register) as BodyMultipartType<Argument, BodyMultipartReturnRecursive<string|number|boolean|File>>;
+    }, {register}) as BodyMultipartType<Argument, BodyMultipartReturnRecursive<string|number|boolean|File>>;
 }
 
 export type BodyMultipartParseType = {

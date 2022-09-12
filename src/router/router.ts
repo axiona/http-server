@@ -2,7 +2,7 @@ import Middleware from '../middleware/middleware';
 import Catch from '../catch/catch';
 import Context from '../context/context';
 import Metadata from "./metadata/metadata";
-import Callable from "../../../function/dist/callable";
+import Callable from '@alirya/function/callable';
 
 export default interface Router<
     ContextType extends Context  = Context,

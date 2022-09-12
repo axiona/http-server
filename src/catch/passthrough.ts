@@ -5,12 +5,12 @@ import Catch from "./catch";
 export default function Passthrough<
     ContextType extends Context = Context
 >(
-    middleware: Middleware<ContextType>
+    middleware: Middleware<ContextType>|Catch<ContextType>
 ) : Catch<ContextType> {
 
     return async function (context: ContextType, error: Error) {
 
-        await middleware(context);
+        await middleware(context, error);
 
         throw error;
     };

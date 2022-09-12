@@ -10,6 +10,19 @@ import FromRouter from "../matcher/from-router";
 import List from "../path/list/list";
 import Standard from "../router/standard";
 
+export type PathContext<
+    ArgumentType extends Record<string, string> = Record<string, string>,
+    Argument extends string = string,
+    Storage extends string = string,
+    ContextType extends Context = Context> = ContextType & {
+    request : {
+        [Key in Storage] : ListType
+    } & {
+        [Key in Argument] : ArgumentType
+    }
+};
+
+
 export type PathReturn<
     ArgumentType extends Record<string, string> = Record<string, string>,
     Argument extends string = string,
@@ -17,13 +30,7 @@ export type PathReturn<
     ContextType extends Context = Context,
 > =  Middleware<
     ContextType,
-    ContextType & {
-        request : {
-            [Key in Storage] : ListType
-        } & {
-            [Key in Argument] : ArgumentType
-        }
-    }
+    PathContext<ArgumentType, Argument, Storage, ContextType>
 >;
 
 export type PathArgumentsOption<

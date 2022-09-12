@@ -4,7 +4,7 @@ import FromRouter from "./array/from-router";
 import Root from "../root";
 import Standard from "../standard";
 import ContextPath from "../../matcher/match/context-path";
-import {UniqueParameters} from "../../../../array/dist/unique";
+import {UniqueParameters} from '@alirya/array/unique';
 import {Headers} from "headers-polyfill";
 
 export default function GetContextPath(context : Context) : Omit<Metadata, 'path'> {

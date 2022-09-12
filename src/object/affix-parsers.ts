@@ -2,7 +2,7 @@ import Callable from '@alirya/function/callable';
 import {AffixParserArgument, AffixParserParameters} from './affix-parser';
 import Deepmerge from 'deepmerge';
 import File from "../file/boolean/file";
-import Object_ from "../../../object/dist/boolean/object";
+import Object_ from '@alirya/object/boolean/object';
 
 export function AffixParsersParametersArgumentsMergeableDefault(object) : boolean {
     return Object_(object) && !File(object);

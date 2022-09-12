@@ -6,7 +6,7 @@ import BodyMultipart from '../../../dist/middleware/body-multipart';
 import FormData from 'form-data';
 import {createReadStream} from "fs";
 import MaxSizeExceeded from "../../../dist/file/catch/max-size-exceeded";
-import Timeout from "../../../../promise/dist/timeout";
+import Timeout from '@alirya/promise/timeout';
 
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});

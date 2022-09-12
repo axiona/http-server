@@ -2,7 +2,7 @@ import {PickParameters} from '@alirya/object/pick';
 import Context from '../context/context';
 import Syslog from '@alirya/syslog/syslog';
 import Middleware from './middleware';
-import Callable from "../../../function/dist/callable";
+import Callable from '@alirya/function/callable';
 import {Request, Response} from "koa";
 import TransactionMessages from "../array/transaction-messages";
 import RequestMessages from "../array/request-messages";
@@ -18,11 +18,25 @@ export function PrintTransactionParameters<ContextType extends Context<Partial<{
 
     return function (context) {
 
-        syslog[severity](
-            ...transaction(context.request, context.response),
-            ...request(context.request),
-            ...response(context.response),
-        );
+        const responseClose = new Promise<void>((resolve, reject) => {
+            context.res.on('close', resolve);
+        });
+
+        const responseFinish = new Promise<void>((resolve, reject) => {
+            context.res.on('finish', resolve);
+        });
+
+        Promise.race([responseFinish, responseClose]).then(()=>{
+
+            const messages = [
+                ...transaction(context.request, context.response),
+                ...request(context.request),
+                ...response(context.response),
+            ];
+
+            syslog[severity](...messages);
+
+        }).catch(console.error);
 
         return context;
     };

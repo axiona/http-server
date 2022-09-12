@@ -9,7 +9,7 @@ import Context from '../context/context';
 import Callable from "@alirya/function/callable";
 import InferStatic from "@alirya/validator/validatable/infer-static";
 import {SetResponseParameters} from "../context/set-response";
-import {BadRequestParameters} from "../../../http/dist/response/bad-request";
+import {BadRequestParameters} from '@alirya/http/response/bad-request';
 
 export type ValidatorPreviousContext<Properties extends PropertyKey[]> = Context & O.P.Record<Properties, unknown>;
 export type ValidatorTypePropertiesNext<

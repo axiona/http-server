@@ -53,5 +53,5 @@ export default function BodyUrlencoded<Argument extends Context>(
 
         return context;
 
-    }, register) as BodyUrlencodedReturn<Argument>;
+    }, {register}) as BodyUrlencodedReturn<Argument>;
 }
