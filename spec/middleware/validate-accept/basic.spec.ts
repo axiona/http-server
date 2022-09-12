@@ -4,7 +4,7 @@ import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
 import BodyMultipart from '../../../dist/middleware/body-multipart';
 import FormData from 'form-data';
-import StrictAccept from "../../../dist/middleware/strict-accept";
+import StrictAccept from "../../../dist/middleware/validate-accept";
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

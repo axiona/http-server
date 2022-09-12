@@ -15,7 +15,7 @@ import Stop from "./stop";
 
 
 
-export default function StrictAccept<ContextType extends Context>(
+export default function ValidateAccept<ContextType extends Context>(
     invalid: Middleware<ContextType> = Stop(ResponseParameters(UnsupportedMediaTypeParameters())) as Middleware<ContextType>
 ) : Middleware<ContextType> {
 
