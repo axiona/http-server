@@ -120,10 +120,10 @@ export default function AutoCors<
 
 }
 
-export function AutoOptionsDefault<ContextType extends Context>(context : ContextType) {
-
-    return FromResponse.Parameters(context, MethodNotAllowedParameters());
-}
+// export function AutoOptionsDefault<ContextType extends Context>(context : ContextType) {
+//
+//     return FromResponse.Parameters(context, MethodNotAllowedParameters());
+// }
 
 
 

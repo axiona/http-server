@@ -46,6 +46,8 @@
     "@types/co-body": "^6.1.0",
     "@types/mime-types": "^2.1.1",
     "mime-types": "^2.1.35",
+    "@types/uuid": "^8.3.4",
+    "uuid": "^9.0.0",
     "file-type": "^16.5.4",
     "@types/formidable": "^2.0.5",
     "formidable": "^2.0.1",

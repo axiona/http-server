@@ -1,4 +1,4 @@
-import {Options, defaultOptions, IncomingForm, File as FormidableFile} from 'formidable';
+import {Options, defaultOptions, IncomingForm, File as FormidableFile, Part} from 'formidable';
 import Context from '../context/context';
 import Middleware from './middleware';
 import {O} from 'ts-toolbelt';
@@ -8,6 +8,9 @@ import OmitUndefined from "@alirya/object/omit-undefined";
 import File from "../file/file";
 import FromFormidable from "../file/from-formidable";
 import AddAcceptHeaders from "../router/void/add-accept-headers";
+import { v4 } from 'uuid';
+import TrimPrefix, {TrimPrefixParameters} from "../../../string/dist/trim-prefix";
+import {RemovePrefixParameters} from "../../../string/dist/remove-prefix";
 
 export type BodyMultipartReturnRecursive<Type> = {
     [Key in string]: Type|Record<PropertyKey, BodyMultipartReturnRecursive<Type>>|BodyMultipartReturnRecursive<Type>[]
@@ -38,6 +41,12 @@ export interface BodyMultipartArgument<Argument extends Context> extends Options
 export const BodyMultipartArgumentDefault : BodyMultipartArgument<Context> = Object.freeze(Object.assign({
     mapper : AffixParsersParameters(),
     parser : (key, value)=>value,
+    filename : (name: string, ext: string, part: Part, form: FormidableFile) => {
+        return v4().split('-').join('') +
+            (new Date()).getTime().toString(36) +
+            '.' +
+            RemovePrefixParameters(ext, '.');
+    }
 }, defaultOptions as any as Options));
 
 export default function BodyMultipart<Argument extends Context>(

@@ -12,8 +12,8 @@ import Standard from "../router/standard";
 
 export type PathContext<
     ArgumentType extends Record<string, string> = Record<string, string>,
-    Argument extends string = string,
-    Storage extends string = string,
+    Argument extends string = 'pathParameter',
+    Storage extends string = 'paths',
     ContextType extends Context = Context> = ContextType & {
     request : {
         [Key in Storage] : ListType

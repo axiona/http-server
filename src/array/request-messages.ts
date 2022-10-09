@@ -22,7 +22,11 @@ export default function RequestMessages(
     }
 
     result.push(
-        PickParameters(request, 'headers', 'body')
+        PickParameters(request, 'headers')
+    );
+
+    result.push(
+        PickParameters(request, 'body')
     );
 
     return result;

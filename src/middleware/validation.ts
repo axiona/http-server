@@ -50,7 +50,7 @@ export function ValidationParameters<
     validation : ValidationType,
     properties ?: [],
     invalid ?: Invalid,
-    valid ?: Valid,
+    // valid ?: Valid,
 ) : ValidationReturnContextGuard<ContextType, ValidationType>;
 
 export function ValidationParameters<
@@ -63,7 +63,7 @@ export function ValidationParameters<
     validation : ValidationType,
     properties ?: [...Properties],
     invalid ?: Invalid,
-    valid ?: Valid,
+    // valid ?: Valid,
 ) : ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>;
 
 /**
@@ -86,7 +86,7 @@ export function ValidationParameters<
     validation : ValidationType,
     properties ?: [],
     invalid ?: Middleware<ContextType>,
-    valid ?: Middleware<ContextType>,
+    // valid ?: Middleware<ContextType>,
 ) : ValidationReturnContextValidatable<ContextType>;
 
 
@@ -112,7 +112,7 @@ export function ValidationParameters<
     validation : ValidationInterface<[O.Path<ContextType, Properties>]>,
     properties ?: [...Properties],
     invalid ?: Invalid,
-    valid ?: Valid,
+    // valid ?: Valid,
 ) : ValidationReturnPropertiesValidatable<Properties, Value, ContextType>;
 
 /**
@@ -161,7 +161,7 @@ export interface ValidationArgumentContextGuard<
     validation : ValidationType;
     properties ?: [];
     invalid ?: ValidationReturnContextGuard<ContextType, ValidationType>;
-    valid ?: ValidationReturnContextGuard<ContextType, ValidationType>;
+    // valid ?: ValidationReturnContextGuard<ContextType, ValidationType>;
 }
 
 export interface ValidationArgumentPropertiesGuard<
@@ -173,7 +173,7 @@ export interface ValidationArgumentPropertiesGuard<
 > {
     validation : ValidationType;
     properties : [...Properties];
-    valid ?: Valid;
+    // valid ?: Valid;
     invalid ?: Invalid;
 }
 
@@ -186,7 +186,7 @@ export interface ValidationArgumentContextValidatable<
     validation : ValidationType;
     properties ?: [];
     invalid ?: Invalid;
-    valid ?: Valid;
+    // valid ?: Valid;
 }
 
 export interface ValidationArgumentPropertiesValidatable<
@@ -199,7 +199,7 @@ export interface ValidationArgumentPropertiesValidatable<
     validation : ValidationInterface<[O.P.Pick<ContextType, Properties>]>;
     properties : [...Properties];
     invalid ?: Invalid;
-    valid ?: Valid;
+    // valid ?: Valid;
 }
 
 
@@ -216,7 +216,7 @@ export function ValidationParameter<
 >(  {
         validation,
         invalid,
-        valid,
+        // valid,
     } : ValidationArgumentContextGuard<ContextType, ValidationType>,
 ) : ValidationReturnContextGuard<ContextType, ValidationType>;
 
@@ -229,7 +229,7 @@ export function ValidationParameter<
 >(  {
         validation,
         invalid,
-        valid,
+        // valid,
         properties,
     } : ValidationArgumentPropertiesGuard<Properties, ContextType, ValidationType, Invalid, Valid>,
 ) : ValidationReturnPropertiesGuard<Properties, ContextType, ValidationType>;
@@ -249,7 +249,7 @@ export function ValidationParameter<
 >(  {
         validation,
         invalid,
-        valid,
+        // valid,
         properties,
     } : ValidationArgumentContextValidatable<ContextType, ValidationType, Invalid, Valid>,
 ) : Middleware<ContextType>;

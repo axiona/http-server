@@ -21,7 +21,11 @@ export default function ResponseMessages(
     }
 
     result.push(
-        PickParameters(response, 'headers', 'body')
+        PickParameters(response, 'headers')
+    );
+
+    result.push(
+        PickParameters(response, 'body')
     );
 
     return result;
