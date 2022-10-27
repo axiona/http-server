@@ -9,8 +9,8 @@ import File from "../file/file";
 import FromFormidable from "../file/from-formidable";
 import AddAcceptHeaders from "../router/void/add-accept-headers";
 import { v4 } from 'uuid';
-import TrimPrefix, {TrimPrefixParameters} from "../../../string/dist/trim-prefix";
-import {RemovePrefixParameters} from "../../../string/dist/remove-prefix";
+import TrimPrefix, {TrimPrefixParameters} from '@alirya/string/trim-prefix';
+import {RemovePrefixParameters} from '@alirya/string/remove-prefix';
 
 export type BodyMultipartReturnRecursive<Type> = {
     [Key in string]: Type|Record<PropertyKey, BodyMultipartReturnRecursive<Type>>|BodyMultipartReturnRecursive<Type>[]
