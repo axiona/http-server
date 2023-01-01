@@ -151,6 +151,11 @@ describe('validation', () => {
                     return Object.assign(context, {request: {body : 'a' as string|number|boolean}});
 
                 })
+                .add(function (ctx) {
+
+                    return ctx;
+
+                })
                 .add(ValidationParameter({
                     validation: () => true,
                     properties : ['request', 'body'],

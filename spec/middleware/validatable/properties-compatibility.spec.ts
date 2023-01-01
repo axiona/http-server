@@ -2,6 +2,7 @@ import Router from '../../../dist/router/standard';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Validation, {ValidationParameter, ValidationParameters} from '../../../dist/middleware/validation';
+import Context from '../../../dist/context/context';
 import OneGuard from './one-guard';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
@@ -13,6 +14,7 @@ let router =  BindToServer(server, new Router());
 describe('validation', () => {
 
     describe('no context', ()=>{
+
         it('parameters', ()=>{
 
             router
@@ -95,12 +97,16 @@ describe('validation', () => {
     describe('with context', ()=>{
         it('parameters', ()=>{
             router
-                .add(function (context) {
+                .add(function (context) : Context<{body : string|number|boolean}> {
 
-                    return Object.assign(context, {request: {body : 'a' as string|number|boolean}});
+                    return Object.assign(context, {request: {body : 'a' }});
 
                 })
-                .add(ValidationParameters(() => true, ['request', 'body']))
+
+                .add(ValidationParameters((data: string|number|boolean) => {
+                    let string: string|number|boolean = data;
+                    return true;
+                }, ['request', 'body']))
                 .add(function (ctx) {
 
                     let data : string|number|boolean = ctx.request.body;
