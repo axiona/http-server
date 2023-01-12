@@ -3,7 +3,7 @@ import {O} from 'ts-toolbelt';
 import {SelectPathParameters} from '@alirya/object/value/value/select-path';
 import Context from '../context/context';
 import Stop from './stop';
-import ValidationInterface from '@alirya/boolean/function/validation';
+import {ValidationAsyncable} from '@alirya/boolean/function/validation';
 import Guard, {GuardInferExpect} from '@alirya/boolean/function/guard';
 // import Next from "./next";
 // import {ConditionalCallParameters} from "@alirya/function/conditional-call";
@@ -83,7 +83,7 @@ export function ValidationParameters<
  */
 export function ValidationParameters<
     ContextType extends Context,
-    ValidationType extends ValidationInterface<[ContextType]> = ValidationInterface<[ContextType]>,
+    ValidationType extends ValidationAsyncable<[ContextType]> = ValidationAsyncable<[ContextType]>,
 >(
     validation : ValidationType,
     properties ?: [],
@@ -111,7 +111,7 @@ export function ValidationParameters<
     // Invalid extends ValidationTypeMiddleware<ContextType, Properties, Value> = ValidationTypeMiddleware<ContextType, Properties, Value>,
     // Valid extends ValidationTypeMiddleware<ContextType, Properties, Value> = ValidationTypeMiddleware<ContextType, Properties, Value>
 >(
-    validation : ValidationInterface<[O.Path<ContextType, Properties>]>,
+    validation : ValidationAsyncable<[O.Path<ContextType, Properties>]>,
     properties ?: [...Properties],
     // invalid ?: Invalid,
     invalid ?: ValidationTypeMiddleware<ContextType, Properties, Value>,
@@ -131,7 +131,7 @@ export function ValidationParameters<
     Value extends unknown,
     ContextType extends Context = Context,
 >(
-    validation : ValidationInterface<[O.Path<ContextType, Properties>]>|ValidationInterface<[ContextType]>,
+    validation : ValidationAsyncable<[O.Path<ContextType, Properties>]>|ValidationAsyncable<[ContextType]>,
     properties : Properties|[] = [],
     invalid : Middleware<ContextType> = Stop(),
     // valid : Middleware<ContextType> = Next(),
@@ -139,18 +139,13 @@ export function ValidationParameters<
 
     const assignment : boolean = !!properties.length;
 
-    return function (context: ContextType & O.P.Record<Properties|[], unknown>) {
+    return async function (context: ContextType & O.P.Record<Properties|[], unknown>) {
 
         const value = assignment ? SelectPathParameters(context, ...properties) : context;
 
-        const result = (validation as ValidationInterface<[O.Path<ContextType, Properties>]>)(value as O.Path<ContextType, Properties>);
+        const result = await (validation as ValidationAsyncable<[O.Path<ContextType, Properties>]>)(value as O.Path<ContextType, Properties>);
 
-        if(!result) {
-
-            return invalid(context);
-        }
-
-        return context;
+        return result ? context : invalid(context);
 
         // return ConditionalCallParameters(result, valid, invalid, context as ContextType);
 
@@ -183,7 +178,7 @@ export interface ValidationArgumentPropertiesGuard<
 
 export interface ValidationArgumentContextValidatable<
     ContextType extends Context,
-    ValidationType extends ValidationInterface<[ContextType]>,
+    ValidationType extends ValidationAsyncable<[ContextType]>,
     // Invalid extends Middleware<ContextType>,
     // Valid extends Middleware<ContextType>,
 > {
@@ -201,7 +196,7 @@ export interface ValidationArgumentPropertiesValidatable<
     // Invalid extends ValidationTypeMiddleware<ContextType, Properties, Value>,
     // Valid extends ValidationTypeMiddleware<ContextType, Properties, Value>,
 > {
-    validation : ValidationInterface<[O.P.Pick<ContextType, Properties>]>;
+    validation : ValidationAsyncable<[O.P.Pick<ContextType, Properties>]>;
     properties : [...Properties];
     invalid ?: ValidationTypeMiddleware<ContextType, Properties, Value>;
     // invalid ?: Invalid;
@@ -249,7 +244,7 @@ export function ValidationParameter<
  */
 export function ValidationParameter<
     ContextType extends Context,
-    ValidationType extends ValidationInterface<[ContextType]> = ValidationInterface<[ContextType]>,
+    ValidationType extends ValidationAsyncable<[ContextType]> = ValidationAsyncable<[ContextType]>,
     Invalid extends Middleware<ContextType> = Middleware<ContextType>,
     Valid extends Middleware<ContextType> = Middleware<ContextType>,
 >(  {
@@ -299,10 +294,10 @@ export function ValidationParameter<
         invalid = Stop(),
         properties = [],
     } : ValidationArgumentPropertiesValidatable<Properties, Value, ContextType/*, Invalid, Valid*/> |
-        ValidationArgumentContextValidatable<ContextType,  ValidationInterface<[ContextType]>/*, Middleware<ContextType>, Middleware<ContextType>*/>
+        ValidationArgumentContextValidatable<ContextType,  ValidationAsyncable<[ContextType]>/*, Middleware<ContextType>, Middleware<ContextType>*/>
 ) : ValidationReturnPropertiesValidatable<Properties, Value, ContextType> | ValidationReturnContextValidatable<ContextType> {
 
-    return ValidationParameters(validation as ValidationInterface<[ContextType]>, properties as [], invalid) as
+    return ValidationParameters(validation as ValidationAsyncable<[ContextType]>, properties as [], invalid) as
         ValidationReturnPropertiesValidatable<Properties, Value, ContextType> | ValidationReturnContextValidatable<ContextType>;
 }
 
@@ -354,7 +349,7 @@ namespace Validation {
 
     export type ContextTypeContextValidatable<
         ContextType extends Context,
-        ValidationType extends ValidationInterface<[ContextType]>,
+        ValidationType extends ValidationAsyncable<[ContextType]>,
         // Invalid extends Middleware<ContextType>,
         // Valid extends Middleware<ContextType>,
     > = ValidationArgumentContextValidatable<ContextType, ValidationType/*, Invalid, Valid*/>;
