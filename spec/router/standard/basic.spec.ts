@@ -1,4 +1,4 @@
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
@@ -25,7 +25,7 @@ describe('basic', function () {
 
     let called : boolean = false;
 
-    const router =  BindToServer(server, new Router());
+    const router =  BindToServer(server, Router());
 
     router.add(function (ctx) {
 
@@ -64,7 +64,7 @@ describe('204', function () {
 
     let called : boolean = false;
 
-    const router =  BindToServer(server, new Router());
+    const router =  BindToServer(server, Router());
 
     router.add(function (ctx) {
 

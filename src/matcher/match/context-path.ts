@@ -1,6 +1,6 @@
 import Context from "../../context/context";
 import {ListType} from "@alirya/uri/path/list";
-import ContextPathSegments, {PathSegmentsGet} from "../../context/path-segments";
+import {PathSegmentsGet} from "../../context/path-segments";
 import { Match} from 'path-to-regexp';
 import GetOrSet from "../../map/get-or-set";
 import Matcher from "../matcher";
@@ -16,7 +16,7 @@ export const PathMatchesKeyCache = Symbol('PathMatch');
 export default function ContextPath<Argument extends string, Storage extends string>(
     match : Matcher,
     context : Context,
-    factory : (context: Context) => ListType = (ctx) => PathSegmentsGet(ContextPathSegments(ctx)) as ListType
+    factory : (context: Context) => ListType = (ctx) => PathSegmentsGet(ctx) as ListType
 ) : Match|false  {
 
     const cached = GetOrSet(context.request as {}, PathMatchesKeyCache, () =>new Map<string, Match|false>());

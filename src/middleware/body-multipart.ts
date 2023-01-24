@@ -9,7 +9,6 @@ import File from "../file/file";
 import FromFormidable from "../file/from-formidable";
 import AddAcceptHeaders from "../router/void/add-accept-headers";
 import { v4 } from 'uuid';
-import TrimPrefix, {TrimPrefixParameters} from '@alirya/string/trim-prefix';
 import {RemovePrefixParameters} from '@alirya/string/remove-prefix';
 
 export type BodyMultipartReturnRecursive<Type> = {
@@ -62,7 +61,10 @@ export default function BodyMultipart<Argument extends Context>(
 
     const parser : Callable<[string, any], any> = required.parser;
 
-    const register : Middleware['register'] = (router) =>AddAcceptHeaders(router, 'multipart/form-data');
+    const register : Middleware['register'] = (router) => {
+        AddAcceptHeaders(router, 'multipart/form-data');
+        return router;
+    };
 
     return Object.assign(function (context) {
 

@@ -7,9 +7,6 @@ import {Required} from 'utility-types';
 import {BodyTextArgument, BodyTextArgumentDefault} from './body-text';
 import OmitUndefined from "@alirya/object/omit-undefined";
 import Pick from '@alirya/object/pick';
-import Router from "../router/router";
-import {Headers} from "headers-polyfill";
-import {CurryParameters} from '@alirya/function/curry';
 import AddAcceptHeaders from "../router/void/add-accept-headers";
 
 
@@ -45,7 +42,10 @@ export function BodyJsonParameter<Argument extends Context>(
 
     argument = Object.assign({}, BodyTextArgumentDefault, OmitUndefined(argument)) as BodyJsonArgument<Argument>;
 
-    const register : Middleware['register'] = (router) =>AddAcceptHeaders(router, 'application/json');
+    const register : Middleware['register'] = (router) => {
+        AddAcceptHeaders(router, 'application/json');
+        return router;
+    };
 
     const middleware = function (context) {
 

@@ -1,14 +1,19 @@
 import Router from './router';
-import Standard from "./standard";
+import Standard from "./middleware";
 import Koa from "koa";
 
 export default function PrependKoa(server : Koa) : Router;
 export default function PrependKoa<Type extends Router>(server : Koa, router: Type) : Type;
-export default function PrependKoa<Type extends Router>(server : Koa, router: Type|Router = new Standard()) : Type|Router {
+export default function PrependKoa<Type extends Router>(server : Koa, router: Type|Router = Standard()) : Type|Router {
 
-    server.use((context, next) => {
+    server.use(async (context, next) => {
 
-        return router.call(context as any).then(next);
+        let contextNext = await router(context);
+
+        if(contextNext) {
+
+            return next();
+        }
     });
 
     return router;

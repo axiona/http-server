@@ -1,6 +1,6 @@
 import Middleware from './middleware';
 import Context from '../context/context';
-import Router from "../router/router";
+import Metadata from "../router/metadata/metadata";
 
 export default function Method<ContextType extends Context>(
     ...methods : string[]
@@ -16,9 +16,10 @@ export default function Method<ContextType extends Context>(
         }
     };
 
-    const register = function (router : Router)  {
+    const register = function (router : Metadata) : Metadata {
 
-        router.metadata.method.push(...methods);
+        router.method.push(...methods);
+        return router;
     };
 
     return Object.assign(callable, {register});

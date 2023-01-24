@@ -2,28 +2,28 @@ import Middleware from '../middleware/middleware';
 import Catch from '../catch/catch';
 import Context from '../context/context';
 import Metadata from "./metadata/metadata";
-import Callable from '@alirya/function/callable';
 
 export default interface Router<
     ContextType extends Context  = Context,
     // Type extends Middleware  = Middleware,
     Error extends Catch  = Catch,
->  {
+> extends Middleware  {
     children : Router[];
-    middleware : Middleware<Context, ContextType>|undefined;
-    error : Error|undefined;
-    parent : Router|undefined;
+    // middleware : Middleware<Context, ContextType>|undefined;
+    // error : Error|undefined;
+    parent : Router|null;
+    // root : Router|null;
     metadata : Metadata;
 
     add<Next extends Context>(middleware : Middleware<ContextType, Next>) : Router<Next>;
     catch(errorHandler : Error) : Router<ContextType, Error>;
-    call(context: Context) : Promise<Context|void>;
-    extends<
-        ENext extends Context,
-        NextError extends Catch  = Catch,
-    >(
-        router: Callable<[this], Router<ENext, NextError>>
-    ) : Router<ENext, NextError>;
+    // (context: Context) : Promise<Context|void>;
+    // extends<
+    //     ENext extends Context,
+    //     NextError extends Catch  = Catch,
+    // >(
+    //     router: Callable<[this], Router<ENext, NextError>>
+    // ) : Router<ENext, NextError>;
 
 }
 

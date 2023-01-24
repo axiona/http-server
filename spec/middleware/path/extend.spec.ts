@@ -1,8 +1,10 @@
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import {PathParameters} from '../../../dist/middleware/path';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
+import Metadata from "../../../dist/router/metadata/metadata";
+import {ListParameter, ListType} from "../../../../uri/dist/path/list";
 
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
@@ -21,6 +23,7 @@ describe('single', () => {
     let called2 : boolean = false;
 
     let pathParameter : Record<string, string> = {};
+    let pathListType : ListType;
 
     const server = Server();
 
@@ -28,7 +31,15 @@ describe('single', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, new Router());
+    let router =  BindToServer(server, Router());
+
+    // function dump(metadata: Metadata) {
+    //
+    //     return Object.assign({}, {
+    //        path: metadata.path.path,
+    //        children: metadata.children.map(dump)
+    //     });
+    // }
 
 
     it('add request', ()=>{
@@ -39,6 +50,7 @@ describe('single', () => {
                 parent : true,
             };
             pathParameter = ctx.request.pathParameter;
+            pathListType = ctx.request.paths;
             called1 = true;
             return ctx;
 
@@ -47,11 +59,13 @@ describe('single', () => {
             ctx.response.body = Object.assign({ child : true }, ctx.response.body);
 
             pathParameter = ctx.request.pathParameter;
+            pathListType = ctx.request.paths;
             called2 = true;
             return ctx;
-
         });
 
+        // console.log(JSON.stringify(dump(router.metadata), null, 2));
+        // console.log(JSON.stringify(router.metadata, null, 2));
     });
 
     describe('match both', () => {
@@ -72,6 +86,11 @@ describe('single', () => {
             expect(called1).toBe(true);
             expect(called2).toBe(true);
             expect(pathParameter).toEqual({});
+            expect(pathListType.toString()).toEqual(ListParameter({
+                segments : 'path/child',
+                empty : false,
+                prefix: true
+            }).toString());
 
             expect(response.status).toEqual(200);
             expect(response.statusText).toEqual('OK');
@@ -103,6 +122,11 @@ describe('single', () => {
 
             expect(called1).toBe(true);
             expect(called2).toBe(false);
+            expect(pathListType.toString()).toEqual(ListParameter({
+                segments : 'path',
+                empty : false,
+                prefix: true
+            }).toString());
             expect(pathParameter).toEqual({});
 
             expect(response.status).toEqual(200);
@@ -137,7 +161,7 @@ describe('multi', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, new Router());
+    let router =  BindToServer(server, Router());
 
 
     it('add first request', ()=>{
@@ -332,7 +356,7 @@ describe('multi branch', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, new Router())
+    let router =  BindToServer(server, Router())
         .add(PathParameters('/root', {end:false}));
 
 

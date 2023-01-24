@@ -1,18 +1,19 @@
 import Router from "../router/router";
 import Matcher from "./matcher";
 import ArrayFromRouter from "./array/from-router";
-import Root from "../router/root";
+// import Root from "../router/root";
 import FromPathMemoize from "./from-path-memoize";
 import {FromPathArgumentsOption} from "./from-path";
+import Metadata from "../router/metadata/metadata";
 
 
 export default function FromRouter(
-    router : Router,
+    router : Metadata,
     path: string,
     option: FromPathArgumentsOption = {}
 ) : Matcher {
 
-    const matchers = ArrayFromRouter(Root(router));
+    const matchers = ArrayFromRouter(/*Root*/(router));
     return FromPathMemoize(path, option, matchers);
 }
 

@@ -1,11 +1,12 @@
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import Method from '../../../dist/middleware/method';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/prepend-server';
 import Axios, {AxiosResponse} from 'axios';
-import Cors from "../../../dist/middleware/cors";
+import Cors from "../../../dist/middleware/auto-cors";
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
+
 
 describe('single', () => {
 
@@ -22,13 +23,13 @@ describe('single', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, new Router());
+    let router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 
-        router.add(Cors());
+        let next = router.add(Cors());
 
-        BindToServer(server, new Router()).add(Method('POST')).add(function (ctx) {
+        next.add(Method('POST')).add(function (ctx) {
             ctx.response.body = data;
             called = true;
             return ctx;
@@ -74,19 +75,21 @@ describe('multi', () => {
         method : '',
     };
 
-    const server = Server();
+    const server2 = Server();
 
-    beforeAll(()=>server.open());
-    afterAll(()=>server.close());
+    beforeAll(()=>server2.open());
+    afterAll(()=>server2.close());
 
 
-    let router =  BindToServer(server, new Router());
+    let router =  BindToServer(server2, Router());
+
+    let next = router.add(Cors());
 
     for(const method of methods) {
 
         it('add post request', ()=>{
 
-            router.add(Method(method)).add(function (ctx) {
+            next.add(Method(method)).add(function (ctx) {
                 data.method = method;
                 ctx.response.body = data;
                 called = true;
@@ -95,8 +98,6 @@ describe('multi', () => {
                 uncalled = true;
                 return ctx;
             });
-
-
         });
     }
 
@@ -108,7 +109,7 @@ describe('multi', () => {
 
         it('send request', function (done) {
 
-            Axios.post(`http://localhost:${server.config.port}`).then((res)=>{
+            Axios.post(`http://localhost:${server2.config.port}`).then((res)=>{
 
                 response = res;
 

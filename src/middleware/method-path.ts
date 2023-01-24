@@ -1,6 +1,9 @@
 import Context from '../context/context';
 import {PathArgument, PathArgumentsOption, PathOptionDefault, PathParameters, PathReturn} from "./path";
 import Method from "./method";
+import Middleware from "../router/middleware";
+import Identity from "../../../function/dist/identity";
+import Extends from "./extends";
 
 export type MethodPathReturn<
     ArgumentType extends Record<string, string> = Record<string, string>,
@@ -70,6 +73,12 @@ export function MethodPathParameters<
     path : string[]|string,
     option : Partial<MethodPathArgumentsOption<ArgumentType, Argument|string, Storage|string>> = PathOptionDefault,
 ) : MethodPathReturn<ArgumentType, Argument|string, Storage|string, ContextType> {
+
+    // return Method(method);
+
+    return Extends(Middleware(Method(method))
+        // .add(PathParameters(path, option))
+        .add(PathParameters(path, option))) as MethodPathReturn<ArgumentType, Argument|string, Storage|string, ContextType>;
 
     const middlewareMethod = Method(method);
     const middlewarePath = PathParameters(path, option);

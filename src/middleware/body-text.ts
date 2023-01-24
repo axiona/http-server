@@ -44,7 +44,10 @@ export function BodyTextParameter<Argument extends Context>(
 
     argument = Object.assign({}, BodyTextArgumentDefault, OmitUndefined(argument)) as BodyTextArgument<Argument>;
 
-    const register : Middleware['register'] = (router) =>AddAcceptHeaders(router, BodyTextParameterMimetype);
+    const register : Middleware['register'] = (router) => {
+        AddAcceptHeaders(router, BodyTextParameterMimetype);
+        return router;
+    };
 
     return Object.assign(function (context) {
 

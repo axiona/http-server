@@ -1,4 +1,4 @@
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import Method from '../../../dist/middleware/method';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
@@ -15,22 +15,22 @@ describe('ordered', () => {
 
     let mapped : Map<string, string[]> = new Map<string, string[]>();
     mapped.set('/path1/child1', ['POST', 'GET', 'PATCH', 'DELETE', 'PUT']);
-    // mapped.set('/path2/child2', ['GET', 'PATCH', 'DELETE', 'PUT']);
-    // mapped.set('/path3/child3', ['PATCH', 'DELETE', 'PUT']);
-    // mapped.set('/path4/child4', ['DELETE', 'PUT']);
-    // mapped.set('/path5/child5', ['PUT']);
-    // mapped.set('/path6/child6', ['CUSTOM']);
+    mapped.set('/path2/child2', ['GET', 'PATCH', 'DELETE', 'PUT']);
+    mapped.set('/path3/child3', ['PATCH', 'DELETE', 'PUT']);
+    mapped.set('/path4/child4', ['DELETE', 'PUT']);
+    mapped.set('/path5/child5', ['PUT']);
+    mapped.set('/path6/child6', ['CUSTOM']);
 
     const server = Server();
 
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, new Router());
+    let router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 
-        router.add(AutoOptions());
+        let next = router.add(AutoOptions());
 
         let list : {path:string, method:string}[] = [];
 
@@ -46,7 +46,7 @@ describe('ordered', () => {
 
         for (const {path, method} of list) {
 
-            router.add(Method(method)).add(PathParameters(path)).add(ctx=>ctx);
+            next.add(Method(method)).add(PathParameters(path)).add(ctx=>ctx);
         }
 
     });

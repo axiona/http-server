@@ -1,7 +1,7 @@
 import Axios, {AxiosResponse} from 'axios';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import ContextDataGuard from './context-data-guard';
 import {ResponseParameters} from '../../../dist/middleware/response';
 import {PaymentRequiredParameters} from '@alirya/http/response/payment-required';
@@ -23,7 +23,7 @@ describe('invalid middleware', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, new Router());
+    let router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 

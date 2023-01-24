@@ -1,4 +1,4 @@
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import Method from '../../../dist/middleware/method';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
@@ -18,13 +18,13 @@ describe('single', () => {
     it('open', ()=>server.open());
 
 
-    let router =  BindToServer(server, new Router());
+    let router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{
 
-        router.add(AutoOptions());
-        const path = router.add(PathParameters('/path/child'));
+        let next = router.add(AutoOptions());
+        const path = next.add(PathParameters('/path/child'));
 
         for (const method of methods) {
 

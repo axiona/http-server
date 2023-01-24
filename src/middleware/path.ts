@@ -5,10 +5,11 @@ import { ParseOptions, TokensToRegexpOptions, RegexpToFunctionOptions} from 'pat
 import Router from '../router/router';
 import ContextPath from "../matcher/match/context-path";
 import Matcher from "../matcher/matcher";
-import AbsolutePath from "../router/string/absolute-path";
-import FromRouter from "../matcher/from-router";
 import List from "../path/list/list";
-import Standard from "../router/standard";
+import Standard from "../router/middleware";
+import Metadata from "../router/metadata/metadata";
+import FromPath from "../matcher/from-path";
+import Null from "../router/metadata/null";
 
 export type PathContext<
     ArgumentType extends Record<string, string> = Record<string, string>,
@@ -92,57 +93,34 @@ export function PathParameters<
     option : Partial<PathArgumentsOption<ArgumentType, Argument|string, Storage|string>> = PathOptionDefault,
 ) : PathReturn<ArgumentType, Argument|string, Storage|string, ContextType> {
 
-    const path = new PathClass(paths, option);
+    const metadatas = new Map<string, Matcher>();
 
-    return Object.assign(
-        (context : Context) => path.callback(context),
-        { register:(router : Router) => path.register(router) }
-    ) as PathReturn<ArgumentType, Argument|string, Storage|string, ContextType>;
-}
+    option = Object.assign({}, PathOptionDefault, option);
+    let relatives = List(paths);
 
+    const createMatcher = (metadata : Metadata) : Matcher => {
 
-export class PathClass<
-    ArgumentType extends Record<string, string>,
-    Argument extends string,
-    Storage extends string,
-    ContextType extends Context,
-    > {
+        const absolute = List([metadata.path.path, ...relatives]);
 
-    matchers: Map<Router, Matcher> = new Map();
-    option: Partial<PathArgumentsOption<ArgumentType, Argument, Storage>>;
-    relatives: ListType;
+        return FromPath(absolute.toString(), option);
+    };
 
-    constructor(
-        paths : string[]|string,
-        option : Partial<PathArgumentsOption<ArgumentType, Argument, Storage>> = {},
-    ) {
-        this.option = Object.assign({}, PathOptionDefault, option);
-        this.relatives = List(paths);
-    }
+    const register = (metadata : Metadata) => {
 
-    private createMatcher(router : Router) : Matcher {
+        let matcher = createMatcher(metadata);
+        metadata.path = matcher;
 
-        const absoluteString = AbsolutePath(router, this.relatives);
+        metadatas.set(matcher.path, matcher);
+        return metadata;
+    };
 
-        return  FromRouter(router, absoluteString, this.option);
-    }
-
-    register (router : Router) {
-
-        const matcher = this.createMatcher(router);
-
-        this.matchers.set(router, matcher);
-
-        router.metadata.path = matcher;
-    }
-
-    callback (context : Context) : Context|undefined {
+    return Object.assign((context: Context) => {
 
         let match: Matcher;
 
         if(context.router) {
 
-            match = this.matchers.get(context.router) as Matcher;
+            match = metadatas.get(context.router.path.path) as Matcher;
 
             if(!match) {
 
@@ -151,22 +129,104 @@ export class PathClass<
 
         } else {
 
-            match = this.createMatcher(new Standard());
+            match = createMatcher(Null());
         }
 
+        // const result = ContextPath(match, context);
         const result = ContextPath(match, context);
 
         if(result) {
 
             Object.assign(context.request, {
-                [this.option.argument as Argument] : result.params
+                [option.argument as Argument]: result.params
             });
 
             return context;
         }
-    }
 
+    }, {register}) as PathReturn<ArgumentType, Argument|string, Storage|string, ContextType>;
+
+
+    // const path = new PathClass(paths, option);
+    //
+    // return Object.assign(
+    //     (context : Context) => path.callback(context),
+    //     { register:(router : Router) => path.register(router) }
+    // ) as PathReturn<ArgumentType, Argument|string, Storage|string, ContextType>;
 }
+
+//
+// export class PathClass<
+//     ArgumentType extends Record<string, string>,
+//     Argument extends string,
+//     Storage extends string,
+//     ContextType extends Context,
+//     > {
+//
+//     matchers: Map<Router, Matcher> = new Map();
+//     option: Partial<PathArgumentsOption<ArgumentType, Argument, Storage>>;
+//     relatives: ListType;
+//
+//     constructor(
+//         paths : string[]|string,
+//         option : Partial<PathArgumentsOption<ArgumentType, Argument, Storage>> = {},
+//     ) {
+//         this.option = Object.assign({}, PathOptionDefault, option);
+//         this.relatives = List(paths);
+//     }
+//
+//     // funtion (metadata : Metadata) {
+//     //
+//     //     metadata.path.path;
+//     // }
+//
+//     private createMatcher(router : Router) : Matcher {
+//
+//         const absoluteString = AbsolutePath(router, this.relatives);
+//
+//         return  FromRouter(router, absoluteString, this.option);
+//     }
+//
+//     register (router : Router) {
+//
+//         const matcher = this.createMatcher(router);
+//
+//         this.matchers.set(router, matcher);
+//
+//         router.metadata.path = matcher;
+//     }
+//
+//     callback (context : Context) : Context|undefined {
+//
+//         let match: Matcher;
+//
+//         if(context.router) {
+//
+//             match = this.matchers.get(context.router) as Matcher;
+//
+//             if(!match) {
+//
+//                 throw new Error('Matcher on current route is not exists');
+//             }
+//
+//         } else {
+//
+//             match = this.createMatcher(new Standard());
+//         }
+//
+//         const result = ContextPath(match, context);
+//
+//         if(result) {
+//
+//             Object.assign(context.request, {
+//                 [this.option.argument as Argument] : result.params
+//             });
+//
+//             return context;
+//         }
+//     }
+//
+// }
 
 
 

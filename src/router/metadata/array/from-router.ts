@@ -1,21 +1,49 @@
 import Metadata from "../metadata";
 import Router from "../../router";
 
-export default function FromRouter(router: Router) : Metadata[] {
+export function FromRouterArray(metadata: Metadata, container: Set<Metadata>) : Set<Metadata> {
 
-    return Array.from(new Set(FromRouterArray(router)));
-}
+    container.add(metadata);
 
-export function FromRouterArray(router: Router) : Metadata[] {
+    for (const value of metadata.children) {
 
-    const parameters : Metadata[] = [];
-
-    parameters.push(router.metadata);
-
-    for (const children of router.children) {
-
-        parameters.push(...FromRouterArray(children));
+        FromRouterArray(value, container);
     }
 
-    return parameters;
+    return container;
+
+    // return Array.from(new Set(FromRouterArray(router)));
 }
+
+export default function FromRouter(metadata: Metadata) : Metadata[] {
+
+    const set = FromRouterArray(metadata, new Set<Metadata>());
+    return Array.from(set);
+
+    // yield metadata;
+    //
+    // for (const meta of metadata.children) {
+    //
+    //     yield * FromRouter(meta);
+    // }
+
+}
+
+// export default function FromRouter(router: Router) : Metadata[] {
+//
+//     return Array.from(new Set(FromRouterArray(router)));
+// }
+//
+// export function FromRouterArray(router: Router) : Metadata[] {
+//
+//     const parameters : Metadata[] = [];
+//
+//     parameters.push(router.metadata);
+//
+//     for (const children of router.children) {
+//
+//         parameters.push(...FromRouterArray(children));
+//     }
+//
+//     return parameters;
+// }

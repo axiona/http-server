@@ -1,4 +1,4 @@
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import Method from '../../../dist/middleware/method';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
@@ -21,7 +21,7 @@ describe('single', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, new Router());
+    let router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{
@@ -79,7 +79,7 @@ describe('multi', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, new Router());
+    let router =  BindToServer(server, Router());
 
     for(const method of methods) {
 

@@ -32,7 +32,10 @@ export default function BodyUrlencoded<Argument extends Context>(
         queryString: Omit.Parameters(argument, 'limit')
     });
 
-    const register : Middleware['register'] = (router) =>AddAcceptHeaders(router, 'application/x-www-form-urlencoded');
+    const register : Middleware['register'] = (router) => {
+        AddAcceptHeaders(router, 'application/x-www-form-urlencoded');
+        return router;
+    };
 
     return Object.assign(function (context) {
 

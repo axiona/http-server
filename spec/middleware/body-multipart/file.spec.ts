@@ -1,4 +1,4 @@
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
@@ -23,7 +23,7 @@ describe('single', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, new Router());
+    let router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{

@@ -1,4 +1,4 @@
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios from 'axios';
@@ -12,7 +12,7 @@ describe('basic', function () {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    const router =  BindToServer(server, new Router());
+    const router =  BindToServer(server, Router());
 
     let called : string[] = [];
 

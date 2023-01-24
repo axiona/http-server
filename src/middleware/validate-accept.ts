@@ -1,14 +1,10 @@
 import Context from "../context/context";
-import Middleware, {MiddlewareReturn} from "./middleware";
+import Middleware from "./middleware";
 import Metadata from "../router/metadata/metadata";
 import {PathSegmentsGet} from "../context/path-segments";
 import GetContextPath from "../router/metadata/get-context-path";
-import Method from "../boolean/method";
-import {SetResponseParameters} from "../context/set-response";
-import {MethodNotAllowedParameters} from '@alirya/http/response/method-not-allowed';
 import {Request} from "koa";
 import {Headers} from "headers-polyfill";
-import {BadRequestParameters} from '@alirya/http/response/bad-request';
 import {UnsupportedMediaTypeParameters} from '@alirya/http/response/unsupported-media-type';
 import {ResponseParameters} from "../middleware/response";
 import Stop from "./stop";

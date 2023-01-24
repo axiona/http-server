@@ -1,6 +1,6 @@
 import Context from '../context/context';
-import Router from '../router/router';
 import Union from "@alirya/promise/union";
+import Metadata from "../router/metadata/metadata";
 
 
 export default interface Middleware<
@@ -12,7 +12,7 @@ export default interface Middleware<
      * called on registered to router
      * @param context
      */
-    register?:(router: Router) => void;
+    register?:(router: Metadata) => Metadata;
     (context: Argument) : MiddlewareReturn<Return>;
 }
 

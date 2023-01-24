@@ -1,7 +1,7 @@
 import Axios, {AxiosResponse} from 'axios';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import OneGuard from './one-guard';
 import {ValidationParameters} from '../../../dist/middleware/validation';
 
@@ -22,7 +22,7 @@ describe('invalid', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, new Router());
+    let router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 

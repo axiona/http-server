@@ -1,5 +1,5 @@
 import {DefaultContext, DefaultState, ExtendableContext} from 'koa';
-import RouterType from '../router/router';
+import Metadata from "../router/metadata/metadata";
 
 /**
  * context of parameter middleware
@@ -13,7 +13,8 @@ type Context<
 > = ExtendableContext & {
     response : Response,
     request : Request,
-    router ?: RouterType & Router
+    // router ?: RouterType & Router
+    router ?: Metadata & Router
 };
 
 export default Context;

@@ -1,9 +1,11 @@
 import Router from "../router";
 import {Headers} from "headers-polyfill";
+import Metadata from "../metadata/metadata";
 
-export default function AddAcceptHeaders(router: Router, contentType: string) {
+// TODO MOVE TO HTTP PACKAGE
+export default function AddAcceptHeaders(router: Metadata, contentType: string) {
 
-    const header = new Headers(router.metadata.headers);
+    const header = new Headers(router.headers);
 
     const accept = header.get('Accept');
 
@@ -15,6 +17,6 @@ export default function AddAcceptHeaders(router: Router, contentType: string) {
 
     }
 
-    router.metadata.headers = header.all();
+    router.headers = header.all();
 
 }

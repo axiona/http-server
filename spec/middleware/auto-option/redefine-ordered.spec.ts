@@ -1,8 +1,8 @@
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import Method from '../../../dist/middleware/method';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
-import Axios, {AxiosResponse} from 'axios';
+import Axios, {AxiosError, AxiosResponse} from 'axios';
 import {PathParameters} from '../../../dist/middleware/path';
 import AutoOptions from '../../../dist/middleware/auto-options';
 
@@ -10,43 +10,89 @@ it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 
-    let response : AxiosResponse<{name : string, address : string}>;
     let methods : string[] = ['POST', 'GET', 'PATCH', 'DELETE', 'PUT'];
 
-    const server = Server();
+    describe('slibing', () => {
 
-    beforeAll(()=>server.open());
-    afterAll(()=>server.close());
+        // let response : AxiosResponse<{name : string, address : string}>;
+        let error : AxiosError;
+        const server = Server();
 
-    let router =  BindToServer(server, new Router());
+        beforeAll(()=>server.open());
+        afterAll(()=>server.close());
 
-    it('add request', ()=>{
+        let router =  BindToServer(server, Router());
 
-        router.add(AutoOptions());
+        it('add request', ()=>{
 
-        for (const method of methods) {
+            router.add(AutoOptions());
 
-            router.add(Method(method)).add(PathParameters('/path/child')).add(ctx=>ctx);
-        }
+            for (const method of methods) {
+
+                router.add(Method(method)).add(PathParameters('/path/child')).add(ctx=>ctx);
+            }
+        });
+
+        it('send request', function () {
+
+            return Axios.request({
+                method : 'OPTIONS',
+                url : `http://localhost:${server.config.port}/path/child`
+            }).then((res)=>{
+
+                fail('request should fail');
+
+            }).catch(e => {
+                error = e;
+            });
+        });
+
+        it('assert value', function () {
+
+            expect((error.response as AxiosResponse).status).toEqual(404);
+            expect((error.response as AxiosResponse).statusText).toEqual('Not Found');
+        });
+
     });
 
-    it('send request', function (done) {
+    describe('children', () => {
 
-        Axios.request({
-            method : 'OPTIONS',
-            url : `http://localhost:${server.config.port}/path/child`
-    }).then((res)=>{
+        let response : AxiosResponse<{name : string, address : string}>;
+        const server2 = Server();
 
-            response = res;
+        beforeAll(()=>server2.open());
+        afterAll(()=>server2.close());
 
-        }).catch(fail).finally(done);
+        let router =  BindToServer(server2, Router());
+
+        it('add request', ()=>{
+
+            let next = router.add(AutoOptions());
+
+            for (const method of methods) {
+
+                next.add(Method(method)).add(PathParameters('/path/child')).add(ctx=>ctx);
+            }
+        });
+
+        it('send request', function (done) {
+
+            Axios.request({
+                method : 'OPTIONS',
+                url : `http://localhost:${server2.config.port}/path/child`
+            }).then((res)=>{
+
+                response = res;
+
+            }).catch(fail).finally(done);
+        });
+
+        it('assert value', function () {
+
+            expect(response.headers.allow).toEqual(methods.join(', '));
+            expect(response.status).toEqual(204);
+            expect(response.statusText).toEqual('No Content');
+        });
+
     });
-
-    it('assert value', function () {
-
-        expect(response.headers.allow).toEqual(methods.join(', '));
-        expect(response.status).toEqual(204);
-        expect(response.statusText).toEqual('No Content');
-    });
-
 });

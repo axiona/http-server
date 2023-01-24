@@ -1,4 +1,4 @@
-import Router from '../../../dist/router/standard';
+import Router from '../../../dist/router/middleware';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Validation, {ValidationParameter, ValidationParameters} from '../../../dist/middleware/validation';
@@ -9,7 +9,7 @@ it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
 
-let router =  BindToServer(server, new Router());
+let router =  BindToServer(server, Router());
 
 describe('validation', () => {
 
