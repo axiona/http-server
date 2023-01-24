@@ -5,13 +5,11 @@ import {PathSegmentsGet} from "../context/path-segments";
 import {Headers} from "headers-polyfill";
 import Metadata from "../router/metadata/metadata";
 import GetContextPath from "../router/metadata/get-context-path";
-import Next from "./next";
 
 export default function AutoCors<
     ContextType extends Context = Context
 >(
-     // middleware : Middleware<ContextType, ContextType> = Next,
-     varies : string[] = []
+
 ) : Middleware<ContextType, ContextType> {
 
     let caches : Map<string, Pick<Metadata, 'headers'|'method'>> = new Map<string, Pick<Metadata, 'headers'|'method'>>();
@@ -63,18 +61,14 @@ export default function AutoCors<
                 context.set('Vary', varies);
                 context.set(methods.headers);
 
-                // return /*valid*/(context);
             } else if(isMethod) {
 
                 context.set('Access-Control-Allow-Origin', origin);
                 context.set('Vary', varies);
-                // return context;
             }
-
-            // return middleware(context);
         }
 
-        return (context);
+        return context;
 
     };
 

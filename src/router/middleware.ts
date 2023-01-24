@@ -9,8 +9,6 @@ import Compose from "./compose";
 import Register from "./metadata/register";
 import Clone from "./metadata/clone";
 
-let mr = 1;
-
 export default function Middleware<
     ContextType extends Context  = Context,
     Error extends Catch  = Catch,
@@ -18,7 +16,6 @@ export default function Middleware<
     middleware : Middleware<Context, ContextType> = Identity as Middleware<Context, ContextType>,
     metadata : Metadata = Null(),
     parent : Middleware|null = null,
-    // root : Middleware|null = null,
 ) : Router<ContextType>  {
 
     const children : Router[] = [];

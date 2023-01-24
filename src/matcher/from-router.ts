@@ -1,6 +1,5 @@
 import Matcher from "./matcher";
 import ArrayFromRouter from "./array/from-router";
-// import Root from "../router/root";
 import FromPathMemoize from "./from-path-memoize";
 import {FromPathArgumentsOption} from "./from-path";
 import Metadata from "../router/metadata/metadata";

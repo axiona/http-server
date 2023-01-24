@@ -28,5 +28,4 @@ export default function FromPath(path: string, option: FromPathArgumentsOption =
     };
 
     return Object.freeze(Object.assign(callback, {option, path}));
-    // return Object.freeze(Object.assign(match(path, option), {option, path}));
 }

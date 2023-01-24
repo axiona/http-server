@@ -37,15 +37,6 @@ export default function Compose<
             for (const value of children) {
 
                 AppendChildren(meta => Register((meta), value), metaNext);
-
-                // let metadata1 = Register(Clone(metaNext), value);
-                // metadata1.parent = metaNext;
-                // metaNext.children.push(metadata1);
-
-
-                // let metadata1 = Register(Clone(metaNext), value);
-                // metadata1.parent = metaNext;
-                // metaNext.children.push(metadata1);
             }
 
             return metaNext;
@@ -57,12 +48,6 @@ export default function Compose<
                 metadata,
                 children
             );
-
-            const router = MiddlewareRouter(next, Clone(metadata), route as Router<ContextType>);
-            metadata.children.push(router.metadata);
-            children.push(router);
-
-            return router;
         },
         catch : (errorHandler : ErrorHandlerType) => {
 
@@ -71,13 +56,6 @@ export default function Compose<
                 metadata,
                 children
             );
-
-            // let nextMetadata = (metadata);
-            const router =  MiddlewareCatch(errorHandler, Clone(metadata), route as Router<ContextType>);
-            metadata.children.push(router.metadata);
-            children.push(router);
-
-            return router;
         },
 
     }) as Router<ContextType>;
