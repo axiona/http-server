@@ -13,7 +13,6 @@ type Context<
 > = ExtendableContext & {
     response : Response,
     request : Request,
-    // router ?: RouterType & Router
     router ?: Metadata & Router
 };
 

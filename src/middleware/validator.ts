@@ -86,7 +86,6 @@ export function ValidatorParameter<
 >(  {
         validator,
         invalid,
-        // valid,
         replace,
         validatable,
     } : ValidatorArgumentContext<ContextType, ValidatorType, ValidatableKey, Invalid/*, Valid*/>,
@@ -156,7 +155,6 @@ export function ValidatorParameter<
 >(  {
         validator,
         invalid,
-        // valid,
         replace = true,
         properties = [],
         validatable = ['validatable'],

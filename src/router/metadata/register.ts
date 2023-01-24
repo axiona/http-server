@@ -2,7 +2,7 @@ import Clone from "./clone";
 import Middleware from "../../middleware/middleware";
 import Metadata from "./metadata";
 
-export default function Register<MiddlewareType extends Middleware>(metadata: Metadata, middleware: MiddlewareType) : Metadata {
+export default function Register<MiddlewareType extends Pick<Middleware, 'register'>>(metadata: Metadata, middleware: MiddlewareType) : Metadata {
 
     if(middleware.register) {
 

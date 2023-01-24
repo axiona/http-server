@@ -7,6 +7,8 @@ import Null from "./metadata/null";
 import Compose from "../router/compose";
 import Middleware from '../middleware/middleware';
 import Identity from "../../../function/dist/identity";
+import Register from "./metadata/register";
+import Clone from "./metadata/clone";
 
 export default function Catch<
     ContextType extends Context  = Context,
@@ -17,28 +19,34 @@ export default function Catch<
     parent : Middleware|null = null,
 ) : Router<ContextType>  {
 
-
-
     const children : Router[] = [];
+
+    let nextMetadata = Register(metadata, errorHandler);
+
+    const register = (meta : Metadata) : Metadata => {
+
+        return Register(Clone(meta), errorHandler);
+    };
 
     const callback = async function (context : Context) {
 
         for (const next of children) {
 
             try {
-                context.router = metadata;
+                context.router = nextMetadata;
 
                 await next(context);
 
             } catch (error) {
 
+                context.router = nextMetadata;
                 errorHandler(context, error);
             }
         }
 
-        context.router = metadata;
+        context.router = nextMetadata;
 
     };
 
-    return Compose(metadata, children, callback, Identity, parent) as Router<ContextType>;
+    return Compose(nextMetadata, children, callback, register, parent) as Router<ContextType>;
 }

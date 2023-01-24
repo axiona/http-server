@@ -16,7 +16,3 @@ export default function Stop<ContextType extends Context>(m ?: Middleware) : Cal
         return function (context) {};
     }
 }
-
-// export default function Stop<ContextType extends Context>(context : Context) : void {
-//
-// }

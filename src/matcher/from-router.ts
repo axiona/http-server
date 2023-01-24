@@ -1,4 +1,3 @@
-import Router from "../router/router";
 import Matcher from "./matcher";
 import ArrayFromRouter from "./array/from-router";
 // import Root from "../router/root";

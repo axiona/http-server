@@ -3,7 +3,6 @@ import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
 import BodyJson from '../../../dist/middleware/body-json';
-import ContentTypeJson from '@alirya/http/headers/header/content-type-json';
 import {HttpError} from "http-errors";
 import FromError from "../../../dist/context/from-error";
 

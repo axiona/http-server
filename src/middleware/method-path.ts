@@ -74,42 +74,8 @@ export function MethodPathParameters<
     option : Partial<MethodPathArgumentsOption<ArgumentType, Argument|string, Storage|string>> = PathOptionDefault,
 ) : MethodPathReturn<ArgumentType, Argument|string, Storage|string, ContextType> {
 
-    // return Method(method);
-
     return Extends(Middleware(Method(method))
-        // .add(PathParameters(path, option))
         .add(PathParameters(path, option))) as MethodPathReturn<ArgumentType, Argument|string, Storage|string, ContextType>;
-
-    const middlewareMethod = Method(method);
-    const middlewarePath = PathParameters(path, option);
-
-    const middleware = ((context) => {
-
-        const ctx = middlewareMethod(context);
-
-        if(ctx) {
-
-            return middlewarePath(ctx as Context);
-        }
-
-        return ;
-
-    });
-
-    const register = function (router) {
-
-        for (const middleware of [middlewareMethod, middlewarePath]) {
-
-            if(middleware.register) {
-
-                middleware.register(router);
-            }
-        }
-    };
-
-
-    return Object.assign(middleware, middlewarePath, middlewareMethod, {register}) as MethodPathReturn<ArgumentType, Argument|string, Storage|string, ContextType>;
-
 }
 
 export type MethodPathArgument<
