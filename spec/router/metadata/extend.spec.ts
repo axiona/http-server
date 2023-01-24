@@ -6,55 +6,6 @@ import * as util from "util";
 import Extends from "../../../dist/middleware/extends";
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
-//
-// let called : string[] =[];
-//
-// const callback1 = Object.assign(function (ctx) {
-//
-//         called.push('callback 1');
-//         return ctx;
-//     },
-//     {
-//         register: (metadata) => {
-//             metadata.method.push('callback 1');
-//             return metadata;
-//         }
-//     }
-// );
-//
-// const callback2 = Object.assign(function (ctx) {
-//
-//         called.push('callback 2');
-//         return ctx;
-//     },
-//     {
-//         register: (metadata) => {
-//             metadata.method.push('callback 2');
-//             return metadata;
-//         }
-//     }
-// );
-//
-// const router =   Router();
-//
-// let router1 = router.add(Object.assign(function (ctx) {
-//
-//         called.push('1 1');
-//         return ctx;
-//     },
-//     {
-//         register: (metadata) => {
-//             metadata.method.push('1 1');
-//             return metadata;
-//         }
-//     }
-// ));
-//
-//
-//     let r = Router().add(callback1).add(callback2);
-//
-//     router1.add(r);
-// router({} as any);
 
 describe('basic', function () {
 

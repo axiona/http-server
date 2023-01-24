@@ -33,14 +33,6 @@ describe('single', () => {
 
     let router =  BindToServer(server, Router());
 
-    // function dump(metadata: Metadata) {
-    //
-    //     return Object.assign({}, {
-    //        path: metadata.path.path,
-    //        children: metadata.children.map(dump)
-    //     });
-    // }
-
 
     it('add request', ()=>{
 

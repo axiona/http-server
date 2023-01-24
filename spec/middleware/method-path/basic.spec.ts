@@ -90,7 +90,6 @@ describe('multi', () => {
 
     let router =  BindToServer(server, Router());
 
-    // router.add(Method('POST')).add(PathParameters('/path'));
     for(const path of paths) {
 
         for(const method of methods) {
