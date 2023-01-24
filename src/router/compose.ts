@@ -9,6 +9,8 @@ import Metadata from "./metadata/metadata";
 import Identity from "../../../function/dist/identity";
 import Clone from "./metadata/clone";
 import Register from "./metadata/register";
+import RegisterChildren from "./register-children";
+import AppendChildren from "./metadata/append-children";
 
 export default function Compose<
     ContextType extends Context  = Context,
@@ -30,18 +32,31 @@ export default function Compose<
     route = Object.assign(route, {
         register : (meta: Metadata) : Metadata => {
 
-            const metaNext = (registers((meta)));
+            const metaNext = registers(meta);
 
             for (const value of children) {
 
-                let router = Register(Clone(metaNext), value);
-                router.parent = metaNext;
-                metaNext.children.push(router);
+                AppendChildren(meta => Register((meta), value), metaNext);
+
+                // let metadata1 = Register(Clone(metaNext), value);
+                // metadata1.parent = metaNext;
+                // metaNext.children.push(metadata1);
+
+
+                // let metadata1 = Register(Clone(metaNext), value);
+                // metadata1.parent = metaNext;
+                // metaNext.children.push(metadata1);
             }
 
             return metaNext;
         },
         add : <Next extends Context>(next : Middleware<ContextType, Next>) => {
+
+            return RegisterChildren(
+                (metadata) => MiddlewareRouter(next, metadata, route as Router<ContextType>),
+                metadata,
+                children
+            );
 
             const router = MiddlewareRouter(next, Clone(metadata), route as Router<ContextType>);
             metadata.children.push(router.metadata);
@@ -51,8 +66,14 @@ export default function Compose<
         },
         catch : (errorHandler : ErrorHandlerType) => {
 
+            return RegisterChildren(
+                (metadata) => MiddlewareCatch(errorHandler, Clone(metadata), route as Router<ContextType>),
+                metadata,
+                children
+            );
+
             // let nextMetadata = (metadata);
-            const router =  MiddlewareCatch(errorHandler, Clone(metadata));
+            const router =  MiddlewareCatch(errorHandler, Clone(metadata), route as Router<ContextType>);
             metadata.children.push(router.metadata);
             children.push(router);
 

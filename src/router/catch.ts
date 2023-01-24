@@ -25,7 +25,7 @@ export default function Catch<
 
     const register = (meta : Metadata) : Metadata => {
 
-        return Register(Clone(meta), errorHandler);
+        return Register(meta, errorHandler);
     };
 
     const callback = async function (context : Context) {
@@ -34,7 +34,6 @@ export default function Catch<
 
             try {
                 context.router = nextMetadata;
-
                 await next(context);
 
             } catch (error) {

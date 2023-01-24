@@ -27,7 +27,7 @@ export default function Middleware<
 
     const register = (meta : Metadata) : Metadata => {
 
-        return Register(Clone(meta), middleware);
+        return Register(meta, middleware);
     };
 
     const callback = async function (context : Context) {
@@ -46,7 +46,7 @@ export default function Middleware<
         return contextNext;
     };
 
-    return Compose(nextMetadata, children, callback, register, parent) as Router<ContextType> ;
+    return Compose(nextMetadata, children, callback, register, parent) as Router<ContextType>;
 
 }
 

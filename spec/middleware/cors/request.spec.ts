@@ -7,11 +7,15 @@ import Cors from "../../../dist/middleware/auto-cors";
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
+
 describe('single', () => {
 
     let called : boolean = false;
-    let response : AxiosResponse<string>;
-    let data : string = '';
+    let response : AxiosResponse<{name : string, address : string}>;
+    let data : {name : string, address : string} = {
+        name : 'jhon',
+        address : 'earth'
+    };
 
     const server = Server();
 
@@ -35,7 +39,7 @@ describe('single', () => {
 
     it('send request', function (done) {
 
-        Axios.options(`http://localhost:${server.config.port}`).then((res)=>{
+        Axios.post(`http://localhost:${server.config.port}`).then((res)=>{
 
             response = res;
 
@@ -44,14 +48,10 @@ describe('single', () => {
 
     it('assert value', function () {
 
-        expect(response.headers['access-control-allow-methods']).toEqual('POST');
-        expect(response.headers['access-control-allow-origin']).toEqual('');
-        expect(response.headers['vary']).toEqual('Origin');
-
         expect(response.data).toEqual(data);
-        expect(called).toBe(false);
-        expect(response.status).toEqual(204);
-        expect(response.statusText).toEqual('No Content');
+        expect(called).toBe(true);
+        expect(response.status).toEqual(200);
+        expect(response.statusText).toEqual('OK');
     });
 
 });
@@ -60,11 +60,20 @@ describe('single', () => {
 
 describe('multi', () => {
 
+    type Data = {
+        name : string,
+        address : string,
+        method: string
+    };
     const methods : string[] = ['POST', 'GET', 'PATCH', 'PUT'];
     let called : boolean = false;
     let uncalled : boolean = false;
 
-    let data : string = '';
+    let data : Data = {
+        name : 'jhon',
+        address : 'earth',
+        method : '',
+    };
 
     const server2 = Server();
 
@@ -81,7 +90,7 @@ describe('multi', () => {
         it('add post request', ()=>{
 
             next.add(Method(method)).add(function (ctx) {
-
+                data.method = method;
                 ctx.response.body = data;
                 called = true;
                 return ctx;
@@ -92,13 +101,15 @@ describe('multi', () => {
         });
     }
 
-    let response : AxiosResponse<string>;
+    let response : AxiosResponse<Data>;
 
     for(const method of methods) {
 
+        data.method = method;
+
         it('send request', function (done) {
 
-            Axios.options(`http://localhost:${server2.config.port}`).then((res)=>{
+            Axios.post(`http://localhost:${server2.config.port}`).then((res)=>{
 
                 response = res;
 
@@ -108,10 +119,10 @@ describe('multi', () => {
         it('assert value', function () {
 
             expect(response.data).toEqual(data);
-            expect(called).toBe(false);
+            expect(called).toBe(true);
             expect(uncalled).toBe(false);
-            expect(response.status).toEqual(204);
-            expect(response.statusText).toEqual('No Content');
+            expect(response.status).toEqual(200);
+            expect(response.statusText).toEqual('OK');
         });
 
     }
