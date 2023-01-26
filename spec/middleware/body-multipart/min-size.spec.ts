@@ -9,13 +9,14 @@ import FormidableFileBoolean from "../../../dist/file/boolean/file";
 import MinimumSize from "../../../dist/file/validator/minimum-size";
 import Validatable from "@alirya/validator/validatable/validatable";
 import File from "../../../dist/file/file";
+import MaxSizeExceeded from "../../../dist/file/catch/max-size-exceeded";
 
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 
-    let response : AxiosResponse<{name : string, address : string}>;
+    let response : AxiosResponse<{data : string|number}>;
     let validatable : Validatable;
     let validatableInvalid : Validatable;
     let valid : boolean;
@@ -29,7 +30,13 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(BodyMultipart()).add(function (ctx) {
+        router.catch(function (ctx) {
+
+            ctx.response.body = {data:'exception called'};
+
+        }).add(BodyMultipart({
+            minFileSize: 2560
+        })).add(function (ctx) {
 
             const file = ctx.request.body.image as File;
             validatable        = MinimumSize.Parameters(file.size)(file);
@@ -73,6 +80,7 @@ describe('single', () => {
 
         expect(validatableInvalid.valid).toBeFalse();
         expect(validatableInvalid.message).toEqual('File size too small.');
+        expect(response.data).toEqual({data:1});
 
         expect(response.status).toEqual(200);
         expect(response.statusText).toEqual('OK');
