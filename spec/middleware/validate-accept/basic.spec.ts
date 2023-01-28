@@ -27,9 +27,9 @@ describe('single', () => {
     it('add request', ()=>{
 
         router
-            .add(BodyMultipart({multiples:false}))
-            .add(StrictAccept())
-            .add(function (ctx) {
+            .next(BodyMultipart({multiples:false}))
+            .next(StrictAccept())
+            .next(function (ctx) {
 
             let data : Record<PropertyKey, any> = ctx.request.body;
             ctx.response.body = data;

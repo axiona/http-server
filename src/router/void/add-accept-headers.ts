@@ -1,4 +1,3 @@
-import Router from "../router";
 import {Headers} from "headers-polyfill";
 import Metadata from "../metadata/metadata";
 

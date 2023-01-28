@@ -9,7 +9,6 @@ export default function Null() : Metadata {
         headers: {},
         method: [],
         children: [],
-        parent: null,
         path,
     };
 }

@@ -24,7 +24,7 @@ describe('caught', function () {
 
         called.push('1');
 
-    }).add(function (ctx) {
+    }).next(function (ctx) {
 
         called.push('1 E');
         throw new Error('Error');
@@ -65,12 +65,12 @@ describe('uncaught', function () {
 
     let called : string[] = [];
 
-    router.add(function (ctx) {
+    router.next(function (ctx) {
 
         called.push('1');
         return ctx;
 
-    }).add(function (ctx) {
+    }).next(function (ctx) {
 
         ctx.status = 204;
 

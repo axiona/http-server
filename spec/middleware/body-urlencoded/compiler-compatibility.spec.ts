@@ -18,7 +18,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(BodyForm()).add(function (ctx) {
+        router.next(BodyForm()).next(function (ctx) {
 
             // @ts-expect-error
             const boolean : boolean = ctx.request.body;

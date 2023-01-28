@@ -26,14 +26,14 @@ describe('valid', () => {
     it('add request', ()=>{
 
         router
-            .add(BodyText.Parameters())
-            .add(function (context) {
+            .next(BodyText.Parameters())
+            .next(function (context) {
 
                 return Object.assign(context, {data:parseInt(context.request.body) as string|number|boolean});
 
             })
-            .add(ValidationParameters(OneGuard, ['data']))
-            .add(function (ctx) {
+            .next(ValidationParameters(OneGuard, ['data']))
+            .next(function (ctx) {
                 const data : 1 = ctx.data;
                 ctx.response.body = (data + data).toString();
                 called = true;

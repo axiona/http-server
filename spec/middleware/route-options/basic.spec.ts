@@ -33,10 +33,10 @@ describe('empty', () => {
 
     it('add request', ()=>{
 
-        router.add(RouteOptionsParameters(routes));
+        router.next(RouteOptionsParameters(routes));
 
         for (const route of routes) {
-            router.add(MethodPathParameter(route));
+            router.next(MethodPathParameter(route));
         }
 
     });

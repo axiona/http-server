@@ -1,49 +1,28 @@
 import Context from '../context/context';
 import Router from './router';
-import Catch from '../catch/catch';
-import Middleware from '../middleware/middleware';
+import MiddlewareType from '../middleware/middleware';
 import Metadata from "./metadata/metadata";
 import Null from "./metadata/null";
 import Identity from "../../../function/dist/identity";
 import Compose from "./compose";
-import Register from "./metadata/register";
-import Clone from "./metadata/clone";
 
-export default function Middleware<
-    ContextType extends Context  = Context,
-    Error extends Catch  = Catch,
-> (
-    middleware : Middleware<Context, ContextType> = Identity as Middleware<Context, ContextType>,
+export default function Middleware_<ContextType extends Context  = Context>(
+    middleware: MiddlewareType<Context, ContextType> = Identity as MiddlewareType<Context, ContextType>,
     metadata : Metadata = Null(),
-    parent : Middleware|null = null,
-) : Router<ContextType>  {
+) : Router<ContextType> {
 
-    const children : Router[] = [];
+    return Compose<ContextType>(middleware, metadata, async (context, children) : Promise<Context|void>=>  {
 
-    let nextMetadata = Register(metadata, middleware);
+        const next = await middleware(context);
 
-    const register = (meta : Metadata) : Metadata => {
+        if(next) {
 
-        return Register(meta, middleware);
-    };
+            for (const child of children) {
 
-    const callback = async function (context : Context) {
-
-        context.router = nextMetadata;
-        const contextNext = await middleware(context);
-
-        if(contextNext) {
-
-            for (const next of children) {
-
-                await next(contextNext);
+                await child.call(next);
             }
         }
 
-        return contextNext;
-    };
-
-    return Compose(nextMetadata, children, callback, register, parent) as Router<ContextType>;
-
+        return next;
+    });
 }
-

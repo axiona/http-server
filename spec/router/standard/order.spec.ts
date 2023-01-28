@@ -17,25 +17,25 @@ describe('basic', function () {
 
     const router =  BindToServer(server, Router());
 
-    router.add(function (ctx) {
+    router.next(function (ctx) {
 
         called.push('1 1');
         return ctx;
 
-    }).add(function (ctx) {
+    }).next(function (ctx) {
 
 
         called.push('1 1 1');
         return ctx;
 
-    }).add(function (ctx) {
+    }).next(function (ctx) {
 
 
         called.push('1 1 1 1');
         return ctx;
     });
 
-    router.add(function (ctx) {
+    router.next(function (ctx) {
 
         ctx.status = 204;
         called.push('1 2');

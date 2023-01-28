@@ -1,64 +1,63 @@
-import ErrorHandlerType from '../catch/catch';
 import Context from '../context/context';
 import Router from './router';
-import MiddlewareRouter from './middleware';
-import MiddlewareCatch from './catch';
 import Catch from '../catch/catch';
 import Middleware from '../middleware/middleware';
 import Metadata from "./metadata/metadata";
-import Identity from "../../../function/dist/identity";
-import Clone from "./metadata/clone";
 import Register from "./metadata/register";
 import RegisterChildren from "./register-children";
-import AppendChildren from "./metadata/append-children";
+import Null from "./metadata/null";
+import Registrable from "../registrable.ts/registrable";
+import Middleware_ from "./middleware";
+import Catch_ from "./catch";
+import Callable from "../../../function/dist/callable";
 
-export default function Compose<
-    ContextType extends Context  = Context,
-    Error extends Catch  = Catch,
-> (
-    metadata : Metadata,
-    children : Router[],
-    callback : Omit<Middleware, 'register'>,
-    registers : (meta: Metadata) => Metadata = Identity,
-    parent : Middleware|null,
-) : Pick<Router<ContextType>, 'metadata'|'register'|'catch'|'add'>  {
 
-    let route: Pick<Router<ContextType>, 'metadata'|'parent'|'children'> = Object.assign(callback, {
-        parent,
-        metadata,
-        children
-    }) as Pick<Router<ContextType>, 'metadata'|'parent'|'children'>;
+export default function Compose<ContextType extends Context  = Context>(
+    registrable : Registrable,
+    metadata : Metadata = Null(),
+    call : (context: Context, children : Router[], metadata : Metadata) => Promise<Context|void>
+) : Router<ContextType> {
 
-    route = Object.assign(route, {
-        register : (meta: Metadata) : Metadata => {
+    return new ComposeClass(registrable, metadata, call);
 
-            const metaNext = registers(meta);
+}
 
-            for (const value of children) {
+export class ComposeClass<ContextType extends Context  = Context> implements Router<ContextType> {
 
-                AppendChildren(meta => Register((meta), value), metaNext);
-            }
+    public children : Router[] = [];
+    #call: (context: Context, children : Router[], metadata : Metadata) => Promise<Context|void>;
 
-            return metaNext;
-        },
-        add : <Next extends Context>(next : Middleware<ContextType, Next>) => {
+    constructor(
+        registrable : Registrable,
+        public metadata : Metadata = Null(),
+        call: (context: Context, children : Router[], metadata : Metadata) => Promise<Context|void>
+    ) {
 
-            return RegisterChildren(
-                (metadata) => MiddlewareRouter(next, metadata, route as Router<ContextType>),
-                metadata,
-                children
-            );
-        },
-        catch : (errorHandler : ErrorHandlerType) => {
+        this.metadata = Register(this.metadata, registrable);
+        this.#call = call;
+    }
 
-            return RegisterChildren(
-                (metadata) => MiddlewareCatch(errorHandler, Clone(metadata), route as Router<ContextType>),
-                metadata,
-                children
-            );
-        },
+    next<Next extends Context>(middleware: Middleware<ContextType, Next>): Router<Next> {
 
-    }) as Router<ContextType>;
+        return RegisterChildren(metadata => Middleware_(middleware, metadata), this.metadata, this.children);
 
-    return route as Router<ContextType>;
+    }
+
+    catch<ErrorType extends Error>(errorHandler : Catch<ContextType, ErrorType>) : Router<ContextType> {
+
+        return RegisterChildren(metadata => Catch_(errorHandler, metadata), this.metadata, this.children);
+    }
+
+    extends<ContextNext extends Context>(
+        router: (router:Router<ContextType>) => Router<ContextNext>
+    ) : Router<ContextNext> {
+
+        return router(this);
+    }
+
+    call(context: Context) : Promise<Context|void> {
+
+        context.router = this.metadata;
+        return this.#call(context, this.children, this.metadata);
+    }
 }

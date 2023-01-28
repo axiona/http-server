@@ -18,8 +18,8 @@ describe('context compatibility', ()=>{
         describe('parameters', ()=>{
 
             router
-                .add(ValidatorParameters(ContextValidator))
-                .add(function (ctx) {
+                .next(ValidatorParameters(ContextValidator))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -33,8 +33,8 @@ describe('context compatibility', ()=>{
                 });
 
 
-            router.add(ValidatorParameters(ContextValidator))
-                .add(function (ctx) {
+            router.next(ValidatorParameters(ContextValidator))
+                .next(function (ctx) {
 
                     // @ts-expect-error
                     const boolean : boolean = ctx.data;
@@ -53,8 +53,8 @@ describe('context compatibility', ()=>{
                 });
 
             router
-                .add(Validator.Parameters(ContextValidator))
-                .add(function (ctx) {
+                .next(Validator.Parameters(ContextValidator))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -73,8 +73,8 @@ describe('context compatibility', ()=>{
         describe('parameter', ()=>{
 
             router
-                .add(ValidatorParameter({validator:ContextValidator}))
-                .add(function (ctx) {
+                .next(ValidatorParameter({validator:ContextValidator}))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -88,8 +88,8 @@ describe('context compatibility', ()=>{
                 });
 
             router
-                .add(Validator.Parameter({validator:ContextValidator}))
-                .add(function (ctx) {
+                .next(Validator.Parameter({validator:ContextValidator}))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -109,13 +109,13 @@ describe('context compatibility', ()=>{
         describe('parameters', ()=>{
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(ValidatorParameters(ContextValidator))
-                .add(function (ctx) {
+                .next(ValidatorParameters(ContextValidator))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -129,13 +129,13 @@ describe('context compatibility', ()=>{
                 });
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(Validator.Parameters(ContextValidator))
-                .add(function (ctx) {
+                .next(Validator.Parameters(ContextValidator))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -153,13 +153,13 @@ describe('context compatibility', ()=>{
         describe('parameter', ()=>{
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(ValidatorParameter({validator:ContextValidator}))
-                .add(function (ctx) {
+                .next(ValidatorParameter({validator:ContextValidator}))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -172,9 +172,9 @@ describe('context compatibility', ()=>{
                     return ctx;
                 });
 
-            router.add(ValidatorParameter({
+            router.next(ValidatorParameter({
                 validator: ContextValidator
-            })).add(function (ctx) {
+            })).next(function (ctx) {
 
                 // @ts-expect-error
                 const boolean : boolean = ctx.data;
@@ -193,13 +193,13 @@ describe('context compatibility', ()=>{
             });
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(Validator.Parameter({validator:ContextValidator}))
-                .add(function (ctx) {
+                .next(Validator.Parameter({validator:ContextValidator}))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error

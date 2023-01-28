@@ -26,7 +26,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(BodyMultipart({multiples:false})).add(function (ctx) {
+        router.next(BodyMultipart({multiples:false})).next(function (ctx) {
 
             let data : Record<PropertyKey, any> = ctx.request.body;
             ctx.response.body = data;
@@ -83,7 +83,7 @@ describe('multiple', () => {
 
     it('add request', ()=>{
 
-        router.add(BodyMultipart({multiples:true})).add(function (ctx) {
+        router.next(BodyMultipart({multiples:true})).next(function (ctx) {
 
             let data : Record<PropertyKey, any> = ctx.request.body;
             ctx.response.body = data;

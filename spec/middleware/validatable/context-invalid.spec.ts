@@ -26,8 +26,8 @@ describe('invalid', () => {
     it('add request', ()=>{
 
         router
-            .add(Validation.Parameters(ContextDataGuard))
-            .add(function (ctx) {
+            .next(Validation.Parameters(ContextDataGuard))
+            .next(function (ctx) {
 
             const string : string = ctx.data;
             ctx.response.body = string;

@@ -26,17 +26,17 @@ describe('valid', () => {
     it('add request', ()=>{
 
         router
-            .add(BodyText.Parameters())
-            .add(function (context) {
+            .next(BodyText.Parameters())
+            .next(function (context) {
 
                 return Object.assign(context, {data:context.request.body as string|number|boolean});
 
-            }).add(function (ctx) {
+            }).next(function (ctx) {
                 const string : string|number|boolean = ctx.data;
                 return ctx;
             })
-            .add(Validation.Parameters(ContextDataGuard))
-            .add(function (ctx) {
+            .next(Validation.Parameters(ContextDataGuard))
+            .next(function (ctx) {
                 const string : string = ctx.data;
                 ctx.response.body = string;
                 called = true;

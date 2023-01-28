@@ -43,7 +43,7 @@ describe('basic', function () {
 
     const router =  BindToServer(server, Router());
 
-    let router1 = router.add(Object.assign(function (ctx) {
+    let router1 = router.next(Object.assign(function (ctx) {
 
             called.push('1 1');
             return ctx;
@@ -57,11 +57,11 @@ describe('basic', function () {
     ));
 
     {
-        router1.add(callback1);
-        router1.add(callback2);
+        router1.next(callback1);
+        router1.next(callback2);
     }
 
-    let router2 = router.add(Object.assign(function (ctx) {
+    let router2 = router.next(Object.assign(function (ctx) {
 
             ctx.status = 204;
             called.push('1 2');
@@ -76,8 +76,8 @@ describe('basic', function () {
     ));
 
     {
-        router2.add(callback1);
-        router2.add(callback2);
+        router2.next(callback1);
+        router2.next(callback2);
     }
 
 

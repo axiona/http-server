@@ -3,11 +3,9 @@ import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
 import {MethodPathParameter} from "../../../dist/middleware/method-path";
-import FromRouter from "../../../dist/router/metadata/array/from-router";
 import Passthru from "../../../dist/middleware/passthrough";
 import NoOp from '@alirya/function/no-op';
 import {OmitParameters} from "../../../../object/dist/omit";
-import util from "util";
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -31,7 +29,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(MethodPathParameter({method:'POST', path:'/path/child'})).add(function (ctx) {
+        router.next(MethodPathParameter({method:'POST', path:'/path/child'})).next(function (ctx) {
             ctx.response.body = data;
             called = true;
             return ctx;
@@ -97,13 +95,13 @@ describe('multi', () => {
             it('add post request', ()=>{
 
                 router
-                    .add(MethodPathParameter({method, path}))
-                    .add(function (ctx) {
+                    .next(MethodPathParameter({method, path}))
+                    .next(function (ctx) {
                     data.method = method;
                     ctx.response.body = data;
                     called = true;
                     return ctx;
-                }).add(Passthru(NoOp) as any);
+                }).next(Passthru(NoOp) as any);
 
             });
         }
@@ -112,72 +110,27 @@ describe('multi', () => {
 
     it('test parameter', () => {
 
-        // console.log(JSON.stringify(router.metadata));
-
-        const actual = FromRouter(router.metadata).map(data=> {
+        const actual =  (router.metadata.children).map(data=> {
 
             return Object.assign({}, data, {path:data.path.path, children:[]});
 
         });
 
-        // console.log('JSON.stringify(actual)');
-        // console.log(actual);
-        let data = actual.map(data=>OmitParameters(data, 'children', 'parent'));
-        // console.log(util.inspect(router, {showHidden: false, depth: null, colors: true}));
-        // console.log('---------------------------------------------');
-        // console.log(util.inspect(router.metadata, {showHidden: false, depth: null, colors: true}));
-        // console.log(util.inspect(data, {showHidden: false, depth: null, colors: true}));
+        let data = actual.map(data=>OmitParameters(data, 'children'));
 
         expect<any>(data).toEqual([
-            { headers: {}, method: [], path: '' },
-            { headers: {}, method: [ 'POST' ], path: '' },
-            { headers: {}, method: [ 'POST' ], path: '/path' },
-            { headers: {}, method: [ 'POST' ], path: '' },
-            { headers: {}, method: [ 'POST' ], path: '' },
-            { headers: {}, method: [ 'GET' ], path: '' },
-            { headers: {}, method: [ 'GET' ], path: '/path' },
-            { headers: {}, method: [ 'GET' ], path: '' },
-            { headers: {}, method: [ 'GET' ], path: '' },
-            { headers: {}, method: [ 'PATCH' ], path: '' },
-            { headers: {}, method: [ 'PATCH' ], path: '/path' },
-            { headers: {}, method: [ 'PATCH' ], path: '' },
-            { headers: {}, method: [ 'PATCH' ], path: '' },
-            { headers: {}, method: [ 'PUT' ], path: '' },
-            { headers: {}, method: [ 'PUT' ], path: '/path' },
-            { headers: {}, method: [ 'PUT' ], path: '' },
-            { headers: {}, method: [ 'PUT' ], path: '' },
-            { headers: {}, method: [ 'POST' ], path: '' },
-            { headers: {}, method: [ 'POST' ], path: '/path/child' },
-            { headers: {}, method: [ 'POST' ], path: '' },
-            { headers: {}, method: [ 'POST' ], path: '' },
-            { headers: {}, method: [ 'GET' ], path: '' },
-            { headers: {}, method: [ 'GET' ], path: '/path/child' },
-            { headers: {}, method: [ 'GET' ], path: '' },
-            { headers: {}, method: [ 'GET' ], path: '' },
-            { headers: {}, method: [ 'PATCH' ], path: '' },
-            { headers: {}, method: [ 'PATCH' ], path: '/path/child' },
-            { headers: {}, method: [ 'PATCH' ], path: '' },
-            { headers: {}, method: [ 'PATCH' ], path: '' },
-            { headers: {}, method: [ 'PUT' ], path: '' },
-            { headers: {}, method: [ 'PUT' ], path: '/path/child' },
-            { headers: {}, method: [ 'PUT' ], path: '' },
-            { headers: {}, method: [ 'PUT' ], path: '' },
-            { headers: {}, method: [ 'POST' ], path: '' },
-            { headers: {}, method: [ 'POST' ], path: '/path/child/granchild' },
-            { headers: {}, method: [ 'POST' ], path: '' },
-            { headers: {}, method: [ 'POST' ], path: '' },
-            { headers: {}, method: [ 'GET' ], path: '' },
-            { headers: {}, method: [ 'GET' ], path: '/path/child/granchild' },
-            { headers: {}, method: [ 'GET' ], path: '' },
-            { headers: {}, method: [ 'GET' ], path: '' },
-            { headers: {}, method: [ 'PATCH' ], path: '' },
-            { headers: {}, method: [ 'PATCH' ], path: '/path/child/granchild' },
-            { headers: {}, method: [ 'PATCH' ], path: '' },
-            { headers: {}, method: [ 'PATCH' ], path: '' },
-            { headers: {}, method: [ 'PUT' ], path: '' },
-            { headers: {}, method: [ 'PUT' ], path: '/path/child/granchild' },
-            { headers: {}, method: [ 'PUT' ], path: '' },
-            { headers: {}, method: [ 'PUT' ], path: '' }
+                { headers: {}, method: [ 'POST' ], path: '/path' },
+                { headers: {}, method: [ 'GET' ], path: '/path' },
+                { headers: {}, method: [ 'PATCH' ], path: '/path' },
+                { headers: {}, method: [ 'PUT' ], path: '/path' },
+                { headers: {}, method: [ 'POST' ], path: '/path/child' },
+                { headers: {}, method: [ 'GET' ], path: '/path/child' },
+                { headers: {}, method: [ 'PATCH' ], path: '/path/child' },
+                { headers: {}, method: [ 'PUT' ], path: '/path/child' },
+                { headers: {}, method: [ 'POST' ], path: '/path/child/granchild' },
+                { headers: {}, method: [ 'GET' ], path: '/path/child/granchild' },
+                { headers: {}, method: [ 'PATCH' ], path: '/path/child/granchild' },
+                { headers: {}, method: [ 'PUT' ], path: '/path/child/granchild' }
             ]
         );
 
@@ -204,7 +157,6 @@ describe('multi', () => {
 
                 expect(response.data).toEqual(data);
                 expect(called).toBe(true);
-                // expect(uncalled).toBe(false);
                 expect(response.status).toEqual(200);
                 expect(response.statusText).toEqual('OK');
             });

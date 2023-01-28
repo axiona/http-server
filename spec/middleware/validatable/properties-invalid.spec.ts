@@ -27,8 +27,8 @@ describe('invalid', () => {
     it('add request', ()=>{
 
         router
-            .add(ValidationParameters(OneGuard, ['data']))
-            .add(function (ctx : any) {
+            .next(ValidationParameters(OneGuard, ['data']))
+            .next(function (ctx : any) {
 
                 const string : string = ctx.data;
                 ctx.response.body = string;

@@ -8,7 +8,7 @@ export default function PrependKoa<Type extends Router>(server : Koa, router: Ty
 
     server.use(async (context, next) => {
 
-        let contextNext = await router(context);
+        let contextNext = await router.call(context);
 
         if(contextNext) {
 

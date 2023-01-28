@@ -13,8 +13,8 @@ let router =  BindToServer(server, Router());
 describe('empty', ()=>{
 
     router
-        .add(ReplaceParameters((data: string) : string => 'data', ['data']))
-        .add(function (ctx) {
+        .next(ReplaceParameters((data: string) : string => 'data', ['data']))
+        .next(function (ctx) {
 
             {
                 let string: string = ctx.data;
@@ -42,8 +42,8 @@ describe('empty', ()=>{
         });
 
     router
-        .add(Replace.Parameters((data: string) => 'data', ['data']))
-        .add(function (ctx) {
+        .next(Replace.Parameters((data: string) => 'data', ['data']))
+        .next(function (ctx) {
 
             {
                 let string: string = ctx.data;
@@ -75,13 +75,13 @@ describe('empty', ()=>{
 describe('set', ()=>{
 
     router
-        .add(function (context) {
+        .next(function (context) {
 
             return Object.assign(context, {data: 'a' as string|number|boolean});
 
         })
-        .add(ReplaceParameters((data: string|number|boolean) => 'data', ['data']))
-        .add(function (ctx) {
+        .next(ReplaceParameters((data: string|number|boolean) => 'data', ['data']))
+        .next(function (ctx) {
 
             {
                 let string: string = ctx.data;
@@ -109,13 +109,13 @@ describe('set', ()=>{
         });
 
     router
-        .add(function (context) {
+        .next(function (context) {
 
             return Object.assign(context, {data: 'a' as string|number|boolean});
 
         })
-        .add(Replace.Parameters((data: string|number|boolean) => 'data', ['data']))
-        .add(function (ctx) {
+        .next(Replace.Parameters((data: string|number|boolean) => 'data', ['data']))
+        .next(function (ctx) {
 
             {
                 let string: string = ctx.data;
@@ -147,14 +147,14 @@ describe('set', ()=>{
 describe('set diff', ()=>{
 
     router
-        .add(function (context) {
+        .next(function (context) {
 
             return Object.assign(context, {a: 'a' as string|number|boolean});
 
         })
         // @ts-expect-error
-        .add(ReplaceParameters((data: string|number|boolean) => 'data', ['data']))
-        .add(function (ctx) {
+        .next(ReplaceParameters((data: string|number|boolean) => 'data', ['data']))
+        .next(function (ctx) {
 
             {
                 let string: string = ctx.data;
@@ -182,14 +182,14 @@ describe('set diff', ()=>{
         });
 
     router
-        .add(function (context) {
+        .next(function (context) {
 
             return Object.assign(context, {a: 'a' as string|number|boolean});
 
         })
         // @ts-expect-error
-        .add(Replace.Parameters((data: string|number|boolean) => 'data', ['data']))
-        .add(function (ctx) {
+        .next(Replace.Parameters((data: string|number|boolean) => 'data', ['data']))
+        .next(function (ctx) {
 
             {
                 let string: string = ctx.data;

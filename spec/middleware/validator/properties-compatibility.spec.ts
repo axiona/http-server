@@ -21,8 +21,8 @@ describe('guard', () => {
         describe('parameters', ()=>{
 
             router
-                .add(ValidatorParameters(OneGuard(), ['response', 'status'], undefined))
-                .add(function (ctx) {
+                .next(ValidatorParameters(OneGuard(), ['response', 'status'], undefined))
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;
@@ -35,8 +35,8 @@ describe('guard', () => {
                 });
 
             router
-                .add(Validator.Parameters(OneGuard(), ['response', 'status'], undefined))
-                .add(function (ctx) {
+                .next(Validator.Parameters(OneGuard(), ['response', 'status'], undefined))
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;
@@ -48,7 +48,7 @@ describe('guard', () => {
                     return ctx;
                 });
 
-            router.add(Validator.Parameters(RecordValidator(), ['request', 'body'])).add(function (ctx) {
+            router.next(Validator.Parameters(RecordValidator(), ['request', 'body'])).next(function (ctx) {
 
                 // @ts-expect-error
                 const boolean : boolean = ctx.request.body;
@@ -70,12 +70,12 @@ describe('guard', () => {
         describe('parameter', ()=>{
 
             router
-                .add(ValidatorParameter({
+                .next(ValidatorParameter({
                     validator: OneGuard(),
                     properties: ['response', 'status'],
                     invalid: undefined
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;
@@ -87,12 +87,12 @@ describe('guard', () => {
                     return ctx;
                 });
 
-            router.add(ValidatorParameter({
+            router.next(ValidatorParameter({
                 validator: RecordValidator(),
                 invalid: Stop(),
                 replace: true,
                 properties: ['request', 'body']
-            })).add(function (ctx) {
+            })).next(function (ctx) {
 
                 // @ts-expect-error
                 const boolean : boolean = ctx.request.body;
@@ -111,12 +111,12 @@ describe('guard', () => {
             });
 
             router
-                .add(Validator.Parameter({
+                .next(Validator.Parameter({
                     validator: OneGuard(),
                     properties: ['response', 'status'],
                     invalid: undefined
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;
@@ -134,8 +134,8 @@ describe('guard', () => {
         describe('parameters', ()=>{
 
             router
-                .add(ValidatorParameters(OneGuard(), ['response', 'status'], undefined))
-                .add(function (ctx) {
+                .next(ValidatorParameters(OneGuard(), ['response', 'status'], undefined))
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;
@@ -148,8 +148,8 @@ describe('guard', () => {
                 });
 
             router
-                .add(Validator.Parameters(OneGuard(), ['response', 'status'], undefined))
-                .add(function (ctx) {
+                .next(Validator.Parameters(OneGuard(), ['response', 'status'], undefined))
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;
@@ -165,12 +165,12 @@ describe('guard', () => {
         describe('parameter', ()=>{
 
             router
-                .add(ValidatorParameter({
+                .next(ValidatorParameter({
                     validator: OneGuard(),
                     properties: ['response', 'status'],
                     invalid: undefined
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;
@@ -183,12 +183,12 @@ describe('guard', () => {
                 });
 
             router
-                .add(Validator.Parameter({
+                .next(Validator.Parameter({
                     validator: OneGuard(),
                     properties: ['response', 'status'],
                     invalid: undefined
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;

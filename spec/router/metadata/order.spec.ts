@@ -17,7 +17,7 @@ describe('basic', function () {
 
     const router =  BindToServer(server, Router());
 
-    router.add(Object.assign(function (ctx) {
+    router.next(Object.assign(function (ctx) {
 
             called.push('1 1');
             return ctx;
@@ -28,7 +28,7 @@ describe('basic', function () {
                 return metadata;
             }
         }
-    )).add(Object.assign(function (ctx) {
+    )).next(Object.assign(function (ctx) {
 
             called.push('1 1 1');
             return ctx;
@@ -39,7 +39,7 @@ describe('basic', function () {
                 return metadata;
             }
         }
-    )).add(Object.assign(function (ctx) {
+    )).next(Object.assign(function (ctx) {
 
             called.push('1 1 1 1');
             return ctx;
@@ -52,7 +52,7 @@ describe('basic', function () {
         }
     ));
 
-    router.add(Object.assign(function (ctx) {
+    router.next(Object.assign(function (ctx) {
 
             ctx.status = 204;
             called.push('1 2');
@@ -84,7 +84,6 @@ describe('basic', function () {
 
     it('assert value', function () {
 
-        // console.log(called);
         expect(called).toEqual([
             '1 1',
             '1 1 1',

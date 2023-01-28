@@ -18,7 +18,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(BodyJson.Parameter()).add(function (ctx) {
+        router.next(BodyJson.Parameter()).next(function (ctx) {
 
             // @ts-expect-error
             const boolean : boolean = ctx.request.body;

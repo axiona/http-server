@@ -23,8 +23,8 @@ describe('single', () => {
     it('add request', ()=>{
 
         router
-            .add(MethodPathParameter({method:'POST', path:'/path/child'}))
-            .add(FileBuffer((ctx)=>Fs.createReadStream(__dirname + '/../../file-source/jpg.jpg')));
+            .next(MethodPathParameter({method:'POST', path:'/path/child'}))
+            .next(FileBuffer((ctx)=>Fs.createReadStream(__dirname + '/../../file-source/jpg.jpg')));
 
     });
 

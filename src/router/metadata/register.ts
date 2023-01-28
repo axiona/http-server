@@ -1,8 +1,7 @@
-import Clone from "./clone";
-import Middleware from "../../middleware/middleware";
 import Metadata from "./metadata";
+import Registrable from "../../registrable.ts/registrable";
 
-export default function Register<MiddlewareType extends Pick<Middleware, 'register'>>(metadata: Metadata, middleware: MiddlewareType) : Metadata {
+export default function Register(metadata: Metadata, middleware: Registrable) : Metadata {
 
     if(middleware.register) {
 

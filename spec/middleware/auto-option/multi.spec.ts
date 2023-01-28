@@ -30,7 +30,7 @@ describe('ordered', () => {
 
     it('add request', ()=>{
 
-        let next = router.add(AutoOptions());
+        let next = router.next(AutoOptions());
 
         let list : {path:string, method:string}[] = [];
 
@@ -46,7 +46,7 @@ describe('ordered', () => {
 
         for (const {path, method} of list) {
 
-            next.add(Method(method)).add(PathParameters(path)).add(ctx=>ctx);
+            next.next(Method(method)).next(PathParameters(path)).next(ctx=>ctx);
         }
 
     });

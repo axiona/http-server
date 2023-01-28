@@ -17,7 +17,7 @@ describe('parameters', () => {
 
     it('default', ()=>{
 
-        router.add(function (context) {
+        router.next(function (context) {
 
             const validatable = {
                 valid : true,
@@ -27,7 +27,7 @@ describe('parameters', () => {
 
             return Object.assign(context, {validatable});
 
-        }).add(ValidatableResponseMessageParameters()).add(function (ctx) {
+        }).next(ValidatableResponseMessageParameters()).next(function (ctx) {
 
             const validatable : {
                 valid : boolean,
@@ -67,7 +67,7 @@ describe('parameters', () => {
 
     it('custom properties', ()=>{
 
-        router.add(function (context) {
+        router.next(function (context) {
 
             const validatable = {
                 valid : true,
@@ -83,8 +83,8 @@ describe('parameters', () => {
                 }};
 
         })
-            .add(ValidatableResponseMessageParameters(undefined, ['c']))
-            .add(function (ctx) {
+            .next(ValidatableResponseMessageParameters(undefined, ['c']))
+            .next(function (ctx) {
 
                 const validatable : {
                     valid : boolean,
@@ -124,7 +124,7 @@ describe('parameters', () => {
 
     it('custom multi properties', ()=>{
 
-        router.add(function (context) {
+        router.next(function (context) {
 
             const validatable = {
                 valid : true,
@@ -140,8 +140,8 @@ describe('parameters', () => {
                     }}};
 
         })
-            .add(ValidatableResponseMessageParameters(undefined, ['a','b']))
-            .add(function (ctx) {
+            .next(ValidatableResponseMessageParameters(undefined, ['a','b']))
+            .next(function (ctx) {
 
                 const validatable : {
                     valid : boolean,
@@ -181,7 +181,7 @@ describe('parameters', () => {
 
     it('custom multi properties, next', ()=>{
 
-        router.add(function (context) {
+        router.next(function (context) {
 
             const validatable = {
                 valid : true,
@@ -197,8 +197,8 @@ describe('parameters', () => {
                     }}};
 
         })
-            .add(ValidatableResponseMessageParameters(undefined, ['a','b'], true))
-            .add(function (ctx) {
+            .next(ValidatableResponseMessageParameters(undefined, ['a','b'], true))
+            .next(function (ctx) {
 
                 const validatable : {
                     valid : boolean,
@@ -249,7 +249,7 @@ describe('parameter', () => {
 
     it('default', ()=>{
 
-        router.add(function (context) {
+        router.next(function (context) {
 
             const validatable = {
                 valid : true,
@@ -259,7 +259,7 @@ describe('parameter', () => {
 
             return Object.assign(context, {validatable});
 
-        }).add(ValidatableResponseMessageParameter()).add(function (ctx) {
+        }).next(ValidatableResponseMessageParameter()).next(function (ctx) {
 
             const validatable : {
                 valid : boolean,
@@ -299,7 +299,7 @@ describe('parameter', () => {
 
     it('custom properties', ()=>{
 
-        router.add(function (context) {
+        router.next(function (context) {
 
             const validatable = {
                 valid : true,
@@ -315,8 +315,8 @@ describe('parameter', () => {
                 }};
 
         })
-            .add(ValidatableResponseMessageParameter({properties:['c']}))
-            .add(function (ctx) {
+            .next(ValidatableResponseMessageParameter({properties:['c']}))
+            .next(function (ctx) {
 
                 const validatable : {
                     valid : boolean,
@@ -356,7 +356,7 @@ describe('parameter', () => {
 
     it('custom multi properties', ()=>{
 
-        router.add(function (context) {
+        router.next(function (context) {
 
             const validatable = {
                 valid : true,
@@ -372,8 +372,8 @@ describe('parameter', () => {
                     }}};
 
         })
-            .add(ValidatableResponseMessageParameter({properties: ['a','b']}))
-            .add(function (ctx) {
+            .next(ValidatableResponseMessageParameter({properties: ['a','b']}))
+            .next(function (ctx) {
 
                 const validatable : {
                     valid : boolean,
@@ -413,7 +413,7 @@ describe('parameter', () => {
 
     it('custom multi properties, next', ()=>{
 
-        router.add(function (context) {
+        router.next(function (context) {
 
             const validatable = {
                 valid : true,
@@ -429,8 +429,8 @@ describe('parameter', () => {
                     }}};
 
         })
-            .add(ValidatableResponseMessageParameter( {properties:['a','b'], next: true}))
-            .add(function (ctx) {
+            .next(ValidatableResponseMessageParameter( {properties:['a','b'], next: true}))
+            .next(function (ctx) {
 
                 const validatable : {
                     valid : boolean,

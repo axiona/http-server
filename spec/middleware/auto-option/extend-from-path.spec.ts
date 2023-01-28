@@ -24,12 +24,12 @@ describe('extend from path', () => {
 
     it('add request', ()=>{
 
-        let next = router.add(AutoOptions());
-        const path = next.add(PathParameters('/path/child'));
+        let next = router.next(AutoOptions());
+        const path = next.next(PathParameters('/path/child'));
 
         for (const method of methods) {
 
-            path.add(Method(method)).add(ctx=>ctx);
+            path.next(Method(method)).next(ctx=>ctx);
         }
 
     });

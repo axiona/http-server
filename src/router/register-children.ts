@@ -1,5 +1,4 @@
 import Router from "./router";
-import MiddlewareCatch from "./catch";
 import Clone from "./metadata/clone";
 import Metadata from "./metadata/metadata";
 

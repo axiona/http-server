@@ -27,9 +27,9 @@ describe('valid', () => {
     it('add request', ()=>{
 
         router
-            .add(BodyJson.Parameters())
-            .add(Validator.Parameters(RecordValidator(), ['request', 'body']))
-            .add(function (ctx) {
+            .next(BodyJson.Parameters())
+            .next(Validator.Parameters(RecordValidator(), ['request', 'body']))
+            .next(function (ctx) {
 
                 ctx.response.body = ctx.request.body;
                 called = true;

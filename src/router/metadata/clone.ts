@@ -9,7 +9,6 @@ export default function Clone(parameter: Metadata, replace: Partial<Metadata> = 
             method: Array.from(parameter.method),
             path: parameter.path,
             children:[],
-            parent: null,
         },
         replace
     );

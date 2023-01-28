@@ -26,7 +26,7 @@ describe('same method', () => {
 
     it('add request', ()=>{
 
-        router.add(Method('POST')).add(Method('POST')).add(Method('POST')).add(function (ctx) {
+        router.next(Method('POST')).next(Method('POST')).next(Method('POST')).next(function (ctx) {
             ctx.response.body = data;
             called = true;
             return ctx;

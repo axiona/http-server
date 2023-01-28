@@ -27,9 +27,9 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        let next = router.add(Cors());
+        let next = router.next(Cors());
 
-        next.add(Method('POST')).add(function (ctx) {
+        next.next(Method('POST')).next(function (ctx) {
             ctx.response.body = data;
             called = true;
             return ctx;
@@ -83,18 +83,18 @@ describe('multi', () => {
 
     let router =  BindToServer(server2, Router());
 
-    let next = router.add(Cors());
+    let next = router.next(Cors());
 
     for(const method of methods) {
 
         it('add post request', ()=>{
 
-            next.add(Method(method)).add(function (ctx) {
+            next.next(Method(method)).next(function (ctx) {
                 data.method = method;
                 ctx.response.body = data;
                 called = true;
                 return ctx;
-            }).add(Method('DELETE')).add(function (ctx) {
+            }).next(Method('DELETE')).next(function (ctx) {
                 uncalled = true;
                 return ctx;
             });

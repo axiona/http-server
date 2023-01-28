@@ -9,7 +9,6 @@ import FormidableFileBoolean from "../../../dist/file/boolean/file";
 import MinimumSize from "../../../dist/file/validator/minimum-size";
 import Validatable from "@alirya/validator/validatable/validatable";
 import File from "../../../dist/file/file";
-import MaxSizeExceeded from "../../../dist/file/catch/max-size-exceeded";
 
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
@@ -30,13 +29,13 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.catch(function (ctx) {
+        router.catch(function (ctx, error) {
 
             ctx.response.body = {data:'exception called'};
 
-        }).add(BodyMultipart({
+        }).next(BodyMultipart({
             minFileSize: 2560
-        })).add(function (ctx) {
+        })).next(function (ctx) {
 
             const file = ctx.request.body.image as File;
             validatable        = MinimumSize.Parameters(file.size)(file);

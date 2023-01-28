@@ -3,9 +3,7 @@ import {PathParameters} from '../../../dist/middleware/path';
 import Server from '../../server';
 import BindToServer from '../../../dist/router/append-server';
 import Axios, {AxiosResponse} from 'axios';
-import Metadata from "../../../dist/router/metadata/metadata";
 import {ListParameter, ListType} from "../../../../uri/dist/path/list";
-
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -36,7 +34,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(PathParameters('/path', {end:false})).add(function (ctx) {
+        router.next(PathParameters('/path', {end:false})).next(function (ctx) {
 
             ctx.response.body = {
                 parent : true,
@@ -46,7 +44,7 @@ describe('single', () => {
             called1 = true;
             return ctx;
 
-        }).add(PathParameters('child')).add(function (ctx) {
+        }).next(PathParameters('child')).next(function (ctx) {
 
             ctx.response.body = Object.assign({ child : true }, ctx.response.body);
 
@@ -55,9 +53,6 @@ describe('single', () => {
             called2 = true;
             return ctx;
         });
-
-        // console.log(JSON.stringify(dump(router.metadata), null, 2));
-        // console.log(JSON.stringify(router.metadata, null, 2));
     });
 
     describe('match both', () => {
@@ -158,7 +153,7 @@ describe('multi', () => {
 
     it('add first request', ()=>{
 
-        router.add(PathParameters('/parent1', {end:false})).add(function (ctx) {
+        router.next(PathParameters('/parent1', {end:false})).next(function (ctx) {
 
             ctx.response.body = {
                 parent : 1,
@@ -168,7 +163,7 @@ describe('multi', () => {
             called.parent1 = true;
             return ctx;
 
-        }).add(PathParameters('child1')).add(function (ctx) {
+        }).next(PathParameters('child1')).next(function (ctx) {
 
             ctx.response.body = Object.assign({
                 child : 1
@@ -184,7 +179,7 @@ describe('multi', () => {
 
     it('add second request', ()=>{
 
-        router.add(PathParameters('/parent2', {end:false})).add(function (ctx) {
+        router.next(PathParameters('/parent2', {end:false})).next(function (ctx) {
 
             ctx.response.body = {
                 parent : 2,
@@ -194,7 +189,7 @@ describe('multi', () => {
             called.parent2 = true;
             return ctx;
 
-        }).add(PathParameters('child2')).add(function (ctx) {
+        }).next(PathParameters('child2')).next(function (ctx) {
 
             ctx.response.body = Object.assign({
                 child : 2
@@ -349,12 +344,12 @@ describe('multi branch', () => {
 
 
     let router =  BindToServer(server, Router())
-        .add(PathParameters('/root', {end:false}));
+        .next(PathParameters('/root', {end:false}));
 
 
     it('add first request', ()=>{
 
-        router.add(PathParameters('/parent1', {end:false})).add(function (ctx) {
+        router.next(PathParameters('/parent1', {end:false})).next(function (ctx) {
 
             ctx.response.body = {
                 parent : 1,
@@ -364,7 +359,7 @@ describe('multi branch', () => {
             called.parent1 = true;
             return ctx;
 
-        }).add(PathParameters('child1')).add(function (ctx) {
+        }).next(PathParameters('child1')).next(function (ctx) {
 
             ctx.response.body = Object.assign({
                 child : 1
@@ -380,7 +375,7 @@ describe('multi branch', () => {
 
     it('add second request', ()=>{
 
-        router.add(PathParameters('/parent2', {end:false})).add(function (ctx) {
+        router.next(PathParameters('/parent2', {end:false})).next(function (ctx) {
 
             ctx.response.body = {
                 parent : 2,
@@ -390,7 +385,7 @@ describe('multi branch', () => {
             called.parent2 = true;
             return ctx;
 
-        }).add(PathParameters('child2')).add(function (ctx) {
+        }).next(PathParameters('child2')).next(function (ctx) {
 
             ctx.response.body = Object.assign({
                 child : 2

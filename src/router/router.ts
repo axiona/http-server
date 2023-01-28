@@ -2,17 +2,22 @@ import Middleware from '../middleware/middleware';
 import Catch from '../catch/catch';
 import Context from '../context/context';
 import Metadata from "./metadata/metadata";
+import Callable from "../../../function/dist/callable";
 
 export default interface Router<
     ContextType extends Context  = Context,
-    Error extends Catch  = Catch,
-> extends Middleware  {
+>  {
     children : Router[];
-    parent : Router|null;
     metadata : Metadata;
 
-    add<Next extends Context>(middleware : Middleware<ContextType, Next>) : Router<Next>;
-    catch(errorHandler : Error) : Router<ContextType, Error>;
+    extends<ContextNext extends Context>(
+        router: (router:Router<ContextType>) => Router<ContextNext>
+    ) : Router<ContextNext>;
 
+    next<Next extends Context>(middleware : Middleware<ContextType, Next>) : Router<Next>;
+    catch<ErrorType extends Error>(errorHandler : Catch<ContextType, ErrorType>) : Router<ContextType>;
+    call(context: Context) : Promise<Context|void>;
 }
+
+
 

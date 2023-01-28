@@ -29,7 +29,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(BodyMultipart()).add(function (ctx) {
+        router.next(BodyMultipart()).next(function (ctx) {
 
             validatable        = MimeType.Parameters(['image/jpeg'])(ctx.request.body.image as File);
             validatableInvalid = MimeType.Parameters(['image/png'])(ctx.request.body.image as File);

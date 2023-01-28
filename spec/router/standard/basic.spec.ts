@@ -27,7 +27,7 @@ describe('basic', function () {
 
     const router =  BindToServer(server, Router());
 
-    router.add(function (ctx) {
+    router.next(function (ctx) {
 
         called = true;
         ctx.body = data;
@@ -66,7 +66,7 @@ describe('204', function () {
 
     const router =  BindToServer(server, Router());
 
-    router.add(function (ctx) {
+    router.next(function (ctx) {
 
         called = true;
         ctx.status = 204;

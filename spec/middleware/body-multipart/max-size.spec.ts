@@ -28,9 +28,9 @@ describe('single', () => {
 
             ctx.response.body = {data:'exception called'};
 
-        })).add(BodyMultipart({
+        })).next(BodyMultipart({
             maxFileSize:100 * 1024,
-        })).add(function (ctx) {
+        })).next(function (ctx) {
 
             nextCalled = true;
             ctx.response.body = {data:1};

@@ -23,8 +23,8 @@ describe('parameters', () => {
         it('validatable', ()=>{
 
             router
-                .add(ValidatorParameters(RecordValidator(), ['request', 'body'], undefined, /*undefined, */undefined, ['bodyValid']))
-                .add(function (ctx) {
+                .next(ValidatorParameters(RecordValidator(), ['request', 'body'], undefined, /*undefined, */undefined, ['bodyValid']))
+                .next(function (ctx) {
 
                 // @ts-expect-error
                 const boolean : boolean = ctx.request.body;
@@ -55,8 +55,8 @@ describe('parameters', () => {
 
         it('validatable', ()=>{
 
-            router.add(ValidatorParameters(ContextValidator, undefined, /*undefined, */undefined, undefined, ['bodyValid']))
-                .add(function (ctx) {
+            router.next(ValidatorParameters(ContextValidator, undefined, /*undefined, */undefined, undefined, ['bodyValid']))
+                .next(function (ctx) {
 
                     // @ts-expect-error
                     const boolean : boolean = ctx.data;
@@ -89,13 +89,13 @@ describe('parameter', () => {
 
         it('validation', ()=>{
 
-            router.add(ValidatorParameter({
+            router.next(ValidatorParameter({
                 validator: RecordValidator(),
                 invalid: Stop(),
                 replace: true,
                 properties: ['request', 'body'],
                 validatable : ['bodyValid']
-            })).add(function (ctx) {
+            })).next(function (ctx) {
 
                 // @ts-expect-error
                 const boolean : boolean = ctx.request.body;
@@ -127,10 +127,10 @@ describe('parameter', () => {
 
         it('validation', ()=>{
 
-            router.add(ValidatorParameter({
+            router.next(ValidatorParameter({
                 validator: ContextValidator,
                 validatable : ['bodyValid']
-            })).add(function (ctx) {
+            })).next(function (ctx) {
 
                 // @ts-expect-error
                 const boolean : boolean = ctx.data;

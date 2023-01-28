@@ -28,8 +28,8 @@ describe('invalid middleware', () => {
     it('add request', ()=>{
 
         router
-            .add(ValidationParameters(ContextDataGuard, undefined, Stop(ResponseParameters(PaymentRequiredParameters()))))
-            .add(function (ctx : any) {
+            .next(ValidationParameters(ContextDataGuard, undefined, Stop(ResponseParameters(PaymentRequiredParameters()))))
+            .next(function (ctx : any) {
 
                 const string : string = ctx.data;
                 ctx.response.body = string;

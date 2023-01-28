@@ -28,9 +28,9 @@ describe('single', () => {
     it('add request', ()=>{
 
         router
-            .add(BodyJson.Parameter())
-            .add(ReplaceParameters(ReplaceToNumber, ['request', 'body']))
-            .add(function (ctx) {
+            .next(BodyJson.Parameter())
+            .next(ReplaceParameters(ReplaceToNumber, ['request', 'body']))
+            .next(function (ctx) {
 
             let data : ReplaceToNumberReturn = ctx.request.body;
             ctx.response.body = data;
@@ -84,14 +84,14 @@ describe('exists', () => {
     it('add request', ()=>{
 
         router
-            .add(BodyJson.Parameter())
-            .add(function (ctx) {
+            .next(BodyJson.Parameter())
+            .next(function (ctx) {
 
                 ctx.response.body = 'data';
                 called = true;
                 return ctx;
             })
-            .add(ReplaceParameters(status => status + 2 , ['response', 'status']));
+            .next(ReplaceParameters(status => status + 2 , ['response', 'status']));
     });
 
     it('send request', function (done) {

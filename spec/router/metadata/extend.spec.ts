@@ -2,8 +2,6 @@ import Server from "../../server";
 import BindToServer from "../../../dist/router/append-server";
 import Router from "../../../dist/router/middleware";
 import Axios from "axios";
-import * as util from "util";
-import Extends from "../../../dist/middleware/extends";
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -44,7 +42,7 @@ describe('basic', function () {
 
     const router =  BindToServer(server, Router());
 
-    let router1 = router.add(Object.assign(function (ctx) {
+    let router1 = router.next(Object.assign(function (ctx) {
 
             called.push('1 1');
             return ctx;
@@ -58,14 +56,10 @@ describe('basic', function () {
     ));
 
     {
-        // let r = Router();
-        // r.add(callback1).add(callback2);
-        //
-        // router1.add(r);
-        router1.add(callback1).add(callback2);
+        router1.next(callback1).next(callback2);
     }
 
-    let router2 = router.add(Object.assign(function (ctx) {
+    let router2 = router.next(Object.assign(function (ctx) {
 
             ctx.status = 204;
             called.push('1 2');
@@ -80,10 +74,7 @@ describe('basic', function () {
     ));
 
     {
-        // console.log(Router().add(callback1).add(callback2).root);
-        // console.log(Router().add(callback1).add(callback2).root.children[0]);
-        router2.add(Extends(Router(callback1).add(callback2)));
-        // router2.add(callback1).add(callback2);
+        router2.extends(r=>r.next(callback1).next(callback2));
     }
 
 
@@ -95,7 +86,6 @@ describe('basic', function () {
 
     it('metadata', function () {
 
-        // console.log(util.inspect(router.metadata, {showHidden: false, depth: null, colors: true}));
         expect(router.metadata.method).toEqual([]);
 
         expect(router.metadata.children[0].method).toEqual(['1 1']);
@@ -109,7 +99,6 @@ describe('basic', function () {
 
     it('assert value', function () {
 
-        // console.log(called);
         expect(called).toEqual([
             '1 1',
             'callback 1',

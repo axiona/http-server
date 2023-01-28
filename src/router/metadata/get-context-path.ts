@@ -27,5 +27,5 @@ export default function GetContextPath(context : Context) : Omit<Metadata, 'path
         }
     }
 
-    return {method:methods, parent:null, headers: header.all()};
+    return {method:methods, /*parent:null,*/ headers: header.all()};
 }

@@ -29,9 +29,9 @@ describe('multi parse', () => {
             .catch((context, error : HttpError)=>{
                 FromError(context, error);
             })
-            .add(BodyJson.Parameter())
-            .add(BodyJson.Parameter())
-            .add(function (ctx) {
+            .next(BodyJson.Parameter())
+            .next(BodyJson.Parameter())
+            .next(function (ctx) {
 
             ctx.response.body = 'data';
             called = true;

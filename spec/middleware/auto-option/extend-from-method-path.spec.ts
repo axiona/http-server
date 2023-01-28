@@ -25,11 +25,11 @@ describe('extend from path', () => {
 
         it('add request', ()=>{
 
-            router.add(AutoOptions());
+            router.next(AutoOptions());
 
             for (const method of methods) {
 
-                router.add(MethodPathParameter({method, path:'/path/child'})).add(ctx=>ctx);
+                router.next(MethodPathParameter({method, path:'/path/child'})).next(ctx=>ctx);
             }
 
         });
@@ -71,11 +71,11 @@ describe('extend from path', () => {
 
         it('add request', ()=>{
 
-            let next = router.add(AutoOptions());
+            let next = router.next(AutoOptions());
 
             for (const method of methods) {
 
-                next.add(MethodPathParameter({method, path:'/path/child'})).add(ctx=>ctx);
+                next.next(MethodPathParameter({method, path:'/path/child'})).next(ctx=>ctx);
             }
 
         });

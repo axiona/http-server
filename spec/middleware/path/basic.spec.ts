@@ -28,7 +28,7 @@ describe('single', () => {
     it('add request', ()=>{
 
 
-        router.add(PathParameters('/path/child')).add(function (ctx) {
+        router.next(PathParameters('/path/child')).next(function (ctx) {
             ctx.response.body = data;
             called = true;
             return ctx;
@@ -84,7 +84,7 @@ describe('multi', () => {
 
     it('add first request', ()=>{
 
-        router.add(PathParameters('/path1/child1')).add(function (ctx) {
+        router.next(PathParameters('/path1/child1')).next(function (ctx) {
             ctx.response.body = data1;
             called1 = true;
             return ctx;
@@ -94,7 +94,7 @@ describe('multi', () => {
 
     it('add second request', ()=>{
 
-        router.add(PathParameters('/path2/child2')).add(function (ctx) {
+        router.next(PathParameters('/path2/child2')).next(function (ctx) {
             ctx.response.body = data2;
             called2 = true;
             return ctx;

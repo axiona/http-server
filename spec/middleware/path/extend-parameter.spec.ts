@@ -33,7 +33,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(PathParameters('/:main(parent)', {end:false})).add(function (ctx) {
+        router.next(PathParameters('/:main(parent)', {end:false})).next(function (ctx) {
 
             ctx.response.body = {
                 parent : true,
@@ -42,7 +42,7 @@ describe('single', () => {
             called1 = true;
             return ctx;
 
-        }).add(PathParameters(':sub(child)')).add(function (ctx) {
+        }).next(PathParameters(':sub(child)')).next(function (ctx) {
 
             ctx.response.body = Object.assign({ child : true }, ctx.response.body);
 
@@ -147,7 +147,7 @@ describe('multi', () => {
 
     it('add first request', ()=>{
 
-        router.add(PathParameters('/:main(parent1)', {end:false})).add(function (ctx) {
+        router.next(PathParameters('/:main(parent1)', {end:false})).next(function (ctx) {
 
             ctx.response.body = {
                 parent : 1,
@@ -157,7 +157,7 @@ describe('multi', () => {
             called.parent1 = true;
             return ctx;
 
-        }).add(PathParameters(':sub(child1)')).add(function (ctx) {
+        }).next(PathParameters(':sub(child1)')).next(function (ctx) {
 
             ctx.response.body = Object.assign({
                 child : 1
@@ -173,7 +173,7 @@ describe('multi', () => {
 
     it('add second request', ()=>{
 
-        router.add(PathParameters('/:main(parent2)', {end:false})).add(function (ctx) {
+        router.next(PathParameters('/:main(parent2)', {end:false})).next(function (ctx) {
 
             ctx.response.body = {
                 parent : 2,
@@ -183,7 +183,7 @@ describe('multi', () => {
             called.parent2 = true;
             return ctx;
 
-        }).add(PathParameters(':sub(child2)')).add(function (ctx) {
+        }).next(PathParameters(':sub(child2)')).next(function (ctx) {
 
             ctx.response.body = Object.assign({
                 child : 2

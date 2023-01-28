@@ -25,7 +25,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(BodyJson.Parameter()).add(function (ctx) {
+        router.next(BodyJson.Parameter()).next(function (ctx) {
 
             let data : Record<PropertyKey, any> = ctx.request.body;
             ctx.response.body = data;

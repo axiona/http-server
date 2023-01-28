@@ -28,7 +28,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        router.add(BodyMultipart()).add(function (ctx) {
+        router.next(BodyMultipart()).next(function (ctx) {
 
             validatable = FormidableFile.Parameters()(ctx.request.body.image as object);
             validatableInvalid = FormidableFile.Parameters()(ctx.request.body as object);

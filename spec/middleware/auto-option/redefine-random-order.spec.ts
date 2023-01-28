@@ -25,17 +25,17 @@ describe('random order, redefine', () => {
 
         it('add request', ()=>{
 
-            router.add(AutoOptions());
+            router.next(AutoOptions());
 
             for (const method of methods) {
 
                 if(RandomBoolean()) {
 
-                    router.add(Method(method)).add(PathParameters('/path/child')).add(ctx=>ctx);
+                    router.next(Method(method)).next(PathParameters('/path/child')).next(ctx=>ctx);
 
                 } else {
 
-                    router.add(PathParameters('/path/child')).add(Method(method)).add(ctx=>ctx);
+                    router.next(PathParameters('/path/child')).next(Method(method)).next(ctx=>ctx);
                 }
             }
         });
@@ -76,17 +76,17 @@ describe('random order, redefine', () => {
 
         it('add request', ()=>{
 
-            let next = router.add(AutoOptions());
+            let next = router.next(AutoOptions());
 
             for (const method of methods) {
 
                 if(RandomBoolean()) {
 
-                    next.add(Method(method)).add(PathParameters('/path/child')).add(ctx=>ctx);
+                    next.next(Method(method)).next(PathParameters('/path/child')).next(ctx=>ctx);
 
                 } else {
 
-                    next.add(PathParameters('/path/child')).add(Method(method)).add(ctx=>ctx);
+                    next.next(PathParameters('/path/child')).next(Method(method)).next(ctx=>ctx);
                 }
             }
         });

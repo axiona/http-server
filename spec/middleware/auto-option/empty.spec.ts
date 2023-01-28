@@ -22,8 +22,8 @@ describe('empty', () => {
 
     it('add request', ()=>{
 
-        router.add(AutoOptions());
-        router.add(PathParameters('/path/child'));
+        router.next(AutoOptions());
+        router.next(PathParameters('/path/child'));
 
     });
 

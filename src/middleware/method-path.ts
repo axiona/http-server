@@ -1,9 +1,8 @@
 import Context from '../context/context';
 import {PathArgument, PathArgumentsOption, PathOptionDefault, PathParameters, PathReturn} from "./path";
 import Method from "./method";
-import Middleware from "../router/middleware";
-import Identity from "../../../function/dist/identity";
-import Extends from "./extends";
+import Register from "../router/metadata/register";
+import Metadata from "../router/metadata/metadata";
 
 export type MethodPathReturn<
     ArgumentType extends Record<string, string> = Record<string, string>,
@@ -74,8 +73,34 @@ export function MethodPathParameters<
     option : Partial<MethodPathArgumentsOption<ArgumentType, Argument|string, Storage|string>> = PathOptionDefault,
 ) : MethodPathReturn<ArgumentType, Argument|string, Storage|string, ContextType> {
 
-    return Extends(Middleware(Method(method))
-        .add(PathParameters(path, option))) as MethodPathReturn<ArgumentType, Argument|string, Storage|string, ContextType>;
+    const middlewares = [
+        Method(method),
+        PathParameters(path, option)
+    ];
+
+    const register = (metadata : Metadata) : Metadata => {
+
+            for (const middleware of middlewares) {
+                metadata = Register(metadata, middleware);
+            }
+            return metadata;
+        };
+
+    return Object.assign(async function (context) {
+
+        for(const middleware of middlewares) {
+
+            context = await middleware(context);
+
+            if(!context) {
+
+                return context;
+            }
+        }
+
+        return context;
+
+    }, {register});
 }
 
 export type MethodPathArgument<

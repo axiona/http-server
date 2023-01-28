@@ -26,14 +26,14 @@ describe('valid', () => {
     it('add request', ()=>{
 
         router
-            .add(BodyText.Parameters())
-            .add(function (context) {
+            .next(BodyText.Parameters())
+            .next(function (context) {
 
                 return Object.assign(context, {data:context.request.body});
 
             })
-            .add(Validator.Parameters(ContextValidator))
-            .add(function (ctx) {
+            .next(Validator.Parameters(ContextValidator))
+            .next(function (ctx) {
 
                 // @ts-expect-error
                 const boolean : boolean = ctx.data;
@@ -90,8 +90,8 @@ describe('invalid', () => {
     it('add request', ()=>{
 
         router
-            .add(Validator.Parameters(ContextValidator))
-            .add(function (ctx) {
+            .next(Validator.Parameters(ContextValidator))
+            .next(function (ctx) {
 
             // @ts-expect-error
             const boolean : boolean = ctx.data;

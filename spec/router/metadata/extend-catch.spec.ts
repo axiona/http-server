@@ -1,10 +1,8 @@
 import Server from "../../server";
 import BindToServer from "../../../dist/router/append-server";
 import Router from "../../../dist/router/middleware";
-import RouterCatch from "../../../dist/router/catch";
 import Axios from "axios";
 import * as util from "util";
-import Extends from "../../../dist/middleware/extends";
 import Catch from "../../../dist/catch/catch";
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
@@ -45,7 +43,7 @@ describe('no throw', function () {
 
     const router =  BindToServer(server, Router());
 
-    let router1 = router.add(Object.assign(function (ctx) {
+    let router1 = router.next(Object.assign(function (ctx) {
 
             called.push('1 1');
             return ctx;
@@ -59,10 +57,10 @@ describe('no throw', function () {
     ));
 
     {
-        router1.catch(catch1).add(callback2);
+        router1.catch(catch1).next(callback2);
     }
 
-    let router2 = router.add(Object.assign(function (ctx) {
+    let router2 = router.next(Object.assign(function (ctx) {
 
             ctx.status = 204;
             called.push('1 2');
@@ -77,7 +75,7 @@ describe('no throw', function () {
     ));
 
     {
-        router2.add(Extends(RouterCatch(catch1).add(callback2)));
+        router2.extends(r=>r.catch(catch1).next(callback2));
     }
 
 
@@ -89,7 +87,6 @@ describe('no throw', function () {
 
     it('metadata', function () {
 
-        // console.log(util.inspect(router.metadata, {showHidden: false, depth: null, colors: true}));
         expect(router.metadata.method).toEqual([]);
 
         expect(router.metadata.children[0].method).toEqual(['1 1']);
@@ -103,7 +100,6 @@ describe('no throw', function () {
 
     it('assert value', function () {
 
-        // console.log(called);
         expect(called).toEqual([
             '1 1',
             // 'callback 1',
@@ -154,7 +150,7 @@ describe('throw', function () {
 
     const router =  BindToServer(server, Router());
 
-    let router1 = router.add(Object.assign(function (ctx) {
+    let router1 = router.next(Object.assign(function (ctx) {
 
             called.push('1 1');
             return ctx;
@@ -168,10 +164,10 @@ describe('throw', function () {
     ));
 
     {
-        router1.catch(catch1).add(callback2);
+        router1.catch(catch1).next(callback2);
     }
 
-    let router2 = router.add(Object.assign(function (ctx) {
+    let router2 = router.next(Object.assign(function (ctx) {
 
             ctx.status = 204;
             called.push('1 2');
@@ -186,7 +182,7 @@ describe('throw', function () {
     ));
 
     {
-        router2.add(Extends(RouterCatch(catch1).add(callback2)));
+        router2.extends(r=>r.catch(catch1).next(callback2));
     }
 
 
@@ -198,7 +194,6 @@ describe('throw', function () {
 
     it('metadata', function () {
 
-        // console.log(util.inspect(router.metadata, {showHidden: false, depth: null, colors: true}));
         expect(router.metadata.method).toEqual([]);
 
         expect(router.metadata.children[0].method).toEqual(['1 1']);
@@ -212,7 +207,6 @@ describe('throw', function () {
 
     it('assert value', function () {
 
-        // console.log(called);
         expect(called).toEqual([
             '1 1',
             'callback 2',

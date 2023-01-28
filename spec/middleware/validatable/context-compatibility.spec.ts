@@ -18,8 +18,8 @@ describe('validatable', ()=>{
         describe('parameters', ()=>{
 
             router
-                .add(ValidationParameters(() => true))
-                .add(function (ctx) {
+                .next(ValidationParameters(() => true))
+                .next(function (ctx) {
 
                     let data : Context = ctx;
                     // @ts-expect-error
@@ -32,8 +32,8 @@ describe('validatable', ()=>{
                 });
 
             router
-                .add(Validation.Parameters(() => true))
-                .add(function (ctx) {
+                .next(Validation.Parameters(() => true))
+                .next(function (ctx) {
 
                     let data : Context = ctx;
                     // @ts-expect-error
@@ -49,8 +49,8 @@ describe('validatable', ()=>{
         describe('parameter', ()=>{
 
             router
-                .add(ValidationParameter({validation: ()=>true}))
-                .add(function (ctx) {
+                .next(ValidationParameter({validation: ()=>true}))
+                .next(function (ctx) {
 
                     let data : Context = ctx;
                     // @ts-expect-error
@@ -63,8 +63,8 @@ describe('validatable', ()=>{
                 });
 
             router
-                .add(Validation.Parameter({validation: ()=>true}))
-                .add(function (ctx) {
+                .next(Validation.Parameter({validation: ()=>true}))
+                .next(function (ctx) {
 
                     let data : Context = ctx;
                     // @ts-expect-error
@@ -85,13 +85,13 @@ describe('validatable', ()=>{
         describe('parameters', ()=>{
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(ValidationParameters(() => true))
-                .add(function (ctx) {
+                .next(ValidationParameters(() => true))
+                .next(function (ctx) {
 
                     let data : string|number|boolean = ctx.data;
                     // @ts-expect-error
@@ -104,13 +104,13 @@ describe('validatable', ()=>{
                 });
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(Validation.Parameters(() => true))
-                .add(function (ctx) {
+                .next(Validation.Parameters(() => true))
+                .next(function (ctx) {
 
                     let data : string|number|boolean = ctx.data;
                     // @ts-expect-error
@@ -126,13 +126,13 @@ describe('validatable', ()=>{
         describe('parameter', ()=>{
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(ValidationParameter({validation: ()=>true}))
-                .add(function (ctx) {
+                .next(ValidationParameter({validation: ()=>true}))
+                .next(function (ctx) {
 
                     let data : string|number|boolean = ctx.data;
                     // @ts-expect-error
@@ -145,13 +145,13 @@ describe('validatable', ()=>{
                 });
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(Validation.Parameter({validation: ()=>true}))
-                .add(function (ctx) {
+                .next(Validation.Parameter({validation: ()=>true}))
+                .next(function (ctx) {
 
                     let data : string|number|boolean = ctx.data;
                     // @ts-expect-error
@@ -173,8 +173,8 @@ describe('guard', ()=>{
         describe('parameters', ()=>{
 
             router
-                .add(ValidationParameters(ContextDataGuard))
-                .add(function (ctx) {
+                .next(ValidationParameters(ContextDataGuard))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -188,8 +188,8 @@ describe('guard', ()=>{
                 });
 
             router
-                .add(Validation.Parameters(ContextDataGuard))
-                .add(function (ctx) {
+                .next(Validation.Parameters(ContextDataGuard))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -208,8 +208,8 @@ describe('guard', ()=>{
         describe('parameter', ()=>{
 
             router
-                .add(ValidationParameter({validation:ContextDataGuard}))
-                .add(function (ctx) {
+                .next(ValidationParameter({validation:ContextDataGuard}))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -223,8 +223,8 @@ describe('guard', ()=>{
                 });
 
             router
-                .add(Validation.Parameter({validation:ContextDataGuard}))
-                .add(function (ctx) {
+                .next(Validation.Parameter({validation:ContextDataGuard}))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -244,13 +244,13 @@ describe('guard', ()=>{
         describe('parameters', ()=>{
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(ValidationParameters(ContextDataGuard))
-                .add(function (ctx) {
+                .next(ValidationParameters(ContextDataGuard))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -264,13 +264,13 @@ describe('guard', ()=>{
                 });
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(Validation.Parameters(ContextDataGuard))
-                .add(function (ctx) {
+                .next(Validation.Parameters(ContextDataGuard))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -288,13 +288,13 @@ describe('guard', ()=>{
         describe('parameter', ()=>{
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(ValidationParameter({validation:ContextDataGuard}))
-                .add(function (ctx) {
+                .next(ValidationParameter({validation:ContextDataGuard}))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error
@@ -308,13 +308,13 @@ describe('guard', ()=>{
                 });
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {data: 'a' as string|number|boolean});
 
                 })
-                .add(Validation.Parameter({validation:ContextDataGuard}))
-                .add(function (ctx) {
+                .next(Validation.Parameter({validation:ContextDataGuard}))
+                .next(function (ctx) {
 
                     let data : string = ctx.data;
                     // @ts-expect-error

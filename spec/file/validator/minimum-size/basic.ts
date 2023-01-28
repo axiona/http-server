@@ -3,16 +3,12 @@ import Server from "../../../server";
 import BindToServer from "../../../../dist/router/append-server";
 import Router from "../../../../dist/router/middleware";
 import BodyMultipart from "../../../../dist/middleware/body-multipart";
-import File from "../../../../dist/file/file";
-import MinimumSize, {MinimumSizeParameters} from "../../../../dist/file/validator/minimum-size";
-import FormidableFileBoolean from "../../../../dist/file/boolean/file";
+import {MinimumSizeParameters} from "../../../../dist/file/validator/minimum-size";
 import FormData from "form-data";
 import {createReadStream} from "fs";
 import Validatable from "@alirya/validator/validatable/validatable";
 import Validator from "../../../../dist/middleware/validator";
-import RecordValidator from "../../../middleware/validator/record-validator";
 import {MapAllParameters} from '@alirya/object/validator/map-all';
-import {StringParameters} from '@alirya/string/validator/string';
 import And from '@alirya/object/validatable/and';
 import Map from '@alirya/object/message/message/record/map';
 
@@ -36,16 +32,16 @@ describe('single', () => {
     it('add request', ()=>{
 
         router
-            .catch(function (ctx) {
+            .next(function (ctx) {
 
                 ctx.response.body = {data:'exception called'};
 
             })
-            .add(BodyMultipart())
-            .add(Validator.Parameters(MapAllParameters({
+            .next(BodyMultipart())
+            .next(Validator.Parameters(MapAllParameters({
                 image: MinimumSizeParameters(250)
             }, And, Map), ['request', 'body']))
-            .add(function (ctx) {
+            .next(function (ctx) {
 
                 ctx.response.body = {data:1};
                 return ctx;

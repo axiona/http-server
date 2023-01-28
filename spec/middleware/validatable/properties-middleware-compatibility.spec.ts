@@ -19,8 +19,8 @@ describe('validation', () => {
         it('parameters', ()=>{
 
             router
-                .add(ValidationParameters(() => true, ['request', 'body'], Stop()))
-                .add(function (ctx) {
+                .next(ValidationParameters(() => true, ['request', 'body'], Stop()))
+                .next(function (ctx) {
 
                     let unknown : unknown = ctx.request.body;
                     // @ts-expect-error
@@ -36,8 +36,8 @@ describe('validation', () => {
                 });
 
             router
-                .add(Validation.Parameters(() => true, ['request', 'body'], Stop()))
-                .add(function (ctx) {
+                .next(Validation.Parameters(() => true, ['request', 'body'], Stop()))
+                .next(function (ctx) {
 
                     let unknown : unknown = ctx.request.body;
                     // @ts-expect-error
@@ -56,12 +56,12 @@ describe('validation', () => {
         it('parameter', ()=>{
 
             router
-                .add(ValidationParameter({
+                .next(ValidationParameter({
                     validation: () => true,
                     properties : ['request', 'body'],
                     invalid : Stop()
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let unknown : unknown = ctx.request.body;
                     // @ts-expect-error
@@ -77,12 +77,12 @@ describe('validation', () => {
                 });
 
             router
-                .add(Validation.Parameter({
+                .next(Validation.Parameter({
                     validation: () => true,
                     properties : ['request', 'body'],
                     invalid : Stop()
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let unknown : unknown = ctx.request.body;
                     // @ts-expect-error
@@ -103,13 +103,13 @@ describe('validation', () => {
         it('parameters', ()=>{
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {request: {body : 'a' as string|number|boolean}});
 
                 })
-                .add(ValidationParameters(() => true, ['request', 'body'], Stop()))
-                .add(function (ctx) {
+                .next(ValidationParameters(() => true, ['request', 'body'], Stop()))
+                .next(function (ctx) {
 
                     let data : string|number|boolean = ctx.request.body;
                     // @ts-expect-error
@@ -123,13 +123,13 @@ describe('validation', () => {
                 });
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {request: {body : 'a' as string|number|boolean}});
 
                 })
-                .add(Validation.Parameters(() => true, ['request', 'body'], Stop()))
-                .add(function (ctx) {
+                .next(Validation.Parameters(() => true, ['request', 'body'], Stop()))
+                .next(function (ctx) {
 
                     let data : string|number|boolean = ctx.request.body;
                     // @ts-expect-error
@@ -146,22 +146,22 @@ describe('validation', () => {
         it('parameter', ()=>{
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {request: {body : 'a' as string|number|boolean}});
 
                 })
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     return ctx;
 
                 })
-                .add(ValidationParameter({
+                .next(ValidationParameter({
                     validation: () => true,
                     properties : ['request', 'body'],
                     invalid : Stop()
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let data : string|number|boolean = ctx.request.body;
                     // @ts-expect-error
@@ -175,17 +175,17 @@ describe('validation', () => {
                 });
 
             router
-                .add(function (context) {
+                .next(function (context) {
 
                     return Object.assign(context, {request: {body : 'a' as string|number|boolean}});
 
                 })
-                .add(Validation.Parameter({
+                .next(Validation.Parameter({
                     validation: () => true,
                     properties : ['request', 'body'],
                     invalid : Stop()
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let data : string|number|boolean = ctx.request.body;
                     // @ts-expect-error
@@ -211,8 +211,8 @@ describe('guard', () => {
         it('parameters', ()=>{
 
             router
-                .add(ValidationParameters(OneGuard, ['response', 'status'], Stop()))
-                .add(function (ctx) {
+                .next(ValidationParameters(OneGuard, ['response', 'status'], Stop()))
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;
@@ -225,8 +225,8 @@ describe('guard', () => {
                 });
 
             router
-                .add(ValidationParameters(OneGuard, ['a', 'b'], Stop()))
-                .add(function (ctx) {
+                .next(ValidationParameters(OneGuard, ['a', 'b'], Stop()))
+                .next(function (ctx) {
 
                     let number : number = ctx.a.b;
                     let one : 1 = ctx.a.b;
@@ -239,8 +239,8 @@ describe('guard', () => {
                 });
 
             router
-                .add(Validation.Parameters(OneGuard, ['a', 'b'], Stop()))
-                .add(function (ctx) {
+                .next(Validation.Parameters(OneGuard, ['a', 'b'], Stop()))
+                .next(function (ctx) {
 
                     let number : number = ctx.a.b;
                     let one : 1 = ctx.a.b;
@@ -256,12 +256,12 @@ describe('guard', () => {
         it('parameter', ()=>{
 
             router
-                .add(ValidationParameter({
+                .next(ValidationParameter({
                     validation: OneGuard,
                     properties: ['a', 'b'],
                     invalid : Stop()
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let number : number = ctx.a.b;
                     let one : 1 = ctx.a.b;
@@ -274,12 +274,12 @@ describe('guard', () => {
                 });
 
             router
-                .add(Validation.Parameter({
+                .next(Validation.Parameter({
                     validation: OneGuard,
                     properties: ['response', 'body'],
                     invalid : Stop()
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let number : number = ctx.response.body;
                     let one : 1 = ctx.response.body;
@@ -295,8 +295,8 @@ describe('guard', () => {
     describe('with context', ()=>{
         it('parameters', ()=>{
             router
-                .add(ValidationParameters(OneGuard, ['response', 'status'], Stop()))
-                .add(function (ctx) {
+                .next(ValidationParameters(OneGuard, ['response', 'status'], Stop()))
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;
@@ -309,8 +309,8 @@ describe('guard', () => {
                 });
 
             router
-                .add(Validation.Parameters(OneGuard, ['response', 'status'], Stop()))
-                .add(function (ctx) {
+                .next(Validation.Parameters(OneGuard, ['response', 'status'], Stop()))
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;
@@ -325,12 +325,12 @@ describe('guard', () => {
         });
         it('parameter', ()=>{
             router
-                .add(ValidationParameter({
+                .next(ValidationParameter({
                     validation: OneGuard,
                     properties: ['response', 'status'],
                     invalid : Stop()
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;
@@ -343,12 +343,12 @@ describe('guard', () => {
                 });
 
             router
-                .add(Validation.Parameter({
+                .next(Validation.Parameter({
                     validation: OneGuard,
                     properties: ['response', 'status'],
                     invalid : Stop()
                 }))
-                .add(function (ctx) {
+                .next(function (ctx) {
 
                     let number : number = ctx.response.status;
                     let one : 1 = ctx.response.status;

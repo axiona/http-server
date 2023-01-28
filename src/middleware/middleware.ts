@@ -1,18 +1,13 @@
 import Context from '../context/context';
 import Union from "@alirya/promise/union";
-import Metadata from "../router/metadata/metadata";
+import Registrable from "../registrable.ts/registrable";
 
 
 export default interface Middleware<
     Argument extends Context = Context,
     Return extends Context = Argument
-> {
+> extends Registrable {
 
-    /**
-     * called on registered to router
-     * @param context
-     */
-    register?:(router: Metadata) => Metadata;
     (context: Argument) : MiddlewareReturn<Return>;
 }
 

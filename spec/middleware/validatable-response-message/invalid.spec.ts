@@ -28,7 +28,7 @@ describe('parameters', () => {
     it('default', ()=>{
 
         router
-            .add(function (context) {
+            .next(function (context) {
 
                 const validatable = {
                     valid : false,
@@ -39,8 +39,8 @@ describe('parameters', () => {
                 return Object.assign(context, {validatable});
 
             })
-            .add(ValidatableResponseMessageParameters())
-            .add(function (ctx) {
+            .next(ValidatableResponseMessageParameters())
+            .next(function (ctx) {
 
                 ctx.response.body = data;
                 called = true;

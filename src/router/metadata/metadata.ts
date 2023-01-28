@@ -7,5 +7,4 @@ export default interface Metadata extends Omit<Request, 'method'|'body'|'path'> 
     method: string[];
     path: Matcher;
     children : Metadata[];
-    parent : Metadata|null;
 }

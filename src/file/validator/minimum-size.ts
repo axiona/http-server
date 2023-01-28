@@ -31,10 +31,14 @@ export function MinimumSizeParameters<Message>(
 
     const validator = MapAllParameters(record, AndRecord, (record)=>MapMessage(record).size);
 
-    return ValuePartialParameters([
-        ObjectParameters(),
-        validator
-    ], AndParameters, InvalidFirstValidLast, false) as Validator<object, File, Readonly<Validatable<null, Message|string>>>;
+    return function (d)  {
+        let result = ValuePartialParameters([
+            ObjectParameters(),
+            validator
+        ], AndParameters, InvalidFirstValidLast, false)(d);
+
+        return result;
+    } as Validator<object, File, Readonly<Validatable<null, Message|string>>>;
 }
 
 
