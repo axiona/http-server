@@ -19,7 +19,7 @@ export default function Catch<ContextType extends Context  = Context> (
 
             } catch (error) {
 
-                handler(context, error);
+                await handler(context, error);
             }
         }
 
