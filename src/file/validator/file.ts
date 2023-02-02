@@ -9,33 +9,36 @@ import Validatable from '@alirya/validator/validatable/validatable';
 import FormidableFileMessage from "../assert/string/file";
 import InvalidFirstValidLast from "@alirya/array/message/message/list/invalid-first-valid-last";
 import File from "../file";
+import Chain from '../../../../validator/dist/chain';
 
-export function FileParameters() : Validator<object, File, Readonly<Validatable<object, string>>>;
+export function FileParameters() : Validator<object, File, string>;
 
 export function FileParameters<Message>(
     message : StaticParameters<object, File, true, false, Message>
-) : Validator<object, File, Readonly<Validatable<object, Message>>>;
+) : Validator<object, File, Message>;
 
 export function FileParameters<Message>(
     message : StaticParameters<object, File, true, false, Message|string> = FormidableFileMessage.Parameters
-) : Validator<object, File, Readonly<Validatable<null, Message|string>>> {
+) : Validator<object, File, Message|string> {
 
-    return ValuePartialParameters([
-        ObjectParameters(),
-        CallbackParameters(FormidableFileValidation, message)
-    ], AndParameters, InvalidFirstValidLast, false);
+    return Chain(ObjectParameters(), CallbackParameters(FormidableFileValidation, message)) as Validator<object, File, Message|string>;
+    //
+    // return ValuePartialParameters([
+    //     ObjectParameters(),
+    //     CallbackParameters(FormidableFileValidation, message)
+    // ], AndParameters, InvalidFirstValidLast, false);
 }
 
 export function FileParameter(
-) : Validator<object, File, Readonly<Validatable<object, string>>>;
+) : Validator<object, File, string>;
 
 export function FileParameter<Message>(
     message : StaticParameter<object, File, true, false, Message>
-) : Validator<object, File, Readonly<Validatable<object, Message>>>;
+) : Validator<object, File, Message>;
 
 export function FileParameter<Message>(
     message : StaticParameter<object, File, true, false, Message|string> = FormidableFileMessage.Parameter
-) : Validator<object, File, Readonly<Validatable<null, Message|string>>> {
+) : Validator<object, File, Message|string> {
 
     return FileParameters((value, valid)=>message({value, valid}));
 }

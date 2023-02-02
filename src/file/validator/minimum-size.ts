@@ -11,19 +11,21 @@ import AndRecord from '@alirya/object/validatable/and';
 import MapMessage from '@alirya/object/message/message/record/map';
 import ValidatorInterface from "@alirya/validator/simple";
 import {GreaterParameters, GreaterArgumentsMessage, GreaterArgument} from '@alirya/number/validator/greater';
+import Chain from '../../../../validator/dist/chain';
+import {FileParameters} from './file';
 
-export function MinimumSizeParameters() : Validator<File, File, Readonly<Validatable<object, string>>>;
-export function MinimumSizeParameters(minimum: number) : Validator<File, File, Readonly<Validatable<object, string>>>;
+export function MinimumSizeParameters() : Validator<File, File, string>;
+export function MinimumSizeParameters(minimum: number) : Validator<File, File, string>;
 
 export function MinimumSizeParameters<Message>(
     minimum: number,
     message : GreaterArgumentsMessage<Message>
-) : Validator<object, File, Readonly<Validatable<object, Message>>>;
+) : Validator<object, File, Message>;
 
 export function MinimumSizeParameters<Message>(
     minimum: number = 256,
     message : GreaterArgumentsMessage<Message|string> = MinimumSizeMessage.Parameters
-) : Validator<object, File, Readonly<Validatable<null, Message|string>>> {
+) : Validator<object, File, Message|string> {
 
     const record : Record<'size', ValidatorInterface> = {
         size : GreaterParameters(minimum, true, message) as ValidatorInterface<number, number>
@@ -31,41 +33,43 @@ export function MinimumSizeParameters<Message>(
 
     const validator = MapAllParameters(record, AndRecord, (record)=>MapMessage(record).size);
 
-    return function (d)  {
-        let result = ValuePartialParameters([
-            ObjectParameters(),
-            validator
-        ], AndParameters, InvalidFirstValidLast, false)(d);
-
-        return result;
-    } as Validator<object, File, Readonly<Validatable<null, Message|string>>>;
+    return Chain(FileParameters(), validator) as Validator<object, File, Message|string>;
+    //
+    // return function (d)  {
+    //     let result = ValuePartialParameters([
+    //         ObjectParameters(),
+    //         validator
+    //     ], AndParameters, InvalidFirstValidLast, false)(d);
+    //
+    //     return result;
+    // } as Validator<object, File, Message|string>;
 }
 
 
 
 
-export function MinimumSizeParameter() : Validator<object, File, Readonly<Validatable<object, string>>>;
+export function MinimumSizeParameter() : Validator<object, File, string>;
 
 
 export function MinimumSizeParameter(
     {
         minimum
     } : GreaterArgument<string>
-) : Validator<object, File, Readonly<Validatable<object, string>>>;
+) : Validator<object, File, string>;
 
 export function MinimumSizeParameter<Message>(
     {
         minimum,
         message
     } : GreaterArgument<Message>
-) : Validator<object, File, Readonly<Validatable<object, Message>>>;
+) : Validator<object, File, Message>;
 
 export function MinimumSizeParameter<Message>(
     {
         minimum = 256,
         message  = MinimumSizeMessage.Parameter
     } : Partial<GreaterArgument<Message|string>> = {}
-) : Validator<object, File, Readonly<Validatable<null, Message|string>>> {
+) : Validator<object, File, Message|string> {
 
     return MinimumSizeParameters(minimum, (value, valid, minimum, inclusive)=>message({minimum, inclusive, value, valid}));
 }

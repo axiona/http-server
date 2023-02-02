@@ -7,21 +7,21 @@ import {MinimumSizeParameters} from "./minimum-size";
 import { ValidatableParameters, ValidatableParameter } from '@alirya/validator/message/function/validatable';
 import Message from "@alirya/message/message";
 
-export function NotEmptyParameters() : Validator<File, File, Readonly<Validatable<object, string>>>;
+export function NotEmptyParameters() : Validator<File, File, string>;
 
 export function NotEmptyParameters<Message>(
     message : ValidatableParameters<number, Message>
-) : Validator<object, File, Readonly<Validatable<object, Message>>>;
+) : Validator<object, File, Message>;
 
 export function NotEmptyParameters<Message>(
     message : ValidatableParameters<number, Message|string> = EmptyFileMessage.Parameters
-) : Validator<object, File, Readonly<Validatable<null, Message|string>>> {
+) : Validator<object, File, Message|string> {
 
     return MinimumSizeParameters(0, message);
 }
 export type EmptyFileArgument<MessageT> = Message<ValidatableParameter<number, MessageT>>;
 
-export function NotEmptyParameter() : Validator<object, File, Readonly<Validatable<object, string>>>;
+export function NotEmptyParameter() : Validator<object, File, string>;
 
 export function NotEmptyParameter<Message>(
     {
@@ -33,7 +33,7 @@ export function NotEmptyParameter<Message>(
     {
         message  = MinimumSizeMessage.Parameter
     } : Partial<EmptyFileArgument<Message|string>> = {}
-) : Validator<object, File, Readonly<Validatable<null, Message|string>>> {
+) : Validator<object, File, Message|string> {
 
     return NotEmptyParameters((value, valid)=>message({value, valid}));
 }
