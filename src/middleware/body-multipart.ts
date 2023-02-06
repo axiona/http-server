@@ -10,6 +10,11 @@ import FromFormidable from "../file/from-formidable";
 import AddAcceptHeaders from "../router/void/add-accept-headers";
 import { v4 } from 'uuid';
 import {RemovePrefixParameters} from '@alirya/string/remove-prefix';
+import error from "../catch/error";
+import NoOp from "../../../function/dist/no-op";
+import Delete from "../file/delete";
+import ResponseEnd from "../promise/response-end";
+import {extension} from "mime-types";
 
 export type BodyMultipartReturnRecursive<Type> = {
     [Key in string]: Type|Record<PropertyKey, BodyMultipartReturnRecursive<Type>>|BodyMultipartReturnRecursive<Type>[]
@@ -35,17 +40,55 @@ export type BodyMultipartType<
 export interface BodyMultipartArgument<Argument extends Context> extends Options {
     mapper : Callable<[ReadonlyArray<[string, any]>]>;
     parser : Callable<[string, string|number|boolean|File], any>;
+    autoDeleteFile ?: boolean;
+    autoDeleteFileErrorHandler ?: (error)=>void;
 }
 
 export const BodyMultipartArgumentDefault : BodyMultipartArgument<Context> = Object.freeze(Object.assign({
     mapper : AffixParsersParameters(),
     parser : (key, value)=>value,
     filename : (name: string, ext: string, part: Part, form: FormidableFile) => {
-        return v4().split('-').join('') +
-            (new Date()).getTime().toString(36) +
-            '.' +
-            RemovePrefixParameters(ext, '.');
-    }
+
+        if(!ext) {
+
+            for(let mime of [part.mimetype, form.mimetype]) {
+
+                if(!mime) {
+                    continue;
+                }
+
+                let detected = extension(mime);
+
+                if(!detected) {
+                    continue;
+                }
+
+                ext = detected;
+                break;
+            }
+        }
+
+        let basename = v4().split('-');
+        basename.push((new Date()).getTime().toString(36));
+
+        if(ext) {
+            basename.push(`.${ext}`);
+        }
+
+        return basename.join('');
+
+
+        // console.log('---------------------------');
+        // console.log({name,             ext});
+        // console.log(part);
+        // console.log(form);
+        // return v4().split('-').join('') +
+        //     (new Date()).getTime().toString(36) +
+        //     '.' +
+        //     RemovePrefixParameters(ext, '.');
+    },
+    autoDeleteFile: false,
+    autoDeleteFileErrorHandler: NoOp
 }, defaultOptions as any as Options));
 
 export default function BodyMultipart<Argument extends Context>(
@@ -128,6 +171,13 @@ export function BodyMultipartParse<Argument extends Context>(
             files.push([field, file]);
 
         });
+
+        if(argument.autoDeleteFile) {
+
+            ResponseEnd(context.res).then(()=>{
+                files.map(([, file])=>Delete(file, argument.autoDeleteFileErrorHandler));
+            });
+        }
 
         form.parse(context.req);
     });

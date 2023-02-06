@@ -1,6 +1,7 @@
 import Context from '../context/context';
 import Middleware from './middleware';
 import Callable from '@alirya/function/callable';
+import ResponseEnd from "../promise/response-end";
 
 export function ResponseEndParameters<ContextType extends Context>(
     middleware : Middleware<ContextType, ContextType>,
@@ -9,15 +10,7 @@ export function ResponseEndParameters<ContextType extends Context>(
 
     return function (context) {
 
-        const responseClose = new Promise<void>((resolve, reject) => {
-            context.res.on('close', resolve);
-        });
-
-        const responseFinish = new Promise<void>((resolve, reject) => {
-            context.res.on('finish', resolve);
-        });
-
-        Promise.race([responseFinish, responseClose]).then(()=>{
+        ResponseEnd(context.res).then(()=>{
 
             middleware(context);
 
