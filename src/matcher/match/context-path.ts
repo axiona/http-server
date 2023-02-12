@@ -1,9 +1,9 @@
-import Context from "../../context/context";
-import {ListType} from "@alirya/uri/path/list";
-import {PathSegmentsGet} from "../../context/path-segments";
+import Context from '../../context/context.js';
+import {ListType} from "@alirya/uri/path/list.js";
+import {PathSegmentsGet} from '../../context/path-segments.js';
 import { Match} from 'path-to-regexp';
-import GetOrSet from "../../map/get-or-set";
-import Matcher from "../matcher";
+import GetOrSet from '../../map/get-or-set.js';
+import Matcher from '../matcher.js';
 
 export const PathMatchesKeyCache = Symbol('PathMatch');
 /**

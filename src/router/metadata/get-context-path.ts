@@ -1,10 +1,10 @@
-import Context from "../../context/context";
-import Metadata from "./metadata";
-import FromRouter from "./array/from-router";
-import ContextPath from "../../matcher/match/context-path";
-import {UniqueParameters} from '@alirya/array/unique';
+import Context from '../../context/context.js';
+import Metadata from './metadata.js';
+import FromRouter from './array/from-router.js';
+import ContextPath from '../../matcher/match/context-path.js';
+import {UniqueParameters} from '@alirya/array/unique.js';
 import {Headers} from "headers-polyfill";
-import Null from "./null";
+import Null from './null.js';
 
 export default function GetContextPath(context : Context) : Omit<Metadata, 'path'|'children'> {
 

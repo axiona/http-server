@@ -1,14 +1,14 @@
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import Router from '../../../dist/router/middleware';
-import Context from '../../../dist/context/context';
-import Replace, {ReplaceParameters} from '../../../dist/middleware/replace';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Router from '../../../dist/router/middleware.js';
+import Context from '../../../dist/context/context.js';
+import Replace, {ReplaceParameters} from '../../../dist/middleware/replace.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
 
-let router =  BindToServer(server, Router());
+const router =  BindToServer(server, Router());
 
 describe('empty', ()=>{
 
@@ -17,25 +17,25 @@ describe('empty', ()=>{
         .next(function (ctx) {
 
             {
-                let string: string = ctx.data;
-                let data: Context = ctx;
+                const string: string = ctx.data;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: number = ctx.data;
+                const number: number = ctx.data;
                 // @ts-expect-error
-                let boolean: boolean = ctx.data;
+                const boolean: boolean = ctx.data;
                 // @ts-expect-error
-                let object: object = ctx.data;
+                const object: object = ctx.data;
             }
 
             {
-                let string: Context & { data: string } = ctx;
-                let data: Context = ctx;
+                const string: Context & { data: string } = ctx;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: Context & { data: number } = ctx;
+                const number: Context & { data: number } = ctx;
                 // @ts-expect-error
-                let boolean: Context & { data: boolean } = ctx;
+                const boolean: Context & { data: boolean } = ctx;
                 // @ts-expect-error
-                let object: Context & { data: object } = ctx;
+                const object: Context & { data: object } = ctx;
             }
 
             return ctx;
@@ -46,30 +46,31 @@ describe('empty', ()=>{
         .next(function (ctx) {
 
             {
-                let string: string = ctx.data;
-                let data: Context = ctx;
+                const string: string = ctx.data;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: number = ctx.data;
+                const number: number = ctx.data;
                 // @ts-expect-error
-                let boolean: boolean = ctx.data;
+                const boolean: boolean = ctx.data;
                 // @ts-expect-error
-                let object: object = ctx.data;
+                const object: object = ctx.data;
             }
 
             {
-                let string: Context & { data: string } = ctx;
-                let data: Context = ctx;
+                const string: Context & { data: string } = ctx;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: Context & { data: number } = ctx;
+                const number: Context & { data: number } = ctx;
                 // @ts-expect-error
-                let boolean: Context & { data: boolean } = ctx;
+                const boolean: Context & { data: boolean } = ctx;
                 // @ts-expect-error
-                let object: Context & { data: object } = ctx;
+                const object: Context & { data: object } = ctx;
             }
 
             return ctx;
         });
 
+    it('',()=>expect(true).toBeTrue());
 });
 
 describe('set', ()=>{
@@ -84,25 +85,25 @@ describe('set', ()=>{
         .next(function (ctx) {
 
             {
-                let string: string = ctx.data;
-                let data: Context = ctx;
+                const string: string = ctx.data;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: number = ctx.data;
+                const number: number = ctx.data;
                 // @ts-expect-error
-                let boolean: boolean = ctx.data;
+                const boolean: boolean = ctx.data;
                 // @ts-expect-error
-                let object: object = ctx.data;
+                const object: object = ctx.data;
             }
 
             {
-                let string: Context & { data: string } = ctx;
-                let data: Context = ctx;
+                const string: Context & { data: string } = ctx;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: Context & { data: number } = ctx;
+                const number: Context & { data: number } = ctx;
                 // @ts-expect-error
-                let boolean: Context & { data: boolean } = ctx;
+                const boolean: Context & { data: boolean } = ctx;
                 // @ts-expect-error
-                let object: Context & { data: object } = ctx;
+                const object: Context & { data: object } = ctx;
             }
 
             return ctx;
@@ -118,30 +119,31 @@ describe('set', ()=>{
         .next(function (ctx) {
 
             {
-                let string: string = ctx.data;
-                let data: Context = ctx;
+                const string: string = ctx.data;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: number = ctx.data;
+                const number: number = ctx.data;
                 // @ts-expect-error
-                let boolean: boolean = ctx.data;
+                const boolean: boolean = ctx.data;
                 // @ts-expect-error
-                let object: object = ctx.data;
+                const object: object = ctx.data;
             }
 
             {
-                let string: Context & { data: string } = ctx;
-                let data: Context = ctx;
+                const string: Context & { data: string } = ctx;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: Context & { data: number } = ctx;
+                const number: Context & { data: number } = ctx;
                 // @ts-expect-error
-                let boolean: Context & { data: boolean } = ctx;
+                const boolean: Context & { data: boolean } = ctx;
                 // @ts-expect-error
-                let object: Context & { data: object } = ctx;
+                const object: Context & { data: object } = ctx;
             }
 
             return ctx;
         });
 
+    it('',()=>expect(true).toBeTrue());
 });
 
 describe('set diff', ()=>{
@@ -157,25 +159,25 @@ describe('set diff', ()=>{
         .next(function (ctx) {
 
             {
-                let string: string = ctx.data;
-                let data: Context = ctx;
+                const string: string = ctx.data;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: number = ctx.data;
+                const number: number = ctx.data;
                 // @ts-expect-error
-                let boolean: boolean = ctx.data;
+                const boolean: boolean = ctx.data;
                 // @ts-expect-error
-                let object: object = ctx.data;
+                const object: object = ctx.data;
             }
 
             {
-                let string: Context & { data: string } = ctx;
-                let data: Context = ctx;
+                const string: Context & { data: string } = ctx;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: Context & { data: number } = ctx;
+                const number: Context & { data: number } = ctx;
                 // @ts-expect-error
-                let boolean: Context & { data: boolean } = ctx;
+                const boolean: Context & { data: boolean } = ctx;
                 // @ts-expect-error
-                let object: Context & { data: object } = ctx;
+                const object: Context & { data: object } = ctx;
             }
 
             return ctx;
@@ -192,28 +194,29 @@ describe('set diff', ()=>{
         .next(function (ctx) {
 
             {
-                let string: string = ctx.data;
-                let data: Context = ctx;
+                const string: string = ctx.data;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: number = ctx.data;
+                const number: number = ctx.data;
                 // @ts-expect-error
-                let boolean: boolean = ctx.data;
+                const boolean: boolean = ctx.data;
                 // @ts-expect-error
-                let object: object = ctx.data;
+                const object: object = ctx.data;
             }
 
             {
-                let string: Context & { data: string } = ctx;
-                let data: Context = ctx;
+                const string: Context & { data: string } = ctx;
+                const data: Context = ctx;
                 // @ts-expect-error
-                let number: Context & { data: number } = ctx;
+                const number: Context & { data: number } = ctx;
                 // @ts-expect-error
-                let boolean: Context & { data: boolean } = ctx;
+                const boolean: Context & { data: boolean } = ctx;
                 // @ts-expect-error
-                let object: Context & { data: object } = ctx;
+                const object: Context & { data: object } = ctx;
             }
 
             return ctx;
         });
 
+    it('',()=>expect(true).toBeTrue());
 });

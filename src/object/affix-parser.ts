@@ -1,17 +1,17 @@
-import Escape from '@alirya/string/pattern/escape';
-import Digit from '@alirya/string/boolean/digit';
-import String from '@alirya/string/boolean/string';
-import SafeCast from '@alirya/string/safe-cast';
-import Callable from '@alirya/function/callable';
-import {RemoveSuffixParameters} from '@alirya/string/remove-suffix';
-import {RemovePrefixParameters} from '@alirya/string/remove-prefix';
-import Prefix from '@alirya/string/prefix/prefix';
-import Suffix from '@alirya/string/suffix/suffix';
+import Escape from '@alirya/string/pattern/escape.js';
+import Digit from '@alirya/string/boolean/digit.js';
+import String from '@alirya/string/boolean/string.js';
+import SafeCast from '@alirya/string/safe-cast.js';
+import Callable from '@alirya/function/callable.js';
+import {RemoveSuffixParameters} from '@alirya/string/remove-suffix.js';
+import {RemovePrefixParameters} from '@alirya/string/remove-prefix.js';
+import Prefix from '@alirya/string/prefix/prefix.js';
+import Suffix from '@alirya/string/suffix/suffix.js';
 
 
 export function AffixParserParameters(
- prefix : string = '[',
- suffix : string = ']',
+ prefix  = '[',
+ suffix  = ']',
 ) : Callable<[string, any], Record<string, any>> {
 
     prefix = Escape(prefix[0]);
@@ -21,7 +21,7 @@ export function AffixParserParameters(
 
     return function (path : string, value) {
 
-        let paths = path.match(pattern) ?? [];
+        let paths : string[] = path.match(pattern) ?? [];
 
         paths = paths
             .filter(path=>path.length)
@@ -47,7 +47,7 @@ export function AffixParserParameter(
 
 export function AffixParserParameterBracesSet(keys : ReadonlyArray<string>, value : any) : Record<PropertyKey, any> {
 
-    let clone = keys.slice(0);
+    const clone = keys.slice(0);
     const key = clone.shift();
 
 

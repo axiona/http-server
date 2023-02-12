@@ -1,13 +1,13 @@
-import Context from "../context/context";
-import Middleware from "./middleware";
-import Metadata from "../router/metadata/metadata";
-import {PathSegmentsGet} from "../context/path-segments";
-import GetContextPath from "../router/metadata/get-context-path";
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
+import Metadata from '../router/metadata/metadata.js';
+import {PathSegmentsGet} from '../context/path-segments.js';
+import GetContextPath from '../router/metadata/get-context-path.js';
 import {Request} from "koa";
 import {Headers} from "headers-polyfill";
-import {UnsupportedMediaTypeParameters} from '@alirya/http/response/unsupported-media-type';
-import {ResponseParameters} from "../middleware/response";
-import Stop from "./stop";
+import {UnsupportedMediaTypeParameters} from '@alirya/http/response/unsupported-media-type.js';
+import {ResponseParameters} from '../middleware/response.js';
+import Stop from './stop.js';
 
 
 
@@ -15,7 +15,7 @@ export default function ValidateAccept<ContextType extends Context>(
     invalid: Middleware<ContextType> = Stop(ResponseParameters(UnsupportedMediaTypeParameters())) as Middleware<ContextType>
 ) : Middleware<ContextType> {
 
-    let caches : Map<string, Pick<Metadata, 'headers'|'method'>> = new Map<string, Pick<Metadata, 'headers'|'method'>>();
+    const caches : Map<string, Pick<Metadata, 'headers'|'method'>> = new Map<string, Pick<Metadata, 'headers'|'method'>>();
 
     return function (context) {
 

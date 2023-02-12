@@ -1,17 +1,17 @@
-import Middleware from './middleware';
-import Context from '../context/context';
-import Method from '../boolean/method';
-import {SetResponseParameters} from '../context/set-response';
-import {MethodNotAllowedParameters} from '@alirya/http/response/method-not-allowed';
-import {PathSegmentsGet} from "../context/path-segments";
-import Metadata from "../router/metadata/metadata";
-import GetContextPath from "../router/metadata/get-context-path";
+import Middleware from './middleware.js';
+import Context from '../context/context.js';
+import Method from '../boolean/method.js';
+import {SetResponseParameters} from '../context/set-response.js';
+import {MethodNotAllowedParameters} from '@alirya/http/response/method-not-allowed.js';
+import {PathSegmentsGet} from '../context/path-segments.js';
+import Metadata from '../router/metadata/metadata.js';
+import GetContextPath from '../router/metadata/get-context-path.js';
 
 export default function AutoOptions<
     ContextType extends Context = Context
 >() : Middleware<ContextType, ContextType> {
 
-    let caches : Map<string, Pick<Metadata, 'headers'|'method'>> = new Map<string, Pick<Metadata, 'headers'|'method'>>();
+    const caches : Map<string, Pick<Metadata, 'headers'|'method'>> = new Map<string, Pick<Metadata, 'headers'|'method'>>();
 
     return function (context) {
 

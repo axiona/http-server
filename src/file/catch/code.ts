@@ -1,10 +1,11 @@
-import Catch from "../../catch/catch";
-import Context from "../../context/context";
-import FormidableError from "../boolean/formidable-error";
-import {errors} from "formidable";
-import {ErrorParameters} from "../../catch/error";
-import Middleware from "../../middleware/middleware";
+import Catch from '../../catch/catch.js';
+import Context from '../../context/context.js';
+import FormidableError from '../boolean/formidable-error.js';
+import Formidable /*{errors}*/ from "formidable";
+import {ErrorParameters} from '../../catch/error.js';
+import Middleware from '../../middleware/middleware.js';
 
+const errors = Formidable.errors;
 /**
  *
  * @param code error from {@see errors}

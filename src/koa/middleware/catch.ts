@@ -1,5 +1,5 @@
 import {Middleware as KoaMiddleware} from "koa";
-import Catch from "../../catch/catch";
+import Catch from '../../catch/catch.js';
 
 export default function Prepend<
     CatchType extends Catch

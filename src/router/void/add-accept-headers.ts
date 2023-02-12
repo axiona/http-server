@@ -1,5 +1,5 @@
 import {Headers} from "headers-polyfill";
-import Metadata from "../metadata/metadata";
+import Metadata from '../metadata/metadata.js';
 
 // TODO MOVE TO HTTP PACKAGE
 export default function AddAcceptHeaders(router: Metadata, contentType: string) {

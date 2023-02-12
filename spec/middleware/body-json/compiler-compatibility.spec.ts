@@ -1,20 +1,20 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import BodyJson from '../../../dist/middleware/body-json';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import BodyJson from '../../../dist/middleware/body-json.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 
-    let called : boolean = false;
+    let called  = false;
 
     const server = Server();
 
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 

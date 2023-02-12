@@ -1,17 +1,17 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import BodyMultipart from '../../../dist/middleware/body-multipart';
-import StrictAccept from "../../../dist/middleware/validate-accept";
+import BodyMultipart from '../../../dist/middleware/body-multipart.js';
+import StrictAccept from '../../../dist/middleware/validate-accept.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 
-    let called : boolean = false;
+    let called  = false;
     let response : AxiosResponse<{name : string, address : string}>;
-    let data  = {
+    const data  = {
         root: {parent: {child : 'value 3'}},
         main: {parent: {child : ['array 1', 'array 2', 'array 3']}},
     };
@@ -21,7 +21,7 @@ describe('single', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{
@@ -31,7 +31,7 @@ describe('single', () => {
             .next(StrictAccept())
             .next(function (ctx) {
 
-            let data : Record<PropertyKey, any> = ctx.request.body;
+            const data : Record<PropertyKey, any> = ctx.request.body;
             ctx.response.body = data;
             called = true;
             return ctx;

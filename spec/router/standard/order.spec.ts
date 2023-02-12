@@ -1,6 +1,6 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios from 'axios';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
@@ -13,7 +13,7 @@ describe('basic', function () {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let called : string[] = [];
+    const called : string[] = [];
 
     const router =  BindToServer(server, Router());
 

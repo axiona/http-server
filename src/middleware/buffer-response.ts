@@ -1,8 +1,8 @@
-import Context from "../context/context";
-import Callable from '@alirya/function/callable';
-import Middleware from "./middleware";
-import FromBuffer from "../context/from-buffer";
-import Union from '@alirya/promise/union';
+import Context from '../context/context.js';
+import Callable from '@alirya/function/callable.js';
+import Middleware from './middleware.js';
+import FromBuffer from '../context/from-buffer.js';
+import Union from '@alirya/promise/union.js';
 
 
 export type BufferResponseCallbackType = Buffer|{
@@ -18,7 +18,7 @@ export default function BufferResponse<
 
     return async function (context) {
 
-        let {buffer, mime} = BufferResponseUnpackArgument(await option(context));
+        const {buffer, mime} = BufferResponseUnpackArgument(await option(context));
 
         return FromBuffer(context, buffer, mime);
     };

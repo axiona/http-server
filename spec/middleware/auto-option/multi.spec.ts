@@ -1,11 +1,11 @@
-import Router from '../../../dist/router/middleware';
-import Method from '../../../dist/middleware/method';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Method from '../../../dist/middleware/method.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import {PathParameters} from '../../../dist/middleware/path';
-import AutoOptions from '../../../dist/middleware/auto-options';
-import {ShuffleParameters} from '@alirya/array/shuffle';
+import {PathParameters} from '../../../dist/middleware/path.js';
+import AutoOptions from '../../../dist/middleware/auto-options.js';
+import {ShuffleParameters} from '@alirya/array/shuffle.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -13,7 +13,7 @@ describe('ordered', () => {
 
     let response : AxiosResponse<{name : string, address : string}>;
 
-    let mapped : Map<string, string[]> = new Map<string, string[]>();
+    const mapped : Map<string, string[]> = new Map<string, string[]>();
     mapped.set('/path1/child1', ['POST', 'GET', 'PATCH', 'DELETE', 'PUT']);
     mapped.set('/path2/child2', ['GET', 'PATCH', 'DELETE', 'PUT']);
     mapped.set('/path3/child3', ['PATCH', 'DELETE', 'PUT']);
@@ -26,11 +26,11 @@ describe('ordered', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 
-        let next = router.next(AutoOptions());
+        const next = router.next(AutoOptions());
 
         let list : {path:string, method:string}[] = [];
 

@@ -1,11 +1,11 @@
 import {Response} from "koa";
-import {PickParameters} from '@alirya/object/pick';
+import {PickParameters} from '@alirya/object/pick.js';
 
 
 export default function ResponseMessages(
     response:Response,
     label : string|null = 'response',
-    line: boolean = false
+    line = false
 ) : any[] {
 
     const result : any[] = [];

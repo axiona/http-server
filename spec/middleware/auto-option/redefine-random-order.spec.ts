@@ -1,17 +1,17 @@
-import Router from '../../../dist/router/middleware';
-import Method from '../../../dist/middleware/method';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Method from '../../../dist/middleware/method.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosError, AxiosResponse} from 'axios';
-import {PathParameters} from '../../../dist/middleware/path';
-import AutoOptions from '../../../dist/middleware/auto-options';
-import RandomBoolean from '@alirya/boolean/random';
+import {PathParameters} from '../../../dist/middleware/path.js';
+import AutoOptions from '../../../dist/middleware/auto-options.js';
+import RandomBoolean from '@alirya/boolean/random.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('random order, redefine', () => {
 
-    let methods : string[] = ['POST', 'GET', 'PATCH', 'DELETE', 'PUT'];
+    const methods : string[] = ['POST', 'GET', 'PATCH', 'DELETE', 'PUT'];
 
     describe('slibing', () => {
 
@@ -21,7 +21,7 @@ describe('random order, redefine', () => {
         beforeAll(()=>server.open());
         afterAll(()=>server.close());
 
-        let router =  BindToServer(server, Router());
+        const router =  BindToServer(server, Router());
 
         it('add request', ()=>{
 
@@ -65,18 +65,18 @@ describe('random order, redefine', () => {
     describe('children', () => {
 
         let response : AxiosResponse<{name : string, address : string}>;
-        let methods : string[] = ['POST', 'GET', 'PATCH', 'DELETE', 'PUT'];
+        const methods : string[] = ['POST', 'GET', 'PATCH', 'DELETE', 'PUT'];
 
         const server2 = Server();
 
         beforeAll(()=>server2.open());
         afterAll(()=>server2.close());
 
-        let router =  BindToServer(server2, Router());
+        const router =  BindToServer(server2, Router());
 
         it('add request', ()=>{
 
-            let next = router.next(AutoOptions());
+            const next = router.next(AutoOptions());
 
             for (const method of methods) {
 

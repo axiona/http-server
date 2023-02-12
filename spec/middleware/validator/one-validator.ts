@@ -1,4 +1,4 @@
-import Validator from '@alirya/validator/simple';
+import Validator from '@alirya/validator/simple.js';
 
 export default function RecordValidator() : Validator<number, 1> {
 

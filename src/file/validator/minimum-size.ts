@@ -1,18 +1,18 @@
-import {ObjectParameters} from "@alirya/object/validator/object";
-import {AndParameters} from "@alirya/array/validatable/and";
-import Validator from "@alirya/validator/simple";
-import {ValuePartialParameters} from "@alirya/array/validator/value-partial";
-import Validatable from '@alirya/validator/validatable/validatable';
-import MinimumSizeMessage from "../assert/string/minimum-size";
-import InvalidFirstValidLast from "@alirya/array/message/message/list/invalid-first-valid-last";
-import File from "../file";
-import {MapAllParameters} from '@alirya/object/validator/map-all';
-import AndRecord from '@alirya/object/validatable/and';
-import MapMessage from '@alirya/object/message/message/record/map';
-import ValidatorInterface from "@alirya/validator/simple";
-import {GreaterParameters, GreaterArgumentsMessage, GreaterArgument} from '@alirya/number/validator/greater';
-import Chain from '../../../../validator/dist/chain';
-import {FileParameters} from './file';
+import {ObjectParameters} from "@alirya/object/validator/object.js";
+import {AndParameters} from "@alirya/array/validatable/and.js";
+import Validator from "@alirya/validator/simple.js";
+import {ValuePartialParameters} from "@alirya/array/validator/value-partial.js";
+import Validatable from '@alirya/validator/validatable/validatable.js';
+import MinimumSizeMessage from '../assert/string/minimum-size.js';
+import InvalidFirstValidLast from "@alirya/array/message/message/list/invalid-first-valid-last.js";
+import File from '../file.js';
+import {MapAllParameters} from '@alirya/object/validator/map-all.js';
+import AndRecord from '@alirya/object/validatable/and.js';
+import MapMessage from '@alirya/object/message/message/record/map.js';
+import ValidatorInterface from "@alirya/validator/simple.js";
+import {GreaterParameters, GreaterArgumentsMessage, GreaterArgument} from '@alirya/number/validator/greater.js';
+import Chain from '../../../../validator/dist/chain.js';
+import {FileParameters} from './file.js';
 
 export function MinimumSizeParameters() : Validator<File, File, string>;
 export function MinimumSizeParameters(minimum: number) : Validator<File, File, string>;
@@ -23,7 +23,7 @@ export function MinimumSizeParameters<Message>(
 ) : Validator<object, File, Message>;
 
 export function MinimumSizeParameters<Message>(
-    minimum: number = 256,
+    minimum = 256,
     message : GreaterArgumentsMessage<Message|string> = MinimumSizeMessage.Parameters
 ) : Validator<object, File, Message|string> {
 

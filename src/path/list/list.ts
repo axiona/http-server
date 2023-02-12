@@ -1,4 +1,4 @@
-import {ListParameter, ListType} from "@alirya/uri/path/list";
+import {ListParameter, ListType} from "@alirya/uri/path/list.js";
 
 export default function List(paths : string[]|string) : ListType {
 

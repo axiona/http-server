@@ -1,6 +1,6 @@
-import Router from "./router";
-import Clone from "./metadata/clone";
-import Metadata from "./metadata/metadata";
+import Router from './router.js';
+import Clone from './metadata/clone.js';
+import Metadata from './metadata/metadata.js';
 
 /**
  * @internal

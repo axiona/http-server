@@ -1,6 +1,6 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
@@ -23,7 +23,7 @@ describe('basic', function () {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let called : boolean = false;
+    let called  = false;
 
     const router =  BindToServer(server, Router());
 
@@ -62,7 +62,7 @@ describe('204', function () {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let called : boolean = false;
+    let called  = false;
 
     const router =  BindToServer(server, Router());
 

@@ -1,18 +1,18 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import BodyText from '../../../dist/middleware/body-text';
-import Validation from '../../../dist/middleware/validation';
-import ContextDataGuard from './context-data-guard';
+import BodyText from '../../../dist/middleware/body-text.js';
+import Validation from '../../../dist/middleware/validation.js';
+import ContextDataGuard from './context-data-guard.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('valid', () => {
 
-    let called : boolean = false;
+    let called  = false;
 
-    let data : string = 'string test';
+    const data  = 'string test';
 
     let response : AxiosResponse<string>;
 
@@ -21,7 +21,7 @@ describe('valid', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 

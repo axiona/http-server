@@ -1,10 +1,10 @@
-import Middleware from './middleware';
-import Context from '../context/context';
-import Method from '../boolean/method';
-import {PathSegmentsGet} from "../context/path-segments";
+import Middleware from './middleware.js';
+import Context from '../context/context.js';
+import Method from '../boolean/method.js';
+import {PathSegmentsGet} from '../context/path-segments.js';
 import {Headers} from "headers-polyfill";
-import Metadata from "../router/metadata/metadata";
-import GetContextPath from "../router/metadata/get-context-path";
+import Metadata from '../router/metadata/metadata.js';
+import GetContextPath from '../router/metadata/get-context-path.js';
 
 export default function AutoCors<
     ContextType extends Context = Context
@@ -12,7 +12,7 @@ export default function AutoCors<
 
 ) : Middleware<ContextType, ContextType> {
 
-    let caches : Map<string, Pick<Metadata, 'headers'|'method'>> = new Map<string, Pick<Metadata, 'headers'|'method'>>();
+    const caches : Map<string, Pick<Metadata, 'headers'|'method'>> = new Map<string, Pick<Metadata, 'headers'|'method'>>();
 
     return function (context) {
 

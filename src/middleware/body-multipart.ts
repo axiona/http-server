@@ -1,20 +1,25 @@
-import {Options, defaultOptions, IncomingForm, File as FormidableFile, Part} from 'formidable';
-import Context from '../context/context';
-import Middleware from './middleware';
+import Formidable from 'formidable';
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import Callable from '@alirya/function/callable';
-import {AffixParsersParameters} from '../object/affix-parsers';
-import OmitUndefined from "@alirya/object/omit-undefined";
-import File from "../file/file";
-import FromFormidable from "../file/from-formidable";
-import AddAcceptHeaders from "../router/void/add-accept-headers";
+import Callable from '@alirya/function/callable.js';
+import {AffixParsersParameters} from '../object/affix-parsers.js';
+import OmitUndefined from "@alirya/object/omit-undefined.js";
+import File from '../file/file.js';
+import FromFormidable from '../file/from-formidable.js';
+import AddAcceptHeaders from '../router/void/add-accept-headers.js';
 import { v4 } from 'uuid';
-import {RemovePrefixParameters} from '@alirya/string/remove-prefix';
+import {RemovePrefixParameters} from '@alirya/string/remove-prefix.js';
 import error from "../catch/error";
-import NoOp from "../../../function/dist/no-op";
-import Delete from "../file/delete";
-import ResponseEnd from "../promise/response-end";
+import NoOp from "../../../function/dist/no-op.js";
+import Delete from "../file/delete.js";
+import ResponseEnd from "../promise/response-end.js";
 import {extension} from "mime-types";
+
+const {defaultOptions, IncomingForm} = Formidable;
+type Options = Formidable.Options;
+type FormidableFile = Formidable.File;
+type Part = Formidable.Part;
 
 export type BodyMultipartReturnRecursive<Type> = {
     [Key in string]: Type|Record<PropertyKey, BodyMultipartReturnRecursive<Type>>|BodyMultipartReturnRecursive<Type>[]

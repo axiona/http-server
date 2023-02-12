@@ -1,7 +1,7 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import {ValidatableResponseMessageParameters} from '../../../dist/middleware/validatable-response-message';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import {ValidatableResponseMessageParameters} from '../../../dist/middleware/validatable-response-message.js';
 import Axios, {AxiosResponse} from 'axios';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
@@ -10,12 +10,12 @@ describe('parameters', () => {
 
     let response : AxiosResponse<string>;
 
-    let called : boolean = false;
+    let called  = false;
 
     const server = Server();
 
-    let data = {data : 1};
-    let message = {
+    const data = {data : 1};
+    const message = {
         value: 'value',
         message: 'data',
     };
@@ -23,7 +23,7 @@ describe('parameters', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
     it('default', ()=>{
 

@@ -1,6 +1,8 @@
 import Fs from "fs";
-import NoOp from "../../../function/dist/no-op";
-import {File as FormidableFile} from "formidable";
+import NoOp from "../../../function/dist/no-op.js";
+import Formidable from "formidable";
+
+type FormidableFile = Formidable.File;
 
 export default function Delete(file : FormidableFile, errorHandler: (error)=>void = NoOp) : Promise<FormidableFile> {
 

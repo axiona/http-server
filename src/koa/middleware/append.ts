@@ -1,5 +1,5 @@
 import {Middleware as KoaMiddleware} from "koa";
-import Middleware from "../../middleware/middleware";
+import Middleware from '../../middleware/middleware.js';
 
 export default function Prepend<
     MiddlewareType extends Middleware

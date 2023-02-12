@@ -1,15 +1,15 @@
-import {ObjectParameters} from "@alirya/object/validator/object";
-import {AndParameters} from "@alirya/array/validatable/and";
-import Validator from "@alirya/validator/simple";
-import {ValuePartialParameters} from "@alirya/array/validator/value-partial";
-import {CallbackParameters} from "@alirya/validator/callback";
-import FormidableFileValidation from "../boolean/file";
-import {StaticParameters, StaticParameter} from '@alirya/validator/message/function/static';
-import Validatable from '@alirya/validator/validatable/validatable';
-import FormidableFileMessage from "../assert/string/file";
-import InvalidFirstValidLast from "@alirya/array/message/message/list/invalid-first-valid-last";
-import File from "../file";
-import Chain from '../../../../validator/dist/chain';
+import {ObjectParameters} from "@alirya/object/validator/object.js";
+import {AndParameters} from "@alirya/array/validatable/and.js";
+import Validator from "@alirya/validator/simple.js";
+import {ValuePartialParameters} from "@alirya/array/validator/value-partial.js";
+import {CallbackParameters} from "@alirya/validator/callback.js";
+import FormidableFileValidation from '../boolean/file.js';
+import {StaticParameters, StaticParameter} from '@alirya/validator/message/function/static.js';
+import Validatable from '@alirya/validator/validatable/validatable.js';
+import FormidableFileMessage from '../assert/string/file.js';
+import InvalidFirstValidLast from "@alirya/array/message/message/list/invalid-first-valid-last.js";
+import File from '../file.js';
+import Chain from '../../../../validator/dist/chain.js';
 
 export function FileParameters() : Validator<object, File, string>;
 

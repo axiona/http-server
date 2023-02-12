@@ -1,7 +1,7 @@
-import Server from "../../server";
-import BindToServer from "../../../dist/router/append-server";
-import Router from "../../../dist/router/middleware";
-import Axios from "axios";
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Router from '../../../dist/router/middleware.js';
+import Axios from 'axios';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -13,7 +13,7 @@ describe('basic', function () {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let called : string[] = [];
+    const called : string[] = [];
 
     const callback1 = Object.assign(function (ctx) {
 
@@ -43,7 +43,7 @@ describe('basic', function () {
 
     const router =  BindToServer(server, Router());
 
-    let router1 = router.next(Object.assign(function (ctx) {
+    const router1 = router.next(Object.assign(function (ctx) {
 
             called.push('1 1');
             return ctx;
@@ -61,7 +61,7 @@ describe('basic', function () {
         router1.next(callback2);
     }
 
-    let router2 = router.next(Object.assign(function (ctx) {
+    const router2 = router.next(Object.assign(function (ctx) {
 
             ctx.status = 204;
             called.push('1 2');

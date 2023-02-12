@@ -1,5 +1,5 @@
-import Context from '../context/context';
-import Middleware from './middleware';
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
 
 type BodyJsonReturn<Argument extends Context, Body extends unknown> = Middleware<

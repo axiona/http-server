@@ -1,8 +1,8 @@
-import Server from "../../server";
-import BindToServer from "../../../dist/router/append-server";
-import Router from "../../../dist/router/middleware";
-import Axios, {AxiosResponse} from "axios";
-import Context from "../../../dist/context/context";
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Router from '../../../dist/router/middleware.js';
+import Axios, {AxiosResponse} from 'axios';
+import Context from '../../../dist/context/context.js';
 
 describe('multi', () => {
 
@@ -14,7 +14,7 @@ describe('multi', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, Router((context) : Context<{}, {body:string[]}> => {
+    const router =  BindToServer(server, Router((context) : Context<{}, {body:string[]}> => {
 
         context.response.body = [];
         return context as Context<{}, {body:string[]}>;

@@ -1,4 +1,4 @@
-import Context from '../context/context';
+import Context from '../context/context.js';
 
 export default interface Handler<Argument extends Context = Context, Return extends Context = Argument> {
 

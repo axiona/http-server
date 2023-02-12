@@ -1,9 +1,9 @@
-import Context from "../context/context";
-import Callable from '@alirya/function/callable';
-import Middleware from "./middleware";
-import Union from '@alirya/promise/union';
+import Context from '../context/context.js';
+import Callable from '@alirya/function/callable.js';
+import Middleware from './middleware.js';
+import Union from '@alirya/promise/union.js';
 import { Readable } from 'stream';
-import FromReadable from "../context/from-readable";
+import FromReadable from '../context/from-readable.js';
 
 export type StreamResponseCallbackType = Readable|{
     readable: Readable,
@@ -18,7 +18,7 @@ export default function StreamResponse<
 
     return async function (context) {
 
-        let {readable, mime} = StreamResponseUnpackArgument(await option(context));
+        const {readable, mime} = StreamResponseUnpackArgument(await option(context));
 
         return FromReadable(context, readable, mime);
     };

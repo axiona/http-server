@@ -1,18 +1,18 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import Validator from '../../../dist/middleware/validator';
-import ContextValidator from './context-validator';
-import BodyText from '../../../dist/middleware/body-text';
+import Validator from '../../../dist/middleware/validator.js';
+import ContextValidator from './context-validator.js';
+import BodyText from '../../../dist/middleware/body-text.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('valid', () => {
 
-    let called : boolean = false;
+    let called  = false;
 
-    let data : string = 'string test';
+    const data  = 'string test';
 
     let response : AxiosResponse<string>;
 
@@ -21,7 +21,7 @@ describe('valid', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 
@@ -74,9 +74,9 @@ describe('valid', () => {
 
 describe('invalid', () => {
 
-    let called : boolean = false;
+    let called  = false;
 
-    let data : string = 'string test';
+    const data  = 'string test';
 
     let response : AxiosResponse<string>;
 
@@ -85,7 +85,7 @@ describe('invalid', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 

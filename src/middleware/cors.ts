@@ -1,6 +1,6 @@
 import KoaCors, {Options} from "@koa/cors";
-import Context from "../context/context";
-import Middleware from "./middleware";
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
 
 export default function Cors<
     ContextType extends Context = Context

@@ -1,10 +1,10 @@
-import Response from '@alirya/http/response/response';
-import Context from '../context/context';
+import Response from '@alirya/http/response/response.js';
+import Context from '../context/context.js';
 import {O} from 'ts-toolbelt';
-import Middleware from './middleware';
-import IsFunction from '@alirya/function/boolean/function';
-import FromResponse, {SetResponseReturn} from '../context/set-response';
-import Callable from '@alirya/function/callable';
+import Middleware from './middleware.js';
+import IsFunction from '@alirya/function/boolean/function.js';
+import FromResponse, {SetResponseReturn} from '../context/set-response.js';
+import Callable from '@alirya/function/callable.js';
 /**
  * use {@param response} value or return for response data
  *

@@ -1,15 +1,15 @@
-import Context from '../context/context';
-import Router from './router';
-import Catch from '../catch/catch';
-import Middleware from '../middleware/middleware';
-import Metadata from "./metadata/metadata";
-import Register from "./metadata/register";
-import RegisterChildren from "./register-children";
-import Null from "./metadata/null";
-import Registrable from "../registrable.ts/registrable";
-import Middleware_ from "./middleware";
-import Catch_ from "./catch";
-import Callable from "../../../function/dist/callable";
+import Context from '../context/context.js';
+import Router from './router.js';
+import Catch from '../catch/catch.js';
+import Middleware from '../middleware/middleware.js';
+import Metadata from './metadata/metadata.js';
+import Register from './metadata/register.js';
+import RegisterChildren from './register-children.js';
+import Null from './metadata/null.js';
+import Registrable from '../registrable.ts/registrable.js';
+import Middleware_ from './middleware.js';
+import Catch_ from './catch.js';
+import Callable from '../../../function/dist/callable.js';
 
 
 export default function Compose<ContextType extends Context  = Context>(

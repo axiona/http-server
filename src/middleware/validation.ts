@@ -1,10 +1,10 @@
-import Middleware from './middleware';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import {SelectPathParameters} from '@alirya/object/value/value/select-path';
-import Context from '../context/context';
-import Stop from './stop';
-import {ValidationAsyncable} from '@alirya/boolean/function/validation';
-import Guard, {GuardInferExpect} from '@alirya/boolean/function/guard';
+import {SelectPathParameters} from '@alirya/object/value/value/select-path.js';
+import Context from '../context/context.js';
+import Stop from './stop.js';
+import {ValidationAsyncable} from '@alirya/boolean/function/validation.js';
+import Guard, {GuardInferExpect} from '@alirya/boolean/function/guard.js';
 
 
 export type ValidationTypeContext<ContextType extends Context, Properties extends PropertyKey[], Value extends unknown>
@@ -121,7 +121,7 @@ export function ValidationParameters<
     invalid : Middleware<ContextType> = Stop(),
 ) : ValidationReturnPropertiesValidatable<Properties, Value, ContextType> | ValidationReturnContextValidatable<ContextType> {
 
-    const assignment : boolean = !!properties.length;
+    const assignment  = !!properties.length;
 
     return async function (context: ContextType & O.P.Record<Properties|[], unknown>) {
 

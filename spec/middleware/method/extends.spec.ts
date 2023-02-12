@@ -1,16 +1,16 @@
-import Router from '../../../dist/router/middleware';
-import Method from '../../../dist/middleware/method';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Method from '../../../dist/middleware/method.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('same method', () => {
 
-    let called : boolean = false;
+    let called  = false;
     let response : AxiosResponse<{name : string, address : string}>;
-    let data : {name : string, address : string} = {
+    const data : {name : string, address : string} = {
         name : 'jhon',
         address : 'earth'
     };
@@ -21,7 +21,7 @@ describe('same method', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{

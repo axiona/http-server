@@ -1,15 +1,19 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import BodyMultipart from '../../../dist/middleware/body-multipart';
-import FormData from 'form-data';
+import BodyMultipart from '../../../dist/middleware/body-multipart.js';
+import FormData from "form-data";
 import {createReadStream} from "fs";
-import FormidableFileBoolean from "../../../dist/file/boolean/file";
-import MinimumSize from "../../../dist/file/validator/minimum-size";
-import Validatable from "@alirya/validator/validatable/validatable";
-import File from "../../../dist/file/file";
+import FormidableFileBoolean from '../../../dist/file/boolean/file.js';
+import MinimumSize from '../../../dist/file/validator/minimum-size.js';
+import Validatable from "@alirya/validator/validatable/validatable.js";
+import File from '../../../dist/file/file.js';
+import {fileURLToPath} from 'url';
+import {dirname} from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -24,7 +28,7 @@ describe('single', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{

@@ -1,7 +1,12 @@
 import {copyFileSync, existsSync, readFileSync} from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-const file = __dirname + '/../';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 let raw : string;
+const file = __dirname + '/../';
 
 if(existsSync(file)) {
 
@@ -15,6 +20,4 @@ if(existsSync(file)) {
 
 
 const Config = JSON.parse(raw);
-export default <{
-    port : number
-}>  Config;
+export default <{port : number}>  Config;

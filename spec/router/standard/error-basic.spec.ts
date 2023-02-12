@@ -1,6 +1,6 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
@@ -16,7 +16,7 @@ describe('caught', function () {
 
     const router =  BindToServer(server, Router());
 
-    let called : string[] = [];
+    const called : string[] = [];
 
     router.catch(function (ctx, error) {
 
@@ -63,7 +63,7 @@ describe('uncaught', function () {
 
     let response : AxiosResponse<string>;
 
-    let called : string[] = [];
+    const called : string[] = [];
 
     router.next(function (ctx) {
 

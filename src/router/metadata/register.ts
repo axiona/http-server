@@ -1,5 +1,5 @@
-import Metadata from "./metadata";
-import Registrable from "../../registrable.ts/registrable";
+import Metadata from './metadata.js';
+import Registrable from '../../registrable.ts/registrable.js';
 
 export default function Register(metadata: Metadata, middleware: Registrable) : Metadata {
 

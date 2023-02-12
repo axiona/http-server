@@ -1,7 +1,9 @@
-import {errors} from "formidable";
-import {ExistsParameters} from '@alirya/object/property/boolean/exists';
-import String from '@alirya/string/boolean/string';
-import Number from '@alirya/number/boolean/number';
+import Formidable /*{errors}*/ from "formidable";
+import {ExistsParameters} from '@alirya/object/property/boolean/exists.js';
+import String from '@alirya/string/boolean/string.js';
+import Number from '@alirya/number/boolean/number.js';
+
+const errors = Formidable.errors;
 
 // fix incorrect @types
 export type FormidableErrorType = Omit<InstanceType<typeof errors.FormidableError>, 'internalCode'> & {

@@ -1,8 +1,8 @@
-import Middleware from '../middleware/middleware';
-import Catch from '../catch/catch';
-import Context from '../context/context';
-import Metadata from "./metadata/metadata";
-import Callable from "../../../function/dist/callable";
+import Middleware from '../middleware/middleware.js';
+import Catch from '../catch/catch.js';
+import Context from '../context/context.js';
+import Metadata from './metadata/metadata.js';
+import Callable from '../../../function/dist/callable.js';
 
 export default interface Router<
     ContextType extends Context  = Context,

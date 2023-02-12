@@ -1,11 +1,11 @@
-import Validator from "@alirya/validator/simple";
-import Validatable from '@alirya/validator/validatable/validatable';
-import MinimumSizeMessage from "../assert/string/minimum-size";
-import EmptyFileMessage from "../assert/string/not-empty";
-import File from "../file";
-import {MinimumSizeParameters} from "./minimum-size";
-import { ValidatableParameters, ValidatableParameter } from '@alirya/validator/message/function/validatable';
-import Message from "@alirya/message/message";
+import Validator from "@alirya/validator/simple.js";
+import Validatable from '@alirya/validator/validatable/validatable.js';
+import MinimumSizeMessage from '../assert/string/minimum-size.js';
+import EmptyFileMessage from '../assert/string/not-empty.js';
+import File from '../file.js';
+import {MinimumSizeParameters} from './minimum-size.js';
+import { ValidatableParameters, ValidatableParameter } from '@alirya/validator/message/function/validatable.js';
+import Message from "@alirya/message/message.js";
 
 export function NotEmptyParameters() : Validator<File, File, string>;
 

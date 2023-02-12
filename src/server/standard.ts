@@ -1,6 +1,6 @@
 import Koa, {DefaultContext, DefaultState} from 'koa';
 import {Server as HttpServer} from 'http';
-import Server, {ServerKoaOption} from './server';
+import Server, {ServerKoaOption} from './server.js';
 import {ListenOptions} from 'net';
 
 export default class Standard<

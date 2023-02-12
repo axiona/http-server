@@ -1,5 +1,5 @@
 // import Koa, {DefaultContext, DefaultState} from 'koa';
-// import Server from './server';
+// import Server from './server.js';
 // import {Server as HttpServer} from 'http';
 // import {ListenOptions} from 'net';
 //

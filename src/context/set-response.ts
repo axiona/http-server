@@ -1,5 +1,5 @@
-import Response from '@alirya/http/response/response';
-import Context from './context';
+import Response from '@alirya/http/response/response.js';
+import Context from './context.js';
 import {O} from 'ts-toolbelt';
 
 export type SetResponseReturn<
@@ -10,7 +10,7 @@ export type SetResponseReturn<
 export function SetResponseParameters<Body extends unknown, ContextType extends Context>(
     context : ContextType,
     response : Response<Body>,
-    mergeHeader: boolean = false
+    mergeHeader = false
 ) : SetResponseReturn<Body, ContextType> {
 
     if(mergeHeader) {

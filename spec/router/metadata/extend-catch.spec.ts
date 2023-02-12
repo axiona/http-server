@@ -1,9 +1,9 @@
-import Server from "../../server";
-import BindToServer from "../../../dist/router/append-server";
-import Router from "../../../dist/router/middleware";
-import Axios from "axios";
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Router from '../../../dist/router/middleware.js';
+import Axios from 'axios';
 import * as util from "util";
-import Catch from "../../../dist/catch/catch";
+import Catch from '../../../dist/catch/catch.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -14,7 +14,7 @@ describe('no throw', function () {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let called : string[] = [];
+    const called : string[] = [];
 
     const catch1 : Catch = Object.assign(function (ctx, error) {
 
@@ -43,7 +43,7 @@ describe('no throw', function () {
 
     const router =  BindToServer(server, Router());
 
-    let router1 = router.next(Object.assign(function (ctx) {
+    const router1 = router.next(Object.assign(function (ctx) {
 
             called.push('1 1');
             return ctx;
@@ -60,7 +60,7 @@ describe('no throw', function () {
         router1.catch(catch1).next(callback2);
     }
 
-    let router2 = router.next(Object.assign(function (ctx) {
+    const router2 = router.next(Object.assign(function (ctx) {
 
             ctx.status = 204;
             called.push('1 2');
@@ -120,7 +120,7 @@ describe('throw', function () {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let called : string[] = [];
+    const called : string[] = [];
 
     const catch1 : Catch = Object.assign(function (ctx, error) {
 
@@ -150,7 +150,7 @@ describe('throw', function () {
 
     const router =  BindToServer(server, Router());
 
-    let router1 = router.next(Object.assign(function (ctx) {
+    const router1 = router.next(Object.assign(function (ctx) {
 
             called.push('1 1');
             return ctx;
@@ -167,7 +167,7 @@ describe('throw', function () {
         router1.catch(catch1).next(callback2);
     }
 
-    let router2 = router.next(Object.assign(function (ctx) {
+    const router2 = router.next(Object.assign(function (ctx) {
 
             ctx.status = 204;
             called.push('1 2');

@@ -1,5 +1,5 @@
-import Router from './router';
-import Standard from "./middleware";
+import Router from './router.js';
+import Standard from './middleware.js';
 import Koa from "koa";
 
 export default function AppendKoa(server : Koa) : Router;

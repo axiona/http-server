@@ -1,16 +1,21 @@
-import Axios, {AxiosError, AxiosResponse} from "axios";
-import Server from "../../../server";
-import BindToServer from "../../../../dist/router/append-server";
-import Router from "../../../../dist/router/middleware";
-import BodyMultipart from "../../../../dist/middleware/body-multipart";
-import {MinimumSizeParameters} from "../../../../dist/file/validator/minimum-size";
+import Axios, {AxiosError, AxiosResponse} from 'axios';
+import Server from '../../../server.js';
+import BindToServer from '../../../../dist/router/append-server.js';
+import Router from '../../../../dist/router/middleware.js';
+import BodyMultipart from '../../../../dist/middleware/body-multipart.js';
+import {MinimumSizeParameters} from '../../../../dist/file/validator/minimum-size.js';
 import FormData from "form-data";
 import {createReadStream} from "fs";
-import Validatable from "@alirya/validator/validatable/validatable";
-import Validator from "../../../../dist/middleware/validator";
-import {MapAllParameters} from '@alirya/object/validator/map-all';
-import And from '@alirya/object/validatable/and';
-import Map from '@alirya/object/message/message/record/map';
+import Validatable from "@alirya/validator/validatable/validatable.js";
+import Validator from '../../../../dist/middleware/validator.js';
+import {MapAllParameters} from '@alirya/object/validator/map-all.js';
+import And from '@alirya/object/validatable/and.js';
+import Map from '@alirya/object/message/message/record/map.js';
+import {fileURLToPath} from 'url';
+import {dirname} from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -26,7 +31,7 @@ describe('single', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{

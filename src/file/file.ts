@@ -1,4 +1,6 @@
-import {File as FormidableFile} from "formidable";
+import Formidable from "formidable";
+
+type FormidableFile = Formidable.File;
 
 
 export type File = Omit<FormidableFile, 'mtime'> & {

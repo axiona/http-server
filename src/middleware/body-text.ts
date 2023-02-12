@@ -1,10 +1,10 @@
 import {text, Options} from 'co-body';
-import Context from '../context/context';
-import Middleware from './middleware';
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
 import {Required} from 'utility-types';
-import OmitUndefined from "@alirya/object/omit-undefined";
-import AddAcceptHeaders from "../router/void/add-accept-headers";
+import OmitUndefined from "@alirya/object/omit-undefined.js";
+import AddAcceptHeaders from '../router/void/add-accept-headers.js';
 
 
 type BodyTextReturn<Argument extends Context> = Middleware<

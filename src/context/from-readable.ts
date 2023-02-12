@@ -1,9 +1,11 @@
-import Context from "./context";
-import {fromStream} from "file-type";
-import ContentType from '@alirya/http/headers/header/content-type';
+import Context from './context.js';
+// import {fromStream} from "file-type";
+import FileType from "file-type";
+import ContentType from '@alirya/http/headers/header/content-type.js';
 import {Readable, PassThrough} from "stream";
 import HttpError from "http-errors";
 
+const {fromStream} = FileType;
 
 export default async function FromReadable<Ctx extends Context>(
     context: Ctx,

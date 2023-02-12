@@ -1,15 +1,15 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import ContextValidator from './context-validator';
-import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator';
-import Validatable from '@alirya/validator/validatable/validatable';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import ContextValidator from './context-validator.js';
+import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator.js';
+import Validatable from '@alirya/validator/validatable/validatable.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
 
-let router =  BindToServer(server, Router());
+const router =  BindToServer(server, Router());
 
 describe('context compatibility', ()=>{
 
@@ -21,13 +21,13 @@ describe('context compatibility', ()=>{
                 .next(ValidatorParameters(ContextValidator))
                 .next(function (ctx) {
 
-                    let data : string = ctx.data;
+                    const data : string = ctx.data;
                     // @ts-expect-error
-                    let number : number = ctx.data;
+                    const number : number = ctx.data;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.data;
+                    const boolean : boolean = ctx.data;
                     // @ts-expect-error
-                    let object : object = ctx.data;
+                    const object : object = ctx.data;
 
                     return ctx;
                 });
@@ -56,17 +56,17 @@ describe('context compatibility', ()=>{
                 .next(Validator.Parameters(ContextValidator))
                 .next(function (ctx) {
 
-                    let data : string = ctx.data;
+                    const data : string = ctx.data;
                     // @ts-expect-error
-                    let number : number = ctx.data;
+                    const number : number = ctx.data;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.data;
+                    const boolean : boolean = ctx.data;
                     // @ts-expect-error
-                    let object : object = ctx.data;
+                    const object : object = ctx.data;
 
                     return ctx;
                 });
-
+            it('',()=>expect(true).toBeTrue());
         });
 
 
@@ -76,13 +76,13 @@ describe('context compatibility', ()=>{
                 .next(ValidatorParameter({validator:ContextValidator}))
                 .next(function (ctx) {
 
-                    let data : string = ctx.data;
+                    const data : string = ctx.data;
                     // @ts-expect-error
-                    let number : number = ctx.data;
+                    const number : number = ctx.data;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.data;
+                    const boolean : boolean = ctx.data;
                     // @ts-expect-error
-                    let object : object = ctx.data;
+                    const object : object = ctx.data;
 
                     return ctx;
                 });
@@ -91,16 +91,17 @@ describe('context compatibility', ()=>{
                 .next(Validator.Parameter({validator:ContextValidator}))
                 .next(function (ctx) {
 
-                    let data : string = ctx.data;
+                    const data : string = ctx.data;
                     // @ts-expect-error
-                    let number : number = ctx.data;
+                    const number : number = ctx.data;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.data;
+                    const boolean : boolean = ctx.data;
                     // @ts-expect-error
-                    let object : object = ctx.data;
+                    const object : object = ctx.data;
 
                     return ctx;
                 });
+            it('',()=>expect(true).toBeTrue());
         });
     });
 
@@ -117,13 +118,13 @@ describe('context compatibility', ()=>{
                 .next(ValidatorParameters(ContextValidator))
                 .next(function (ctx) {
 
-                    let data : string = ctx.data;
+                    const data : string = ctx.data;
                     // @ts-expect-error
-                    let number : number = ctx.data;
+                    const number : number = ctx.data;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.data;
+                    const boolean : boolean = ctx.data;
                     // @ts-expect-error
-                    let object : object = ctx.data;
+                    const object : object = ctx.data;
 
                     return ctx;
                 });
@@ -137,16 +138,17 @@ describe('context compatibility', ()=>{
                 .next(Validator.Parameters(ContextValidator))
                 .next(function (ctx) {
 
-                    let data : string = ctx.data;
+                    const data : string = ctx.data;
                     // @ts-expect-error
-                    let number : number = ctx.data;
+                    const number : number = ctx.data;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.data;
+                    const boolean : boolean = ctx.data;
                     // @ts-expect-error
-                    let object : object = ctx.data;
+                    const object : object = ctx.data;
 
                     return ctx;
                 });
+            it('',()=>expect(true).toBeTrue());
         });
 
 
@@ -161,13 +163,13 @@ describe('context compatibility', ()=>{
                 .next(ValidatorParameter({validator:ContextValidator}))
                 .next(function (ctx) {
 
-                    let data : string = ctx.data;
+                    const data : string = ctx.data;
                     // @ts-expect-error
-                    let number : number = ctx.data;
+                    const number : number = ctx.data;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.data;
+                    const boolean : boolean = ctx.data;
                     // @ts-expect-error
-                    let object : object = ctx.data;
+                    const object : object = ctx.data;
 
                     return ctx;
                 });
@@ -201,17 +203,17 @@ describe('context compatibility', ()=>{
                 .next(Validator.Parameter({validator:ContextValidator}))
                 .next(function (ctx) {
 
-                    let data : string = ctx.data;
+                    const data : string = ctx.data;
                     // @ts-expect-error
-                    let number : number = ctx.data;
+                    const number : number = ctx.data;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.data;
+                    const boolean : boolean = ctx.data;
                     // @ts-expect-error
-                    let object : object = ctx.data;
+                    const object : object = ctx.data;
 
                     return ctx;
                 });
-
+            it('',()=>expect(true).toBeTrue());
         });
     });
 

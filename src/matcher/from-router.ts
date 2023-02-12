@@ -1,8 +1,8 @@
-import Matcher from "./matcher";
-import ArrayFromRouter from "./array/from-router";
-import FromPathMemoize from "./from-path-memoize";
-import {FromPathArgumentsOption} from "./from-path";
-import Metadata from "../router/metadata/metadata";
+import Matcher from './matcher.js';
+import ArrayFromRouter from './array/from-router.js';
+import FromPathMemoize from './from-path-memoize.js';
+import {FromPathArgumentsOption} from './from-path.js';
+import Metadata from '../router/metadata/metadata.js';
 
 
 export default function FromRouter(

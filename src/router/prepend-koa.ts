@@ -1,5 +1,5 @@
-import Router from './router';
-import Standard from "./middleware";
+import Router from './router.js';
+import Standard from './middleware.js';
 import Koa from "koa";
 
 export default function PrependKoa(server : Koa) : Router;
@@ -8,7 +8,7 @@ export default function PrependKoa<Type extends Router>(server : Koa, router: Ty
 
     server.use(async (context, next) => {
 
-        let contextNext = await router.call(context);
+        const contextNext = await router.call(context);
 
         if(contextNext) {
 

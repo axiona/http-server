@@ -1,10 +1,15 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import {MethodPathParameter} from "../../../dist/middleware/method-path";
-import FileBuffer from "../../../dist/middleware/file-buffer-response";
+import {MethodPathParameter} from '../../../dist/middleware/method-path.js';
+import FileBuffer from '../../../dist/middleware/file-buffer-response.js';
 import * as Fs from "fs";
+import {fileURLToPath} from 'url';
+import {dirname} from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -17,7 +22,7 @@ describe('single', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{

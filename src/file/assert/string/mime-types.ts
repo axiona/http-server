@@ -1,6 +1,6 @@
-import Validatable from '@alirya/validatable/validatable';
-import Value from '@alirya/value/value';
-import ReadonlyList from '@alirya/array/array/readonly';
+import Validatable from '@alirya/validatable/validatable.js';
+import Value from '@alirya/value/value.js';
+import ReadonlyList from '@alirya/array/array/readonly.js';
 
 export function MimeTypesParameters(
     value : string,

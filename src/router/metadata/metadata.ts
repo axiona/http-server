@@ -1,5 +1,5 @@
-import Request from "@alirya/http/request/request";
-import Matcher from "../../matcher/matcher";
+import Request from "@alirya/http/request/request.js";
+import Matcher from '../../matcher/matcher.js';
 
 
 export default interface Metadata extends Omit<Request, 'method'|'body'|'path'> {

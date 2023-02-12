@@ -1,19 +1,19 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import {MethodPathParameter} from "../../../dist/middleware/method-path";
-import Passthru from "../../../dist/middleware/passthrough";
-import NoOp from '@alirya/function/no-op';
-import {OmitParameters} from "../../../../object/dist/omit";
+import {MethodPathParameter} from '../../../dist/middleware/method-path.js';
+import Passthru from '../../../dist/middleware/passthrough.js';
+import NoOp from '@alirya/function/no-op.js';
+import {OmitParameters} from '../../../../object/dist/omit.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 
-    let called : boolean = false;
+    let called  = false;
     let response : AxiosResponse<{name : string, address : string}>;
-    let data : {name : string, address : string} = {
+    const data : {name : string, address : string} = {
         name : 'jhon',
         address : 'earth'
     };
@@ -24,7 +24,7 @@ describe('single', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{
@@ -72,9 +72,9 @@ describe('multi', () => {
         '/path/child',
         '/path/child/granchild',
     ];
-    let called : boolean = false;
+    let called  = false;
 
-    let data : Data = {
+    const data : Data = {
         name : 'jhon',
         address : 'earth',
         method : '',
@@ -86,7 +86,7 @@ describe('multi', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
     for(const path of paths) {
 
@@ -116,7 +116,7 @@ describe('multi', () => {
 
         });
 
-        let data = actual.map(data=>OmitParameters(data, 'children'));
+        const data = actual.map(data=>OmitParameters(data, 'children'));
 
         expect<any>(data).toEqual([
                 { headers: {}, method: [ 'POST' ], path: '/path' },

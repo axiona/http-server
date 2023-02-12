@@ -1,13 +1,13 @@
-import Context from '../context/context';
-import Middleware from './middleware';
-import {ListType} from '@alirya/uri/path/list';
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
+import {ListType} from '@alirya/uri/path/list.js';
 import { ParseOptions, TokensToRegexpOptions, RegexpToFunctionOptions} from 'path-to-regexp';
-import ContextPath from "../matcher/match/context-path";
-import Matcher from "../matcher/matcher";
-import List from "../path/list/list";
-import Metadata from "../router/metadata/metadata";
-import FromPath from "../matcher/from-path";
-import Null from "../router/metadata/null";
+import ContextPath from '../matcher/match/context-path.js';
+import Matcher from '../matcher/matcher.js';
+import List from '../path/list/list.js';
+import Metadata from '../router/metadata/metadata.js';
+import FromPath from '../matcher/from-path.js';
+import Null from '../router/metadata/null.js';
 
 export type PathContext<
     ArgumentType extends Record<string, string> = Record<string, string>,
@@ -94,7 +94,7 @@ export function PathParameters<
     const metadatas = new Map<string, Matcher>();
 
     option = Object.assign({}, PathOptionDefault, option);
-    let relatives = List(paths);
+    const relatives = List(paths);
 
     const createMatcher = (metadata : Metadata) : Matcher => {
 
@@ -105,7 +105,7 @@ export function PathParameters<
 
     const register = (metadata : Metadata) => {
 
-        let matcher = createMatcher(metadata);
+        const matcher = createMatcher(metadata);
         metadata.path = matcher;
 
         metadatas.set(matcher.path, matcher);

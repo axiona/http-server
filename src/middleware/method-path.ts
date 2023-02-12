@@ -1,8 +1,8 @@
-import Context from '../context/context';
-import {PathArgument, PathArgumentsOption, PathOptionDefault, PathParameters, PathReturn} from "./path";
-import Method from "./method";
-import Register from "../router/metadata/register";
-import Metadata from "../router/metadata/metadata";
+import Context from '../context/context.js';
+import {PathArgument, PathArgumentsOption, PathOptionDefault, PathParameters, PathReturn} from './path.js';
+import Method from './method.js';
+import Register from '../router/metadata/register.js';
+import Metadata from '../router/metadata/metadata.js';
 
 export type MethodPathReturn<
     ArgumentType extends Record<string, string> = Record<string, string>,

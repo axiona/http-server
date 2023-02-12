@@ -1,5 +1,5 @@
-import Config from './config';
-import Standard from '../dist/server/standard';
+import Config from './config.js';
+import Standard from '../dist/server/standard.js';
 
 process.setMaxListeners(99);
 

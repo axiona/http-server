@@ -1,9 +1,9 @@
-import Number from "@alirya/number/boolean/number";
-import {ExistsParameters} from "@alirya/object/property/boolean/exists";
-import String from "@alirya/string/boolean/string";
-import Nullable from "@alirya/null/boolean/nullable";
-import FileType from "../file";
-import Object_ from '@alirya/object/boolean/object';
+import Number from "@alirya/number/boolean/number.js";
+import {ExistsParameters} from "@alirya/object/property/boolean/exists.js";
+import String from "@alirya/string/boolean/string.js";
+import Nullable from "@alirya/null/boolean/nullable.js";
+import FileType from '../file.js';
+import Object_ from '@alirya/object/boolean/object.js';
 
 export default function File(value: object) : value is FileType {
 

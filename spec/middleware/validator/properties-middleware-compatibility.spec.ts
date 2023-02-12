@@ -1,15 +1,15 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator';
-import Stop from '../../../dist/middleware/stop';
-import OneGuard from './one-validator';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator.js';
+import Stop from '../../../dist/middleware/stop.js';
+import OneGuard from './one-validator.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
 
-let router =  BindToServer(server, Router());
+const router =  BindToServer(server, Router());
 
 describe('guard', () => {
 
@@ -21,12 +21,12 @@ describe('guard', () => {
                 .next(ValidatorParameters(OneGuard(), ['response', 'status'], Stop()))
                 .next(function (ctx) {
 
-                    let number : number = ctx.response.status;
-                    let one : 1 = ctx.response.status;
+                    const number : number = ctx.response.status;
+                    const one : 1 = ctx.response.status;
                     // @ts-expect-error
-                    let two : 2 = ctx.response.status;
+                    const two : 2 = ctx.response.status;
                     // @ts-expect-error
-                    let string : string = ctx.response.status;
+                    const string : string = ctx.response.status;
 
                     return ctx;
                 });
@@ -35,12 +35,12 @@ describe('guard', () => {
                 .next(ValidatorParameters(OneGuard(), ['a', 'b'], Stop()))
                 .next(function (ctx) {
 
-                    let number : number = ctx.a.b;
-                    let one : 1 = ctx.a.b;
+                    const number : number = ctx.a.b;
+                    const one : 1 = ctx.a.b;
                     // @ts-expect-error
-                    let two : 2 = ctx.a.b;
+                    const two : 2 = ctx.a.b;
                     // @ts-expect-error
-                    let string : string = ctx.a.b;
+                    const string : string = ctx.a.b;
 
                     return ctx;
                 });
@@ -49,15 +49,17 @@ describe('guard', () => {
                 .next(Validator.Parameters(OneGuard(), ['a', 'b'], Stop()))
                 .next(function (ctx) {
 
-                    let number : number = ctx.a.b;
-                    let one : 1 = ctx.a.b;
+                    const number : number = ctx.a.b;
+                    const one : 1 = ctx.a.b;
                     // @ts-expect-error
-                    let two : 2 = ctx.a.b;
+                    const two : 2 = ctx.a.b;
                     // @ts-expect-error
-                    let string : string = ctx.a.b;
+                    const string : string = ctx.a.b;
 
                     return ctx;
                 });
+
+            it('',()=>expect(true).toBeTrue());
         });
 
         describe('parameter', ()=>{
@@ -70,12 +72,12 @@ describe('guard', () => {
                 }))
                 .next(function (ctx) {
 
-                    let number : number = ctx.a.b;
-                    let one : 1 = ctx.a.b;
+                    const number : number = ctx.a.b;
+                    const one : 1 = ctx.a.b;
                     // @ts-expect-error
-                    let two : 2 = ctx.a.b;
+                    const two : 2 = ctx.a.b;
                     // @ts-expect-error
-                    let string : string = ctx.a.b;
+                    const string : string = ctx.a.b;
 
                     return ctx;
                 });
@@ -88,15 +90,17 @@ describe('guard', () => {
                 }))
                 .next(function (ctx) {
 
-                    let number : number = ctx.response.body;
-                    let one : 1 = ctx.response.body;
+                    const number : number = ctx.response.body;
+                    const one : 1 = ctx.response.body;
                     // @ts-expect-error
-                    let two : 2 = ctx.response.body;
+                    const two : 2 = ctx.response.body;
                     // @ts-expect-error
-                    let string : string = ctx.response.body;
+                    const string : string = ctx.response.body;
 
                     return ctx;
                 });
+
+            it('',()=>expect(true).toBeTrue());
         });
     });
     describe('with context', ()=>{
@@ -105,12 +109,12 @@ describe('guard', () => {
                 .next(ValidatorParameters(OneGuard(), ['response', 'status'], Stop()))
                 .next(function (ctx) {
 
-                    let number : number = ctx.response.status;
-                    let one : 1 = ctx.response.status;
+                    const number : number = ctx.response.status;
+                    const one : 1 = ctx.response.status;
                     // @ts-expect-error
-                    let two : 2 = ctx.response.status;
+                    const two : 2 = ctx.response.status;
                     // @ts-expect-error
-                    let string : string = ctx.response.status;
+                    const string : string = ctx.response.status;
 
                     return ctx;
                 });
@@ -119,15 +123,17 @@ describe('guard', () => {
                 .next(Validator.Parameters(OneGuard(), ['response', 'status'], Stop()))
                 .next(function (ctx) {
 
-                    let number : number = ctx.response.status;
-                    let one : 1 = ctx.response.status;
+                    const number : number = ctx.response.status;
+                    const one : 1 = ctx.response.status;
                     // @ts-expect-error
-                    let two : 2 = ctx.response.status;
+                    const two : 2 = ctx.response.status;
                     // @ts-expect-error
-                    let string : string = ctx.response.status;
+                    const string : string = ctx.response.status;
 
                     return ctx;
                 });
+
+            it('',()=>expect(true).toBeTrue());
 
         });
         describe('parameter', ()=>{
@@ -139,12 +145,12 @@ describe('guard', () => {
                 }))
                 .next(function (ctx) {
 
-                    let number : number = ctx.response.status;
-                    let one : 1 = ctx.response.status;
+                    const number : number = ctx.response.status;
+                    const one : 1 = ctx.response.status;
                     // @ts-expect-error
-                    let two : 2 = ctx.response.status;
+                    const two : 2 = ctx.response.status;
                     // @ts-expect-error
-                    let string : string = ctx.response.status;
+                    const string : string = ctx.response.status;
 
                     return ctx;
                 });
@@ -157,16 +163,16 @@ describe('guard', () => {
                 }))
                 .next(function (ctx) {
 
-                    let number : number = ctx.response.status;
-                    let one : 1 = ctx.response.status;
+                    const number : number = ctx.response.status;
+                    const one : 1 = ctx.response.status;
                     // @ts-expect-error
-                    let two : 2 = ctx.response.status;
+                    const two : 2 = ctx.response.status;
                     // @ts-expect-error
-                    let string : string = ctx.response.status;
+                    const string : string = ctx.response.status;
 
                     return ctx;
                 });
-
+            it('',()=>expect(true).toBeTrue());
         });
     });
 

@@ -1,12 +1,12 @@
 import {Request} from "koa";
-import {PickParameters} from '@alirya/object/pick';
-import Body from "@alirya/http/body/body";
+import {PickParameters} from '@alirya/object/pick.js';
+import Body from "@alirya/http/body/body.js";
 
 
 export default function RequestMessages(
     request: Request & Partial<Body>,
     label: string|null = 'request',
-    line: boolean = false
+    line = false
 ) : any[] {
 
     const result : any[] = [];

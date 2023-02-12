@@ -1,5 +1,5 @@
-import Metadata from "./metadata";
-import CloneRecursive from '@alirya/object/clone-recursive';
+import Metadata from './metadata.js';
+import CloneRecursive from '@alirya/object/clone-recursive.js';
 
 export default function Clone(parameter: Metadata, replace: Partial<Metadata> = {}) : Metadata {
 

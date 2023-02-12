@@ -1,7 +1,10 @@
-import {File as FormidableFile} from "formidable";
-import File from "./file";
-import {fromFile} from "file-type";
+import Formidable from "formidable";
+import File from './file.js';
+import FileType from "file-type";
 import {extension} from "mime-types";
+
+const {fromFile} = FileType;
+type FormidableFile = Formidable.File;
 
 export default async function FromFormidable(file: FormidableFile|File) : Promise<File> {
 
@@ -26,7 +29,7 @@ export default async function FromFormidable(file: FormidableFile|File) : Promis
 
     if(file.mimetype && !(file as File).extension) {
 
-        let ext = extension(file.mimetype);
+        const ext = extension(file.mimetype);
 
         if(ext) {
 

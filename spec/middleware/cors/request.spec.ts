@@ -1,18 +1,18 @@
-import Router from '../../../dist/router/middleware';
-import Method from '../../../dist/middleware/method';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/prepend-server';
+import Router from '../../../dist/router/middleware.js';
+import Method from '../../../dist/middleware/method.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/prepend-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import Cors from "../../../dist/middleware/auto-cors";
+import Cors from '../../../dist/middleware/auto-cors.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 
 describe('single', () => {
 
-    let called : boolean = false;
+    let called  = false;
     let response : AxiosResponse<{name : string, address : string}>;
-    let data : {name : string, address : string} = {
+    const data : {name : string, address : string} = {
         name : 'jhon',
         address : 'earth'
     };
@@ -23,11 +23,11 @@ describe('single', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 
-        let next = router.next(Cors());
+        const next = router.next(Cors());
 
         next.next(Method('POST')).next(function (ctx) {
             ctx.response.body = data;
@@ -66,10 +66,10 @@ describe('multi', () => {
         method: string
     };
     const methods : string[] = ['POST', 'GET', 'PATCH', 'PUT'];
-    let called : boolean = false;
-    let uncalled : boolean = false;
+    let called  = false;
+    let uncalled  = false;
 
-    let data : Data = {
+    const data : Data = {
         name : 'jhon',
         address : 'earth',
         method : '',
@@ -81,9 +81,9 @@ describe('multi', () => {
     afterAll(()=>server2.close());
 
 
-    let router =  BindToServer(server2, Router());
+    const router =  BindToServer(server2, Router());
 
-    let next = router.next(Cors());
+    const next = router.next(Cors());
 
     for(const method of methods) {
 

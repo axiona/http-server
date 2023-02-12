@@ -1,5 +1,5 @@
 import {DefaultContext, DefaultState, ExtendableContext} from 'koa';
-import Metadata from "../router/metadata/metadata";
+import Metadata from '../router/metadata/metadata.js';
 
 /**
  * context of parameter middleware

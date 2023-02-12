@@ -1,9 +1,9 @@
-import Middleware from './middleware';
-import Context from '../context/context';
-import Syslog from '@alirya/syslog/syslog';
-import Callable from '@alirya/function/callable';
+import Middleware from './middleware.js';
+import Context from '../context/context.js';
+import Syslog from '@alirya/syslog/syslog.js';
+import Callable from '@alirya/function/callable.js';
 import {Request} from "koa";
-import RequestMessages from "../array/request-messages";
+import RequestMessages from '../array/request-messages.js';
 
 export function PrintRequestParameters<ContextType extends Context, Log extends Syslog<any[]>>(
     syslog: Log,

@@ -1,4 +1,4 @@
-import BracesParsers from '../../../dist/object/affix-parsers';
+import BracesParsers from '../../../dist/object/affix-parsers.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

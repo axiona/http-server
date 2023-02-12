@@ -1,5 +1,5 @@
-import Metadata from "./metadata";
-import FromPath from "../../matcher/from-path";
+import Metadata from './metadata.js';
+import FromPath from '../../matcher/from-path.js';
 
 const path = FromPath('');
 

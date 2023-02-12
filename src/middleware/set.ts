@@ -1,8 +1,8 @@
-import ApplicationContext from '../context/context';
-import Middleware from './middleware';
+import ApplicationContext from '../context/context.js';
+import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import { SetPathParameters } from '@alirya/object/set-path';
-import Union from "@alirya/promise/union";
+import { SetPathParameters } from '@alirya/object/set-path.js';
+import Union from "@alirya/promise/union.js";
 
 export type SetReturn<
     Properties extends PropertyKey[],

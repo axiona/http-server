@@ -1,9 +1,9 @@
-import Route from '@alirya/http/route/route';
-import {PathOptionDefault, PathParameters} from "./path";
-import {MethodPathArgumentsOption} from "./method-path";
-import Middleware from "./middleware";
-import Method from "./method";
-import Context from "../context/context";
+import Route from '@alirya/http/route/route.js';
+import {PathOptionDefault, PathParameters} from './path.js';
+import {MethodPathArgumentsOption} from './method-path.js';
+import Middleware from './middleware.js';
+import Method from './method.js';
+import Context from '../context/context.js';
 
 
 export function RouteOptionsParameters<

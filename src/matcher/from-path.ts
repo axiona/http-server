@@ -1,4 +1,4 @@
-import MatcherType from "./matcher";
+import MatcherType from './matcher.js';
 import { match, ParseOptions, TokensToRegexpOptions, RegexpToFunctionOptions, MatchFunction, Match} from 'path-to-regexp';
 
 export type FromPathArgumentsOption = ParseOptions & TokensToRegexpOptions & RegexpToFunctionOptions;

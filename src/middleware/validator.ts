@@ -1,15 +1,15 @@
-import Validator from '@alirya/validator/simple';
-import InferValidatable from '@alirya/validator/validatable/infer-static';
-import InferMatch from '@alirya/validator/validatable/match/infer';
-import Middleware, {MiddlewareReturn} from './middleware';
+import Validator from '@alirya/validator/simple.js';
+import InferValidatable from '@alirya/validator/validatable/infer-static.js';
+import InferMatch from '@alirya/validator/validatable/match/infer.js';
+import Middleware, {MiddlewareReturn} from './middleware.js';
 import {O} from 'ts-toolbelt';
-import {SelectPathParameters} from '@alirya/object/value/value/select-path';
-import { SetPathParameters } from '@alirya/object/set-path';
-import Context from '../context/context';
-import Callable from "@alirya/function/callable";
-import InferStatic from "@alirya/validator/validatable/infer-static";
-import {SetResponseParameters} from "../context/set-response";
-import {BadRequestParameters} from '@alirya/http/response/bad-request';
+import {SelectPathParameters} from '@alirya/object/value/value/select-path.js';
+import { SetPathParameters } from '@alirya/object/set-path.js';
+import Context from '../context/context.js';
+import Callable from "@alirya/function/callable.js";
+import InferStatic from "@alirya/validator/validatable/infer-static.js";
+import {SetResponseParameters} from '../context/set-response.js';
+import {BadRequestParameters} from '@alirya/http/response/bad-request.js';
 
 export type ValidatorPreviousContext<Properties extends PropertyKey[]> = Context & O.P.Record<Properties, unknown>;
 export type ValidatorTypePropertiesNext<
@@ -45,12 +45,12 @@ export type ValidatorTypeContextNext<
 
 export interface ValidatorArgumentProperties<
     Properties extends PropertyKey[],
-    ContextType extends ValidatorPreviousContext<Properties>,
+    ContextType extends ValidatorPreviousContext<Properties>|Context,
     ValidatorType extends Validator<O.Path<ContextType, Properties>>,
     ValidatableKey extends PropertyKey[]
 > {
     validator : ValidatorType;
-    invalid ?: Callable<[ContextType, InferStatic<ValidatorType>],  MiddlewareReturn<ValidatorTypePropertiesNext<ContextType, Properties, ValidatorType>>>;
+    invalid ?: Callable<[ContextType, InferStatic<ValidatorType>],  MiddlewareReturn</*ValidatorTypePropertiesNext<*/ContextType/*, Properties, ValidatorType>*/>>;
     replace ?: boolean;
     properties : [...Properties];
     validatable ?: [...ValidatableKey];
@@ -80,7 +80,7 @@ export interface ValidatorArgumentContext<
  */
 export function ValidatorParameter<
     ContextType extends Context = Context,
-    ValidatorType extends Validator<ContextType, Context> = Validator<ContextType, Context>,
+    ValidatorType extends Validator<ContextType> = Validator<ContextType>,
     ValidatableKey extends PropertyKey[] = ['validatable'],
     Invalid extends ValidatorTypeContextNext<ContextType, ValidatorType, ValidatableKey> = ValidatorTypeContextNext<ContextType, ValidatorType, ValidatableKey>,
 >(  {
@@ -148,22 +148,24 @@ export function ValidatorParameter<
  */
 export function ValidatorParameter<
     Properties extends PropertyKey[],
-    ContextType extends ValidatorPreviousContext<Properties>,
+    ContextType extends ValidatorPreviousContext<Properties>|Context,
     ValidatorType extends Validator<O.Path<ContextType, Properties>>|Validator<ContextType>,
-    ValidatableKey extends PropertyKey[],
-    Invalid extends ValidatorTypeContextNext<ContextType, ValidatorType, ValidatableKey>,
+    ValidatableKey extends PropertyKey[] = ['validatable'],
+    Invalid extends ValidatorTypeContextNext<ContextType, Validator<ContextType>, ValidatableKey>
+        = ValidatorTypeContextNext<ContextType, Validator<ContextType>, ValidatableKey>,
 >(  {
         validator,
         invalid,
         replace = true,
-        properties = [],
-        validatable = ['validatable'],
-    } : ValidatorArgumentProperties<Properties, ContextType, ValidatorType, ValidatableKey|['validatable']> |
-        ValidatorArgumentContext<ContextType, ValidatorType, ValidatableKey|['validatable'], any>
-) : ValidatorTypeProperties<ContextType, Properties, ValidatorType, ValidatableKey> | ValidatorTypeContext<ContextType, ValidatorType, ValidatableKey> {
+        properties = [] as any ,
+        validatable  = ['validatable'],
+    } : ValidatorArgumentProperties<Properties, ContextType, Validator<O.Path<ContextType, Properties>>, ValidatableKey|['validatable']> |
+        ValidatorArgumentContext<ContextType, Validator<ContextType>, ValidatableKey|['validatable'], any>
+) : ValidatorTypeProperties<ContextType, Properties, Validator<O.Path<ContextType, Properties>>, ValidatableKey/*|['validatable']*/> /*| ValidatorTypeContext<ContextType, ValidatorType, ValidatableKey>*/ {
 
-    return ValidatorParameters(validator, properties as [], invalid as any, /*valid as any,*/ replace , validatable as ValidatableKey|['validatable']) as
-        ValidatorTypeProperties<ContextType, Properties, ValidatorType, ValidatableKey> | ValidatorTypeContext<ContextType, ValidatorType, ValidatableKey>;
+    // TODO FIX ANY TYPE
+    return ValidatorParameters(validator as any, properties as any, invalid as any/* as any*/, /*valid as any,*/ replace as any , validatable as any/* as ValidatableKey|['validatable']*/) as any /*as
+        any as ValidatorTypeProperties<ContextType, Properties, ValidatorType, ValidatableKey>*/ /*| ValidatorTypeContext<ContextType, ValidatorType, ValidatableKey>*/;
 }
 
 
@@ -235,7 +237,7 @@ export function ValidatorParameters<
 export function ValidatorParameters<
     Properties extends PropertyKey[],
     ContextType extends ValidatorPreviousContext<Properties>|Context,
-    ValidatorType extends Validator<O.Path<ContextType, Properties>>|Validator<ContextType>,
+    ValidatorType extends Validator<O.Path<ContextType, Properties>>/*|Validator<ContextType>*/,
     ValidatableKey extends PropertyKey[]
 >(
     validator : ValidatorType,
@@ -243,11 +245,11 @@ export function ValidatorParameters<
     invalid : Callable<[ContextType, InferStatic<ValidatorType>], MiddlewareReturn<ContextType>> = (context, validatable) => {
         SetResponseParameters(context, BadRequestParameters(validatable.message));
     },
-    replace : boolean = true,
+    replace  = true,
     validatable : ValidatableKey|['validatable'] = ['validatable'],
-) : ValidatorTypeProperties<ContextType, Properties, ValidatorType, ValidatableKey> | ValidatorTypeContext<ContextType, ValidatorType, ValidatableKey> {
+) : ValidatorTypeProperties<ContextType, Properties, ValidatorType, ValidatableKey> /*| ValidatorTypeContext<ContextType, ValidatorType, ValidatableKey>*/ {
 
-    const assignment : boolean = !!properties.length;
+    const assignment  = !!properties.length;
 
     return function (context: ValidatorPreviousContext<Properties|[]>) {
 

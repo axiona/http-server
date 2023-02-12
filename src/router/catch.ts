@@ -1,8 +1,8 @@
-import Context from '../context/context';
-import CatchType from '../catch/catch';
-import Metadata from "./metadata/metadata";
-import Null from "./metadata/null";
-import Compose from "../router/compose";
+import Context from '../context/context.js';
+import CatchType from '../catch/catch.js';
+import Metadata from './metadata/metadata.js';
+import Null from './metadata/null.js';
+import Compose from '../router/compose.js';
 
 export default function Catch<ContextType extends Context  = Context> (
     handler : CatchType,

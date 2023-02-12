@@ -1,11 +1,11 @@
-import Server from "../../server";
-import BindToServer from "../../../dist/router/append-server";
-import Router from "../../../dist/router/middleware";
-import Route from "../../../dist/router/router";
-import Axios, {AxiosResponse} from "axios";
-import Context from "../../../dist/context/context";
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Router from '../../../dist/router/middleware.js';
+import Route from '../../../dist/router/router.js';
+import Axios, {AxiosResponse} from 'axios';
+import Context from '../../../dist/context/context.js';
 import util from "util";
-import {OmitParameters} from "../../../../object/dist/omit";
+import {OmitParameters} from '../../../../object/dist/omit.js';
 
 describe('multi', () => {
 
@@ -17,7 +17,7 @@ describe('multi', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, Router(function Main (context) : Context<{}, {body:string[]}>  {
+    const router =  BindToServer(server, Router(function Main (context) : Context<{}, {body:string[]}>  {
 
         context.response.body = [];
         return context as Context<{}, {body:string[]}>;
@@ -43,7 +43,7 @@ describe('multi', () => {
 
     function dump(route: Route) : any {
 
-        let data =  OmitParameters(Object.assign({}, route), 'metadata');
+        const data =  OmitParameters(Object.assign({}, route), 'metadata');
 
         data.children = data.children.map(dump);
 

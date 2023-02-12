@@ -1,4 +1,4 @@
-import Metadata from "../metadata";
+import Metadata from '../metadata.js';
 
 export function FromRouterArray(metadata: Metadata, container: Set<Metadata>) : Set<Metadata> {
 

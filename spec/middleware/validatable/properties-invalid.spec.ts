@@ -1,9 +1,9 @@
 import Axios, {AxiosResponse} from 'axios';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import Router from '../../../dist/router/middleware';
-import OneGuard from './one-guard';
-import {ValidationParameters} from '../../../dist/middleware/validation';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Router from '../../../dist/router/middleware.js';
+import OneGuard from './one-guard.js';
+import {ValidationParameters} from '../../../dist/middleware/validation.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -11,9 +11,9 @@ it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('invalid', () => {
 
-    let called : boolean = false;
+    let called  = false;
 
-    let data : string = 'string test';
+    const data  = 'string test';
 
     let response : AxiosResponse<string>;
 
@@ -22,7 +22,7 @@ describe('invalid', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 

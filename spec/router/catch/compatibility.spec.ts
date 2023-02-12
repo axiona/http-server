@@ -1,6 +1,6 @@
-import Router from "../../../dist/router/middleware";
-import Context from "../../../dist/context/context";
-import Middleware from "../../../dist/middleware/middleware";
+import Router from '../../../dist/router/middleware.js';
+import Context from '../../../dist/context/context.js';
+import Middleware from '../../../dist/middleware/middleware.js';
 
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
@@ -22,7 +22,7 @@ describe('basic', function () {
         .next(Type())
         .catch(function (context, error) {
 
-            let string: string = context.request.body.data;
+            const string: string = context.request.body.data;
 
         })
         .next(function (context) {
@@ -32,9 +32,9 @@ describe('basic', function () {
         })
         .next(function (context) {
 
-            let string: string = context.request.body.data;
+            const string: string = context.request.body.data;
             return context;
         });
 
-
+    it('',()=>expect(true).toBeTrue());
 });

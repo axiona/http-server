@@ -1,10 +1,10 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import BodyJson from '../../../dist/middleware/body-json';
-import RecordValidator from './record-validator';
-import Validator from '../../../dist/middleware/validator';
+import BodyJson from '../../../dist/middleware/body-json.js';
+import RecordValidator from './record-validator.js';
+import Validator from '../../../dist/middleware/validator.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -15,14 +15,14 @@ describe('valid', () => {
         address : string
     };
 
-    let called : boolean = false;
+    let called  = false;
 
     const server = Server();
 
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 
@@ -40,7 +40,7 @@ describe('valid', () => {
 
     describe('valid', () => {
 
-        let data : Data = {
+        const data : Data = {
             name : 'jhon',
             address : 'earth'
         };

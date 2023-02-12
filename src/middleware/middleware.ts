@@ -1,6 +1,6 @@
-import Context from '../context/context';
-import Union from "@alirya/promise/union";
-import Registrable from "../registrable.ts/registrable";
+import Context from '../context/context.js';
+import Union from "@alirya/promise/union.js";
+import Registrable from '../registrable.ts/registrable.js';
 
 
 export default interface Middleware<

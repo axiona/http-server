@@ -1,9 +1,9 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import {PathParameters} from '../../../dist/middleware/path';
-import AutoOptions from '../../../dist/middleware/auto-options';
+import {PathParameters} from '../../../dist/middleware/path.js';
+import AutoOptions from '../../../dist/middleware/auto-options.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -17,7 +17,7 @@ describe('empty', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{

@@ -1,10 +1,10 @@
-import Context from '../../dist/context/context';
-import FromResponse from '../../dist/context/set-response';
+import Context from '../../dist/context/context.js';
+import FromResponse from '../../dist/context/set-response.js';
 
 
 describe('empty', () => {
 
-    let cts = FromResponse.Parameters({
+    const cts = FromResponse.Parameters({
 
         response : {
             set (header) {},
@@ -15,10 +15,11 @@ describe('empty', () => {
 
     } as Context, {headers:{}, message:'', status:200, body: 1});
 
-    let number : number = cts.response.body;
+    const number : number = cts.response.body;
     // @ts-expect-error
-    let string : string = cts.response.body;
+    const string : string = cts.response.body;
     // @ts-expect-error
-    let object : object = cts.response.body;
+    const object : object = cts.response.body;
 
+    it('', ()=>expect(true).toBeTrue());
 });

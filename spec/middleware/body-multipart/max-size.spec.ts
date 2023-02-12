@@ -1,20 +1,24 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import BodyMultipart from '../../../dist/middleware/body-multipart';
-import FormData from 'form-data';
+import BodyMultipart from '../../../dist/middleware/body-multipart.js';
+import FormData from "form-data";
 import {createReadStream} from "fs";
-import MaxSizeExceeded from "../../../dist/file/catch/max-size-exceeded";
-import Timeout from '@alirya/promise/timeout';
+import MaxSizeExceeded from '../../../dist/file/catch/max-size-exceeded.js';
+import Timeout from '@alirya/promise/timeout.js';
+import {fileURLToPath} from 'url';
+import {dirname} from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 
     let response : AxiosResponse<{data : string}>;
-    let nextCalled : boolean = false;
+    let nextCalled  = false;
     const server = Server();
 
     it('open', ()=>server.open().then(() => Timeout(0.5)));
@@ -22,7 +26,7 @@ describe('single', () => {
 
     it('add request', ()=>{
 
-        let router =  BindToServer(server, Router());
+        const router =  BindToServer(server, Router());
 
         router.catch(MaxSizeExceeded(function (ctx) {
 

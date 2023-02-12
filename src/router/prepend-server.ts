@@ -1,7 +1,7 @@
-import Router from './router';
-import Server from '../server/server';
-import Standard from "./middleware";
-import PrependKoa from "./prepend-koa";
+import Router from './router.js';
+import Server from '../server/server.js';
+import Standard from './middleware.js';
+import PrependKoa from './prepend-koa.js';
 
 export default function PrependServer(server : Server) : Router;
 export default function PrependServer<Type extends Router>(server : Server, router: Type) : Type;

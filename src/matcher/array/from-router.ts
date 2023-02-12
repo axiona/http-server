@@ -1,6 +1,6 @@
-import MetadataFromRouter from "../../router/metadata/array/from-router";
-import Matcher from "../matcher";
-import Metadata from "../../router/metadata/metadata";
+import MetadataFromRouter from '../../router/metadata/array/from-router.js';
+import Matcher from '../matcher.js';
+import Metadata from '../../router/metadata/metadata.js';
 
 export default function FromRouter(router: Metadata) : Matcher[] {
 

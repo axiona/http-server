@@ -1,8 +1,8 @@
-import Callable from '@alirya/function/callable';
-import Middleware from "../middleware/middleware";
-import Context from "../context/context";
-import Catch from "./catch";
-import Guard from "@alirya/boolean/function/guard";
+import Callable from '@alirya/function/callable.js';
+import Middleware from '../middleware/middleware.js';
+import Context from '../context/context.js';
+import Catch from './catch.js';
+import Guard from "@alirya/boolean/function/guard.js";
 
 export function ErrorParameters<ContextType extends Context, ErrorType extends Error = Error>(
     validation : Guard<Error, ErrorType>,

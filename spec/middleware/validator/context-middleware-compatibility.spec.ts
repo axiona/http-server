@@ -1,16 +1,16 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator';
-import Stop from '../../../dist/middleware/stop';
-import Context from '../../../dist/context/context';
-import ContextValidator from './context-validator';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator.js';
+import Stop from '../../../dist/middleware/stop.js';
+import Context from '../../../dist/context/context.js';
+import ContextValidator from './context-validator.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 const server = Server();
 
-let router =  BindToServer(server, Router());
+const router =  BindToServer(server, Router());
 
 describe('guard', () => {
 
@@ -22,13 +22,13 @@ describe('guard', () => {
                 .next(ValidatorParameters(ContextValidator, undefined, Stop()))
                 .next(function (ctx) {
 
-                    let data : Context = ctx;
+                    const data : Context = ctx;
                     // @ts-expect-error
-                    let number : Context<{ data :number }> = ctx;
+                    const number : Context<{ data :number }> = ctx;
                     // @ts-expect-error
-                    let boolean : Context<{ data :boolean }> = ctx;
+                    const boolean : Context<{ data :boolean }> = ctx;
                     // @ts-expect-error
-                    let string : Context<{ data :string }> = ctx;
+                    const string : Context<{ data :string }> = ctx;
 
                     return ctx;
                 });
@@ -37,17 +37,18 @@ describe('guard', () => {
                 .next(Validator.Parameters(ContextValidator, undefined, Stop()))
                 .next(function (ctx) {
 
-                    let data : Context = ctx;
+                    const data : Context = ctx;
                     // @ts-expect-error
-                    let number : Context<{ data :number }> = ctx;
+                    const number : Context<{ data :number }> = ctx;
                     // @ts-expect-error
-                    let boolean : Context<{ data :boolean }> = ctx;
+                    const boolean : Context<{ data :boolean }> = ctx;
                     // @ts-expect-error
-                    let string : Context<{ data :string }> = ctx;
+                    const string : Context<{ data :string }> = ctx;
 
                     return ctx;
                 });
 
+            it('',()=>expect(true).toBeTrue());
         });
 
 
@@ -60,13 +61,13 @@ describe('guard', () => {
                 }))
                 .next(function (ctx) {
 
-                    let data : Context = ctx;
+                    const data : Context = ctx;
                     // @ts-expect-error
-                    let number : Context<{ data :number }> = ctx;
+                    const number : Context<{ data :number }> = ctx;
                     // @ts-expect-error
-                    let boolean : Context<{ data :boolean }> = ctx;
+                    const boolean : Context<{ data :boolean }> = ctx;
                     // @ts-expect-error
-                    let string : Context<{ data :string }> = ctx;
+                    const string : Context<{ data :string }> = ctx;
 
                     return ctx;
                 });
@@ -78,16 +79,18 @@ describe('guard', () => {
                 }))
                 .next(function (ctx) {
 
-                    let data : Context = ctx;
+                    const data : Context = ctx;
                     // @ts-expect-error
-                    let number : Context<{ data :number }> = ctx;
+                    const number : Context<{ data :number }> = ctx;
                     // @ts-expect-error
-                    let boolean : Context<{ data :boolean }> = ctx;
+                    const boolean : Context<{ data :boolean }> = ctx;
                     // @ts-expect-error
-                    let string : Context<{ data :string }> = ctx;
+                    const string : Context<{ data :string }> = ctx;
 
                     return ctx;
                 });
+
+            it('',()=>expect(true).toBeTrue());
         });
     });
 
@@ -104,13 +107,13 @@ describe('guard', () => {
                 .next(ValidatorParameters(ContextValidator, undefined, Stop()))
                 .next(function (ctx) {
 
-                    let data : string|number|boolean = ctx.request.body;
+                    const data : string|number|boolean = ctx.request.body;
                     // @ts-expect-error
-                    let number : number = ctx.request.body;
+                    const number : number = ctx.request.body;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.request.body;
+                    const boolean : boolean = ctx.request.body;
                     // @ts-expect-error
-                    let string : string = ctx.request.body;
+                    const string : string = ctx.request.body;
 
                     return ctx;
                 });
@@ -124,16 +127,18 @@ describe('guard', () => {
                 .next(ValidatorParameters(ContextValidator, undefined, Stop()))
                 .next(function (ctx) {
 
-                    let data : string|number|boolean = ctx.request.body;
+                    const data : string|number|boolean = ctx.request.body;
                     // @ts-expect-error
-                    let number : number = ctx.request.body;
+                    const number : number = ctx.request.body;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.request.body;
+                    const boolean : boolean = ctx.request.body;
                     // @ts-expect-error
-                    let string : string = ctx.request.body;
+                    const string : string = ctx.request.body;
 
                     return ctx;
                 });
+
+            it('',()=>expect(true).toBeTrue());
         });
 
         describe('parameter', ()=>{
@@ -149,13 +154,13 @@ describe('guard', () => {
                 }))
                 .next(function (ctx) {
 
-                    let data : string|number|boolean = ctx.request.body;
+                    const data : string|number|boolean = ctx.request.body;
                     // @ts-expect-error
-                    let number : number = ctx.request.body;
+                    const number : number = ctx.request.body;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.request.body;
+                    const boolean : boolean = ctx.request.body;
                     // @ts-expect-error
-                    let string : string = ctx.request.body;
+                    const string : string = ctx.request.body;
 
                     return ctx;
                 });
@@ -172,16 +177,18 @@ describe('guard', () => {
                 }))
                 .next(function (ctx) {
 
-                    let data : string|number|boolean = ctx.request.body;
+                    const data : string|number|boolean = ctx.request.body;
                     // @ts-expect-error
-                    let number : number = ctx.request.body;
+                    const number : number = ctx.request.body;
                     // @ts-expect-error
-                    let boolean : boolean = ctx.request.body;
+                    const boolean : boolean = ctx.request.body;
                     // @ts-expect-error
-                    let string : string = ctx.request.body;
+                    const string : string = ctx.request.body;
 
                     return ctx;
                 });
+
+            it('',()=>expect(true).toBeTrue());
 
         });
     });

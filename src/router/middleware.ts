@@ -1,10 +1,10 @@
-import Context from '../context/context';
-import Router from './router';
-import MiddlewareType from '../middleware/middleware';
-import Metadata from "./metadata/metadata";
-import Null from "./metadata/null";
-import Identity from "../../../function/dist/identity";
-import Compose from "./compose";
+import Context from '../context/context.js';
+import Router from './router.js';
+import MiddlewareType from '../middleware/middleware.js';
+import Metadata from './metadata/metadata.js';
+import Null from './metadata/null.js';
+import Identity from '../../../function/dist/identity.js';
+import Compose from './compose.js';
 
 export default function Middleware_<ContextType extends Context  = Context>(
     middleware: MiddlewareType<Context, ContextType> = Identity as MiddlewareType<Context, ContextType>,

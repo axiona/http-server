@@ -1,6 +1,6 @@
-import Context from '../context/context';
-import Middleware from "./middleware";
-import Callable from '@alirya/function/callable';
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
+import Callable from '@alirya/function/callable.js';
 
 export default function Stop<ContextType extends Context>() : Callable<[ContextType], void>;
 export default function Stop<ContextType extends Context, CtxtNext extends Context>(context : Middleware<ContextType, CtxtNext>) : Middleware<ContextType, CtxtNext>;

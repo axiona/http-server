@@ -1,6 +1,6 @@
-import Middleware from "../middleware/middleware";
-import Context from "../context/context";
-import Catch from "./catch";
+import Middleware from '../middleware/middleware.js';
+import Context from '../context/context.js';
+import Catch from './catch.js';
 
 export default function Passthrough<
     ContextType extends Context = Context

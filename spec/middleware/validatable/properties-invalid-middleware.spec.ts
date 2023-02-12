@@ -1,20 +1,20 @@
 import Axios, {AxiosResponse} from 'axios';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
-import Router from '../../../dist/router/middleware';
-import ContextDataGuard from './context-data-guard';
-import {ResponseParameters} from '../../../dist/middleware/response';
-import {PaymentRequiredParameters} from '@alirya/http/response/payment-required';
-import {ValidationParameters} from '../../../dist/middleware/validation';
-import Stop from "../../../dist/middleware/stop";
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
+import Router from '../../../dist/router/middleware.js';
+import ContextDataGuard from './context-data-guard.js';
+import {ResponseParameters} from '../../../dist/middleware/response.js';
+import {PaymentRequiredParameters} from '@alirya/http/response/payment-required.js';
+import {ValidationParameters} from '../../../dist/middleware/validation.js';
+import Stop from '../../../dist/middleware/stop.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('invalid middleware', () => {
 
-    let called : boolean = false;
+    let called  = false;
 
-    let data : string = 'string test';
+    const data  = 'string test';
 
     let response : AxiosResponse<string>;
 
@@ -23,7 +23,7 @@ describe('invalid middleware', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
     it('add request', ()=>{
 

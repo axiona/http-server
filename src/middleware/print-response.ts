@@ -1,9 +1,9 @@
-import Context from '../context/context';
-import Syslog from '@alirya/syslog/syslog';
-import Middleware from './middleware';
-import Callable from '@alirya/function/callable';
+import Context from '../context/context.js';
+import Syslog from '@alirya/syslog/syslog.js';
+import Middleware from './middleware.js';
+import Callable from '@alirya/function/callable.js';
 import {Response} from "koa";
-import ResponseMessages from "../array/response-messages";
+import ResponseMessages from '../array/response-messages.js';
 
 export function PrintResponseParameters<ContextType extends Context, Log extends Syslog<any[]>>(
     syslog: Log,

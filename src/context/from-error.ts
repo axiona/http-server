@@ -1,4 +1,4 @@
-import Context from "./context";
+import Context from './context.js';
 import createHttpError from "http-errors";
 
 export default function FromError<Ctx extends Context>(context: Ctx, error: Error) : Ctx {

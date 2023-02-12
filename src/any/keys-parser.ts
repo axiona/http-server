@@ -1,5 +1,5 @@
-import Callable from "@alirya/function/callable";
-import String from "@alirya/string/boolean/string";
+import Callable from "@alirya/function/callable.js";
+import String from "@alirya/string/boolean/string.js";
 
 function KeysParserDefaultParser (value) {
 

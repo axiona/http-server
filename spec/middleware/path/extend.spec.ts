@@ -1,9 +1,9 @@
-import Router from '../../../dist/router/middleware';
-import {PathParameters} from '../../../dist/middleware/path';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import {PathParameters} from '../../../dist/middleware/path.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import {ListParameter, ListType} from "../../../../uri/dist/path/list";
+import {ListParameter, ListType} from '../../../../uri/dist/path/list.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -17,8 +17,8 @@ describe('single', () => {
 
 
 
-    let called1 : boolean = false;
-    let called2 : boolean = false;
+    let called1  = false;
+    let called2  = false;
 
     let pathParameter : Record<string, string> = {};
     let pathListType : ListType;
@@ -29,7 +29,7 @@ describe('single', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{
@@ -133,7 +133,7 @@ describe('multi', () => {
         child ?: number,
     };
 
-    let called = {
+    const called = {
         parent1 : false,
         parent2 : false,
         child1 : false,
@@ -148,7 +148,7 @@ describe('multi', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
 
     it('add first request', ()=>{
@@ -328,7 +328,7 @@ describe('multi branch', () => {
         child ?: number,
     };
 
-    let called = {
+    const called = {
         parent1 : false,
         parent2 : false,
         child1 : false,
@@ -343,7 +343,7 @@ describe('multi branch', () => {
     afterAll(()=>server.close());
 
 
-    let router =  BindToServer(server, Router())
+    const router =  BindToServer(server, Router())
         .next(PathParameters('/root', {end:false}));
 
 

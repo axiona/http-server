@@ -1,18 +1,18 @@
-import Router from '../../../dist/router/middleware';
-import Server from '../../server';
-import BindToServer from '../../../dist/router/append-server';
+import Router from '../../../dist/router/middleware.js';
+import Server from '../../server.js';
+import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import BodyJson from '../../../dist/middleware/body-json';
-import ReplaceToNumber, {ReplaceToNumberArgument, ReplaceToNumberReturn} from './replace-to-number';
-import {ReplaceParameters} from '../../../dist/middleware/replace';
+import BodyJson from '../../../dist/middleware/body-json.js';
+import ReplaceToNumber, {ReplaceToNumberArgument, ReplaceToNumberReturn} from './replace-to-number.js';
+import {ReplaceParameters} from '../../../dist/middleware/replace.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
 describe('single', () => {
 
-    let called : boolean = false;
+    let called  = false;
     let response : AxiosResponse<ReplaceToNumberReturn>;
-    let data : ReplaceToNumberArgument = {
+    const data : ReplaceToNumberArgument = {
         height : '1',
         length : '5'
     };
@@ -22,7 +22,7 @@ describe('single', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{
@@ -32,7 +32,7 @@ describe('single', () => {
             .next(ReplaceParameters(ReplaceToNumber, ['request', 'body']))
             .next(function (ctx) {
 
-            let data : ReplaceToNumberReturn = ctx.request.body;
+            const data : ReplaceToNumberReturn = ctx.request.body;
             ctx.response.body = data;
             called = true;
             return ctx;
@@ -66,9 +66,9 @@ describe('single', () => {
 
 describe('exists', () => {
 
-    let called : boolean = false;
+    let called  = false;
     let response : AxiosResponse<ReplaceToNumberReturn>;
-    let data : ReplaceToNumberArgument = {
+    const data : ReplaceToNumberArgument = {
         height : '1',
         length : '5'
     };
@@ -78,7 +78,7 @@ describe('exists', () => {
     beforeAll(()=>server.open());
     afterAll(()=>server.close());
 
-    let router =  BindToServer(server, Router());
+    const router =  BindToServer(server, Router());
 
 
     it('add request', ()=>{

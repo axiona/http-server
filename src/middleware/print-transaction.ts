@@ -1,11 +1,11 @@
-import Context from '../context/context';
-import Syslog from '@alirya/syslog/syslog';
-import Middleware from './middleware';
-import Callable from '@alirya/function/callable';
+import Context from '../context/context.js';
+import Syslog from '@alirya/syslog/syslog.js';
+import Middleware from './middleware.js';
+import Callable from '@alirya/function/callable.js';
 import {Request, Response} from "koa";
-import TransactionMessages from "../array/transaction-messages";
-import RequestMessages from "../array/request-messages";
-import ResponseMessages from "../array/response-messages";
+import TransactionMessages from '../array/transaction-messages.js';
+import RequestMessages from '../array/request-messages.js';
+import ResponseMessages from '../array/response-messages.js';
 
 export function PrintTransactionParameters<ContextType extends Context<Partial<{ body: any }>>, Log extends Syslog<any[]>>(
     syslog: Log,

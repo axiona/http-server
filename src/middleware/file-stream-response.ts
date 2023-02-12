@@ -1,12 +1,12 @@
-import Context from "../context/context";
-import Callable from '@alirya/function/callable';
-import Middleware from "./middleware";
+import Context from '../context/context.js';
+import Callable from '@alirya/function/callable.js';
+import Middleware from './middleware.js';
 import {createReadStream} from "fs";
 import {lookup} from 'mime-types';
-import String from '@alirya/string/boolean/string';
+import String from '@alirya/string/boolean/string.js';
 import { Readable } from 'stream';
-import FromReadable from "../context/from-readable";
-import Union from '@alirya/promise/union';
+import FromReadable from '../context/from-readable.js';
+import Union from '@alirya/promise/union.js';
 import HttpError from "http-errors";
 
 export type FileStreamResponseCallbackType = string|{
@@ -26,7 +26,7 @@ export default function FileStreamResponseResponse<
 
         const stream = createReadStream(path, options);
 
-        let mime : string|false = lookup(path);
+        const mime : string|false = lookup(path);
 
         try {
 

@@ -1,6 +1,6 @@
-import Middleware from './middleware';
-import Context from '../context/context';
-import Metadata from "../router/metadata/metadata";
+import Middleware from './middleware.js';
+import Context from '../context/context.js';
+import Metadata from '../router/metadata/metadata.js';
 
 export default function Method<ContextType extends Context>(
     ...methods : string[]

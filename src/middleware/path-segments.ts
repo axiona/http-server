@@ -1,6 +1,6 @@
-import Context from '../context/context';
-import Middleware from './middleware';
-import ContextPathSegments, {PathPathSegmentsReturn as ContextPathPathSegmentsReturn} from '../context/path-segments';
+import Context from '../context/context.js';
+import Middleware from './middleware.js';
+import ContextPathSegments, {PathPathSegmentsReturn as ContextPathPathSegmentsReturn} from '../context/path-segments.js';
 
 export type PathSegmentsReturn<
     ContextType extends Context,

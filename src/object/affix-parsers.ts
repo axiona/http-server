@@ -1,16 +1,16 @@
-import Callable from '@alirya/function/callable';
-import {AffixParserArgument, AffixParserParameters} from './affix-parser';
+import Callable from '@alirya/function/callable.js';
+import {AffixParserArgument, AffixParserParameters} from './affix-parser.js';
 import Deepmerge from 'deepmerge';
-import File from "../file/boolean/file";
-import Object_ from '@alirya/object/boolean/object';
+import File from '../file/boolean/file.js';
+import Object_ from '@alirya/object/boolean/object.js';
 
 export function AffixParsersParametersArgumentsMergeableDefault(object) : boolean {
     return Object_(object) && !File(object);
 }
 
 export function AffixParsersParameters(
- prefix : string = '[',
- suffix : string = ']',
+ prefix  = '[',
+ suffix  = ']',
  mergeable : (value: object) => boolean = AffixParsersParametersArgumentsMergeableDefault
 ) : Callable<[ReadonlyArray<[string, any]>]> {
 
