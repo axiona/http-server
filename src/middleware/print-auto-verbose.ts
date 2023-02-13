@@ -1,14 +1,15 @@
-import Context from '../context/context.js';
-import Syslog from '@alirya/syslog/syslog.js';
-import Middleware from './middleware.js';
-import Callable from '@alirya/function/callable.js';
+import Context from '../context/context';
+import Syslog from '@alirya/syslog/syslog';
+import Middleware from './middleware';
+import Callable from '@alirya/function/callable';
 import {Request, Response} from "koa";
-import TransactionMessages from '../array/transaction-messages.js';
-import RequestMessages from '../array/request-messages.js';
-import ResponseMessages from '../array/response-messages.js';
+import TransactionMessages from "../array/transaction-messages";
+import RequestMessages from "../array/request-messages";
+import ResponseMessages from "../array/response-messages";
 import ResponseEnd from "../promise/response-end";
+import Successful from '@alirya/http/response/status/class/boolean/successful';
 
-export function PrintTransactionParameters<ContextType extends Context<Partial<{ body: any }>>, Log extends Syslog<any[]>>(
+export function PrintAutoVerboseParameters<ContextType extends Context<Partial<{ body: any }>>, Log extends Syslog<any[]>>(
     syslog: Log,
     severity : keyof Syslog = 'debug',
     transaction : Callable<[Request, Response], any[]> = TransactionMessages,
@@ -20,11 +21,13 @@ export function PrintTransactionParameters<ContextType extends Context<Partial<{
 
         ResponseEnd(context.res).then(()=>{
 
-            const messages = [
-                ...transaction(context.request, context.response),
-                ...request(context.request),
-                ...response(context.response),
-            ];
+            const messages = transaction(context.request, context.response);
+
+            if(!Successful(context.response.status)) {
+
+                messages.push(...request(context.request));
+                messages.push(...response(context.response));
+            }
 
             syslog[severity](...messages);
 
@@ -56,7 +59,7 @@ export function PrintTransactionParameters<ContextType extends Context<Partial<{
 }
 
 
-export function PrintTransactionParameter<ContextType extends Context, Log extends Syslog<[string, any, any]>>(
+export function PrintAutoVerboseParameter<ContextType extends Context, Log extends Syslog<[string, any, any]>>(
     {
         syslog,
         severity = 'debug',
@@ -71,12 +74,12 @@ export function PrintTransactionParameter<ContextType extends Context, Log exten
         response ?: Callable<[Response], any[]>,
     }
 ) {
-    return PrintTransactionParameters(syslog, severity, transaction, request, response);
+    return PrintAutoVerboseParameters(syslog, severity, transaction, request, response);
 }
 
-namespace PrintTransaction {
-    export const Parameters = PrintTransactionParameters;
-    export const Parameter = PrintTransactionParameter;
+namespace PrintAutoVerbose {
+    export const Parameters = PrintAutoVerboseParameters;
+    export const Parameter = PrintAutoVerboseParameter;
 }
 
-export default PrintTransaction;
+export default PrintAutoVerbose;

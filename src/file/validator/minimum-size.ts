@@ -11,7 +11,7 @@ import AndRecord from '@alirya/object/validatable/and.js';
 import MapMessage from '@alirya/object/message/message/record/map.js';
 import ValidatorInterface from "@alirya/validator/simple.js";
 import {GreaterParameters, GreaterArgumentsMessage, GreaterArgument} from '@alirya/number/validator/greater.js';
-import Chain from '../../../../validator/dist/chain.js';
+import Chain from '@alirya/validator/chain.js';
 import {FileParameters} from './file.js';
 
 export function MinimumSizeParameters() : Validator<File, File, string>;
@@ -23,7 +23,7 @@ export function MinimumSizeParameters<Message>(
 ) : Validator<object, File, Message>;
 
 export function MinimumSizeParameters<Message>(
-    minimum = 256,
+    minimum: number = 256,
     message : GreaterArgumentsMessage<Message|string> = MinimumSizeMessage.Parameters
 ) : Validator<object, File, Message|string> {
 

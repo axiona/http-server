@@ -77,6 +77,7 @@ export const BodyMultipartArgumentDefault : BodyMultipartArgument<Context> = Obj
         basename.push((new Date()).getTime().toString(36));
 
         if(ext) {
+            ext = RemovePrefixParameters(ext, '.');
             basename.push(`.${ext}`);
         }
 
