@@ -58,7 +58,7 @@ export interface ValidatorArgumentProperties<
 
 export interface ValidatorArgumentContext<
     ContextType extends Context,
-    ValidatorType extends Validator<ContextType>,
+    ValidatorType extends Validator<ContextType, Context>,
     ValidatableKey extends PropertyKey[],
     Invalid extends ValidatorTypeContextNext<ContextType, ValidatorType, ValidatableKey>,
 > {
@@ -80,7 +80,7 @@ export interface ValidatorArgumentContext<
  */
 export function ValidatorParameter<
     ContextType extends Context = Context,
-    ValidatorType extends Validator<ContextType> = Validator<ContextType>,
+    ValidatorType extends Validator<ContextType, Context> = Validator<ContextType, Context>,
     ValidatableKey extends PropertyKey[] = ['validatable'],
     Invalid extends ValidatorTypeContextNext<ContextType, ValidatorType, ValidatableKey> = ValidatorTypeContextNext<ContextType, ValidatorType, ValidatableKey>,
 >(  {
@@ -187,7 +187,7 @@ export function ValidatorParameter<
  */
 export function ValidatorParameters<
     ContextType extends Context = Context,
-    ValidatorType extends Validator<ContextType> = Validator<ContextType>,
+    ValidatorType extends Validator<ContextType, Context> = Validator<ContextType, Context>,
     ValidatableKey extends PropertyKey[] = ['validatable'],
     Invalid extends ValidatorTypeContextNext<ContextType, ValidatorType, ValidatableKey> = ValidatorTypeContextNext<ContextType, ValidatorType, ValidatableKey>,
 >(

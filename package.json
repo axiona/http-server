@@ -116,7 +116,7 @@
     "_spec-compile-watch-script": "tsc-fancy --preserveConsoleOutput -w -p tsconfig-spec.json",
     "_compile-ensure-directory": "mkdirp dist",
     "_release_copy-meta-files": "cpy package.json package-lock.json LICENSE Readme.md .npmignore dist",
-    "_release-remove-compile-cache": "rimraf ./dist/compiler-cache.json",
+    "_release-remove-compile-cache": "rimraf ./dist/.compiler-cache.json",
     "_doc-generate": "typedoc --entryPointStrategy expand ./src --out docs",
     "_doc-clean": "rimraf docs",
     "prepublishOnly": "cd ../dist",

@@ -4,7 +4,7 @@ import BindToServer from '../../../dist/router/append-server.js';
 import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator.js';
 import Stop from '../../../dist/middleware/stop.js';
 import Context from '../../../dist/context/context.js';
-import ContextValidator from './context-validator.js';
+import ContextValidator, {ContextValidatorFunction} from './context-validator.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 
@@ -124,7 +124,7 @@ describe('guard', () => {
                     return Object.assign(context, {request: {body : 'a' as string|number|boolean}});
 
                 })
-                .next(ValidatorParameters(ContextValidator, undefined, Stop()))
+                .next(ValidatorParameters(ContextValidatorFunction(), undefined, Stop()))
                 .next(function (ctx) {
 
                     const data : string|number|boolean = ctx.request.body;
@@ -172,7 +172,7 @@ describe('guard', () => {
 
                 })
                 .next(Validator.Parameter({
-                    validator: ContextValidator,
+                    validator: ContextValidatorFunction(),
                     invalid : Stop()
                 }))
                 .next(function (ctx) {

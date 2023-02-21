@@ -11,7 +11,7 @@ import AddAcceptHeaders from '../router/void/add-accept-headers.js';
 import { v4 } from 'uuid';
 import {RemovePrefixParameters} from '@alirya/string/remove-prefix.js';
 import error from "../catch/error";
-import NoOp from "../../../function/dist/no-op.js";
+import NoOp from '@alirya/function/no-op.js';
 import Delete from "../file/delete.js";
 import ResponseEnd from "../promise/response-end.js";
 import {extension} from "mime-types";
@@ -26,9 +26,14 @@ export type BodyMultipartReturnRecursive<Type> = {
 };
 
 
+export type BodyMultipartContextBodyDefaultValue = string|number|boolean|File|any;
+export type BodyMultipartContextBody = Record<PropertyKey, BodyMultipartContextBodyDefaultValue|BodyMultipartContextBodyDefaultValue[]>;
+
+
 export type BodyMultipartTypeContext<
     Argument extends Context,
-    Body extends BodyMultipartReturnRecursive<string|number|boolean|File> = BodyMultipartReturnRecursive<string|number|boolean|File>,
+    // Body extends BodyMultipartReturnRecursive<string|number|boolean|File> = BodyMultipartReturnRecursive<string|number|boolean|File>,
+    Body extends BodyMultipartContextBody = BodyMultipartContextBody,
     > = O.P.Omit<Argument, ['request', 'body']> & {
     request: {
         body : Body,
@@ -39,7 +44,8 @@ export type BodyMultipartTypeContext<
 
 export type BodyMultipartType<
     Argument extends Context,
-    Body extends BodyMultipartReturnRecursive<string|number|boolean|File> = BodyMultipartReturnRecursive<string|number|boolean|File>,
+    // Body extends BodyMultipartReturnRecursive<string|number|boolean|File> = BodyMultipartReturnRecursive<string|number|boolean|File>,
+    Body extends BodyMultipartContextBody = BodyMultipartContextBody,
 > = Middleware<Argument, BodyMultipartTypeContext<Argument, Body>>;
 
 export interface BodyMultipartArgument<Argument extends Context> extends Options {

@@ -3,7 +3,7 @@
     "esModuleInterop": true,
     "removeComments": false,
     "moduleResolution": "node",
-    "module": "es2015",
+    "module": "es2020",
     "declaration": true,
     "target": "es2015",
     "sourceMap": true,
@@ -18,7 +18,7 @@
     "rootDir": "./spec",
     "outDir": "./dist-spec",
     "importHelpers": true,
-    "tsBuildInfoFile": "./dist-spec/compiler-cache.json",
+    "tsBuildInfoFile": "./dist-spec/.compiler-cache.json",
     "lib": [
       "es2016",
       "es2015",

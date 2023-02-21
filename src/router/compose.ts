@@ -9,7 +9,7 @@ import Null from './metadata/null.js';
 import Registrable from '../registrable.ts/registrable.js';
 import Middleware_ from './middleware.js';
 import Catch_ from './catch.js';
-import Callable from '../../../function/dist/callable.js';
+import Callable from '@alirya/function/callable.js';
 
 
 export default function Compose<ContextType extends Context  = Context>(

@@ -8,15 +8,14 @@ import Union from "@alirya/promise/union.js";
 export type ReplaceReturn<
     Properties extends PropertyKey[],
     BodyTo extends unknown,
-    ContextType extends ApplicationContext & O.P.Record<Properties, unknown>
-        = ApplicationContext & O.P.Record<Properties, unknown> ,
-    > = Middleware<ContextType, O.P.Omit<ContextType, Properties> & O.P.Record<Properties, BodyTo>>;
+    ContextType extends ApplicationContext /*& O.P.Record<Properties, unknown>*/ = ApplicationContext /*& O.P.Record<Properties, unknown>*/ ,
+    > = Middleware<ContextType & O.P.Record<Properties, unknown>, O.P.Omit<ContextType, Properties> & O.P.Record<Properties, BodyTo>>;
 
 export function ReplaceParameters<
     Properties extends PropertyKey[],
     BodyTo extends unknown,
-    ContextType extends ApplicationContext & O.P.Record<Properties, unknown>
-        = ApplicationContext & O.P.Record<Properties, unknown> ,
+    ContextType extends ApplicationContext/* & O.P.Record<Properties, unknown>*/
+        = ApplicationContext/* & O.P.Record<Properties, unknown>*/,
 >(
     filter : (data : O.Path<ContextType, Properties>, context: ContextType) => Union<BodyTo>,
     properties : [...Properties]

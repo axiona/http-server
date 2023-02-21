@@ -1,5 +1,5 @@
 import Fs from "fs";
-import NoOp from "../../../function/dist/no-op.js";
+import NoOp from '@alirya/function/no-op.js';
 import Formidable from "formidable";
 
 type FormidableFile = Formidable.File;

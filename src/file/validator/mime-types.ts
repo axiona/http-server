@@ -13,7 +13,7 @@ import InvalidMessageRecord from '@alirya/object/message/message/record/invalid.
 import ValidMessageRecord from '@alirya/object/message/message/record/valid.js';
 import ValidatorInterface from "@alirya/validator/simple.js";
 import {FileParameters} from './file.js';
-import Chain from '../../../../validator/dist/chain.js';
+import Chain from '@alirya/validator/chain.js';
 
 export function MimeTypesParameters(mimes: ReadonlyArray<string>) : Validator<File, File, string>;
 

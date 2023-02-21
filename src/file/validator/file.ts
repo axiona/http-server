@@ -9,7 +9,7 @@ import Validatable from '@alirya/validator/validatable/validatable.js';
 import FormidableFileMessage from '../assert/string/file.js';
 import InvalidFirstValidLast from "@alirya/array/message/message/list/invalid-first-valid-last.js";
 import File from '../file.js';
-import Chain from '../../../../validator/dist/chain.js';
+import Chain from '@alirya/validator/chain.js';
 
 export function FileParameters() : Validator<object, File, string>;
 

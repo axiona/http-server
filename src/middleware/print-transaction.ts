@@ -6,7 +6,7 @@ import {Request, Response} from "koa";
 import TransactionMessages from '../array/transaction-messages.js';
 import RequestMessages from '../array/request-messages.js';
 import ResponseMessages from '../array/response-messages.js';
-import ResponseEnd from "../promise/response-end";
+import ResponseEnd from "../promise/response-end.js";
 
 export function PrintTransactionParameters<ContextType extends Context<Partial<{ body: any }>>, Log extends Syslog<any[]>>(
     syslog: Log,

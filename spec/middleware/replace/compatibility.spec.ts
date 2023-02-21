@@ -13,7 +13,7 @@ const router =  BindToServer(server, Router());
 describe('empty', ()=>{
 
     router
-        .next(ReplaceParameters((data: string) : string => 'data', ['data']))
+        .next(ReplaceParameters((data: string|undefined) : string => 'data', ['data']))
         .next(function (ctx) {
 
             {
@@ -42,7 +42,7 @@ describe('empty', ()=>{
         });
 
     router
-        .next(Replace.Parameters((data: string) => 'data', ['data']))
+        .next(Replace.Parameters((data: unknown|string) => 'data', ['data']))
         .next(function (ctx) {
 
             {
