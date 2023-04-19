@@ -14,6 +14,7 @@ export default interface Router<
         router: (router:Router<ContextType>) => Router<ContextNext>
     ) : Router<ContextNext>;
 
+    scope<Next extends Context = ContextType>(callback : Callable<[Router<ContextType>]>) : Router<Next>;
     next<Next extends Context>(middleware : Middleware<ContextType, Next>) : Router<Next>;
     catch<ErrorType extends Error>(errorHandler : Catch<ContextType, ErrorType>) : Router<ContextType>;
     call(context: Context) : Promise<Context|void>;

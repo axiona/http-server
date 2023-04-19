@@ -60,4 +60,10 @@ export class ComposeClass<ContextType extends Context  = Context> implements Rou
         context.router = this.metadata;
         return this.#call(context, this.children, this.metadata);
     }
+
+    scope<Next extends Context = ContextType>(callback: Callable<[Router<ContextType>]>): Router<Next> {
+
+        callback(this);
+        return this as Router<Context> as Router<Next>;
+    }
 }
