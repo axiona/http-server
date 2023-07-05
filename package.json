@@ -88,9 +88,9 @@
   },
   "private": true,
   "scripts": {
-    "spec-run-js": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json",
-    "spec-run": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine.json --reporter=jasmine-ts-console-reporter",
-    "spec-run-debug": "node -r esm node_modules/jasmine/bin/jasmine.js --config=./jasmine-debug.json --reporter=jasmine-ts-console-reporter",
+    "spec-run-js": "node --enable-source-maps --trace-warnings node_modules/jasmine/bin/jasmine.js --config=./jasmine.json",
+    "spec-run": "node --enable-source-maps --trace-warnings node_modules/jasmine/bin/jasmine.js --config=./jasmine.json --color",
+    "spec-run-debug": "node --inspect --enable-source-maps --trace-warnings node_modules/jasmine/bin/jasmine.js --config=./jasmine.json",
     "spec": "npm-run-all spec-compile spec-run",
     "spec-compile": "npm-run-all _spec-compile-script spec-cleanup _spec-asset",
     "spec-compile-watch": "npm-run-all --sequential _spec-ensure-directory --parallel _spec-compile-watch-script spec-cleanup-watch _spec-asset-watch",

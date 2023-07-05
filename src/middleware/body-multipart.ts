@@ -10,10 +10,9 @@ import FromFormidable from '../file/from-formidable.js';
 import AddAcceptHeaders from '../router/void/add-accept-headers.js';
 import { v4 } from 'uuid';
 import {RemovePrefixParameters} from '@alirya/string/remove-prefix.js';
-import error from "../catch/error";
 import NoOp from '@alirya/function/no-op.js';
 import Delete from "../file/delete.js";
-import ResponseEnd from "../promise/response-end.js";
+import ResponseEnd from "../http/reponse/promise/response-end.js";
 import {extension} from "mime-types";
 
 const {defaultOptions, IncomingForm} = Formidable;
