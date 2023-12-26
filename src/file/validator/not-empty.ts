@@ -1,11 +1,11 @@
-import Validator from "@alirya/validator/simple.js";
-import Validatable from '@alirya/validator/validatable/validatable.js';
+import Validator from "@axiona/validator/simple.js";
+import Validatable from '@axiona/validator/validatable/validatable.js';
 import MinimumSizeMessage from '../assert/string/minimum-size.js';
 import EmptyFileMessage from '../assert/string/not-empty.js';
 import File from '../file.js';
 import {MinimumSizeParameters} from './minimum-size.js';
-import { ValidatableParameters, ValidatableParameter } from '@alirya/validator/message/function/validatable.js';
-import Message from "@alirya/message/message.js";
+import { ValidatableParameters, ValidatableParameter } from '@axiona/validator/message/function/validatable.js';
+import Message from "@axiona/message/message.js";
 
 export function NotEmptyParameters() : Validator<File, File, string>;
 

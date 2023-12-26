@@ -1,6 +1,6 @@
-import String from '@alirya/string/boolean/string.js';
-import Validator from '@alirya/validator/simple.js';
-import Validatable from '@alirya/validator/validatable/simple.js';
+import String from '@axiona/string/boolean/string.js';
+import Validator from '@axiona/validator/simple.js';
+import Validatable from '@axiona/validator/validatable/simple.js';
 import Context from '../../../dist/context/context.js';
 
 

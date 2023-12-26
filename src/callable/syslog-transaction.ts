@@ -1,5 +1,5 @@
-import Syslog from '@alirya/syslog/syslog.js';
-import Callable from '@alirya/function/callable.js';
+import Syslog from '@axiona/syslog/syslog.js';
+import Callable from '@axiona/function/callable.js';
 import {Request, Response} from "koa";
 
 

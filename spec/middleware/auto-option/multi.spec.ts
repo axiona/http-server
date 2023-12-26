@@ -5,7 +5,7 @@ import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
 import {PathParameters} from '../../../dist/middleware/path.js';
 import AutoOptions from '../../../dist/middleware/auto-options.js';
-import {ShuffleParameters} from '@alirya/array/shuffle.js';
+import {ShuffleParameters} from '@axiona/array/shuffle.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

@@ -1,4 +1,4 @@
-import Route from '@alirya/http/route/route.js';
+import Route from '@axiona/http/route/route.js';
 import {PathOptionDefault, PathParameters} from './path.js';
 import {MethodPathArgumentsOption} from './method-path.js';
 import Middleware from './middleware.js';

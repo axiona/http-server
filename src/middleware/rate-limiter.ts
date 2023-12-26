@@ -1,8 +1,8 @@
 import {RateLimiterAbstract} from "rate-limiter-flexible";
 import Context from "../context/context.js";
-import Callable from '@alirya/function/callable.js';
-import Response from "@alirya/http/response/response.js";
-import {TooManyRequestsParameters} from '@alirya/http/response/too-many-requests.js';
+import Callable from '@axiona/function/callable.js';
+import Response from "@axiona/http/response/response.js";
+import {TooManyRequestsParameters} from '@axiona/http/response/too-many-requests.js';
 import Middleware from "./middleware.js";
 import {SetResponseParameters} from "../context/set-response.js";
 

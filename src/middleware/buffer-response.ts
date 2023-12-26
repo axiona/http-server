@@ -1,8 +1,8 @@
 import Context from '../context/context.js';
-import Callable from '@alirya/function/callable.js';
+import Callable from '@axiona/function/callable.js';
 import Middleware from './middleware.js';
 import FromBuffer from '../context/from-buffer.js';
-import Union from '@alirya/promise/union.js';
+import Union from '@axiona/promise/union.js';
 
 
 export type BufferResponseCallbackType = Buffer|{

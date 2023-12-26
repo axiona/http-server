@@ -4,8 +4,8 @@ import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
 import {MethodPathParameter} from '../../../dist/middleware/method-path.js';
 import Passthru from '../../../dist/middleware/passthrough.js';
-import NoOp from '@alirya/function/no-op.js';
-import {OmitParameters} from '@alirya/object/omit.js';
+import NoOp from '@axiona/function/no-op.js';
+import {OmitParameters} from '@axiona/object/omit.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

@@ -1,8 +1,8 @@
-import Function from '@alirya/function/boolean/function.js';
-import {ExistsParameters} from '@alirya/object/property/boolean/exists.js';
+import Function from '@axiona/function/boolean/function.js';
+import {ExistsParameters} from '@axiona/object/property/boolean/exists.js';
 import Middleware from '../middleware.js';
 import {PathReturn} from '../path.js';
-import String from '@alirya/string/boolean/string.js';
+import String from '@axiona/string/boolean/string.js';
 
 
 export default function Path<Type extends Middleware>(type: Type) : type is Type & PathReturn {

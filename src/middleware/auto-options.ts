@@ -2,7 +2,7 @@ import Middleware from './middleware.js';
 import Context from '../context/context.js';
 import Method from '../boolean/method.js';
 import {SetResponseParameters} from '../context/set-response.js';
-import {MethodNotAllowedParameters} from '@alirya/http/response/method-not-allowed.js';
+import {MethodNotAllowedParameters} from '@axiona/http/response/method-not-allowed.js';
 import {PathSegmentsGet} from '../context/path-segments.js';
 import Metadata from '../router/metadata/metadata.js';
 import GetContextPath from '../router/metadata/get-context-path.js';

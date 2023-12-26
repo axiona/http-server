@@ -1,10 +1,10 @@
 import {O} from 'ts-toolbelt';
 import Middleware from './middleware.js';
-import Validatable from '@alirya/validator/validatable/validatable.js';
-import Response from '@alirya/http/response/response.js';
-import {UnprocessableEntityParameter} from '@alirya/http/response/unprocessable-entity.js';
+import Validatable from '@axiona/validator/validatable/validatable.js';
+import Response from '@axiona/http/response/response.js';
+import {UnprocessableEntityParameter} from '@axiona/http/response/unprocessable-entity.js';
 import Context from '../context/context.js';
-import {SelectPathParameters} from '@alirya/object/value/value/select-path.js';
+import {SelectPathParameters} from '@axiona/object/value/value/select-path.js';
 import FromResponse from '../context/set-response.js';
 
 export type ValidatableResponseMessageReturn<

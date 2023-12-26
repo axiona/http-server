@@ -1,6 +1,6 @@
 import Context from './context.js';
-import {ListParameter, ListType} from '@alirya/uri/path/list.js';
-import {ExistsParameters} from '@alirya/object/property/boolean/exists.js';
+import {ListParameter, ListType} from '@axiona/uri/path/list.js';
+import {ExistsParameters} from '@axiona/object/property/boolean/exists.js';
 
 
 

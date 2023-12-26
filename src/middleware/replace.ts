@@ -1,9 +1,9 @@
 import ApplicationContext from '../context/context.js';
 import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import { SetPathParameters } from '@alirya/object/set-path.js';
-import {SelectPathParameters} from '@alirya/object/value/value/select-path.js';
-import Union from "@alirya/promise/union.js";
+import { SetPathParameters } from '@axiona/object/set-path.js';
+import {SelectPathParameters} from '@axiona/object/value/value/select-path.js';
+import Union from "@axiona/promise/union.js";
 
 export type ReplaceReturn<
     Properties extends PropertyKey[],

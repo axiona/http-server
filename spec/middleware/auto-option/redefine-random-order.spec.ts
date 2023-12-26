@@ -5,7 +5,7 @@ import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosError, AxiosResponse} from 'axios';
 import {PathParameters} from '../../../dist/middleware/path.js';
 import AutoOptions from '../../../dist/middleware/auto-options.js';
-import RandomBoolean from '@alirya/boolean/random.js';
+import RandomBoolean from '@axiona/boolean/random.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

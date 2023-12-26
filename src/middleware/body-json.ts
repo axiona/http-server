@@ -5,8 +5,8 @@ import {O} from 'ts-toolbelt';
 import JsonMimeTypes from '../array/json-mime-types.js';
 import {Required} from 'utility-types';
 import {BodyTextArgument, BodyTextArgumentDefault} from './body-text.js';
-import OmitUndefined from "@alirya/object/omit-undefined.js";
-import Pick from '@alirya/object/pick.js';
+import OmitUndefined from "@axiona/object/omit-undefined.js";
+import Pick from '@axiona/object/pick.js';
 import AddAcceptHeaders from '../router/void/add-accept-headers.js';
 
 

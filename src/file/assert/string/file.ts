@@ -1,6 +1,6 @@
-import Value from '@alirya/value/value.js';
-import Validatable from '@alirya/validatable/validatable.js';
-import {TemplateParameters} from "@alirya/string/function/template.js";
+import Value from '@axiona/value/value.js';
+import Validatable from '@axiona/validatable/validatable.js';
+import {TemplateParameters} from "@axiona/string/function/template.js";
 
 const template = TemplateParameters<Record<'subject'|'valid', string>>('{subject} {valid} compatible with formidable-file.');
 

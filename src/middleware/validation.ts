@@ -1,10 +1,10 @@
 import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import {SelectPathParameters} from '@alirya/object/value/value/select-path.js';
+import {SelectPathParameters} from '@axiona/object/value/value/select-path.js';
 import Context from '../context/context.js';
 import Stop from './stop.js';
-import {ValidationAsyncable} from '@alirya/boolean/function/validation.js';
-import Guard, {GuardInferExpect} from '@alirya/boolean/function/guard.js';
+import {ValidationAsyncable} from '@axiona/boolean/function/validation.js';
+import Guard, {GuardInferExpect} from '@axiona/boolean/function/guard.js';
 
 
 export type ValidationTypeContext<ContextType extends Context, Properties extends PropertyKey[], Value extends unknown>

@@ -1,13 +1,13 @@
 // import Context from '../context/context.js';
-// import Syslog from '@alirya/syslog/syslog.js';
+// import Syslog from '@axiona/syslog/syslog.js';
 // import Middleware from './middleware.js';
-// import Callable from '@alirya/function/callable.js';
+// import Callable from '@axiona/function/callable.js';
 // import {Request, Response} from "koa";
 // import TransactionMessages from "../array/transaction-messages.js";
 // import RequestMessages from "../array/request-messages.js";
 // import ResponseMessages from "../array/response-messages.js";
 // import ResponseEnd from "../http/reponse/promise/response-end";
-// import Successful from '@alirya/http/response/status/class/boolean/successful.js';
+// import Successful from '@axiona/http/response/status/class/boolean/successful.js';
 //
 // export function PrintAutoVerboseParameters<ContextType extends Context<Partial<{ body: any }>>, Log extends Syslog<any[]>>(
 //     syslog: Log,

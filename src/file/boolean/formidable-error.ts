@@ -1,7 +1,7 @@
 import Formidable /*{errors}*/ from "formidable";
-import {ExistsParameters} from '@alirya/object/property/boolean/exists.js';
-import String from '@alirya/string/boolean/string.js';
-import Number from '@alirya/number/boolean/number.js';
+import {ExistsParameters} from '@axiona/object/property/boolean/exists.js';
+import String from '@axiona/string/boolean/string.js';
+import Number from '@axiona/number/boolean/number.js';
 
 const errors = Formidable.errors;
 

@@ -1,5 +1,5 @@
 import Context from '../../context/context.js';
-import {ListType} from "@alirya/uri/path/list.js";
+import {ListType} from "@axiona/uri/path/list.js";
 import {PathSegmentsGet} from '../../context/path-segments.js';
 import { Match} from 'path-to-regexp';
 import GetOrSet from '../../map/get-or-set.js';

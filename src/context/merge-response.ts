@@ -1,4 +1,4 @@
-import Response from '@alirya/http/response/response.js';
+import Response from '@axiona/http/response/response.js';
 import Context from './context.js';
 import {O} from 'ts-toolbelt';
 

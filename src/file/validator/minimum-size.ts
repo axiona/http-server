@@ -1,12 +1,12 @@
-import Validator from "@alirya/validator/simple.js";
+import Validator from "@axiona/validator/simple.js";
 import MinimumSizeMessage from '../assert/string/minimum-size.js';
 import File from '../file.js';
-import {MapAllParameters} from '@alirya/object/validator/map-all.js';
-import AndRecord from '@alirya/object/validatable/and.js';
-import MapMessage from '@alirya/object/message/message/record/map.js';
-import ValidatorInterface from "@alirya/validator/simple.js";
-import {GreaterParameters, GreaterArgumentsMessage, GreaterArgument} from '@alirya/number/validator/greater.js';
-import Chain from '@alirya/validator/chain.js';
+import {MapAllParameters} from '@axiona/object/validator/map-all.js';
+import AndRecord from '@axiona/object/validatable/and.js';
+import MapMessage from '@axiona/object/message/message/record/map.js';
+import ValidatorInterface from "@axiona/validator/simple.js";
+import {GreaterParameters, GreaterArgumentsMessage, GreaterArgument} from '@axiona/number/validator/greater.js';
+import Chain from '@axiona/validator/chain.js';
 import {FileParameters} from './file.js';
 
 export function MinimumSizeParameters() : Validator<File, File, string>;

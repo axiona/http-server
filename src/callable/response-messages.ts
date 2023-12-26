@@ -1,6 +1,6 @@
 import {Request, Response} from "koa";
-import {PickParameters} from '@alirya/object/pick.js';
-import Callable from '@alirya/function/callable.js';
+import {PickParameters} from '@axiona/object/pick.js';
+import Callable from '@axiona/function/callable.js';
 
 
 export default function ResponseMessages() : Callable<[Request, Response], any[]>;

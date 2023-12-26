@@ -5,7 +5,7 @@ import Route from '../../../dist/router/router.js';
 import Axios, {AxiosResponse} from 'axios';
 import Context from '../../../dist/context/context.js';
 import util from "util";
-import {OmitParameters} from '@alirya/object/omit.js';
+import {OmitParameters} from '@axiona/object/omit.js';
 
 describe('multi', () => {
 

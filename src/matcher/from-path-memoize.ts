@@ -1,7 +1,7 @@
 import MatcherType from './matcher.js';
 import FromPath, {FromPathArgumentsOption} from './from-path.js';
 import {diff} from "deep-object-diff";
-import Empty from '@alirya/object/boolean/empty.js';
+import Empty from '@axiona/object/boolean/empty.js';
 
 export default function FromPathMemoize(
     path: string,

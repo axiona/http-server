@@ -2,7 +2,7 @@ import Router from '../../../dist/router/middleware.js';
 import Server from '../../server.js';
 import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import Route from '@alirya/http/route/route.js';
+import Route from '@axiona/http/route/route.js';
 import {MethodPathParameter} from '../../../dist/middleware/method-path.js';
 import {RouteOptionsParameters} from '../../../dist/middleware/route-options.js';
 

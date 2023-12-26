@@ -1,13 +1,13 @@
 import Context from '../context/context.js';
-import Callable from '@alirya/function/callable.js';
+import Callable from '@axiona/function/callable.js';
 import Middleware from './middleware.js';
 import {promises} from "fs";
 import {lookup} from 'mime-types';
-import String from '@alirya/string/boolean/string.js';
+import String from '@axiona/string/boolean/string.js';
 import {OpenMode} from "fs";
 import {Abortable} from "events";
 import FromBuffer from '../context/from-buffer.js';
-import Union from '@alirya/promise/union.js';
+import Union from '@axiona/promise/union.js';
 import HttpError from "http-errors";
 
 

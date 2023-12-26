@@ -1,7 +1,7 @@
 // import Middleware from './middleware.js';
 // import Context from '../context/context.js';
-// import Syslog from '@alirya/syslog/syslog.js';
-// import Callable from '@alirya/function/callable.js';
+// import Syslog from '@axiona/syslog/syslog.js';
+// import Callable from '@axiona/function/callable.js';
 // import {Request} from "koa";
 // import RequestMessages from '../callable/request-messages';
 //

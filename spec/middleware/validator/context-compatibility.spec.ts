@@ -3,7 +3,7 @@ import Server from '../../server.js';
 import BindToServer from '../../../dist/router/append-server.js';
 import ContextValidator from './context-validator.js';
 import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/middleware/validator.js';
-import Validatable from '@alirya/validator/validatable/validatable.js';
+import Validatable from '@axiona/validator/validatable/validatable.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

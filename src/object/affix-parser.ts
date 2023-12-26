@@ -1,12 +1,12 @@
-import Escape from '@alirya/string/pattern/escape.js';
-import Digit from '@alirya/string/boolean/digit.js';
-import String from '@alirya/string/boolean/string.js';
-import SafeCast from '@alirya/string/safe-cast.js';
-import Callable from '@alirya/function/callable.js';
-import {RemoveSuffixParameters} from '@alirya/string/remove-suffix.js';
-import {RemovePrefixParameters} from '@alirya/string/remove-prefix.js';
-import Prefix from '@alirya/string/prefix/prefix.js';
-import Suffix from '@alirya/string/suffix/suffix.js';
+import Escape from '@axiona/string/pattern/escape.js';
+import Digit from '@axiona/string/boolean/digit.js';
+import String from '@axiona/string/boolean/string.js';
+import SafeCast from '@axiona/string/safe-cast.js';
+import Callable from '@axiona/function/callable.js';
+import {RemoveSuffixParameters} from '@axiona/string/remove-suffix.js';
+import {RemovePrefixParameters} from '@axiona/string/remove-prefix.js';
+import Prefix from '@axiona/string/prefix/prefix.js';
+import Suffix from '@axiona/string/suffix/suffix.js';
 
 
 export function AffixParserParameters(

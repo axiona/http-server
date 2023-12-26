@@ -6,11 +6,11 @@ import BodyMultipart from '../../../../dist/middleware/body-multipart.js';
 import {MinimumSizeParameters} from '../../../../dist/file/validator/minimum-size.js';
 import FormData from "form-data";
 import {createReadStream} from "fs";
-import Validatable from "@alirya/validator/validatable/validatable.js";
+import Validatable from "@axiona/validator/validatable/validatable.js";
 import Validator from '../../../../dist/middleware/validator.js';
-import {MapAllParameters} from '@alirya/object/validator/map-all.js';
-import And from '@alirya/object/validatable/and.js';
-import Map from '@alirya/object/message/message/record/map.js';
+import {MapAllParameters} from '@axiona/object/validator/map-all.js';
+import And from '@axiona/object/validatable/and.js';
+import Map from '@axiona/object/message/message/record/map.js';
 import {fileURLToPath} from 'url';
 import {dirname} from 'path';
 

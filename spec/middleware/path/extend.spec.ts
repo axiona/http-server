@@ -3,7 +3,7 @@ import {PathParameters} from '../../../dist/middleware/path.js';
 import Server from '../../server.js';
 import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
-import {ListParameter, ListType} from '@alirya/uri/path/list.js';
+import {ListParameter, ListType} from '@axiona/uri/path/list.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

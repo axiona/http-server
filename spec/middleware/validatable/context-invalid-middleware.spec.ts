@@ -3,7 +3,7 @@ import Server from '../../server.js';
 import BindToServer from '../../../dist/router/append-server.js';
 import Axios, {AxiosResponse} from 'axios';
 import Validation from '../../../dist/middleware/validation.js';
-import {PaymentRequiredParameters} from '@alirya/http/response/payment-required.js';
+import {PaymentRequiredParameters} from '@axiona/http/response/payment-required.js';
 import ContextDataGuard from './context-data-guard.js';
 import {ResponseParameters} from '../../../dist/middleware/response.js';
 import Stop from '../../../dist/middleware/stop.js';

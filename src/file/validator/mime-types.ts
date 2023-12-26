@@ -1,14 +1,14 @@
-import Validator from "@alirya/validator/simple.js";
+import Validator from "@axiona/validator/simple.js";
 import MimeTypeMessage from '../assert/string/mime-types.js';
 import File from '../file.js';
-import {InParameters, InArgumentsMessage, InArgument} from "@alirya/array/validator/in.js";
-import {MapAllParameters} from '@alirya/object/validator/map-all.js';
-import AndRecord from '@alirya/object/validatable/and.js';
-import InvalidMessageRecord from '@alirya/object/message/message/record/invalid.js';
-import ValidMessageRecord from '@alirya/object/message/message/record/valid.js';
-import ValidatorInterface from "@alirya/validator/simple.js";
+import {InParameters, InArgumentsMessage, InArgument} from "@axiona/array/validator/in.js";
+import {MapAllParameters} from '@axiona/object/validator/map-all.js';
+import AndRecord from '@axiona/object/validatable/and.js';
+import InvalidMessageRecord from '@axiona/object/message/message/record/invalid.js';
+import ValidMessageRecord from '@axiona/object/message/message/record/valid.js';
+import ValidatorInterface from "@axiona/validator/simple.js";
 import {FileParameters} from './file.js';
-import Chain from '@alirya/validator/chain.js';
+import Chain from '@axiona/validator/chain.js';
 
 export function MimeTypesParameters(mimes: ReadonlyArray<string>) : Validator<File, File, string>;
 

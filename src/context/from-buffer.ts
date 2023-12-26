@@ -1,7 +1,7 @@
 import Context from './context.js';
 // import {fromBuffer} from "file-type";
 import FileType from "file-type";
-import ContentType from '@alirya/http/headers/header/content-type.js';
+import ContentType from '@axiona/http/headers/header/content-type.js';
 import HttpError from "http-errors";
 
 const {fromBuffer} = FileType;

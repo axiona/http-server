@@ -6,7 +6,7 @@ import BodyMultipart from '../../../dist/middleware/body-multipart.js';
 import FormData from "form-data";
 import {createReadStream} from "fs";
 import MaxSizeExceeded from '../../../dist/file/catch/max-size-exceeded.js';
-import Timeout from '@alirya/promise/timeout.js';
+import Timeout from '@axiona/promise/timeout.js';
 import {fileURLToPath} from 'url';
 import {dirname} from 'path';
 

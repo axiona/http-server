@@ -3,7 +3,7 @@ import * as qs from 'qs';
 import Context from '../context/context.js';
 import Middleware from './middleware.js';
 import {O} from 'ts-toolbelt';
-import Omit from '@alirya/object/omit.js';
+import Omit from '@axiona/object/omit.js';
 import AddAcceptHeaders from '../router/void/add-accept-headers.js';
 
 

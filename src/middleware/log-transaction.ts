@@ -1,7 +1,7 @@
 import Context from '../context/context.js';
-import Syslog from '@alirya/syslog/syslog.js';
+import Syslog from '@axiona/syslog/syslog.js';
 import Middleware from './middleware.js';
-import Callable from '@alirya/function/callable.js';
+import Callable from '@axiona/function/callable.js';
 import {Request, Response} from "koa";
 import SyslogTransaction from "../callable/syslog-transaction.js";
 

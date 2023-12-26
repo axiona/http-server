@@ -1,6 +1,6 @@
 import Context from '../context/context.js';
 import Middleware from './middleware.js';
-import Callable from '@alirya/function/callable.js';
+import Callable from '@axiona/function/callable.js';
 import ResponseEnd from "../http/reponse/promise/response-end.js";
 
 export function ResponseEndParameters<ContextType extends Context>(

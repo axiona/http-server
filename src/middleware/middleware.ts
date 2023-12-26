@@ -1,5 +1,5 @@
 import Context from '../context/context.js';
-import Union from "@alirya/promise/union.js";
+import Union from "@axiona/promise/union.js";
 import Registrable from '../registrable.ts/registrable.js';
 
 

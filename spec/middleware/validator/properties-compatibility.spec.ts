@@ -5,7 +5,7 @@ import Validator, {ValidatorParameter, ValidatorParameters} from '../../../dist/
 import Stop from '../../../dist/middleware/stop.js';
 import OneGuard from './one-validator.js';
 import RecordValidator, {ValidatorType} from './record-validator.js';
-import Validatable from '@alirya/validator/validatable/validatable.js';
+import Validatable from '@axiona/validator/validatable/validatable.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 

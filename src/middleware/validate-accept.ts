@@ -5,7 +5,7 @@ import {PathSegmentsGet} from '../context/path-segments.js';
 import GetContextPath from '../router/metadata/get-context-path.js';
 import {Request} from "koa";
 import {Headers} from "headers-polyfill";
-import {UnsupportedMediaTypeParameters} from '@alirya/http/response/unsupported-media-type.js';
+import {UnsupportedMediaTypeParameters} from '@axiona/http/response/unsupported-media-type.js';
 import {ResponseParameters} from '../middleware/response.js';
 import Stop from './stop.js';
 

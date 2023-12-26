@@ -7,7 +7,7 @@ import FormData from 'form-data';
 import Fs, {createReadStream} from "fs";
 import FormidableFileBoolean from "../../../dist/file/boolean/file.js";
 import FormidableFile from "../../../dist/file/validator/file.js";
-import Validatable from "@alirya/validator/validatable/validatable.js";
+import Validatable from "@axiona/validator/validatable/validatable.js";
 import Path, {dirname} from 'path';
 import {fileURLToPath} from 'url';
 

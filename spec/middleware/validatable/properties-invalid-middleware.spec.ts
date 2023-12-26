@@ -4,7 +4,7 @@ import BindToServer from '../../../dist/router/append-server.js';
 import Router from '../../../dist/router/middleware.js';
 import ContextDataGuard from './context-data-guard.js';
 import {ResponseParameters} from '../../../dist/middleware/response.js';
-import {PaymentRequiredParameters} from '@alirya/http/response/payment-required.js';
+import {PaymentRequiredParameters} from '@axiona/http/response/payment-required.js';
 import {ValidationParameters} from '../../../dist/middleware/validation.js';
 import Stop from '../../../dist/middleware/stop.js';
 

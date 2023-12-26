@@ -1,10 +1,10 @@
-import Response from '@alirya/http/response/response.js';
+import Response from '@axiona/http/response/response.js';
 import Context from '../context/context.js';
 import {O} from 'ts-toolbelt';
 import Middleware from './middleware.js';
-import IsFunction from '@alirya/function/boolean/function.js';
+import IsFunction from '@axiona/function/boolean/function.js';
 import FromResponse, {SetResponseReturn} from '../context/set-response.js';
-import Callable from '@alirya/function/callable.js';
+import Callable from '@axiona/function/callable.js';
 /**
  * use {@param response} value or return for response data
  *

@@ -5,7 +5,7 @@ import {ValidatorParameter} from '../../../dist/middleware/validator.js';
 import Stop from '../../../dist/middleware/stop.js';
 import RecordValidator, {ValidatorType} from './record-validator.js';
 import ContextValidator from './context-validator.js';
-import Validatable from '@alirya/validator/validatable/validatable.js';
+import Validatable from '@axiona/validator/validatable/validatable.js';
 import {ValidatorParameters} from '../../../dist/middleware/validator.js';
 
 it('force console log', () => { spyOn(console, 'log').and.callThrough();});

@@ -1,8 +1,8 @@
-import Validator from '@alirya/validator/simple.js';
-import {MapAllParameters} from '@alirya/object/validator/map-all.js';
-import {StringParameters} from '@alirya/string/validator/string.js';
-import And from '@alirya/object/validatable/and.js';
-import Map from '@alirya/object/message/message/record/map.js';
+import Validator from '@axiona/validator/simple.js';
+import {MapAllParameters} from '@axiona/object/validator/map-all.js';
+import {StringParameters} from '@axiona/string/validator/string.js';
+import And from '@axiona/object/validatable/and.js';
+import Map from '@axiona/object/message/message/record/map.js';
 
 export type ValidatorType = { name : string, address : string };
 

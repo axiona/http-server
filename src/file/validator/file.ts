@@ -1,11 +1,11 @@
-import {ObjectParameters} from "@alirya/object/validator/object.js";
-import Validator from "@alirya/validator/simple.js";
-import {CallbackParameters} from "@alirya/validator/callback.js";
+import {ObjectParameters} from "@axiona/object/validator/object.js";
+import Validator from "@axiona/validator/simple.js";
+import {CallbackParameters} from "@axiona/validator/callback.js";
 import FormidableFileValidation from '../boolean/file.js';
-import {StaticParameters, StaticParameter} from '@alirya/validator/message/function/static.js';
+import {StaticParameters, StaticParameter} from '@axiona/validator/message/function/static.js';
 import FormidableFileMessage from '../assert/string/file.js';
 import File from '../file.js';
-import Chain from '@alirya/validator/chain.js';
+import Chain from '@axiona/validator/chain.js';
 
 export function FileParameters() : Validator<object, File, string>;
 
