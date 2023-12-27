@@ -1,6 +1,9 @@
 {
+  "esm": {
+    "cache": false
+  },
   "name": "@axiona/http-server",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Typescript Http Server",
   "publishConfig": {
     "directory": "dist"
@@ -29,7 +32,7 @@
     "@axiona/string": "^0.18.0",
     "@axiona/validatable": "^0.22.0",
     "@axiona/http": "^0.20.0",
-    "@axiona/promise": "^0.2.0",
+    "@axiona/promise": "^0.2.2",
     "@axiona/validator": "^0.21.0",
     "@axiona/syslog": "^0.5.0",
     "@axiona/value": "^0.17.0",
@@ -84,10 +87,6 @@
     "eslint": "^8.33.0",
     "@types/node": "^16.11.7"
   },
-  "esm": {
-    "cache": false
-  },
-  "private": true,
   "scripts": {
     "spec-run-js": "node --enable-source-maps --trace-warnings node_modules/jasmine/bin/jasmine.js --config=./jasmine.json",
     "spec-run": "node --enable-source-maps --trace-warnings node_modules/jasmine/bin/jasmine.js --config=./jasmine.json --color",
@@ -102,7 +101,6 @@
     "spec-cleanup-watch": "ts-cleaner --verbose --dist=dist-spec --src=spec --watch",
     "compile-watch": "npm-run-all --sequential _compile-ensure-directory --parallel _compile-script-watch cleanup-watch _compile-asset-watch",
     "release": "npm publish ./dist",
-    "postrelease": "npm publish --access=public ./dist",
     "prerelease": "npm-run-all _release-remove-compile-cache compile",
     "postpublish": "rimraf package.json package-lock.json LICENSE Readme.md .npmignore",
     "lint": "eslint .",
