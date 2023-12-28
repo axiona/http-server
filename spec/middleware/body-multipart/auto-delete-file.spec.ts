@@ -19,7 +19,9 @@ it('force console log', () => { spyOn(console, 'log').and.callThrough();});
 const root = Path.resolve(__dirname + '/../../../temp');
 
 Fs.mkdir(root, {recursive:true}, function (error){
-    console.error(error);
+    if(error) {
+        console.error(error);
+    }
 });
 
 
